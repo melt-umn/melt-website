@@ -1,6 +1,6 @@
 ---
 layout: sv_wiki
-title: MELT
+title: People
 ---
 
 # MELT Group Members:

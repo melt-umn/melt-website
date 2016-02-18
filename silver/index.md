@@ -1,10 +1,8 @@
 ---
 layout: sv_wiki
-title: MELT
+title: Silver
 ---
 
-# Silver - an extensible attribute grammar system
+#Silver
 
-
-Documentation - generated from the other repository, should go in a
-directory named `docs`
+Silver is an attribute grammar system and lazy langauge.

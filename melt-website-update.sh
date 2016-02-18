@@ -4,21 +4,25 @@
 rm -rf .git
 
 # Install gems
-echo $'Updating ruby gems...\n'
+echo $'\nUpdating ruby gems...\n'
 bundle install --path vendor/bundle
 
 # Clone all other repos and remove their .git folders
-echo $'Pulling updates to the Silver documentation...\n'
+echo $'\nPulling updates to the Silver documentation...\n'
+cd silver
 git clone https://github.umn.edu/melt/silver-wiki-jekyll.git silver
 rm -rf !$/.git
+cd ..
 
 # TODO: Will need to add repos and then script to do pull
 #echo $'Pulling updates to the Copper documentation...\n'
+#cd
 #git clone
 #rm -Rf !$/.git
+#cd ..
 
 # Run the python script to generate the navigation menu
-echo $'Generating navigation menu...\n'
+echo $'\nGenerating navigation menu...\n'
 python3 menu-builder.py
 
 # Run jekyll to build the new site
