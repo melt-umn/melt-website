@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>LR parsing</title>
+    <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="http://melt.cs.umn.edu/concepts/lr-parsing/">
+    
+    <script src="/js/nav.js"></script>
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">Silver Documentation</a>
+
+  </div>
+
+</header>
+
+
+    <div class="site-nav">
+      
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/">Home</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/install-guide/">Installation guide</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/command-line-reference/">Command line reference</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/faq/">Frequently asked questions (FAQ)</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/error-faq/">Frequently found errors (FFE)</a>
+    
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Tutorials (TODO)
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        Intro to AGs - dc?
+    
+    
+    </li>
+
+    
+    <li>
+    
+        Simple
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Concepts
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        Attribute grammars
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/decorated-vs-undecorated/">Decorated vs undecorated</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        Forwarding
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/aspects/">Aspects</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/collections/">Collection attributes</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/modules/">The module system</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/types/">Types</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        Concrete syntax
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/io/">IO</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/lr-parsing/">LR parsing</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/ffi/">Foreign Function Interface</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/modular-well-definedness/">Modular well-definedness</a>
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Language reference
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li class="collapsible collapsed">
+    
+        Declarations
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/nonterminals/">Nonterminals</a>
+    
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        <a href="doc/ref/decl/productions/">Productions</a>
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/productions/concrete/">Concrete</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/productions/aspect/">Aspect</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/productions/default/">Default</a>
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/attributes/">Attributes</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/occurs/">Occurs</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/functions/">Functions</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/globals/">Global values</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/types/">Type declarations</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/parsers/">Parser declarations</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/terminals/">Terminals</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/annotations/">Annotations</a>
+    
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Copper-specific
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/copper/parser-attribute/">Parser attributes</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/copper/lexer-class/">Lexer classes</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/copper/disambiguate/">Disambiguation functions</a>
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Production body
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/ref/stmt/equations/">Equations</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/stmt/forwarding/">Forwards to</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/stmt/locals/">Locals</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/stmt/return/">Return</a>
+    
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Copper-specific
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/ref/stmt/copper/pluck/">Pluck</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/stmt/copper/print/">Print</a>
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Expressions
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/calls/">Function/production application</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/attribute-access/">Attribute access</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/booleans/">Boolean expressions</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/comparisons/">Comparison operators</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/numeric/">Numeric expressions</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/decorate/">Decorate with</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/new/">New (undecorate)</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/terminal/">Terminal literals</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/pattern-matching/">Pattern matching</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/let/">Lets</a>
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Extensions
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        List syntax
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/ext/easy-terminal/">Easy terminals</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        Convenience
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Library reference
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/lib/string/">String</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/lib/pair/">Pair</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/lib/list/">List</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/lib/maybe/">Maybe</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/lib/io/">IO</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/lib/document-pp/">Document (pp)</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/lib/other/">Other</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/lib/comparison/">Comparison fns</a>
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/bibliography/">Bibliography</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/style-guide/">Style guide</a>
+    
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Development
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/dev/building/">Building Silver</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/dev/code-organization/">Code organization</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/dev/runtime-editing/">Runtime development</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/dev/long-term-todo/">Silver popularity todo list</a>
+    
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Eclipse
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/dev/eclipse/getting-started/">Getting started</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/dev/eclipse/ide-decl/">Creating an IDE plugin</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/dev/eclipse/internals/">Eclipse internals docs</a>
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+</ul>
+
+    </div>
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">LR parsing</h1>
+  </header>
+
+  <article class="post-content">
+    <h1 id="shortest-ever-guide-to-lr-parsing">Shortest ever guide to LR parsing</h1>
+
+<p>LR parsers recognize syntax by essentially turning it into reverse polish notation, with the ‘production rules’ being the operators, and everything else just data.</p>
+
+<p>For example,</p>
+
+<p><code>1 + 2 * 3 / 4</code></p>
+
+<p>in a grammar with the appropriate productions MUL, DIV, ADD with the usual precedence rules gets recognized as:</p>
+
+<p><code>1 + 2 * 3 MUL / 4 DIV ADD</code></p>
+
+<p>equivalent to the usual reverse polish:</p>
+
+<p><code>1 2 3 * 4 / +</code></p>
+
+<p>whereas without precedence this might be incorrectly read as:</p>
+
+<p><code>1 + 2 ADD * 3 MUL / 4 DIV</code></p>
+
+<p>which is equivalent to the usual reverse polish:</p>
+
+<p><code>1 2 + 3 * 4 /</code></p>
+
+<h1 id="conflicts">Conflicts</h1>
+
+<ul>
+  <li><strong>Shift</strong> means “move on to the next token.”</li>
+  <li><strong>Reduce</strong> means “recognize this production.”</li>
+</ul>
+
+<p>Silver’s parser generator, Copper, will report Shift/Reduce and Reduce/Reduce conflicts. The error message generated on the command line may not be the best.</p>
+
+<p>The quickest route to understanding the problem is to open the <code>Parser_*.copperdump.html</code> file, and going to the parser state (in the “LALR DFA”) an error is reported in, and take a look at what the parser’s view of the world is.</p>
+
+<h1 id="fixing-errors">Fixing errors</h1>
+
+<p>Unfortunately, beyond the scope of this document. (TODO: Someone suggest links to elsewhere for discussion and examples, perhaps?)</p>
+
+<p>Generally, the structure of the grammar must be changed somehow to recognize the same language, but in a manner the parser is capable of understanding.</p>
+
+<h1 id="how-precedence-works">How precedence works</h1>
+
+<p>This is a brief explanation of how the precedence rules work, since this isn’t always explained even to people who understand and are capable of writing LALR grammars.</p>
+
+<p>There are two forms of precedence:</p>
+
+<ul>
+  <li>Terminal (operator) precedence: for resolving shift/reduce conflicts.</li>
+  <li>Production precedence: for resolving reduce/reduce conflicts.</li>
+</ul>
+
+<p>Precedence is only used to resolve conflicts when (1) it’s not a conflict due to insufficient lookahead, but rather due to an actual ambiguity in the grammar AND (2) exactly one behavior should always be preferred.  If either of these two are not the case, then it must be resolved through changing the grammar.</p>
+
+<h2 id="operator-precedence">Operator precedence</h2>
+
+<p>To resolve shift/reduce conflicts, we must be able to relate the production and the terminal somehow. We accomplish this by using the shift terminal, and mapping every production to an <em>operator terminal</em>.</p>
+
+<p>By default, every production reports the <em>last</em> terminal that appears in the production rule as its operator terminal. If it has no terminals, it has no operator terminal. An operator terminal can be assigned manually in silver:</p>
+
+<pre><code>concrete production whatever
+top::Expr ::= Expr '-' '&gt;' Expr
+operator=Some_Terminal_t
+{
+}
+</code></pre>
+
+<p>This will make the ‘whatever’ production use <code>Some_Terminal_t</code> instead of ‘&gt;’ as it’s operator terminal.</p>
+
+<h3 id="operator-precedence-resolution">Operator precedence resolution</h3>
+
+<p>After mapping each production to an operator terminal, we then consult the precedence of each terminal (the shift terminal, and the production operator terminal.)</p>
+
+<p>This consists of two parts:</p>
+
+<ol>
+  <li>The precedence number.  Higher means binds more tightly (e.g. MUL has 2, ADD has 1)</li>
+  <li>The association: left/right/non-assoc, if any.</li>
+</ol>
+
+<p>This is just a very convenient way of ranking terminals. First, by precedence number, second by association (if precedence is equal.) The winner is the action the parser takes.</p>
+
+<p>If there is no winner, a shift/reduce conflict is reported.</p>
+
+<p>The “non-assoc” case is special: it resolves the ambiguity in favor of raising a parse error when that syntax is encountered. No winner. The shift and reduce actions are both removed.</p>
+
+<p>An example, consider our earlier example,</p>
+
+<p><code>1 + 2 *</code></p>
+
+<p>The parser has shifted <code>1 + 2</code> and <code>*</code> is the next symbol in the input, we are in a state where we can either shift <code>*</code> or reduce (emit ADD). Since <code>*</code> has a higher precedence, shifting wins.</p>
+
+<p><code>1 + 2 * 3 /</code></p>
+
+<p>We’re looking at the <code>/</code> symbol, shift or reduce. Here, our reduce option is to emit MUL, which has operator <code>*</code> which has the same precedence as <code>/</code>. But, they’re left associative, so the decision is to reduce.</p>
+
+<h2 id="production-precedence">Production precedence</h2>
+
+<p>Reduce/Reduce conflicts simply require relating productions to other productions. Each production can optionally be assigned a precedence number. The highest number wins.</p>
+
+<p>There is no interaction or relationship between production precedence and operator precedence at all. They’re entirely orthogonal.</p>
+
+<pre><code>concrete production alwaysUsed
+top::Expr ::= Ident_t
+precedence=2
+{
+}
+
+concrete production neverUsed
+top::Expr ::= Ident_t
+precedence=1
+{
+}
+</code></pre>
+
+<p>Usually reduce/reduce conflicts are more interesting than this example. (TODO: pick a simple interesting one?)  Typically, however, it’s often better to resolve RR conflicts by changing the grammar to more accurately express the language structure rather than ad-hoc sprinkling of these precedences.</p>
+
+<h1 id="philosophy">Philosophy</h1>
+
+<p>Why LR parsing? There are lots of alternatives, <a href="http://en.wikipedia.org/wiki/Parsing_expression_grammar">PEG</a>s and GLR in particular. Answering this question requires context, though.</p>
+
+<ul>
+  <li>For general purpose programming, you probably wouldn’t use LR. PEGs and parser combinators seem the most appropriate solution there. The challenge that tools primarily face here is not technological, but social: just getting programmers to not use more damned ad-hoc regex and string hacks.</li>
+  <li>For ultra-high quality production compilers, the choice <em>seems</em> to be hand-written parsers. The justifications commonly cited are primarily error reporting and error recovery, and this approach manages to be practical only because the syntax doesn’t change very often. However, it’s unclear that this isn’t a solvable problem. The greater reason these seem to be hand-written is that C++ cannot be parsed any other way. (And once you’ve hand-written a parser for C++, you’re not far from the rest of the C family.) The developers of javac, to take a non-C family example, seem to have fallen on hand-written parsing only by necessity: they didn’t have a (good enough, fast enough) parser generator, so they wrote it by hand, and now they’re not sure they have an accurate grammar, but would consider transitioning to a generated parser if they did. (<a href="http://mail.openjdk.java.net/pipermail/compiler-dev/2012-February/thread.html#4014">some discussion here</a>)</li>
+  <li>For language processing experts building tools for themselves, generalized parsing DOES seem to be the way to go, in many cases! The tricky thing about GLR is that you get back an ambiguous parse forest, but this is no problem for grammar engineers to handle (it’s only an obstacle for the rest of us!)  The nice thing about GLR is that it allows one to simply dump a grammar into the tool, and then immediately obtain parse forests, that you can then hack into sensibility and use them for your immediate purposes.</li>
+  <li>For <strong>language extension</strong> purposes (and note that we’re talking specifically about programmers being able to pull in and use language extensions, not about grammar engineers being able to extend languages – that’s covered in the case above) the major reason for choosing LR parsing that it can give guarantees about composition of many extensions together with their host language. This is the reason for our choice of Copper in particular as our parser and scanner generator.</li>
+  <li>For everyone else, however, there doesn’t seem to be a good reason not to use LR, and in fact that’s what you see in practice: Ruby, PHP, and Python, for example. However, many of these have to resort to a few ugly hacks to work out. More on that later.</li>
+</ul>
+
+<p>For Silver, we’re less focused on general purpose programmers or even grammar hackers, and more focused on compilers, and language extension in particular. Here, LR has a few obvious advantages:</p>
+
+<ul>
+  <li>The parsers generated are unambiguous, no unexpected surprises that break things for users.</li>
+  <li>They’re semantically sound - PEGs lack unordered choice, and this can cause surprises (and makes grammar definition and composition difficult: in what order?)</li>
+  <li>Context-aware scanning, and Copper’s modular determinism analysis permit language extension while retaining these properties. Generalized parsing, even if the grammar is unambiguous to start with, can’t guarantee it stays that way after being composed with extensions.</li>
+  <li>And of course, as a relatively minor thing, they’re quite efficient.</li>
+</ul>
+
+  </article>
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+  </div>
+
+</footer>
+
+<script>nav_hook();</script>
+
+
+  </body>
+
+</html>

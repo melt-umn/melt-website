@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Modules</title>
+    <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="http://melt.cs.umn.edu/concepts/modules/">
+    
+    <script src="/js/nav.js"></script>
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">Silver Documentation</a>
+
+  </div>
+
+</header>
+
+
+    <div class="site-nav">
+      
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/">Home</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/install-guide/">Installation guide</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/command-line-reference/">Command line reference</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/faq/">Frequently asked questions (FAQ)</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/error-faq/">Frequently found errors (FFE)</a>
+    
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Tutorials (TODO)
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        Intro to AGs - dc?
+    
+    
+    </li>
+
+    
+    <li>
+    
+        Simple
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Concepts
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        Attribute grammars
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/decorated-vs-undecorated/">Decorated vs undecorated</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        Forwarding
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/aspects/">Aspects</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/collections/">Collection attributes</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/modules/">The module system</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/types/">Types</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        Concrete syntax
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/io/">IO</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/lr-parsing/">LR parsing</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/ffi/">Foreign Function Interface</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/modular-well-definedness/">Modular well-definedness</a>
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Language reference
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li class="collapsible collapsed">
+    
+        Declarations
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/nonterminals/">Nonterminals</a>
+    
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        <a href="doc/ref/decl/productions/">Productions</a>
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/productions/concrete/">Concrete</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/productions/aspect/">Aspect</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/productions/default/">Default</a>
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/attributes/">Attributes</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/occurs/">Occurs</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/functions/">Functions</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/globals/">Global values</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/types/">Type declarations</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/parsers/">Parser declarations</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/terminals/">Terminals</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/annotations/">Annotations</a>
+    
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Copper-specific
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/copper/parser-attribute/">Parser attributes</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/copper/lexer-class/">Lexer classes</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/copper/disambiguate/">Disambiguation functions</a>
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Production body
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/ref/stmt/equations/">Equations</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/stmt/forwarding/">Forwards to</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/stmt/locals/">Locals</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/stmt/return/">Return</a>
+    
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Copper-specific
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/ref/stmt/copper/pluck/">Pluck</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/stmt/copper/print/">Print</a>
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Expressions
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/calls/">Function/production application</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/attribute-access/">Attribute access</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/booleans/">Boolean expressions</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/comparisons/">Comparison operators</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/numeric/">Numeric expressions</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/decorate/">Decorate with</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/new/">New (undecorate)</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/terminal/">Terminal literals</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/pattern-matching/">Pattern matching</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/let/">Lets</a>
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Extensions
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        List syntax
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/ext/easy-terminal/">Easy terminals</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        Convenience
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Library reference
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/lib/string/">String</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/lib/pair/">Pair</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/lib/list/">List</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/lib/maybe/">Maybe</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/lib/io/">IO</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/lib/document-pp/">Document (pp)</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/lib/other/">Other</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/lib/comparison/">Comparison fns</a>
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/bibliography/">Bibliography</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/style-guide/">Style guide</a>
+    
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Development
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/dev/building/">Building Silver</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/dev/code-organization/">Code organization</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/dev/runtime-editing/">Runtime development</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/dev/long-term-todo/">Silver popularity todo list</a>
+    
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Eclipse
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/dev/eclipse/getting-started/">Getting started</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/dev/eclipse/ide-decl/">Creating an IDE plugin</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/dev/eclipse/internals/">Eclipse internals docs</a>
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+</ul>
+
+    </div>
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Modules</h1>
+  </header>
+
+  <article class="post-content">
+    <h2 id="a-grammar">A grammar</h2>
+
+<p>Unlike most languages, a compilation unit in Silver is not tied to a file, but instead to a directory.  A grammar (“module”) consists of the declarations and definitions found in all files with a “<em><code>.sv</code></em>” suffix in the directory identifying the grammar.</p>
+
+<p>For example, <code>a:module:name</code> corresponds to <code>a/modules/name/*.sv</code> in the first matching directory in the grammar search path given to the Silver compiler.</p>
+
+<p>The Silver files in a grammar optionally specify their grammar name as the first declaration of the file.  This practice is recommended, to avoid any potential problems with grammar search paths.</p>
+
+<pre><code>grammar a:module:name;
+</code></pre>
+
+<h3 id="names">Names</h3>
+
+<p>All declarations in a grammar have a name.  This name is sequence of alpha-numeric characters or underscores beginning with a letter.  This name is called the <em>short name</em> of the construct.</p>
+
+<p>The <em>full name</em> of such a construct is formed by prepending the name of the grammar in which it is defined and an additional colon.</p>
+
+<blockquote>
+  <p><em><strong>Example:</strong></em><br />
+<code>
+ nonterminal Expr;
+</code><br />
+in the grammar <code>a:module:name</code> will have short name <code>Expr</code> and full name <code>a:module:name:Expr</code>.</p>
+</blockquote>
+
+<h2 id="grammar-wide-module-statements">Grammar-wide module statements</h2>
+
+<h3 id="importing-other-grammars">Importing other grammars</h3>
+
+<p>Other grammars can be imported to every file in a grammar using the <code>imports</code> statement:</p>
+
+<pre><code>imports another:module:name;
+</code></pre>
+
+<p>All symbols in that grammar are imported, including any symbols in grammars that grammars exported by the imported grammar.</p>
+
+<p>See <a href="Concept_Modules#Import_modifiers.md">the later section on import modifiers</a>.</p>
+
+<h3 id="exporting-other-grammars">Exporting other grammars</h3>
+
+<p>Other grammars can be exported by a grammar using the <code>exports</code> statement:</p>
+
+<pre><code>exports more:modules;
+</code></pre>
+
+<p>No modifiers are possible on an <code>exports</code> statement.  There is no equivalent <code>export</code> statment.</p>
+
+<h3 id="conditional-exports">Conditional exports</h3>
+
+<p>Although not a part of Silver’s focus on <em>extensibility</em>, Silver supports a notion of conditional exports to facilitate <em>modularity</em>. This allows, for example, code specific to supporting a feature to be factored out, to allow for builds that do not include that feature. (This is unnecessary for <em>extensions</em> because they should forward to the host language. But modular specifications of a host language will likely take advantage of this feature, as they often cannot forward to the kernel “host” language.)</p>
+
+<pre><code>exports a:grammar:to:export with if:this:grammar;
+</code></pre>
+
+<p>This causes any grammar that imports the grammar this statement appear in to <em>also</em> import <code>if:this:grammar</code> but ONLY if that grammar also imports <code>a:grammar:to:export</code>.  Either directly, by importing that grammar, or indirectly, by importing something that exports that grammar. (But importing something that merely imports that grammar will not cause this to trigger!)</p>
+
+<p>Although this sounds as if it could cause problems, the feature is typically only used to resolve the “intersection problem,” where glue code is necessary to fit two features together, and the above semantics “just work.”  (Again, a reminder that this is for modular specifications of the host language. True <em>extensions</em> require no glue code to compose, as forwarding takes care of the issue.)</p>
+
+<p><strong>For parsers</strong>, only those grammars included in the parser are used to trigger conditional exports. So if the grammar includes a trigger, it won’t necessarily trigger for the parser, unless that grammar is also included in the parser’s list of grammars.</p>
+
+<h2 id="file-specific-module-statements">File specific module statements</h2>
+
+<h3 id="importing-a-grammar">Importing a grammar</h3>
+
+<p>The simple form of an <em><code>import</code></em> statement is<br />
+<code>
+import &lt;grammar-name&gt; ;
+</code><br />
+and has the effect of making all exported names from the named grammar visible in the current file.  Note that both the full and short names are made visible in the importing grammar.  Typically this includes all the nonterminals, terminals, attributes, and productions that are declared in the grammar.</p>
+
+<h2 id="import-modifiers">Import modifiers</h2>
+
+<p>Both <code>import</code> and <code>imports</code> support different ways to control the <em>short names</em> imported. Note that <em>full names</em> are always imported.</p>
+
+<h3 id="only-including-some-names">Only including some names</h3>
+
+<p>The import can be limited to including only a few short names with a <code>only</code> clause. For example:</p>
+
+<pre><code>imports silver:langutil only ast;
+import core only Maybe, just, nothing;
+</code></pre>
+
+<h3 id="excluding-some-names">Excluding some names</h3>
+
+<p>The import can exclude some short names with a <code>hiding</code> clause:</p>
+
+<pre><code>imports silver:langutil hiding pp, unparse;
+import core hiding implode;
+</code></pre>
+
+<h3 id="renaming-some-short-names">Renaming some short names</h3>
+
+<p>The import can rename some <em>short names</em> using a <code>with</code> clause. Note that full names are again left unaffected.</p>
+
+<pre><code>imports silver:langutil:pp with implode as ppimplode;
+import core with append as listappend, List as BuiltinList;
+</code></pre>
+
+<p>Renaming is also supported in conjuction with <code>only</code> and <code>hiding</code>:</p>
+
+<pre><code>import core only Maybe, orElse with orElse as maybeOrElse;
+import core hiding List with Maybe as BuiltinMaybe;
+</code></pre>
+
+<h3 id="qualified-imports">Qualified imports</h3>
+
+<p>The <em>short name</em> assigned to each imported symbol can be qualified using the <code>as</code> clause:</p>
+
+<pre><code>import silver:langutil:pp as pp;
+</code></pre>
+
+<p>This will result in all the the <em>short names</em> imported to be prefixed with <code>pp:</code>. For example, the <code>implode</code> symbol will now be <code>pp:implode</code>. Of course, full names are unaffected, as always.</p>
+
+  </article>
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+  </div>
+
+</footer>
+
+<script>nav_hook();</script>
+
+
+  </body>
+
+</html>

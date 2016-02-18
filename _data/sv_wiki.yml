@@ -1,0 +1,10 @@
+- text: home
+  url: /
+- text: people
+  url: /people
+- text: ableC
+  url: /ableC
+- text: silver
+  url: /silver
+- text: copper
+  url: /copper

@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Forwarding equations</title>
+    <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="http://melt.cs.umn.edu/ref/stmt/forwarding/">
+    
+    <script src="/js/nav.js"></script>
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">Silver Documentation</a>
+
+  </div>
+
+</header>
+
+
+    <div class="site-nav">
+      
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/">Home</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/install-guide/">Installation guide</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/command-line-reference/">Command line reference</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/faq/">Frequently asked questions (FAQ)</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/error-faq/">Frequently found errors (FFE)</a>
+    
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Tutorials (TODO)
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        Intro to AGs - dc?
+    
+    
+    </li>
+
+    
+    <li>
+    
+        Simple
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Concepts
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        Attribute grammars
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/decorated-vs-undecorated/">Decorated vs undecorated</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        Forwarding
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/aspects/">Aspects</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/collections/">Collection attributes</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/modules/">The module system</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/types/">Types</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        Concrete syntax
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/io/">IO</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/lr-parsing/">LR parsing</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/ffi/">Foreign Function Interface</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/modular-well-definedness/">Modular well-definedness</a>
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Language reference
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li class="collapsible collapsed">
+    
+        Declarations
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/nonterminals/">Nonterminals</a>
+    
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        <a href="doc/ref/decl/productions/">Productions</a>
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/productions/concrete/">Concrete</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/productions/aspect/">Aspect</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/productions/default/">Default</a>
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/attributes/">Attributes</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/occurs/">Occurs</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/functions/">Functions</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/globals/">Global values</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/types/">Type declarations</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/parsers/">Parser declarations</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/terminals/">Terminals</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/annotations/">Annotations</a>
+    
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Copper-specific
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/copper/parser-attribute/">Parser attributes</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/copper/lexer-class/">Lexer classes</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/copper/disambiguate/">Disambiguation functions</a>
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Production body
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/ref/stmt/equations/">Equations</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/stmt/forwarding/">Forwards to</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/stmt/locals/">Locals</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/stmt/return/">Return</a>
+    
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Copper-specific
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/ref/stmt/copper/pluck/">Pluck</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/stmt/copper/print/">Print</a>
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Expressions
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/calls/">Function/production application</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/attribute-access/">Attribute access</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/booleans/">Boolean expressions</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/comparisons/">Comparison operators</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/numeric/">Numeric expressions</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/decorate/">Decorate with</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/new/">New (undecorate)</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/terminal/">Terminal literals</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/pattern-matching/">Pattern matching</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/let/">Lets</a>
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Extensions
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        List syntax
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/ext/easy-terminal/">Easy terminals</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        Convenience
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Library reference
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/lib/string/">String</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/lib/pair/">Pair</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/lib/list/">List</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/lib/maybe/">Maybe</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/lib/io/">IO</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/lib/document-pp/">Document (pp)</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/lib/other/">Other</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/lib/comparison/">Comparison fns</a>
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/bibliography/">Bibliography</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/style-guide/">Style guide</a>
+    
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Development
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/dev/building/">Building Silver</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/dev/code-organization/">Code organization</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/dev/runtime-editing/">Runtime development</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/dev/long-term-todo/">Silver popularity todo list</a>
+    
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Eclipse
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/dev/eclipse/getting-started/">Getting started</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/dev/eclipse/ide-decl/">Creating an IDE plugin</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/dev/eclipse/internals/">Eclipse internals docs</a>
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+</ul>
+
+    </div>
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Forwarding equations</h1>
+  </header>
+
+  <article class="post-content">
+    <h1 id="forwarding">Forwarding</h1>
+
+<p>Forwarding is a mechanism for providing default values for attributes that we introduced to attribute grammars that is especially useful for defining language extensions.</p>
+
+<p>A production can specify a semantically equivalent tree that it will provide default values for any attributes that are not explicitly defined on that production.  Thus, the type of the forwarded-to tree must be the same as the nonterminal on the left-hand side of the production.</p>
+
+<p>Any inherited attributes assigned to the forwarding-tree are automatically copied to the forwarded-to tree.</p>
+
+<blockquote>
+  <p><em><strong>Example:</strong></em> An example will help to clarify.  Consider the definition of a greater-than-or-equal operator <em><code>&gt;=</code></em> found in the <em><code>Expr.sv</code></em> file of the Simple tutorial’s abstract syntax.<br />
+<code>
+abstract production gte 
+e::Expr ::= l::Expr r::Expr 
+{
+  e.pp = "(" ++  l.pp ++ " &gt;= " ++ r.pp ++ ")" ;
+  forwards to not(lt(l,r)) ;
+}
+</code><br />
+This productions defines the value of its <em><code>pp</code></em> attribute but does not have a definition of the attribute <em><code>c_code</code></em> to define its translation to C code.  When a node in the syntax tree constructed by the <em><code>gte</code></em> production is queried for the value of its <em><code>pp</code></em> attribute it will compute it based on the explicit definition.  If that node is queried for the value of its <em><code>c_code</code></em> attribute however it will “forward” that query to the tree <em><code>not(lt(l,r)</code></em>.  This tree is the semantic equivalent of the <em><code>gte</code></em> tree ( <code>(l &gt;= r) = -(l &lt; r)</code> ).</p>
+</blockquote>
+
+<blockquote>
+  <p>If inherited attributes, for example <em><code>env</code></em> are used in the computation of <em><code>c_code</code></em>, then those attributes must be available on the forwards to tree.  This is accomplished automatically as any inherited attribute that decorates node <em><code>e</code></em> is copied to the forwards to node.</p>
+</blockquote>
+
+<p>A production can specify the values of inherited attributes for the forwarded to tree.  To do so, the forwards clause is augmented with attribute definitions and has the following form<br />
+<code>
+forwards to &lt;expression&gt; with { ( &lt;name&gt; = &lt;expression&gt; ; )* } ;
+</code></p>
+
+<h2 id="common-forwarding-patterns">Common forwarding patterns</h2>
+
+<p>The primary purpose of forwarding is to enable safe extension of a host language. Forwarding permits one extension to safely add new attributes to the host language, while another extension adds new productions. This is accomplished by simple evaluating the attribute on the forwarded-to tree for those new productions.</p>
+
+<p>But, forwarding is often used in a few other common ways:</p>
+
+<h3 id="single-dispatch-via-forwarding">Single dispatch via forwarding</h3>
+
+<p>Single-dispatch based on types, for example, is easy to implement using forwarding. Types can be given an attribute like the following:</p>
+
+<pre><code>synthesized attribute lengthDispatcher :: Production(Expr ::= Decorated Expr);
+</code></pre>
+
+<p>Using the inheritance method of the previous section, the default type can set this attribute to an error production, and relevant types (such as strings and lists) can override that with a production specialized to their types.</p>
+
+<p>Then the syntax itself can be implemented as follows:</p>
+
+<pre><code>abstract production lengthFunction
+top::Expr ::= arg::Expr
+{
+  forwards to arg.type.lengthDispatcher(arg);
+}
+</code></pre>
+
+<blockquote>
+  <p><em><strong>Note:</strong></em> Although it is unlikely that calls to length would be nested too deeply, see <a href="Concept_DecVsUndec#Examples.md">Decorated vs Undecorated Examples</a> for an explanation for why the production attribute has a decorated child.</p>
+</blockquote>
+
+<h3 id="forwarding-to-a-higher-order-attribute">Forwarding to a higher order attribute</h3>
+
+<p>Complex extensions will often forward to a higher order attribute.  For example,</p>
+
+<pre><code>synthesized attribute hostTranslation :: Expr;
+
+abstract production extensionMagic
+top::Expr ::= 'magic' m::ComplexNewSyntax
+{
+  forwards to m.hostTranslation;
+}
+</code></pre>
+
+<p>Here, the “semantically equivalent” tree is computed based on the code.</p>
+
+<h2 id="todo">TODO</h2>
+
+<p>Part of this page should be on the forwarding concept page, and this trimmed down to just reference material.</p>
+
+  </article>
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+  </div>
+
+</footer>
+
+<script>nav_hook();</script>
+
+
+  </body>
+
+</html>

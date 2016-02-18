@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>IO</title>
+    <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="http://melt.cs.umn.edu/concepts/io/">
+    
+    <script src="/js/nav.js"></script>
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">Silver Documentation</a>
+
+  </div>
+
+</header>
+
+
+    <div class="site-nav">
+      
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/">Home</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/install-guide/">Installation guide</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/command-line-reference/">Command line reference</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/faq/">Frequently asked questions (FAQ)</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/error-faq/">Frequently found errors (FFE)</a>
+    
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Tutorials (TODO)
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        Intro to AGs - dc?
+    
+    
+    </li>
+
+    
+    <li>
+    
+        Simple
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Concepts
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        Attribute grammars
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/decorated-vs-undecorated/">Decorated vs undecorated</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        Forwarding
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/aspects/">Aspects</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/collections/">Collection attributes</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/modules/">The module system</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/types/">Types</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        Concrete syntax
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/io/">IO</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/lr-parsing/">LR parsing</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/ffi/">Foreign Function Interface</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/modular-well-definedness/">Modular well-definedness</a>
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Language reference
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li class="collapsible collapsed">
+    
+        Declarations
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/nonterminals/">Nonterminals</a>
+    
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        <a href="doc/ref/decl/productions/">Productions</a>
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/productions/concrete/">Concrete</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/productions/aspect/">Aspect</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/productions/default/">Default</a>
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/attributes/">Attributes</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/occurs/">Occurs</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/functions/">Functions</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/globals/">Global values</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/types/">Type declarations</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/parsers/">Parser declarations</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/terminals/">Terminals</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/annotations/">Annotations</a>
+    
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Copper-specific
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/copper/parser-attribute/">Parser attributes</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/copper/lexer-class/">Lexer classes</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/copper/disambiguate/">Disambiguation functions</a>
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Production body
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/ref/stmt/equations/">Equations</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/stmt/forwarding/">Forwards to</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/stmt/locals/">Locals</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/stmt/return/">Return</a>
+    
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Copper-specific
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/ref/stmt/copper/pluck/">Pluck</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/stmt/copper/print/">Print</a>
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Expressions
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/calls/">Function/production application</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/attribute-access/">Attribute access</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/booleans/">Boolean expressions</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/comparisons/">Comparison operators</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/numeric/">Numeric expressions</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/decorate/">Decorate with</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/new/">New (undecorate)</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/terminal/">Terminal literals</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/pattern-matching/">Pattern matching</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/let/">Lets</a>
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Extensions
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        List syntax
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/ext/easy-terminal/">Easy terminals</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        Convenience
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Library reference
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/lib/string/">String</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/lib/pair/">Pair</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/lib/list/">List</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/lib/maybe/">Maybe</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/lib/io/">IO</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/lib/document-pp/">Document (pp)</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/lib/other/">Other</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/lib/comparison/">Comparison fns</a>
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/bibliography/">Bibliography</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/style-guide/">Style guide</a>
+    
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Development
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/dev/building/">Building Silver</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/dev/code-organization/">Code organization</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/dev/runtime-editing/">Runtime development</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/dev/long-term-todo/">Silver popularity todo list</a>
+    
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Eclipse
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/dev/eclipse/getting-started/">Getting started</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/dev/eclipse/ide-decl/">Creating an IDE plugin</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/dev/eclipse/internals/">Eclipse internals docs</a>
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+</ul>
+
+    </div>
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">IO</h1>
+  </header>
+
+  <article class="post-content">
+    <p>Silver’s IO support is terrible. Let’s get that out of the way right from the beginning. Silver programs are largely intended to (1) read a file in its entirety and (2) write a file in its entirety, while (3) maybe printing some messages to the console. If you try to be fancier, you’ll be all <em>smdh</em>.</p>
+
+<h2 id="how-it-works">How it works</h2>
+
+<p>Start with <code>main</code>:</p>
+
+<pre><code>function main 
+IOVal&lt;Integer&gt; ::= args::[String] ioin::IO
+{
+  return ...;
+}
+</code></pre>
+
+<p>You get an <em>input IO token</em> <code>ioin</code>. You are then responsible for threading this through every IO function you call, in the correct order, and then out through the standard “IO and also some other value” type called <code>IOVal</code>.</p>
+
+<p>Lets take a look at some types:</p>
+
+<pre><code>abstract production ioval
+top::IOVal&lt;a&gt; ::= i::IO v::a
+
+function print
+IO ::= s::String i::IO
+
+function readFile
+IOVal&lt;String&gt; ::= s::String i::IO
+
+function writeFile
+IO ::= file::String contents::String i::IO
+</code></pre>
+
+<p>So, first off, if you’re getting used to Silver conventions, you’ll notice that <code>ioval</code> has its parameters <em>backwards</em> from what you’d expect. This is indefensible. Sorry.</p>
+
+<p>Next, you can see how every function follows the same pattern: you pass in the token, then you either get a token back, or an <code>IOVal</code> back.</p>
+
+<p>This is partly because we don’t have a <code>unit</code> type yet, so print can’t return <code>IOVal&lt;Unit&gt;</code> or whatever. You know, to be consistent. Oh well. When we fix IO all this will be thrown out anyway.</p>
+
+<p>Here’s a helpful google images search:</p>
+
+<p>https://www.google.com/search?tbm=isch&amp;q=facepalm</p>
+
+<p>Could be worse. Back in the day we had type like <code>IOString</code> and <code>IOBoolean</code> and <code>IOInteger</code> and of course, names of the attributes were different on each. You kids these days are your <code>IOVal</code>…</p>
+
+<h2 id="troubles">Troubles</h2>
+
+<p>If you don’t pass your IO tokens around properly, things can happen weird. Sometimes the order of stuff might get switched around like time travel. Or things don’t get done.</p>
+
+<p>But most often, the issue people hit is the performing of IO actions getting driven by the demand for values other than the IO token. (e.g. you read from a file, and instead of the IO token being what causes the read to happen, it’s the demand for the file’s contents as a string.)</p>
+
+<p>I invite you to marvel at this code:</p>
+
+<pre><code>{--
+ - Run units until a non-zero error code is encountered.
+ -}
+function runAll
+IOVal&lt;Integer&gt; ::= l::[Unit] i::IO
+{
+  local attribute now :: Unit;
+  now = head(l);
+  now.ioIn = i;
+
+  return  if unsafeTrace(null(l), i) -- TODO: this is just to force strictness...
+	  then ioval(i, 0)
+	  else if now.code != 0
+	       then ioval(now.io, now.code)
+	       else runAll(tail(l), now.io);
+}
+</code></pre>
+
+<p>The call to <code>unsafeTrace</code> demands the IO token <code>i</code> before returning the other parameter. Why? Well, you’ll notice that accessing <code>now.code</code> may depend upon that <code>Unit</code>’s IO actions… which means we’d be demanding actions get taken via their return value, not their IO token. Which means ordering can get ~wonky~.</p>
+
+<p>This is evidence that our token passing model is fundamentally broken. Take a laugh.</p>
+
+<p>How did pre-monad Haskell get around this? Our <code>IOVal</code> type isn’t really adequate. It’s a pair. pre-monad Haskell would use a function. i.e.:</p>
+
+<pre><code>abstract production ioval
+IOVal&lt;a&gt; ::= f::(Pair&lt;a IO&gt; ::= IO)
+</code></pre>
+
+<p>How demand was driven (demanding the value or the IO token), in this case, doesn’t matter, because both will trigger calling the function, which will trigger demanding the previous IO token. All good.</p>
+
+<p>Silver doesn’t have good enough lambda support to do this yet. We probably could stick an <code>unsafeTrace</code> inside the <code>ioval</code> production for accessing the <code>iovalue</code> attribute, though. Someone should do that. Maybe.</p>
+
+<h2 id="convention-that-you-must-follow">Convention that you must follow</h2>
+
+<p>Always bind <code>IOVal</code> returning functions to a local. That is:</p>
+
+<pre><code>local file :: IOVal&lt;String&gt; = readFile(filename, ioin);
+</code></pre>
+
+<p>Why? Because that way, there’s exactly one decoration of the <code>IOVal</code> undecorated “tree”. And therefore, there’s one decorated copy (the one implicitly created by the local.) And therefore, there’s one cached value of the IO token.</p>
+
+<p>If you, somehow, manage to get two decorated trees corresponding to a single <code>IOVal</code> undecorated tree, you may get multiple evaluation of IO functions! Having fun yet?</p>
+
+<p>Here’s a forced example, continuing from the above:</p>
+
+<pre><code>local readFileTwice :: String = new(file).iovalue ++ new(file).iovalue;
+</code></pre>
+
+<p>Bonus: this will actually cause the file to be read three times, when later on <code>file.io</code> is demanded.</p>
+
+<p>Double Bonus: The IO actions that will be repeated will be those all the way back to the last properly cached IO token value. So you might even execute more than just a read action three times here!</p>
+
+<p>Aren’t you lucky?</p>
+
+  </article>
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+  </div>
+
+</footer>
+
+<script>nav_hook();</script>
+
+
+  </body>
+
+</html>

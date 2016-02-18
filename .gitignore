@@ -1,1 +1,5 @@
 *~
+vendor/*
+.bundle/*
+.sass-cache/*
+_deply/*

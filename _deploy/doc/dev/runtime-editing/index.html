@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Editing the runtime in Eclipse</title>
+    <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="http://melt.cs.umn.edu/dev/runtime-editing/">
+    
+    <script src="/js/nav.js"></script>
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">Silver Documentation</a>
+
+  </div>
+
+</header>
+
+
+    <div class="site-nav">
+      
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/">Home</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/install-guide/">Installation guide</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/command-line-reference/">Command line reference</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/faq/">Frequently asked questions (FAQ)</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/error-faq/">Frequently found errors (FFE)</a>
+    
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Tutorials (TODO)
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        Intro to AGs - dc?
+    
+    
+    </li>
+
+    
+    <li>
+    
+        Simple
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Concepts
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        Attribute grammars
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/decorated-vs-undecorated/">Decorated vs undecorated</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        Forwarding
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/aspects/">Aspects</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/collections/">Collection attributes</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/modules/">The module system</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/types/">Types</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        Concrete syntax
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/io/">IO</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/lr-parsing/">LR parsing</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/ffi/">Foreign Function Interface</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/modular-well-definedness/">Modular well-definedness</a>
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Language reference
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li class="collapsible collapsed">
+    
+        Declarations
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/nonterminals/">Nonterminals</a>
+    
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        <a href="doc/ref/decl/productions/">Productions</a>
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/productions/concrete/">Concrete</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/productions/aspect/">Aspect</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/productions/default/">Default</a>
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/attributes/">Attributes</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/occurs/">Occurs</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/functions/">Functions</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/globals/">Global values</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/types/">Type declarations</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/parsers/">Parser declarations</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/terminals/">Terminals</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/annotations/">Annotations</a>
+    
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Copper-specific
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/copper/parser-attribute/">Parser attributes</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/copper/lexer-class/">Lexer classes</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/copper/disambiguate/">Disambiguation functions</a>
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Production body
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/ref/stmt/equations/">Equations</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/stmt/forwarding/">Forwards to</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/stmt/locals/">Locals</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/stmt/return/">Return</a>
+    
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Copper-specific
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/ref/stmt/copper/pluck/">Pluck</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/stmt/copper/print/">Print</a>
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Expressions
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/calls/">Function/production application</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/attribute-access/">Attribute access</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/booleans/">Boolean expressions</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/comparisons/">Comparison operators</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/numeric/">Numeric expressions</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/decorate/">Decorate with</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/new/">New (undecorate)</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/terminal/">Terminal literals</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/pattern-matching/">Pattern matching</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/let/">Lets</a>
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Extensions
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        List syntax
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/ext/easy-terminal/">Easy terminals</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        Convenience
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Library reference
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/lib/string/">String</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/lib/pair/">Pair</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/lib/list/">List</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/lib/maybe/">Maybe</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/lib/io/">IO</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/lib/document-pp/">Document (pp)</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/lib/other/">Other</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/lib/comparison/">Comparison fns</a>
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/bibliography/">Bibliography</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/style-guide/">Style guide</a>
+    
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Development
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/dev/building/">Building Silver</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/dev/code-organization/">Code organization</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/dev/runtime-editing/">Runtime development</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/dev/long-term-todo/">Silver popularity todo list</a>
+    
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Eclipse
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/dev/eclipse/getting-started/">Getting started</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/dev/eclipse/ide-decl/">Creating an IDE plugin</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/dev/eclipse/internals/">Eclipse internals docs</a>
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+</ul>
+
+    </div>
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Editing the runtime in Eclipse</h1>
+  </header>
+
+  <article class="post-content">
+    <h2 id="importing-the-project">Importing the project</h2>
+
+<p>I recommend just importing the project where you have it checked out, rather that attempting to use Eclipse’s mercurial plugins or anything like that. This makes it easier to actually test/use the changes because Eclipse will then be editing the files where you have Silver checked out, instead of some separate workspace. (and because <code>./deep-rebuild</code> rebuilds the runtime automatically.)</p>
+
+<p>File -&gt; Import -&gt; Existing projects into workspace</p>
+
+<p>Select <code>runtime/java</code> wherever you have Silver checked out (e.g. <code>~/repos/silver/runtime/java</code>). It should find the project ‘common’.</p>
+
+<h2 id="fixing-configuration-issues">Fixing configuration issues</h2>
+
+<p>You will probably have build errors at this point.</p>
+
+<p>Right click on the project, select ‘Properties’. Go to the ‘Java Build Path’ panel, and click the ‘Libraries’ tab on the right side of the window.</p>
+
+<p>Edit both ‘bin’ and ‘CopperRuntime.jar’. (It should be obvious from the paths.)’</p>
+
+<p>(At this point, I had Eclipse bug out and not let me select a directory for bin. You may have to delete this entry and click ‘Add external class folder’. Editing it alone may not work for some reason.)</p>
+
+<p><strong>Try to avoid committing the changes to the ‘runtime/java/.classpath’ file, so we don’t just step all over each other with this change.</strong></p>
+
+<h2 id="make-sure-silver-is-built">Make sure Silver is built</h2>
+
+<p>Run <code>deep-rebuild</code> once, to make sure ‘bin’ gets populated. Then click ‘refresh’ on the project to have it see the changes.</p>
+
+<p>At this point, everything should be built and working in Eclipse.</p>
+
+<h2 id="a-tour-of-the-runtime">A tour of the runtime</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">silver</th>
+      <th style="text-align: left">A main function for invoking the Silver compiler. (To set up the class path to find the runtime jars, etc.)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">common.rawlib</td>
+      <td style="text-align: left">Adaptors for some Java datastructures, so they can be called easier from Silver.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">common.javainterop</td>
+      <td style="text-align: left">Some utilities for working with Silver stuffs from Java code. (currently iterator for lists and comparator from silver functions.)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">common.exceptions</td>
+      <td style="text-align: left">Contains the Silver-specific exceptions. See the JavaDocs for the class for details.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">common</td>
+      <td style="text-align: left">See below</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="the-common-package">The common package</h2>
+
+<p>The basic mechanics:</p>
+
+<ul>
+  <li><strong>Lazy</strong> - Essentially just a function pointer. Given a context to evaluate.</li>
+  <li><strong>Thunk</strong> - Thunk. No context necessary.</li>
+  <li>There’s also <strong>PatternLazy</strong> - just a detail about pattern matching translation</li>
+  <li>Also <strong>CollectionAttribute</strong> - A <strong>Lazy</strong>, that allows contributions to be mutated in.</li>
+</ul>
+
+<p>The basic data structures:</p>
+
+<ul>
+  <li><strong>StringCatter</strong> - A special string representation to make appends efficient.</li>
+  <li><strong>ConsCell</strong> - List cons cells. (They’re special-cased because lists are so common that it’s important to be space efficient. And also to have efficient appends…) (<strong>NilConsCell</strong> is a nested class inside ConsCell, and not referenceable.)</li>
+  <li><strong>AppendCell</strong> - Actually implements the special optimization for list appends.</li>
+</ul>
+
+<p>Attribute-grammary data structures:</p>
+
+<ul>
+  <li><strong>TerminalRecord</strong> - Representation for terminals.</li>
+  <li><strong>Node</strong> - represents <em>undecorated</em> nodes. (i.e. given children, but nothing more.)</li>
+  <li><strong>DecoratedNode</strong> - Given inherited attribute values. Can be examined for attributes, etc.</li>
+</ul>
+
+<p>Related attribute-grammary stuffs:</p>
+
+<ul>
+  <li><strong>FunctionNode</strong> - Closes off parts of Node that don’t apply for functions.</li>
+  <li><strong>NodeFactory</strong> - Represents the type of Silver functions.</li>
+  <li><strong>AttributeSection</strong> - A kind <strong>NodeFactory</strong> for accessing an attribute (the (.pp) syntax)</li>
+  <li><strong>PartialNodeFactory</strong> - Implements partial application.</li>
+  <li><strong>TopNode</strong> - A decorated node that errors if it’s ever used. Maybe slightly nicer than using ‘null’ whenever a ‘context’ is required, but nonexistant.</li>
+</ul>
+
+<p><strong>Util</strong> is just a random collection of static methods, often used by the ‘core’ library.</p>
+
+<p>Ignore this crap:</p>
+
+<ul>
+  <li><strong>Decorator</strong> - will go away. Currently just junk about how autocopy gets implemented.</li>
+  <li><strong>IOToken</strong> - not yet used, but will eventually just be the ‘<code>IO</code>’ value.</li>
+  <li><strong>Statistics</strong> - ignore it. Nasty.</li>
+</ul>
+
+<h2 id="generated-class-info">Generated class info</h2>
+
+<ul>
+  <li>Every <strong>nonterminal</strong> is class that inherits from <strong>Node</strong></li>
+  <li>Every <strong>production</strong> is a class that inherits from the <strong>nonterminal</strong> class</li>
+  <li>Every <strong>production</strong> and <strong>function</strong> has a static ‘invoke’ method, and a ‘factory’ field that is the <strong>NodeFactory</strong> value for that function.</li>
+  <li>The Init.java for every grammar has a count of number of syn/inh on every nonterminal and locals on every production.
+    <ul>
+      <li>This is used during initialization to give indexes into arrays for all syn/inh/locals. (Typically given names like occurs.grammar.name.Init.attribute_grammar_attrONnonterminal_grammar_nt)</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="general-rule">General rule</h2>
+
+<p>Grep for things to see how they’re used.</p>
+
+  </article>
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+  </div>
+
+</footer>
+
+<script>nav_hook();</script>
+
+
+  </body>
+
+</html>

@@ -1,0 +1,24 @@
+{% comment %}
+
+inputs:
+  nav  (data. can have: text, url, subitems, nolink)
+  navbase  (link base)
+
+
+{% endcomment %}
+{% assign navurl = page.url | remove: 'index.html' %}
+<ul class="nav">
+{% for item in include.nav %}
+    {% assign thisurl = item.url | prepend: include.navbase %}
+    <li{% if item.subitems %} class="collapsible{% unless navurl contains thisurl %} collapsed{% endunless %}"{% endif %}>
+    {% if item.nolink %}
+        {{ item.text }}
+    {% else %}
+        <a href="{{ thisurl }}"{% if thisurl == navurl %} class="navpage"{% endif %}>{{ item.text }}</a>
+    {% endif %}
+    {% if item.subitems %}
+        {% include nav.html nav=item.subitems toplevel='no' navbase=include.navbase %}
+    {% endif %}
+    </li>
+{% endfor %}
+</ul>

@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Terminal declarations</title>
+    <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="http://melt.cs.umn.edu/ref/decl/terminals/">
+    
+    <script src="/js/nav.js"></script>
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">Silver Documentation</a>
+
+  </div>
+
+</header>
+
+
+    <div class="site-nav">
+      
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/">Home</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/install-guide/">Installation guide</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/command-line-reference/">Command line reference</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/faq/">Frequently asked questions (FAQ)</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/error-faq/">Frequently found errors (FFE)</a>
+    
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Tutorials (TODO)
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        Intro to AGs - dc?
+    
+    
+    </li>
+
+    
+    <li>
+    
+        Simple
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Concepts
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        Attribute grammars
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/decorated-vs-undecorated/">Decorated vs undecorated</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        Forwarding
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/aspects/">Aspects</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/collections/">Collection attributes</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/modules/">The module system</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/types/">Types</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        Concrete syntax
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/io/">IO</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/lr-parsing/">LR parsing</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/ffi/">Foreign Function Interface</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/concepts/modular-well-definedness/">Modular well-definedness</a>
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Language reference
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li class="collapsible collapsed">
+    
+        Declarations
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/nonterminals/">Nonterminals</a>
+    
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        <a href="doc/ref/decl/productions/">Productions</a>
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/productions/concrete/">Concrete</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/productions/aspect/">Aspect</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/productions/default/">Default</a>
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/attributes/">Attributes</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/occurs/">Occurs</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/functions/">Functions</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/globals/">Global values</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/types/">Type declarations</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/parsers/">Parser declarations</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/terminals/">Terminals</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/annotations/">Annotations</a>
+    
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Copper-specific
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/copper/parser-attribute/">Parser attributes</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/copper/lexer-class/">Lexer classes</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/decl/copper/disambiguate/">Disambiguation functions</a>
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Production body
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/ref/stmt/equations/">Equations</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/stmt/forwarding/">Forwards to</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/stmt/locals/">Locals</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/stmt/return/">Return</a>
+    
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Copper-specific
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/ref/stmt/copper/pluck/">Pluck</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/stmt/copper/print/">Print</a>
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Expressions
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/calls/">Function/production application</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/attribute-access/">Attribute access</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/booleans/">Boolean expressions</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/comparisons/">Comparison operators</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/numeric/">Numeric expressions</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/decorate/">Decorate with</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/new/">New (undecorate)</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/terminal/">Terminal literals</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/pattern-matching/">Pattern matching</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/expr/let/">Lets</a>
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Extensions
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        List syntax
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/ref/ext/easy-terminal/">Easy terminals</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        Convenience
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Library reference
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/lib/string/">String</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/lib/pair/">Pair</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/lib/list/">List</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/lib/maybe/">Maybe</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/lib/io/">IO</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/lib/document-pp/">Document (pp)</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/lib/other/">Other</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/lib/comparison/">Comparison fns</a>
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/bibliography/">Bibliography</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/style-guide/">Style guide</a>
+    
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Development
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/dev/building/">Building Silver</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/dev/code-organization/">Code organization</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/dev/runtime-editing/">Runtime development</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/dev/long-term-todo/">Silver popularity todo list</a>
+    
+    
+    </li>
+
+    
+    <li class="collapsible collapsed">
+    
+        Eclipse
+    
+    
+        
+
+<ul class="nav">
+
+    
+    <li>
+    
+        <a href="doc/dev/eclipse/getting-started/">Getting started</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/dev/eclipse/ide-decl/">Creating an IDE plugin</a>
+    
+    
+    </li>
+
+    
+    <li>
+    
+        <a href="doc/dev/eclipse/internals/">Eclipse internals docs</a>
+    
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+</ul>
+
+    
+    </li>
+
+</ul>
+
+    </div>
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Terminal declarations</h1>
+  </header>
+
+  <article class="post-content">
+    <pre><code>terminal Identifier /[A-Za-z_][A-Za-z0-9_]*/;
+
+terminal BlockComment / \/\* ([^\*]|\*+[^\*\/])* \*+\/ /;
+</code></pre>
+
+<h2 id="syntax">Syntax</h2>
+
+<p>Terminals are declared using the keyword <code>terminal</code> followed by a name, and a regular expression inside forward slashes (<code>/</code>).</p>
+
+<p><code>terminal</code> <em>Identifier</em> <code>/</code> <em>regular expression</em> <code>/</code> <code>;</code></p>
+
+<p>The identifier, like all type names in Silver, must start with a capital letter.  Only standard DFA-style regular expressions are supported (e.g. no back references, etc.)</p>
+
+<p>Character classes are not currently supported, but are in the works.</p>
+
+<p>Whitespace inside the regex is allowed and <strong>ignored</strong>. If whitespace is desired in the regular expression it should be escaped (<code>'\ '</code>).</p>
+
+<h2 id="easy-terminal-extension">Easy terminal extension</h2>
+
+<p>An extension allows a terminal declaration to use single-quote non-regular expressions.  For example:</p>
+
+<pre><code>terminal Boolean  'bool';
+terminal Multiply '*';
+</code></pre>
+
+<h2 id="attributes">“Attributes”</h2>
+
+<p>Values of terminal type have a small number of pseudo-attributes:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Attribute</th>
+      <th style="text-align: left">Type</th>
+      <th style="text-align: left">Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">lexeme</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">The string the terminal matched</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">filename</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">The filename the terminal purports to be from</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">line</td>
+      <td style="text-align: left">Integer</td>
+      <td style="text-align: left">The starting line of the terminal (begins counting with 1)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">column</td>
+      <td style="text-align: left">Integer</td>
+      <td style="text-align: left">The starting column of the terminal (begins counting with 0)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="terminal-modifiers">Terminal Modifiers</h2>
+
+<h3 id="ignore-terminals">Ignore terminals</h3>
+
+<p>Ignored layout terminals can be specified for an entire grammar prefixing the terminal declaration with the <code>ignore</code> keyword:</p>
+
+<pre><code>ignore terminal WhiteSpace /[\n\t\ ]+/;
+</code></pre>
+
+<h3 id="terminal-precedence">Terminal precedence</h3>
+
+<p>Operator terminals can be given a parsing precedence:</p>
+
+<pre><code>terminal Plus  '+' precedence = 11;
+terminal Times '*' precedence = 12;
+</code></pre>
+
+<p>The numbers are arbitrary, relative to each other. High number means “binds more tightly.”</p>
+
+<h3 id="terminal-association">Terminal association</h3>
+
+<p>The association for a terminal can also be given:</p>
+
+<pre><code>terminal Plus  '+' precedence = 11, association = left;
+terminal Times '*' precedence = 12, association = left;
+</code></pre>
+
+<p>‘left’ and ‘right’ are valid. Absent a declaration, terminals are assumed to be non-associative.</p>
+
+<h2 id="copper-specific-modifiers">Copper-specific modifiers</h2>
+
+<h3 id="lexer-classes">Lexer classes</h3>
+
+<p>Terminals can be assigned multiple lexer classes:</p>
+
+<pre><code>terminal Global 'global' lexer classes {KEYWORD};
+terminal Length 'length' lexer classes {KEYWORD,BUILTIN};
+</code></pre>
+
+<h3 id="dominatessubmits">Dominates/submits</h3>
+
+<p>Terminals can have dominates and submits lists:</p>
+
+<pre><code>terminal Identifier /[a-z]+/ submits to {KEYWORD};
+terminal Redundant 'keyword' dominates {Identifier};
+</code></pre>
+
+<p>Each element of the list should refer either to a lexer class, or a terminal.</p>
+
+<p>It’s generally preferred to do dominates/submits on the lexer class declarations than on the terminals themselves, however.</p>
+
+<h3 id="semantic-action-code">Semantic action code</h3>
+
+<p>Terminals can provide code to be executed when that terminal is shifted by the parser (or ignored, in the case of layout terminals.)</p>
+
+<pre><code>terminal Magic 'more magic'
+action { 
+  print "how does " ++ lexeme ++ " work, but magic not?";
+};
+</code></pre>
+
+<p>Inside this action block, a couple of variables are available:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Variable</th>
+      <th style="text-align: left">Type</th>
+      <th style="text-align: left">Contents</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">lexeme</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">The string matched by the regular expression</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">filename</td>
+      <td style="text-align: left">String</td>
+      <td style="text-align: left">The filename given to the parser, when it was invoked. (Unless otherwise changed!)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">line</td>
+      <td style="text-align: left">Integer</td>
+      <td style="text-align: left">The starting line of this terminal (begins with 1)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">column</td>
+      <td style="text-align: left">Integer</td>
+      <td style="text-align: left">The starting column of this terminal (begins with 0)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>In addition, the <code>filename</code>, <code>line</code>, and <code>column</code> variables can be assigned to in the action block, but this updates the position the <em>next</em> terminal will believe it starts at, not the current terminal. (This is often used to deal with CPP directives in the parser.)</p>
+
+  </article>
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+  </div>
+
+</footer>
+
+<script>nav_hook();</script>
+
+
+  </body>
+
+</html>

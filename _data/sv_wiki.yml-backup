@@ -1,0 +1,199 @@
+- text: Home
+  url: /
+- text: Installation guide
+  url: /install-guide/
+- text: Command line reference
+  url: /command-line-reference/
+- text: Frequently asked questions (FAQ)
+  url: /faq/
+- text: Frequently found errors (FFE)
+  url: /error-faq/
+- text: Tutorials (TODO)
+  url: /tutorials/
+  nolink: true
+  subitems:
+    - text: Intro to AGs - dc?
+      url: /tutorials/attribute-grammars/
+      nolink: true
+    - text: Simple
+      url: /tutorials/simple/
+      nolink: true
+- text: Concepts
+  url: /concepts/
+  nolink: true
+  subitems:
+    - text: Attribute grammars
+      url: /concepts/attribute-grammars/
+      nolink: true
+    - text: Decorated vs undecorated
+      url: /concepts/decorated-vs-undecorated/
+    - text: Forwarding
+      url: /concepts/forwarding/
+      nolink: true
+    - text: Aspects
+      url: /concepts/aspects/
+    - text: Collection attributes
+      url: /concepts/collections/
+    - text: The module system
+      url: /concepts/modules/
+    - text: Types
+      url: /concepts/types/
+    - text: Concrete syntax
+      url: /concepts/concrete-syntax/
+      nolink: true
+    - text: IO
+      url: /concepts/io/
+    - text: LR parsing
+      url: /concepts/lr-parsing/
+    - text: Foreign Function Interface
+      url: /concepts/ffi/
+    - text: Modular well-definedness
+      url: /concepts/modular-well-definedness/
+- text: Language reference
+  url: /ref/
+  nolink: true
+  subitems:
+    - text: Declarations
+      url: /ref/decl/
+      nolink: true
+      subitems:
+        - text: Nonterminals
+          url: /ref/decl/nonterminals/
+        - text: Productions
+          url: /ref/decl/productions/
+          subitems:
+            - text: Concrete
+              url: /ref/decl/productions/concrete/
+            - text: Aspect
+              url: /ref/decl/productions/aspect/
+            - text: Default
+              url: /ref/decl/productions/default/
+        - text: Attributes
+          url: /ref/decl/attributes/
+        - text: Occurs
+          url: /ref/decl/occurs/
+        - text: Functions
+          url: /ref/decl/functions/
+        - text: Global values
+          url: /ref/decl/globals/
+        - text: Type declarations
+          url: /ref/decl/types/
+        - text: Parser declarations
+          url: /ref/decl/parsers/
+        - text: Terminals
+          url: /ref/decl/terminals/
+        - text: Annotations
+          url: /ref/decl/annotations/
+        - text: Copper-specific
+          url: /ref/decl/copper/
+          nolink: true
+          subitems:
+            - text: Parser attributes
+              url: /ref/decl/copper/parser-attribute/
+            - text: Lexer classes
+              url: /ref/decl/copper/lexer-class/
+            - text: Disambiguation functions
+              url: /ref/decl/copper/disambiguate/
+    - text: Production body
+      url: /ref/stmt/
+      nolink: true
+      subitems:
+        - text: Equations
+          url: /ref/stmt/equations/
+        - text: Forwards to
+          url: /ref/stmt/forwarding/
+        - text: Locals
+          url: /ref/stmt/locals/
+        - text: Return
+          url: /ref/stmt/return/
+        - text: Copper-specific
+          url: /ref/stmt/copper/
+          nolink: true
+          subitems:
+            - text: Pluck
+              url: /ref/stmt/copper/pluck/
+            - text: Print
+              url: /ref/stmt/copper/print/
+    - text: Expressions
+      url: /ref/expr/
+      nolink: true
+      subitems:
+        - text: Function/production application
+          url: /ref/expr/calls/
+        - text: Attribute access
+          url: /ref/expr/attribute-access/
+        - text: Boolean expressions
+          url: /ref/expr/booleans/
+        - text: Comparison operators
+          url: /ref/expr/comparisons/
+        - text: Numeric expressions
+          url: /ref/expr/numeric/
+        - text: Decorate with
+          url: /ref/expr/decorate/
+        - text: New (undecorate)
+          url: /ref/expr/new/
+        - text: Terminal literals
+          url: /ref/expr/terminal/
+        - text: Pattern matching
+          url: /ref/expr/pattern-matching/
+        - text: Lets
+          url: /ref/expr/let/
+    - text: Extensions
+      url: /ref/ext/
+      nolink: true
+      subitems:
+        - text: List syntax
+          url: /ref/ext/lists/
+          nolink: true
+        - text: Easy terminals
+          url: /ref/ext/easy-terminal/
+        - text: Convenience
+          url: /ref/ext/convenience/
+          nolink: true
+- text: Library reference
+  url: /lib/
+  nolink: true
+  subitems:
+    - text: String
+      url: /lib/string/
+    - text: Pair
+      url: /lib/pair/
+    - text: List
+      url: /lib/list/
+    - text: Maybe
+      url: /lib/maybe/
+    - text: IO
+      url: /lib/io/
+    - text: Document (pp)
+      url: /lib/document-pp/
+    - text: Other
+      url: /lib/other/
+    - text: Comparison fns
+      url: /lib/comparison/
+- text: Bibliography
+  url: /bibliography/
+- text: Style guide
+  url: /style-guide/
+- text: Development
+  url: /dev/
+  nolink: true
+  subitems:
+    - text: Building Silver
+      url: /dev/building/
+    - text: Code organization
+      url: /dev/code-organization/
+    - text: Runtime development
+      url: /dev/runtime-editing/
+    - text: Silver popularity todo list
+      url: /dev/long-term-todo/
+    - text: Eclipse
+      url: /dev/eclipse/
+      nolink: true
+      subitems: 
+        - text: Getting started
+          url: /dev/eclipse/getting-started/
+        - text: Creating an IDE plugin
+          url: /dev/eclipse/ide-decl/
+        - text: Eclipse internals docs
+          url: /dev/eclipse/internals/
+
