@@ -1,3 +1,8 @@
+---
+layout: sv_wiki
+title: MELT
+---
+
 # Minnesota Extensible Language Tools
 
 ## Research:
