@@ -10,7 +10,7 @@ bundle install --path vendor/bundle
 # Clone all other repos and remove their .git folders
 echo $'\nPulling updates to the Silver documentation...\n'
 cd silver
-git clone https://github.umn.edu/melt/silver-wiki-jekyll.git silver
+git clone https://github.umn.edu/melt/silver-wiki-jekyll.git doc
 rm -rf !$/.git
 cd ..
 
