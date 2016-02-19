@@ -21,3 +21,7 @@ Alumni:
 * [August Schwerdfeger](http://www.adventiumlabs.com/about-us/staff/technical-staff/august-schwerdfeger-phd), PhD, July, 2011, [Adventium Labs](http://www.adventiumlabs.com/)
 * Derek Bodin, MS Student
 * Paul Johnson, MS Student
+
+We share many interests with our colleagues in the department and thus work closely with them. These people and groups include:
+* [Mats Heimdahl](http://www.umsec.umn.edu/directory/mats-heimdahl/) and members of his [Crisys group](http://crisys.cs.umn.edu/).
+* [Gopalan Nadathur](http://www-users.cs.umn.edu/~gopalan/) and his students. 
