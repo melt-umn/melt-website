@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Silver Documentation</title>
+    <title>Minnesota Extensible Language Tools</title>
     <description>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
 </description>
-    <link>http://melt.cs.umn.edu/docs/</link>
-    <atom:link href="http://melt.cs.umn.edu/docs/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 18 Feb 2016 10:50:53 -0600</pubDate>
-    <lastBuildDate>Thu, 18 Feb 2016 10:50:53 -0600</lastBuildDate>
+    <link>http://melt.cs.umn.edu/</link>
+    <atom:link href="http://melt.cs.umn.edu/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Thu, 18 Feb 2016 10:59:46 -0600</pubDate>
+    <lastBuildDate>Thu, 18 Feb 2016 10:59:46 -0600</lastBuildDate>
     <generator>Jekyll v2.4.0</generator>
     
       <item>
@@ -28,8 +28,8 @@
 
 </description>
         <pubDate>Thu, 20 Aug 2015 12:56:16 -0500</pubDate>
-        <link>http://melt.cs.umn.edu/docs/jekyll/update/2015/08/20/welcome-to-jekyll.html</link>
-        <guid isPermaLink="true">http://melt.cs.umn.edu/docs/jekyll/update/2015/08/20/welcome-to-jekyll.html</guid>
+        <link>http://melt.cs.umn.edu/jekyll/update/2015/08/20/welcome-to-jekyll.html</link>
+        <guid isPermaLink="true">http://melt.cs.umn.edu/jekyll/update/2015/08/20/welcome-to-jekyll.html</guid>
         
         
         <category>jekyll</category>
