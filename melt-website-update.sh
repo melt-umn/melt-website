@@ -5,7 +5,7 @@ rm -rf .git
 
 # Install gems
 echo $'\nUpdating ruby gems...\n'
-bundle install --path vendor/bundle
+bundle install --path vendor/bundle --jobs 10
 
 # Clone and build Silver documentation
 echo $'\nBuilding silver documentation\n'
