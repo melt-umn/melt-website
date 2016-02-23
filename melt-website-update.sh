@@ -14,6 +14,7 @@ cd scripttemp
 git clone https://github.com/melt-umn/silver.git
 git checkout feature/docgen #This needs to be taken out when we stop developing on the feature branch
 cd silver
+./fetch-jars
 #Compile Silver
 ./self-compile --doc --clean
 #Copy the generated documentation into the 
@@ -21,6 +22,7 @@ cp -rf generated/doc/silver documentation/ref/generated
 cp -rf generated/doc/core documentation/ref/generated
 #Copy the entire documentation folder into the Silver folder
 cp -rf documentation/* ../../silver/doc
+cd ../..
 
 # TODO: Will need to add repos and then script to do pull
 #echo $'Pulling updates to the Copper documentation...\n'
