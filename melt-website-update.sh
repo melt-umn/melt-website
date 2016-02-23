@@ -15,14 +15,12 @@ git clone https://github.com/melt-umn/silver.git
 cd silver
 git checkout feature/docgen #This needs to be taken out when we stop developing on the feature branch
 ./fetch-jars
-#Compile Silver
+#Compile Silver to work with documentation
 ./self-compile
 cp build/silver.composed.Default.jar jars
-./self-compile --doc --clean
-#Copy the generated documentation into the 
-cp -rf generated/doc/silver documentation/ref/generated
-cp -rf generated/doc/core documentation/ref/generated
-#Copy the entire documentation folder into the Silver folder
+#Run the script generate documentation
+./generate-documentation
+#Copy the documentation to the silver doc directory
 cp -rf documentation/* ../../silver/doc
 cd ../..
 
