@@ -12,8 +12,8 @@ echo $'\nBuilding silver documentation\n'
 mkdir scripttemp
 cd scripttemp
 git clone https://github.com/melt-umn/silver.git
-git checkout feature/docgen #This needs to be taken out when we stop developing on the feature branch
 cd silver
+git checkout feature/docgen #This needs to be taken out when we stop developing on the feature branch
 ./fetch-jars
 #Compile Silver
 ./self-compile --doc --clean
