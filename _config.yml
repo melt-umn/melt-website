@@ -24,4 +24,5 @@ exclude:
   - README.md
   - menu-builder.py
   - .gitignore
+  - temp
 

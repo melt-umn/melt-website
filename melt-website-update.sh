@@ -9,13 +9,15 @@ bundle install --path vendor/bundle --jobs 10
 
 # Clone and build Silver documentation
 echo $'\nBuilding silver documentation\n'
-mkdir scripttemp
+mkdir temp
 cd scripttemp
 git clone https://github.com/melt-umn/silver.git
 cd silver
 git checkout feature/docgen #This needs to be taken out when we stop developing on the feature branch
 ./fetch-jars
 #Compile Silver
+./self-compile
+cp build/silver.composed.Default.jar jars
 ./self-compile --doc --clean
 #Copy the generated documentation into the 
 cp -rf generated/doc/silver documentation/ref/generated
