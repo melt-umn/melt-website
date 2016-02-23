@@ -9,8 +9,8 @@ bundle install --path vendor/bundle --jobs 10
 
 # Clone and build Silver documentation
 echo $'\nBuilding silver documentation\n'
-mkdir temp
-cd scripttemp
+mkdir _temp
+cd _temp
 git clone https://github.com/melt-umn/silver.git
 cd silver
 git checkout feature/docgen #This needs to be taken out when we stop developing on the feature branch

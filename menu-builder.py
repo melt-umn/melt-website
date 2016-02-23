@@ -24,14 +24,17 @@ def generate_menu_item(base_dir, depth):
 			return ""
 	# Otherwise, make a new expandable menu item
 	else:
+		nolink = space + "  nolink: true\n"
+		if(os.path.isfile(os.path.join(base_dir, "index.md"))):
+			nolink = ""
 		return space + "- text: " + menu_text + "\n" + \
 			space + "  url: /" + base_dir + "\n" + \
-			space + "  nolink: true\n" + \
+			nolink + \
 			space + "  subitems:\n" + submenu
 
 # Store the menu text in 'menu'
 menu = "- text: home\n  url: /\n"
-dirs = [f for f in os.listdir(".") if not os.path.isfile(f)]
+dirs = [f for f in os.listdir(".") if (not os.path.isfile(f) and not f.startswith("_"))]
 
 # Generate menu items for all subdirectories
 for d in dirs:
@@ -41,5 +44,5 @@ for d in dirs:
 datafile = open("_data/sv_wiki.yml", "w")
 datafile.write(menu)
 datafile.close()
-print(menu)
+print("Menu Generated")
 
