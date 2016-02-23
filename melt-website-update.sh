@@ -21,6 +21,7 @@ cp build/silver.composed.Default.jar jars
 #Run the script generate documentation
 ./generate-documentation
 #Copy the documentation to the silver doc directory
+mkdir ../../silver/doc
 cp -rf documentation/* ../../silver/doc
 cd ../..
 
