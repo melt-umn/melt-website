@@ -1,6 +1,8 @@
 ---
 layout: sv_wiki
 title: People
+menu_title: People
+menu_weight: 100.0
 ---
 
 # MELT Group Members:

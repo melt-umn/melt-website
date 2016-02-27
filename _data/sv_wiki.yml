@@ -1,10 +1,19 @@
-- text: home
+- text: Home
   url: /
-- text: people
-  url: /people
-- text: ableC
-  url: /ableC
-- text: silver
-  url: /silver
-- text: copper
+- text: Copper
   url: /copper
+- text: Silver
+  url: /silver
+  subitems:
+    - text: Sub
+      url: /silver/sub
+      nolink: true
+      subitems:
+        - text: Silver
+          url: /silver/sub/sub2
+        - text: Silver
+          url: /silver/sub/sub1
+- text: ableC
+  url: /ablec
+- text: People
+  url: /people
