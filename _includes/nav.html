@@ -10,7 +10,7 @@ inputs:
 <ul class="nav">
 {% for item in include.nav %}
     {% assign thisurl = item.url | prepend: include.navbase %}
-    <li{% if item.subitems %} class="collapsible{% unless navurl contains thisurl %} collapsed{% endunless %}"{% endif %}>
+    <li{% if item.subitems %} class="collapsible collapsed"{% endif %} id="{{ thisurl }}">
     {% if item.nolink %}
         {{ item.text }}
     {% else %}
