@@ -19,27 +19,28 @@ semantic gap. *Extensible languages* and *extensible compilers* provide a promis
 
 ## Tools and applications:
 
-### [ableC](ableC/index.html): an extensible specification of C
+### ablec: an extensible specification of C
 
-(at the C11 standard)
+[ableC](ablec/index.html)
 
 
 ### Silver: an extensible attribute grammar system
 
-[Silver](silver) is our attribute grammar system.  The specifications
-for ableC and its extensions are written in the Silver AG langauge.
+[Silver](silver) is our attribute grammar system.  The specifications for ableC and its extensions are written in the Silver AG langauge.
 
-Uniquely, Silver supports a modular analysis so that extension writers 
+Uniquely, Silver supports a modular analysis so that extension writers
 can use to certify that their extension will compose with other
 independently-devlopled, and similarly certified, extensions to form a
-well-defined attribute grammar.  Essentially, this ensures that the
-composed attribute grammar will work.
+well-defined attribute grammar.  Essentially, this ensures that the composed attribute grammar will work.
 
 ### Copper: a context-aware scanner and parser generator
 
-[Copper](copper/index.html)
+[Copper](copper/index.html) is a parser and scanner generator that generates integrated LR parsers and context-aware scanners from language specifications based on context-free grammars and regular expressions. The generated scanners use context (in the form of the current LR parse state) to be more discriminating in recognizing tokens.  This is useful in extensible language settings and has the nice benefit of making LR parse table conflicts less likely.
+
+Copper also has a modular analysis that can be used to ensure that
+certified language extension grammars will compose into a
+deterministic grammar.
 
 ## Acknowledgements:
 
-We are very grateful for funding from the [National Science
-Foundation](http://www.nsf.gov/), the McKnight Foundation, the [University of Minnesota](http://www.umn.edu), and [IBM](http://ibm.com) for funding different aspects of our research.
+We are very grateful for funding from the [National Science Foundation](http://www.nsf.gov/), the McKnight Foundation, the [University of Minnesota](http://www.umn.edu), and [IBM](http://ibm.com) for funding different aspects of our research.
