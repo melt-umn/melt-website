@@ -13,12 +13,33 @@ Our main research interests are in the declarative specification of programming 
 
 Software development is a time-consuming and error-prone process that often results in unreliable and insecure software. At least part of the reason for these undesirable results is that large semantic gap between the programmer's high-level understanding of the problem and the relatively low-level programming language in which the problem solutions are encoded. Thus, programmers cannot "say what they mean" but must encode their ideas as programming idioms at a lower level of abstraction. This wastes time and is the source of many errors.
 
-A long range goal is to improve the software development process and the quality of the resulting software artifacts by reducing the semantic gap. Extensible languages provide a promising way to achieve this goal. An extensible language can easily be extended with the unique combination of domain-specific language features that raises the level of abstraction to that of the task at hand. The extended language provides the programmer with language constructs, optimizations, and static program analyses to significantly simplify the software development process.
+A long range goal is to improve the software development process and
+the quality of the resulting software artifacts by reducing the
+semantic gap. *Extensible languages* and *extensible compilers* provide a promising way to achieve this goal. These can easily be extended with the unique combination of domain-specific language features that raises the level of abstraction to that of the task at hand. The extended language provides the programmer with language constructs, optimizations, and static program analyses to significantly simplify the software development process.
 
 ## Tools and applications:
 
-... to be completed ...
+### [ableC](ableC/index.html): an extensible specification of C
+
+(at the C11 standard)
+
+
+### Silver: an extensible attribute grammar system
+
+[Silver](silver) is our attribute grammar system.  The specifications
+for ableC and its extensions are written in the Silver AG langauge.
+
+Uniquely, Silver supports a modular analysis so that extension writers 
+can use to certify that their extension will compose with other
+independently-devlopled, and similarly certified, extensions to form a
+well-defined attribute grammar.  Essentially, this ensures that the
+composed attribute grammar will work.
+
+### Copper: a context-aware scanner and parser generator
+
+[Copper](copper/index.html)
 
 ## Acknowledgements:
 
-We are very grateful to the National Science Foundation, the McKnight Foundation, the University of Minnesota, and IBM for funding different aspects of our research.
+We are very grateful for funding from the [National Science
+Foundation](http://www.nsf.gov/), the McKnight Foundation, the [University of Minnesota](http://www.umn.edu), and [IBM](http://ibm.com) for funding different aspects of our research.
