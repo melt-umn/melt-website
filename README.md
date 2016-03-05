@@ -59,6 +59,11 @@ The 5 steps are:
    This installs the generated website in
    [http://melt.cs.umn.edu/alpha].  
 
+You need to have access to the local user 'gitbot' on coldpress to build and install the website (at least in the way described there).
+
+Note that the Silver documentation is no longer in the `silver-wiki-jekyll` repository.  The Jekyll parts have moved to `melt-website` and the documentation has moved to the `documentation` directory in the Silver repo on [github.com/melt-umn/silver].
+
+'gitbot' is not configured for git to do a push.  It is probably best to edit documentation files in your own working space and push them before running the appropriate script as 'gitbot'.  Alternatively you can make some edits on github.com or github.umn.edu directly.  It is best to not make edits from the gitbot account directly.
   
 
 # Local setup guide for Jekyll
