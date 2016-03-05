@@ -1,8 +1,67 @@
 # melt-website
-Experiment to generate the melt.cs.umn.edu web site from Markdown using Jekyll
 
+The MELT website ([http://melt.cs.umn.edu]) is to be generated from
+hand-written Markdown files and documentation annontations in the
+Silver files that implement Silver and ableC.
 
-# Local setup guide
+This relies on Jekyll and an extension to Silver for processing the
+annotations in Silver files.  
+
+Below are the descriptions for running our scripts for generating and
+installing the melt website, followed by the documentation for setting
+up Jekyll.
+
+# Generating and installing [http://melt.cs.umn.edu]
+
+(Currently, we are installing this in [http://melt.cs.umn.edu/alpha]
+and will eventually use this to generate the real melt site.)
+
+A local user, named ``gitbot`` on coldpress.cs.umn.edu has created for
+running the scripts.  (Evenually, Jenkins will do this automatically
+when the documentation sources change.)
+
+Since installing the Ruby gems takes some time, the process is broken
+up into 5 steps.  The intention is that one can start the process at
+any point in the sequence to avoid time-consuming early steps when
+they are not required.
+
+The 5 steps are:
+
+1. From ``gitbot`` home directory, run ``step1-clone-and-rebuild.sh``.
+
+   This script is not under version control.  It simply clones the
+   ``melt-website`` repository and starts the second step from inside
+   that ``melt-website`` directory.
+
+   The ``-install`` command-line flag will cause step 5 to run and
+   install the site.  This flag is passed through the scripts for the
+   various steps until it is needed.
+
+2. From the ``melt-website`` directory, run ``step2-install-gems-silver.sh``. 
+
+   This installs the Ruby gems and the documentation generating branch
+   of Silver.  It then runs step 3.
+
+3. From the ``melt-website`` directory, run ``step3-generate-docs.sh``. 
+
+   Runs Silver to generate the Markdown documentation from annontation
+   in various Silver files.  This step will organize the Markdown
+   files so that everything is ready for Jekyll.  Which this scripts
+   starts by running the step 4 script.
+
+4. From the ``melt-website`` directory, run ``step4-run-jekyll.sh``. 
+
+   Create the site and put it in ``~gitbot/build``.  If the
+   ``--install`` is set, it runs step 5.
+
+5. From the ``melt-website`` directory, run ``step5-install-site.sh``. 
+
+   This installs the generated website in
+   [http://melt.cs.umn.edu/alpha].  
+
+  
+
+# Local setup guide for Jekyll
 
 You need Ruby 2.x and Node.js installed. :webdev:
 
