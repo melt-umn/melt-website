@@ -3,11 +3,13 @@
 # Run from 'melt-website'
 
 # Get any updates to Silver documentation in hand-written Markdown
-# files in silver/documentation.
+# in silver/documentation.
 cd _temp/silver
 git pull
 cd ../../
 
+# Get any updates from hand-written Markdown in melt-website
+git pull
 
 # Run the python script to generate the navigation menu
 echo $'\nGenerating navigation menu...\n'
