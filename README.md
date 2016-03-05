@@ -33,7 +33,7 @@ The 5 steps are:
    ``melt-website`` repository and starts the second step from inside
    that ``melt-website`` directory.
 
-   The ``-install`` command-line flag will cause step 5 to run and
+   The ``--install`` command-line flag will cause step 5 to run and
    install the site.  This flag is passed through the scripts for the
    various steps until it is needed.
 
