@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Remove .git directory
-rm -rf .git
+# rm -rf .git   -- EVW, maybe we allow some pulls here for quicker generation?
 
 # Install gems
 echo $'\nUpdating ruby gems...\n'
@@ -21,7 +21,7 @@ cp build/silver.composed.Default.jar jars
 #Run the script generate documentation
 ./generate-documentation
 #Copy the documentation to the silver doc directory
-mkdir ../../silver/doc
+mkdir -p ../../silver/doc
 cp -rf documentation/* ../../silver/doc
 cd ../..
 
