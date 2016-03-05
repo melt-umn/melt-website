@@ -24,5 +24,5 @@ cp -rf documentation/* ../../silver/doc
 
 # Go back to 'melt-website'
 cd ../..
-./step4-run-jekyll.sh $1
+./step4-run-jekyll.sh "$1"
 
