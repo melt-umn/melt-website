@@ -5,6 +5,10 @@
 
 cd _temp/silver
 
+# Get any updates to Silver documentation in source files that will be
+# used to generate documentation.
+git pull
+
 # Run the script generate documentation
 ./generate-documentation
 

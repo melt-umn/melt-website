@@ -2,6 +2,13 @@
 
 # Run from 'melt-website'
 
+# Get any updates to Silver documentation in hand-written Markdown
+# files in silver/documentation.
+cd _temp/silver
+git pull
+cd ../../
+
+
 # Run the python script to generate the navigation menu
 echo $'\nGenerating navigation menu...\n'
 python3 menu-builder.py
@@ -13,5 +20,9 @@ echo $'\nBuilding with jekyll...\n'
 bundle exec jekyll build --destination ../build 
 
 
-./step5-install-site.sh "$1"
-
+if [ -z "$1" ]; then
+    echo ""
+    echo "Site installed in default \"build\" directory."
+else
+    ./step5-install-site.sh "$1"
+fi
