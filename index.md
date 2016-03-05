@@ -15,7 +15,8 @@ Software development is a time-consuming and error-prone process that often resu
 
 A long range goal is to improve the software development process and the quality of the resulting software artifacts by reducing the semantic gap. *Extensible languages* and *extensible compilers* provide a promising way to achieve this goal. These can easily be extended with the unique combination of domain-specific language features that raises the level of abstraction to that of the task at hand. The extended language provides the programmer with language constructs, optimizations, and static program analyses to significantly simplify the software development process.
 
-## Tools and applications:
+## Software:
+Much of our research is evaluated by writing software the realizes the technical contributions of the work.  The primary software artifacts that we are currently using and developing include the following:
 
 ### ablec: an extensible specification of C
 
