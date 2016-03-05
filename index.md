@@ -5,7 +5,7 @@ title: MELT
 
 # Minnesota Extensible Language Tools
 
-...1
+1
 
 ## Research:
 
