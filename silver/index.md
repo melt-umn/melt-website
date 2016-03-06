@@ -5,7 +5,7 @@ menu_title: Silver
 menu_weight: 30.0
 ---
 
-# Silver
+# An extensible attribute grammar system
 
 Silver is an extensible attribute grammar specification language and
 system that we have developed to investigate highly-modular attribute
@@ -56,7 +56,8 @@ Silver comes bundled with [Copper](../copper/index.html), our parser and
 context-aware scanner generator.
 
 Documentation (still a work in progress) is available
-[here](..//silver/doc/). 
+[here](..//silver/doc/) and by expanding the navigation links under
+Silver to the left. 
 
 
 [ableC](/ableC/index.html) is written in Silver.  Silver itself is
