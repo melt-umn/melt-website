@@ -2,7 +2,7 @@
 layout: sv_wiki
 title: Silver
 menu_title: Silver
-menu_weight: 40.0
+menu_weight: 30.0
 ---
 
 # Silver
