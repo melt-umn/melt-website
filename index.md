@@ -5,8 +5,6 @@ title: MELT
 
 # Minnesota Extensible Language Tools
 
-## Research:
-
 Our main research interests are in the declarative specification of
 programming languages semantics and transformations for
 optimization. We are specifically interested in techniques that lead
