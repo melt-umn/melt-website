@@ -52,14 +52,14 @@ langauges to ensure that the composition of independently developed
 language extensions (that all pass this analysis) compose to form a
 *well-defined* attrbribute grammar.
 
-Silver comes bundled with [Copper](/copper/index.html), our parser and
+Silver comes bundled with [Copper](../copper/index.html), our parser and
 context-aware scanner generator.
 
 Documentation (still a work in progress) is available
-[here](/silver/doc/). 
+[here](..//silver/doc/). 
 
 
-[ableC](/ablec/index.html) is written in Silver.  Silver itself is
+[ableC](/ableC/index.html) is written in Silver.  Silver itself is
 bootstapped and written in Silver.  We have also used Silver to
 implement extensible versions of Java (see this paper) and Promela,
 the specification langauge for the Spin model checker (see this
