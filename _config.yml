@@ -15,6 +15,7 @@ markdown: kramdown
 kramdown:
   input: GFM
 # GFM is necessary to understand triple backticks-style code blocks "Github Flavored Markdown"
+  hard_wrap: false
 
 # Exclusions
 exclude:
