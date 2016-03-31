@@ -23,8 +23,12 @@
     }
 }
 
+/**
+ * Site Navigation
+ */
+
 .site-nav {
-    margin-top: 20pt;
+    margin-top: 20px;
     float: left;
     line-height: 56px;
 
@@ -87,6 +91,14 @@
     }
 }
 
+/**
+ * Site Right Sidebar
+ */
+.site-right-sidebar {
+	float: right;
+	margin-top: 20px;
+	margin-right: 20px;
+}
 
 
 /**
