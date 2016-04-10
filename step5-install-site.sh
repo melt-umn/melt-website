@@ -11,3 +11,6 @@ rm -Rf /web/research/melt.cs.umn.edu/alpha
 
 mv ../build /web/research/melt.cs.umn.edu/alpha
 
+cd /web/research/melt.cs.umn.edu
+chmod -R 755 alpha
+
