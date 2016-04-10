@@ -4,3 +4,4 @@ vendor/*
 .sass-cache/*
 _deply/*
 _site/*
+_data/sv_wiki.yml
