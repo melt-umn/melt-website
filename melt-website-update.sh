@@ -13,7 +13,7 @@ mkdir _temp
 cd _temp
 git clone https://github.com/melt-umn/silver.git
 cd silver
-git checkout feature/docgen #This needs to be taken out when we stop developing on the feature branch
+#git checkout feature/docgen
 ./fetch-jars
 #Compile Silver to work with documentation
 ./self-compile

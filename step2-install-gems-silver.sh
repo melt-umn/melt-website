@@ -14,8 +14,7 @@ cd _temp
 git clone https://github.com/melt-umn/silver.git
 cd silver
 
-#This needs to be taken out when we stop developing on the feature branch
-git checkout feature/docgen 
+#git checkout feature/docgen 
 
 ./fetch-jars
 
