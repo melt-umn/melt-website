@@ -8,6 +8,7 @@ menu_weight: 100.0
 # MELT Group Members:
 
 We are:
+
   * [Eric Van Wyk](http://www-users.cs.umn.edu/~evw/), Associate Professor
   * [Ted Kaminski](http://www-users.cs.umn.edu/~tedinski/), Ph.D. student
   * Lucas Kramer, Ph.D student
@@ -16,6 +17,7 @@ We are:
   * Kevin Viratyosin, undergraduate student
 
 Alumni:
+
   * Kevin Williams, MS, 2014, Microsoft, X++ Programming Language group
   * Ming Zhou, MS, November, 2013, Microsoft, Visual Studio group
   * Praveen Kambam Sugavanam , MS, November, 2013, Amazon
@@ -25,5 +27,6 @@ Alumni:
   * Paul Johnson, MS Student
 
 We share many interests with our colleagues in the department and thus work closely with them. These people and groups include:
+
   * [Mats Heimdahl](http://www.umsec.umn.edu/directory/mats-heimdahl/) and members of his [Crisys   group](http://crisys.cs.umn.edu/).
   * [Gopalan Nadathur](http://www-users.cs.umn.edu/~gopalan/) and his students. 
