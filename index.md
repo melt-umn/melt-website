@@ -5,26 +5,25 @@ title: MELT
 
 # Minnesota Extensible Language Tools
 
-Our main research interests are in the declarative specification of
-programming languages semantics and transformations for
-optimization. We are specifically interested in techniques that lead
-to a high degree of modularity in the composition of language
-specifications. This is so that specifications for language features
-can be easily combined to create specifications for new languages. 
-
-We
-are thus interested in tools that automatically compose and implement
-such specifications to create pre-processors, compilers and optimizers
-for the newly specified languages.
+Our main research interests are in declarative specifications for
+programming language syntax, semantics, and optimizing
+transformations.  We are specifically interested in techniques that
+lead to a *high degree of modularity* in the composition of language
+specifications.  We have designed a few unique tools that
+automatically compose and implement such specifications to create
+pre-processors, compilers and optimizers for the newly specified
+languages.
 
 ## Extensible languages and compiler frameworks:
 
 Specifically we are interested in tools and techinques that allow a
 programmer, who is not an expert in language or compiler construction,
-to extend their language with new domain-specific syntax, semantic
-analyses, and optimizations.  This extendend language raises the level
-of abstraction to that of the task at hand and, we conjecture, makes
-software development less time consuming and less error-prone.
+to easily import independently-developed (domain-specific) language
+features into their programming language.  These features may add new
+syntax, semantic analyses, and optimizations to the language.  This
+extendend language raises the level of abstraction to that of the task
+at hand and, we conjecture, makes software development less time
+consuming and less error-prone.
 
 There are many research efforts in extensible langauges to support the
 highly modular design of programming languages.  We are interested in
