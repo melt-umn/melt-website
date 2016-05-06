@@ -1,11 +1,11 @@
 ---
 layout: sv_wiki
-title: People
+title: MELT Group Members
 menu_title: People
 menu_weight: 100.0
 ---
 
-# MELT Group Members:
+
 
 We are:
 
