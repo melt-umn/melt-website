@@ -2,11 +2,20 @@
 
 # Run from 'melt-website'
 
+# After step 3, hand-written and generated MarkDown files are in the
+# `silver/documentation' directory of the _temp silver repo.
+
 # Get any updates to Silver documentation in hand-written Markdown
 # in silver/documentation.
 cd _temp/silver
 git pull
+
+# Copy the documentation to the silver/doc directory
+mkdir -p ../../silver/doc
+cp -rf documentation/* ../../silver/doc
+
 cd ../../
+
 
 # Get any updates from hand-written Markdown in melt-website
 git pull

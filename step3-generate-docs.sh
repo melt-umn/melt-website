@@ -9,13 +9,11 @@ cd _temp/silver
 # used to generate documentation.
 git pull
 
-# Run the script generate documentation
+# Run the script generate documentation.
 ./generate-documentation
 
-# Copy the documentation to the silver doc directory
-mkdir -p ../../silver/doc
-cp -rf documentation/* ../../silver/doc
-
+# At this point, the hand-written and generated MarkDown files are
+# in the 'silver/documentation' directory of the _temp silver repo.
 
 # TODO: We will eventually collect documentation from other
 # repositories, suchs those for Copper and ableC.  We Will need to do
