@@ -34,7 +34,7 @@ bundle exec jekyll build --destination ../build
 if [ -z "$1" ]; then
     # TODO: check that "$1" is actually "--install" instead of just not empty.
     echo ""
-    echo "Site installed in default \"build\" directory."
+    echo "********  Site installed in default \"build\" directory."
 else
     ./step5-install-site.sh "$1"
 fi

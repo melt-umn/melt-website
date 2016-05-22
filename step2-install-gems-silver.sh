@@ -9,12 +9,13 @@ bundle install --path vendor/bundle --jobs 10
 # Clone and build documentation branch of Silver
 echo $'\nBuilding documentation branch of Silver\n'
 
+rm -Rf _temp
 mkdir _temp
 cd _temp
 git clone https://github.com/melt-umn/silver.git
 cd silver
 
-#git checkout feature/docgen 
+git checkout feature/docgen 
 
 ./fetch-jars
 
