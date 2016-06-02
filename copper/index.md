@@ -34,26 +34,36 @@ href="http://www-users.cs.umn.edu/~evw/pubs/vanwyk07gpce/">
 provides a detailed discussion of parser-based context-aware scanning.
 
 Copper can also subject a language extension to a test guaranteeing
-that all extensions that pass the test can be composed together
-without any parse-table conflicts. This test is documented in our PLDI
-2009 paper Verifiable Composition of Deterministic Grammars. 
+that all extensions that pass the test can be
+composed <em>together</em> without any parse-table conflicts. This
+test is documented in our PLDI 2009 paper
+<a href="http://www-users.cs.umn.edu/~evw/pubs/schwerdfeger09pldi/"><em>Verifiable Composition of Deterministic Grammars</em></a>.
 
-Copper is written in Java and generates parsers and scanner written in
-Java. It is used by our attribute grammar system Silver and
-distributed with it. It is also available as a stand-alone package. 
+Copper is written in Java and generates parsers and scanner written
+in Java.   It is used by our attribute grammar system
+<a href="silver/index.html">Silver</a> and
+distributed with it.  It is also available as a stand-alone
+package.
 
-Current versions of Copper are maintained on GitHub. We maintain
+Current versions of Copper are maintained <a
+href="http://github.com/melt-umn/copper">on GitHub</a>. We maintain
 downloads and information here for a legacy version, 0.5, used with
-older versions of Silver. 
-Acknowledgments:
+older versions of Silver.
+
+#### Acknowledgments:
 
 This material is based upon work supported by the National Science
-Foundation under grants #1047961, #0905581, #0429640, and #0347860,
-IBM, and the McKnight Foundation. 
+Foundation under grants 
+<a href="http://www.nsf.gov/awardsearch/showAward.do?AwardNumber=1047961">#1047961</a>,
+<a href="http://www.nsf.gov/awardsearch/showAward.do?AwardNumber=0905581">#0905581</a>,
+<a href="http://www.nsf.gov/awardsearch/showAward.do?AwardNumber=0429640">#0429640</a>,
+and
+<a href="http://www.nsf.gov/awardsearch/showAward.do?AwardNumber=0347860">#0347860</a>,
+IBM, and the McKnight Foundation.
 
 Development of Copper versions 0.6 and 0.7 was supported by funding
-from Adventium Labs. 
+from <a href="http://www.adventiumlabs.com">Adventium Labs</a>. 
 
-Any opinions, findings, and conclusions or recommendations expressed
-in this material are those of the author(s) and do not necessarily
-reflect the views of the National Science Foundation. 
+Any opinions, findings, and conclusions or recommendations
+expressed in this material are those of the author(s) and do not
+necessarily reflect the views of the National Science Foundation.
