@@ -10,6 +10,7 @@ We are:
 * [Eric Van Wyk](http://www-users.cs.umn.edu/~evw/), Associate Professor
 * [Ted Kaminski](http://www-users.cs.umn.edu/~tedinski/), Ph.D. student
 * Lucas Kramer, Ph.D student
+* Travis Carlson, Ph.D student
 * Vince Alm, M.S. student
 * Charlie Hofer, undergraduate student
 * Kevin Viratyosin, undergraduate student
