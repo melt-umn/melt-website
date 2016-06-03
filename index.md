@@ -55,7 +55,7 @@ These criteria have some implications:
   another. 
 
 * Adding criterion 4 requires that the composition must be automatic
-  and that *no* "glue code" be written to combine the language
+  and that **no** "glue code" be written to combine the language
   extensions. 
 
 To solve this problem, language and extension specifications must be
