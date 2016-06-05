@@ -28,6 +28,8 @@ python3 menu-builder.py
 echo $'\nBuilding with jekyll...\n'
 
 # TODO: Change the destination path, or copy from build to the melt root folder
+
+rm -Rf ../build
 bundle exec jekyll build --destination ../build 
 
 

@@ -1,0 +1,29 @@
+# Site settings
+title: Minnesota Extensible Language Tools
+email: your-email@domain.com
+description: > # this means to ignore newlines until "baseurl:"
+  Write an awesome description for your new site here. You can edit this
+  line in _config.yml. It will appear in your document head meta (for
+  Google search results) and in your feed.xml site description.
+baseurl: "/alpha" # the subpath of your site, e.g. /blog/
+url: "http://melt.cs.umn.edu" # the base hostname & protocol for your site
+
+sv_wiki_base: "/alpha" # path from domain root to the silver wiki, used to emit "wiki links"
+
+# Build settings
+markdown: kramdown
+kramdown:
+  input: GFM
+# GFM is necessary to understand triple backticks-style code blocks "Github Flavored Markdown"
+  hard_wrap: false
+
+# Exclusions
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - README.md
+  - menu-builder.py
+  - .gitignore
+  - temp
+
