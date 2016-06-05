@@ -2,7 +2,7 @@
 layout: sv_wiki
 title: MELT group publications
 menu_title: Publications
-menu_weight: 90.0
+menu_weight: 120.0
 ---
 
 We are in the process of restructuring our publications web-page.
