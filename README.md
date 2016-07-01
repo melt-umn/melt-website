@@ -1,7 +1,7 @@
 # melt-website
 
 The MELT website ([http://melt.cs.umn.edu]) is to be generated from
-hand-written Markdown files and documentation annontations in the
+hand-written Markdown files and documentation annotations in the
 Silver files that implement Silver and ableC.
 
 This relies on Jekyll and an extension to Silver for processing the
@@ -16,8 +16,8 @@ up Jekyll.
 (Currently, we are installing this in [http://melt.cs.umn.edu/alpha]
 and will eventually use this to generate the real melt site.)
 
-A local user, named ``gitbot`` on coldpress.cs.umn.edu has created for
-running the scripts.  (Evenually, Jenkins will do this automatically
+A local user, named ``gitbot`` on coldpress.cs.umn.edu has been created for
+running the scripts.  (Eventually, Jenkins will do this automatically
 when the documentation sources change.)
 
 Since installing the Ruby gems takes some time, the process is broken
@@ -44,7 +44,7 @@ The 5 steps are:
 
 3. From the ``melt-website`` directory, run ``step3-generate-docs.sh``. 
 
-   Runs Silver to generate the Markdown documentation from annontation
+   Runs Silver to generate the Markdown documentation from annotation
    in various Silver files.  This step will organize the Markdown
    files so that everything is ready for Jekyll.  Which this scripts
    starts by running the step 4 script.
@@ -98,7 +98,7 @@ This are the wiki data. Each of them uses `layout: sv_wiki` which means they are
 
 This nav template generates a hierarchy by investigating information stored in `site.data.sv_wiki`, which is found in `_data/sv_wiki.yml`. YAML format. At present, this is a list of items, which consist of `text`, `url`, an optional `subitems` list, and an optional `nolink: true` which suppresses emitting a link.
 
-The reason for the existance of `nolink` is that, in order to expand the navigation down to the present page, we need to know exactly which path to take all the way down. The templating language is extremely primitive, so it's hard to know otherwise which one to use. Note that this means *the directory structure must exactly mirror the nagivation structure*.
+The reason for the existance of `nolink` is that, in order to expand the navigation down to the present page, we need to know exactly which path to take all the way down. The templating language is extremely primitive, so it's hard to know otherwise which one to use. Note that this means *the directory structure must exactly mirror the navigation structure*.
 
 The navigation has three major components:
 
@@ -110,7 +110,7 @@ To use the navigation template, the include looks as follows:
 
     include nav.html nav=site.data.sv_wiki navbase=site.sv_wiki_base
 
-The `nav` variable indicates the data to use, and `navbase` indicates the root all links will go from. Note that `sv_wiki_base` is just a variables defined in `_config.yml`.
+The `nav` variable indicates the data to use, and `navbase` indicates the root all links will go from. Note that `sv_wiki_base` is just a variable defined in `_config.yml`.
 
 # TODO
 

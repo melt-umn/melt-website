@@ -1,6 +1,6 @@
-## Using the gibot account on coldpress
+## Using the gitbot account on coldpress
 
-This directory is mean to hold the contents of the `gitbot` home
+This directory is meant to hold the contents of the `gitbot` home
 directory so that it is under revision control and can be retrieved if
 the `gitbot` home directory is removed.
 
@@ -23,7 +23,7 @@ the `gitbot` home directory is removed.
 
 2.  % gem install --user-install bundler
 
-    This will give a warning the something like /lhome/gitbot/.gem/ruby/2.3.0/bin is not in the gitbot $PATH.  If it isnt' there.  Then add it to .bashrc
+    This will give a warning the something like /lhome/gitbot/.gem/ruby/2.3.0/bin is not in the gitbot $PATH.  If it isn't there then add it to .bashrc
 
     See that the current version is in `PATH` in `.bashrc`.
 

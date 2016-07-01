@@ -21,33 +21,33 @@ programmer, who is not an expert in language or compiler construction,
 to easily import independently-developed (domain-specific) language
 features into their programming language.  These features may add new
 syntax, semantic analyses, and optimizations to the language.  This
-extendend language raises the level of abstraction to that of the task
+extended language raises the level of abstraction to that of the task
 at hand and, we conjecture, makes software development less time
 consuming and less error-prone.
 
-There are many research efforts in extensible langauges to support the
+There are many research efforts in extensible languages to support the
 highly modular design of programming languages.  We are interested in
 a specific view of extensible languages and compilers in which the
 *composition* of language features is directed by a programmer that
 need not be an expert in language and compiler constructions.
 
 This view leads to a few criteria that we believe must be satisifed
-for extensible langauges or extensible compilers to have a long-term
+for extensible languages or extensible compilers to have a long-term
 impact: 
 
-1. language extensions can be designed by independent parties
-2. langauge extensions can add new syntactic constucts 
-3. language extensions can add new semantic analyses of these
-   constucts and on construct in the host langauge that is being
-   extended. 
-4. the composition of the extensions choosen by the non-expert
-   programmer must succeed and form a working compiler or translator. 
+1. Language extensions can be designed by independent parties.
+2. Language extensions can add new syntactic constructs.
+3. Language extensions can add new semantic analyses of these
+   constructs and on constructs in the host language that is being
+   extended.
+4. The composition of the extensions chosen by the non-expert
+   programmer must succeed and form a working compiler or translator.
 
 These criteria have some implications:
 
 * Criteria 2 and 3 require that the extensible language/compiler must
   solve the "Expression Problem": that is, both new syntax and new
-  semantics can be added without the modification of the host langauge
+  semantics can be added without the modification of the host language
   specification of other language extensions.
 
 * By adding criterion 1, we need to solve a specific version of
@@ -64,26 +64,26 @@ extension writers, need to provide the assurance that the extension
 has the characteristics needed to compose with other extensions.
 
 ## Software:
-Much of our research is evaluated by writing software the realizes
+Much of our research is evaluated by writing software that realizes
 these ideas.  Collectively, the tools and specfications described
 below satisfy the above criteria.
 
 
-### ablec: an extensible specification of C
+### ableC: an extensible specification of C
 
 [ableC](ablec/index.html) is our primary vehicle for investigating
-extensible langauges.  This specification implements (or soon will)
-the C11 standard of the C programming langauge.
+extensible languages.  This specification implements (or soon will)
+the C11 standard of the C programming language.
 
 
 ### Silver: an extensible attribute grammar system
 
 [Silver](silver) is our attribute grammar system.  The specifications
-for ableC and its extensions are written in the Silver AG langauge. 
+for ableC and its extensions are written in the Silver AG language. 
 
-Uniquely, Silver supports a modular analysis so that extension writers
+Uniquely, Silver supports a modular analysis that extension writers
 can use to certify that their extension will compose with other
-independently-devlopled, and similarly certified, extensions to form a
+independently-developed, and similarly certified, extensions to form a
 well-defined attribute grammar.  Essentially, this ensures that the
 composed attribute grammar will work. 
 

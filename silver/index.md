@@ -15,7 +15,7 @@ System"](http://www-users.cs.umn.edu/~evw/pubs/vanwyk10scp/).
 
 
 Silver supports many extensions to D. E. Knuth's
-original specification of attribute grammars.  This include:
+original specification of attribute grammars.  These include:
 
 * *Forwarding:* In our paper [Forwarding in Attribute Grammars for
   Modular Language
@@ -48,7 +48,7 @@ describes some of these features.
 
 Silver also has a modular analysis ([see this SLE 2012 paper](http://www-users.cs.umn.edu/~evw/pubs/kaminski12sle/index.html)) that can be used
 in extensible 
-langauges to ensure that the composition of independently developed
+languages to ensure that the composition of independently developed
 language extensions (that all pass this analysis) compose to form a
 *well-defined* attrbribute grammar.
 
@@ -56,13 +56,13 @@ Silver comes bundled with [Copper](../copper/index.html), our parser and
 context-aware scanner generator.
 
 Documentation (still a work in progress) is available
-[here](..//silver/doc/) and by expanding the navigation links under
+[here](../silver/doc/) and by expanding the navigation links under
 Silver to the left. 
 
 
 [ableC](/ableC/index.html) is written in Silver.  Silver itself is
-bootstapped and written in Silver.  We have also used Silver to
+bootstrapped and written in Silver.  We have also used Silver to
 implement extensible versions of Java (see this paper) and Promela,
-the specification langauge for the Spin model checker (see this
+the specification language for the Spin model checker (see this
 paper).
 
