@@ -123,3 +123,8 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+. /soft/rko-modules/tcl/init/bash
+
+module load soft/nodejs
+
