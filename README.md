@@ -89,6 +89,7 @@ Hooray!
 
 Alternatively, use the module system to load nodejs (this is now done in
 gitbot-home-directory/.bashrc):
+
     . /soft/rko-modules/tcl/init/bash
     module load soft/nodejs
 
