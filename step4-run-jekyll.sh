@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# stop on error
+set -e
+
 # Run from 'melt-website'
 
 # After step 3, hand-written and generated MarkDown files are in the

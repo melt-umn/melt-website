@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# stop on error
+set -e
+
 rm -Rf melt-website
 
 git clone git@github.umn.edu:melt/melt-website.git

@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# stop on error
+set -e
+
 # Run from 'melt-website'
 # TODO: test existence of _temp/silver directory.
 
