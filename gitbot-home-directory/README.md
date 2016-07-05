@@ -7,15 +7,25 @@ the `gitbot` home directory is removed.
 
 ## Setting it all up.
 
-1.  Copy the directories here into the home directory /lhome/gitbot.
-    These are
+1. Copy step1-clone-website-repo.sh into the home directory /lhome/gitbot.
 
-     .bashrc
+    This script will copy all files in this directory to the home directory and
+    start the install process.
 
-       Adds /lhome/gitbot/.gem/ruby/2.3.0/bin in your PATH,
 
-       Sets PATH explicitly so it has no remnants from the account
-       being logged in from .
+2. Create ssh keys and add them to github.umn.edu for the `robot007` user.
+
+   https://help.github.com/articles/generating-an-ssh-key/
+
+
+## Other.
+
+1.  .bashrc
+
+     Adds /lhome/gitbot/.gem/ruby/2.3.0/bin in your PATH,
+
+     Sets PATH explicitly so it has no remnants from the account
+     being logged in from .
 
 
      step1-clone-website-repo.sh
@@ -31,12 +41,6 @@ the `gitbot` home directory is removed.
 3.  `bundle install --path vendor/bundle`
 
     This doesn't work for me (EVW)...
-
-
-4. Create ssh keys and add them to github.umn.edu for the `robot007` user.
-
-   https://help.github.com/articles/generating-an-ssh-key/
-
 
 
 

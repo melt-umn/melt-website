@@ -13,9 +13,6 @@ up Jekyll.
 
 # Generating and installing [http://melt.cs.umn.edu]
 
-(Currently, we are installing this in [http://melt.cs.umn.edu/alpha]
-and will eventually use this to generate the real melt site.)
-
 A local user, named ``gitbot`` on coldpress.cs.umn.edu has been created for
 running the scripts.  (Eventually, Jenkins will do this automatically
 when the documentation sources change.)
@@ -29,13 +26,14 @@ The 5 steps are:
 
 1. From ``gitbot`` home directory, run ``step1-clone-and-rebuild.sh``.
 
-   This script is not under version control.  It simply clones the
-   ``melt-website`` repository and starts the second step from inside
+   This script  clones the ``melt-website`` repository, copies
+   gitbot-home-directory to ~,  and starts the second step from inside
    that ``melt-website`` directory.
 
    The ``--install`` command-line flag will cause step 5 to run and
    install the site.  This flag is passed through the scripts for the
-   various steps until it is needed.
+   various steps until it is needed. Without this flag, the site will be
+   installed at [http://melt.cs.umn.edu/alpha].
 
 2. From the ``melt-website`` directory, run ``step2-install-gems-silver.sh``. 
 
@@ -46,18 +44,19 @@ The 5 steps are:
 
    Runs Silver to generate the Markdown documentation from annotation
    in various Silver files.  This step will organize the Markdown
-   files so that everything is ready for Jekyll.  Which this scripts
+   files so that everything is ready for Jekyll, which this scripts
    starts by running the step 4 script.
 
 4. From the ``melt-website`` directory, run ``step4-run-jekyll.sh``. 
 
-   Create the site and put it in ``~gitbot/build``.  If the
+   This installs the generated website in
+   [http://melt.cs.umn.edu/alpha].  If the
    ``--install`` is set, it runs step 5.
 
 5. From the ``melt-website`` directory, run ``step5-install-site.sh``. 
 
    This installs the generated website in
-   [http://melt.cs.umn.edu/alpha].  
+   [http://melt.cs.umn.edu/].
 
 You need to have access to the local user 'gitbot' on coldpress to build and install the website (at least in the way described there).
 
@@ -87,6 +86,11 @@ So you should be able to run with:
     bundle exec jekyll serve
 
 Hooray!
+
+Alternatively, use the module system to load nodejs (this is now done in
+gitbot-home-directory/.bashrc):
+    . /soft/rko-modules/tcl/init/bash
+    module load soft/nodejs
 
 # How this works
 
