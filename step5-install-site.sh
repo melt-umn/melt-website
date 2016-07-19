@@ -31,6 +31,8 @@ cp -R alpha/people .
 
 cp -R alpha/ableC .
 
+cp -R alpha/downloads .
+
 cp alpha/silver/index.html silver/
 cp -R alpha/silver/doc/ silver/
 
