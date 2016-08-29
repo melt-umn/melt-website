@@ -71,7 +71,7 @@ below satisfy the above criteria.
 
 ### ableC: an extensible specification of C
 
-[ableC](ablec/index.html) is our primary vehicle for investigating
+[ableC](ableC/index.html) is our primary vehicle for investigating
 extensible languages.  This specification implements (or soon will)
 the C11 standard of the C programming language.
 
