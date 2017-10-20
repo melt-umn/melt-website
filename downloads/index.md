@@ -20,7 +20,7 @@ menu_weight: 140.0
 Version 0.1
 
 * [ableC-0.1.tar.gz](/downloads/ableC-0.1.tar.gz) - ``ableC`` sources
-* [ableC-bundle-0.1.tar.gzableC-alpha1](/downloads/ableC-bundle-0.1.tar.gz)  - ``ableC`` bundle, include Silver, ableC, several extensions, and sample projects
+* [ableC-bundle-0.1.tar.gz](/downloads/ableC-bundle-0.1.tar.gz)  - ``ableC`` bundle, include Silver, ableC, several extensions, and sample projects
 * [extensions-0.1.tar.gz](/downloads/extensions-0.1.tar.gz) - extension sources
 * [ableC Virtual Box VM](/downloads/ableC_artifact_virtual_box_vm.tar.gz) - Virtual Box VM including Silver, ableC, several extensions, and sample projects
 
