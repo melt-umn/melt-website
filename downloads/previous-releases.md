@@ -1,8 +1,8 @@
 ---
 layout: sv_wiki
-title: Downloads
-menu_title: Downloads
-menu_weight: 140.0
+title: Previous Releases
+menu_title: Previous Releases
+menu_weight: 150.0
 ---
 
 # Silver
@@ -30,15 +30,6 @@ menu_weight: 140.0
 
 # ableC
 
-Version 0.1
+* [ableC-alpha1](/downloads/ableC-alpha1.tar.gz)
 
-* [ableC-0.1.tar.gz](/downloads/ableC-0.1.tar.gz) - ``ableC`` sources
-* [ableC-bundle-0.1.tar.gzableC-alpha1](/downloads/ableC-bundle-0.1.tar.gz)  - ``ableC`` bundle, include Silver, ableC, several extensions, and sample projects
-* [extensions-0.1.tar.gz](/downloads/extensions-0.1.tar.gz) - extension sources
-* [ableC Virtual Box VM](/downloads/ableC_artifact_virtual_box_vm.tar.gz) - Virtual Box VM including Silver, ableC, several extensions, and sample projects
-
-
-# Previous releases
-
-* [Previous software releases](previous-releases.html)
 
