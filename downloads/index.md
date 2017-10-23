@@ -7,7 +7,7 @@ menu_weight: 140.0
 
 # Silver
 
-* [silver-latest](/downloads/silver-dev/silver-latest.tar.gz)
+* [Silver 0.4](/downloads/silver-0.4.0.tar.gz)
 
 # Copper
 
