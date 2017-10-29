@@ -72,8 +72,8 @@ below satisfy the above criteria.
 ### ableC: an extensible specification of C
 
 [ableC](ableC/index.html) is our primary vehicle for investigating
-extensible languages.  This specification implements (or soon will)
-the C11 standard of the C programming language.
+extensible languages.  This specification implements the C11 standard
+of the C programming language.
 
 
 ### Silver: an extensible attribute grammar system

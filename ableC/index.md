@@ -7,12 +7,18 @@ menu_weight: 60.0
 
 # ableC: Attribute grammar-Based Language Extensions for C
 
-We have nearly completed an implementation of C, at the C11 standard,
-in Silver.  This is used as a *host language* in our work on
-extensible languages.  To date we've developed a number of language
-extensions.  These include extensions for
+ableC is an implementation of C, at the C11 standard,
+using Silver.  This is used as a *host language* in our work on
+extensible languages.  
+
+See our OOPSLA 2017 paper: [Reliable and Automatic Composition of Language Extensions to C: The ableC Extensible Language Framework](http://www-users.cs.umn.edu/~evw/pubs/kaminski17oopsla/index.html).
+
+To date we've developed a number of language extensions.  These
+include extensions for
 
 + algebraic data types, with pattern matching
++ SQLite, with type-checked queries
++ Cilk, for task-based parallel programming
 + regular expressions, with matching
 + an extension that combines these two to allow regular expressions to
   be used as patterns when matching on strings as part of an
@@ -22,12 +28,12 @@ extensions.  These include extensions for
   functions from MATLAB
 + term rewriting, inspired by the TOM system and Kiama
 + closures / lambda-expressions
-+ parts of HALIDE, a DSL for high performance image processing
++ parts of HALIDE, a DSL for high performance matrix processing
 
 These all pass the modular determinism analysis in Copper and the
 modular well-definedness analysis in Silver.
 
-The ableC specification can be found  on
-[GitHub](https://github.com/melt-umn/ableC). 
+The ableC specification can be downloaded
+[here](/downloads). 
  
 
