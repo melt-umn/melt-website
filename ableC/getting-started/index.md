@@ -6,11 +6,9 @@ menu_weight: 60.0
 ---
 
 
-# Getting started with ableC
+# Installation
 
-## Installation
+# Sample projects
 
-## Sample projects
-
-## Writing extensions
+# Writing extensions
 
