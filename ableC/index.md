@@ -33,6 +33,6 @@ include extensions for
 These all pass the modular determinism analysis in Copper and the
 modular well-definedness analysis in Silver.
 
-To get started with ableC, look [here](ableC/getting-started/index.html).
+To get started with ableC, look [here](/ableC/getting-started/index.html).
 
  
