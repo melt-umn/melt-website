@@ -13,11 +13,12 @@ Silver, ableC, a collection of extensions, and some sample projects
 that use them.
 
 The best way to install this is by running [this
-script](http://http://melt.cs.umn.edu/downloads/install-ableC-bundle.sh).
+script](http://melt.cs.umn.edu/downloads/install-ableC-bundle.sh).
 It will use Git to clone the current version of the software and
 download the Silver JAR files that are needed.
 
 Requirements:
+
 * ``wget``
 * [Java Development Kit](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
 * ``ant``
@@ -35,7 +36,7 @@ it is best to start with the "down on the farm" project.
 
 If you want to use the Cilk extension, first install the Cilk
 libraries.  [This script](The best way to install this is by running [this
-script](http://http://melt.cs.umn.edu/downloads/install-cilk-libs.sh)
+script](http://melt.cs.umn.edu/downloads/install-cilk-libs.sh)
 will put them in ``/usr/local``.  
 
 # Writing extensions
