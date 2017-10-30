@@ -33,7 +33,18 @@ box.  You can download a working VM with it all installed on the
 Once ableC is installed, take a look at the sample projects (included in the
 bundle, also available [here](https://github.com/melt-umn/ableC_sample_projects)). The
 parallel tree search example requires the Cilk runtime libraries, so
-it is best to start with the "down on the farm" project.
+it is best to start with the "down on the farm" project. The example
+`accounting.xc` makes use of the sqlite, conditional tables, algebraic data
+types, and regular expression extensions. Compile and run this example as
+follows:
+
+```
+$ cd ableC_sample_projects/down_on_the_farm
+$ make
+$ ./create_database.sh
+$ ./populate_table
+$ ./accounting
+```
 
 If you want to use the Cilk extension, first install the Cilk
 libraries.  The best way to install this is by running [this
