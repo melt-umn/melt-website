@@ -8,7 +8,7 @@ menu_weight: 60.0
 
 # Installation
 
-The easies way to get started is with the ableC bundle.  It includes
+The easiest way to get started is with the ableC bundle.  It includes
 Silver, ableC, a collection of extensions, and some sample projects
 that use them.
 
@@ -30,14 +30,17 @@ box.  You can download a working VM with it all installed on the
 
 # Sample projects
 
-Once ableC is installed, take a look at the sample projects.  The
+Once ableC is installed, take a look at the sample projects (included in the
+bundle, also available [here](https://github.com/melt-umn/ableC_sample_projects)). The
 parallel tree search example requires the Cilk runtime libraries, so
 it is best to start with the "down on the farm" project.
 
 If you want to use the Cilk extension, first install the Cilk
-libraries.  [This script](The best way to install this is by running [this
+libraries.  The best way to install this is by running [this
 script](http://melt.cs.umn.edu/downloads/install-cilk-libs.sh)
-will put them in ``/usr/local``.  
+which will put them in ``/usr/local``.  
+
+
 
 # Writing extensions
 
