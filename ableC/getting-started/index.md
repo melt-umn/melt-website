@@ -31,27 +31,28 @@ box.  You can download a working VM with it all installed on the
 # Sample projects
 
 Once ableC is installed, take a look at the sample projects (included in the
-bundle, also available [here](https://github.com/melt-umn/ableC_sample_projects)). The
-parallel tree search example requires the Cilk runtime libraries, so
-it is best to start with the "down on the farm" project. The example
-`accounting.xc` makes use of the sqlite, conditional tables, algebraic data
-types, and regular expression extensions. Compile and run this example as
-follows:
+bundle, also available [here](https://github.com/melt-umn/ableC_sample_projects)).
+Each of the sample projects briefly described below contains a README file with
+more information.
 
-```
-$ cd ableC_sample_projects/down_on_the_farm
-$ make
-$ ./create_database.sh
-$ ./populate_table
-$ ./accounting
-```
+* The "down on the farm" project makes use of the sqlite, conditional tables,
+algebraic data types, and regular expression extensions to analyze a database of
+farm animals to compute income and expenses.
 
-If you want to use the Cilk extension, first install the Cilk
-libraries.  The best way to install this is by running [this
-script](http://melt.cs.umn.edu/downloads/install-cilk-libs.sh)
-which will put them in ``/usr/local``.  
+* The "parallel tree search" uses the algebraic data types, Cilk, and regular
+expression extensions to count in parallel the nodes in a binary tree whose
+values match a given regular expression. This project requires the Cilk runtime
+libraries, so it is best to start with the "down on the farm" project.  If you
+want to use the Cilk extension, first install the Cilk libraries.  The best way
+to install this is by running [this
+script](http://melt.cs.umn.edu/downloads/install-cilk-libs.sh) which will put
+them in ``/usr/local``.
 
-
+* The "using transparent prefixes" project demonstrates how to use transparent
+prefixes to fix any lexical ambiguities that arise when composing
+independently-developed language extensions that have passed the modular
+determinism analysis. Any lexical ambiguities that arise when these grammars
+are composed will involve a marking token from at least one of the extensions.
 
 # Writing extensions
 
