@@ -3,6 +3,9 @@
 import os
 import re
 
+# base_dir: the path to examine
+# depth: how deep this is (start at 0 for top level menu items)
+# returns: (weight, string) tuple
 def build_menu_item(base_dir, depth):
 	# Check for an index file
 	index_path = os.path.join(base_dir, "index.md")
@@ -27,12 +30,18 @@ def build_menu_item(base_dir, depth):
 	# Get the the menu string for this directory and all subdirectories
 	return (weight, build_menu_item_string(menu_title, depth, base_dir, has_index, submenu))
 
-# Takes a list of unsorted menu items and returns each one as a string
+# menu_items: list of (weight, string) tuples
+# returns: sorted by weight, each string joined
 def compile_menu_items(menu_items):
 	sorted_menu_items = sorted(menu_items, key=lambda i: i[0])
 	return "".join([i[1] for i in sorted_menu_items])
 	
-# Builds a menu string from bits of information
+# title: the page title
+# depth: the depth in the menu
+# directory: the path containing this file
+# has_index: whether 'index.md' exists
+# submenu_string: the concatenated menuitems for its children
+# returns: a string for this menu item
 def build_menu_item_string(title, depth, directory, has_index, submenu_string):
 	has_submenu = "" != submenu_string.strip()
 	if not has_submenu and not has_index:
@@ -73,7 +82,7 @@ def get_index_properties(index_path):
 
 # Build the menu
 menu = "- text: Home\n  url: /\n"
-dirs = [f for f in os.listdir(".") if (not os.path.isfile(f) and not f.startswith("_"))]
+dirs = [f for f in os.listdir(".") if (not os.path.isfile(f) and not f.startswith("_") and f != "vendor")]
 menu += compile_menu_items([build_menu_item(d, 0) for d in dirs])
 
 # Write to the sv_wiki.yml in _data
