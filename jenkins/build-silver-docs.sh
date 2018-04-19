@@ -32,6 +32,9 @@ cp -rf generated/doc/lib/* documentation/gen/lib
 
 rm -rf generated
 
+# We don't want this file copied over
+rm -f documentation/README.md
+
 # Copy docs from silver back to the website
 mkdir -p "$ORIG/silver/doc"
 cp -rf documentation/* "$ORIG/silver/doc"

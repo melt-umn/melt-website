@@ -27,4 +27,6 @@ exclude:
   - .gitignore
   - temp
   - jenkins
+  - Jenkinsfile
+  - "*.sh"
 
