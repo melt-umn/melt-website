@@ -14,10 +14,8 @@ export GEM_PATH="$GEMDIR"
 echo "Updating metadata..."
 python3 menu-builder.py
 
-# Preserve group-writable in what we generate here, so the copy later is easier
-umask 002
-
 echo "Building site..."
 bundle exec jekyll build
 
-
+# Make group permissions same as user, will be preserved when copied later
+chmod -R g=u _site
