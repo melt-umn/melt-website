@@ -18,23 +18,22 @@ if [ ! -d $WEBSITE ] || [ ! -d $JENKINS_DUMP ]; then
   exit 1
 fi
 
-# Create files accordingly
-umask 002
-# It's a shame we can't easily set the default group files get created with
-
-# Let's reduce IO by only copying files if they're new
 # We MUST leave files in the destination alone if they're not in the source
 # (consider, e.g., downloads)
 
-# -u Only copy if the source file is newer than the destination file
-# --remove-destination  deletes so that we take ownership of the file (thus can chgrp/mod)
-cp -u --remove-destination $JENKINS_DUMP/* $WEBSITE/
+# -u Only copy if the source file is newer than the destination file (reduce IO)
+# --remove-destination  delete before copying so that we take ownership of the file (thus can chgrp/mod)
 
-# Not ourself
+newgrp cs-melt << EOF
+  umask 002
+  cp -u --remove-destination $JENKINS_DUMP/* $WEBSITE/
+EOF
+
+# Don't leave our script in the website
 rm $WEBSITE/cron-install-site.sh
 
 # fix permissions
-chgrp -R cs-melt $WEBSITE
+#chgrp -R cs-melt $WEBSITE
 #chmod -R g+rwX,o-w $WEBSITE
 
 
