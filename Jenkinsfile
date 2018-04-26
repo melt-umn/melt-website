@@ -20,6 +20,7 @@ try {
     stage("Deploy") {
       sh "jenkins/deploy-site.sh"
     }
+    // Once "deployed" a cron script will spot changes and copy to real site
   }
 } catch(e) {
   melt.handle(e)

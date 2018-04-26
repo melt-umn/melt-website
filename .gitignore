@@ -1,7 +1,7 @@
 *~
-vendor/*
-.bundle/*
-.sass-cache/*
-_deply/*
-_site/*
+vendor
+.bundle
+.sass-cache
+_site
 _data/sv_wiki.yml
+silver/doc

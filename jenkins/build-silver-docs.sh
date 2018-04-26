@@ -2,6 +2,11 @@
 
 set -eu
 
+if [ $0 != "jenkins/build-silver-docs.sh" ]; then
+  echo "Run as jenkins/build-silver-docs.sh"
+  exit 1
+fi
+
 ORIG=$(pwd)
 SVWORKSPACE=/export/scratch/melt-jenkins/custom-silver
 SV=vendor/silver
