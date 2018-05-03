@@ -1,7 +1,7 @@
 ---
 layout: sv_wiki
-title: ableC
-menu_title: ableC
+title: AbleC
+menu_title: AbleC
 menu_weight: 60.0
 ---
 

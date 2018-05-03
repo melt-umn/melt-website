@@ -37,7 +37,7 @@ def build_menu_item(base_dir, depth):
 	# Get or build the menu items weight
 	weight = float(index_properties.get('menu_weight', 10000))
 	# Get the the menu string for this directory and all subdirectories
-	return (weight, build_menu_item_string(menu_title, depth, base_dir, index_properties['valid'], submenu))
+	return (weight, build_menu_item_string(menu_title, depth, base_dir, index_properties, submenu))
 
 # menu_items: list of (weight, string) tuples
 # returns: sorted by weight, each string joined
@@ -48,17 +48,17 @@ def compile_menu_items(menu_items):
 # title: the page title
 # depth: the depth in the menu
 # directory: the path containing this file
-# has_index: whether 'index.md' exists
+# properties: properties for this markdown file
 # submenu_string: the concatenated menuitems for its children
 # returns: a string for this menu item
-def build_menu_item_string(title, depth, directory, has_index, submenu_string):
+def build_menu_item_string(title, depth, directory, properties, submenu_string):
 	has_submenu = "" != submenu_string.strip()
-	if not has_submenu and not has_index:
+	if not has_submenu and not properties['valid']:
 		return ""
 	space = "    " * depth
 	menu_string = space + "- text: " + title + "\n" + \
 		      space + "  url: /" + directory + "/\n"
-	if not has_index:
+	if not properties['valid'] or properties.get('menu_nolink', None) == "true":
 		menu_string += space + "  nolink: true\n"
 	if has_submenu:
 		menu_string += space + "  subitems:\n" + submenu_string

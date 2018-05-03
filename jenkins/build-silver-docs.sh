@@ -31,9 +31,7 @@ mkdir -p generated
 
 rm ./build.xml ./silver.extension.doc.extra.jar
 
-cp -rf generated/doc/silver/* documentation/gen/silver
-cp -rf generated/doc/core documentation/gen
-cp -rf generated/doc/lib/* documentation/gen/lib
+cp -r generated/doc/* documentation/gen/
 
 rm -rf generated
 
@@ -41,7 +39,7 @@ rm -rf generated
 rm -f documentation/README.md
 
 # Copy docs from silver back to the website
-mkdir -p "$ORIG/silver/doc"
-cp -rf documentation/* "$ORIG/silver/doc"
+mkdir -p "$ORIG/silver"
+cp -r documentation/* "$ORIG/silver/"
 
 
