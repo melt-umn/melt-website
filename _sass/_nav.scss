@@ -2,7 +2,7 @@
  * Navigation bar
  */
 li.collapsible {
-    background: url('data:image/gif;base64,R0lGODlhCQAJAKIHAKuz1mV1s1doru3u8eXm6v///wAAzP///yH5BAEAAAcALAAAAAAJAAkAAAMdeCHMoaBICda87M5sei/MoA0MoREMMKwrICiNcyQAOw==') no-repeat scroll 1px 7px;
+    background: url('data:image/gif;base64,R0lGODlhCQAJAKIHAKuz1mV1s1doru3u8eXm6v///wAAzP///yH5BAEAAAcALAAAAAAJAAkAAAMdeCHMoaBICda87M5sei/MoA0MoREMMKwrICiNcyQAOw==') no-repeat scroll 0px 9px;
     cursor: pointer;
 
     > ul {
@@ -11,7 +11,7 @@ li.collapsible {
 }
 
 li.collapsible.collapsed {
-    background: url('data:image/gif;base64,R0lGODlhCQAJAKIGAKuz1mV1s1doru3u8f///wAAzP///wAAACH5BAEAAAYALAAAAAAJAAkAAAMgaCHMoYBICdYsk90sSPkfwQwSRgxjKaECMLwvICiNYyQAOw==') no-repeat scroll 1px 7px;
+    background: url('data:image/gif;base64,R0lGODlhCQAJAKIGAKuz1mV1s1doru3u8f///wAAzP///wAAACH5BAEAAAYALAAAAAAJAAkAAAMgaCHMoYBICdYsk90sSPkfwQwSRgxjKaECMLwvICiNYyQAOw==') no-repeat scroll 0px 9px;
 
     > ul { 
         display: none;
@@ -25,19 +25,15 @@ ul.nav {
     list-style: outside none none;
 
     > li {
-        margin: 0 0 2px;
+        margin: 0 0 2px 0;
         padding: 1px 1px 1px 14px;
-        /*padding: 0.15em 0 0.5em 1.5em;
-        margin-bottom: 0.2em;
-        background-repeat: no-repeat;
-        text-indent: 0.4em;*/
         list-style: outside none none;
     }
 }
 
-a.navpage {
-    margin: -1px -3px -1px;
-    padding: 1px 3px 1px;
+a.navonpage {
+    margin: 0px -3px;
+    padding: 0px 3px;
     color: $text-color;
     font-weight: bold;
     background-color: #C3D9FF;

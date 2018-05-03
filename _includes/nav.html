@@ -6,15 +6,17 @@ inputs:
 
 
 {% endcomment %}
-{% assign navurl = page.url | remove: 'index.html' %}
+{% assign pageurl = page.url | remove: 'index.html' %}
 <ul class="nav">
 {% for item in include.nav %}
-    {% assign thisurl = item.url | prepend: include.navbase %}
-    <li{% if item.subitems %} class="collapsible collapsed"{% endif %} id="{{ thisurl }}">
+    {% assign itemurl = item.url | prepend: include.navbase %}
+    {% assign itemsize = itemurl | size %}
+    {% assign pageprefix = pageurl | slice: 0, itemsize %}
+    <li{% if item.subitems %} class="collapsible{% if pageprefix != itemurl %} collapsed{% endif %}"{% endif %} id="{{ itemurl }}">
     {% if item.nolink %}
         {{ item.text }}
     {% else %}
-        <a href="{{ thisurl }}"{% if thisurl == navurl %} class="navpage"{% endif %}>{{ item.text }}</a>
+        <a href="{{ itemurl }}"{% if itemurl == pageurl %} class="navonpage"{% endif %}>{{ item.text }}</a>
     {% endif %}
     {% if item.subitems %}
         {% include nav.html nav=item.subitems toplevel='no' navbase=include.navbase %}
