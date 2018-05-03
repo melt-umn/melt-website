@@ -9,13 +9,6 @@ timezone: "America/Chicago"
 
 sv_wiki_base: "" # path from domain root to the silver wiki, used to emit "wiki links"
 
-# Build settings
-markdown: kramdown
-kramdown:
-  input: GFM
-# GFM is necessary to understand triple backticks-style code blocks "Github Flavored Markdown"
-  hard_wrap: false
-
 # Exclusions
 exclude:
   - Gemfile
