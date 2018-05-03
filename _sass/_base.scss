@@ -127,29 +127,28 @@ blockquote {
  */
 pre,
 code {
-    font-size: 15px;
-    border: 1px solid $grey-color-light;
-    border-radius: 3px;
-    background-color: #eef;
+  font-size: $code-font-size;
+  border: 1px solid $grey-color-light;
+  border-radius: 3px;
+  background-color: $code-background;
 }
 
 code {
-    padding: 1px 5px;
+  padding: 1px 5px;
 }
 
 pre {
-    padding: 8px 12px;
-    overflow-x: auto;
+  padding: 8px 12px;
+  margin-left: -8px;
+  margin-right: -8px;
+  overflow-x: auto;
 
-    > code {
-        border: 0;
-        padding-right: 0;
-        padding-left: 0;
-    }
+  > code {
+    border: 0;
+    padding-right: 0;
+    padding-left: 0;
+  }
 }
-
-
-
 /**
  * Wrapper
  */
