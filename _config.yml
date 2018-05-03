@@ -1,12 +1,11 @@
 # Site settings
-title: Minnesota Extensible Language Tools
-email: your-email@domain.com
-description: > # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
+title: "Minnesota Extensible Language Tools"
+description: "Programming languages research group at the University of Minnesota - Twin Cities. Research focuses on composable language extensions. Copper, Silver, AbleC."
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://melt.cs.umn.edu" # the base hostname & protocol for your site
+lang: "en"
+strict_front_matter: true
+timezone: "America/Chicago"
 
 sv_wiki_base: "" # path from domain root to the silver wiki, used to emit "wiki links"
 
@@ -27,6 +26,4 @@ exclude:
   - .gitignore
   - jenkins
   - Jenkinsfile
-  - "*.sh"
-  - gitbot-home-directory
 
