@@ -26,13 +26,13 @@ fi
 
 newgrp cs-melt << EOF
   umask 002
-  cp -u --remove-destination $JENKINS_DUMP/* $WEBSITE/
+  cp -r -u --remove-destination $JENKINS_DUMP/* $WEBSITE/
 EOF
 
 # Don't leave our script in the website
 rm $WEBSITE/cron-install-site.sh
 
-# fix permissions
+# fix permissions - hopefully unnecessary
 #chgrp -R cs-melt $WEBSITE
 #chmod -R g+rwX,o-w $WEBSITE
 
