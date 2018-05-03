@@ -1,9 +1,6 @@
 ---
 layout: sv_wiki
-title: MELT
 ---
-
-# Minnesota Extensible Language Tools
 
 Our main research interests are in declarative specifications for
 programming language syntax, semantics, and optimizing

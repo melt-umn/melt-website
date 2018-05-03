@@ -57,7 +57,7 @@ def build_menu_item_string(title, depth, directory, has_index, submenu_string):
 		return ""
 	space = "    " * depth
 	menu_string = space + "- text: " + title + "\n" + \
-		      space + "  url: /" + directory + "\n"
+		      space + "  url: /" + directory + "/\n"
 	if not has_index:
 		menu_string += space + "  nolink: true\n"
 	if has_submenu:

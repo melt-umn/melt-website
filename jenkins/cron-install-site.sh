@@ -32,8 +32,6 @@ EOF
 # Don't leave our script in the website
 rm $WEBSITE/cron-install-site.sh
 
-# fix permissions - hopefully unnecessary
-#chgrp -R cs-melt $WEBSITE
-#chmod -R g+rwX,o-w $WEBSITE
-
+echo "Success"
+date
 
