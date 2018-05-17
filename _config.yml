@@ -21,8 +21,7 @@ exclude:
   - Gemfile.lock
   - vendor
   - README.md
-  - menu-builder.py
   - .gitignore
-  - jenkins
   - Jenkinsfile
+  - Makefile
 

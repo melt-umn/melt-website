@@ -2,8 +2,8 @@
 
 set -eu
 
-if [ $0 != "jenkins/build-silver-docs.sh" ]; then
-  echo "Run as jenkins/build-silver-docs.sh"
+if [ $0 != "_scripts/build-silver-docs.sh" ]; then
+  echo "Run as _scripts/build-silver-docs.sh"
   exit 1
 fi
 

@@ -2,8 +2,8 @@
 
 set -eu
 
-if [ $0 != "jenkins/deploy-site.sh" ]; then
-  echo "Run as jenkins/deploy-site.sh"
+if [ $0 != "_scripts/deploy-site.sh" ]; then
+  echo "Run as _scripts/deploy-site.sh"
   exit 1
 fi
 
@@ -13,7 +13,7 @@ TO=/export/scratch/melt-jenkins/custom-website-dump
 mkdir -p "$TO"
 
 # We also want to copy ourselves
-cp jenkins/cron-install-site.sh "$FROM/"
+cp _scripts/cron-install-site.sh "$FROM/"
 
 ### Let's do the copy:
 

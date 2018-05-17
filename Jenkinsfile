@@ -8,17 +8,17 @@ node {
 try {
   stage("Setup") {
     checkout scm
-    sh "jenkins/ready-environment.sh"
+    sh "_scripts/ready-environment.sh"
   }
   stage("Generate") {
-    sh "jenkins/build-silver-docs.sh"
+    sh "_scripts/build-silver-docs.sh"
   }
   stage("Build") {
-    sh "jenkins/build-jekyll-site.sh"
+    sh "_scripts/build-jekyll-site.sh"
   }
   if (env.BRANCH_NAME == 'master') {
     stage("Deploy") {
-      sh "jenkins/deploy-site.sh"
+      sh "_scripts/deploy-site.sh"
     }
     // Once "deployed" a cron script will spot changes and copy to real site
   }

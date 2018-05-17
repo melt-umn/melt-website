@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# Source this file as ". jenkins/source-bundle.sh"
+# Source this file as ". _scripts/source-bundle.sh"
 
 GEMDIR=vendor/globalgem
 
 if [ ! -x $GEMDIR/bin/bundle ]; then
-  echo "Didn't see bundler installed? Did you run jenkins/ready-environment.sh ?"
+  echo "Didn't see bundler installed? Did you run _scripts/ready-environment.sh ?"
   exit 1
 fi
 

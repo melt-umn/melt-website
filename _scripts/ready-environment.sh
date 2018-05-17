@@ -2,8 +2,8 @@
 
 set -eu
 
-if [ $0 != "jenkins/ready-environment.sh" ]; then
-  echo "Run as jenkins/ready-environment.sh"
+if [ $0 != "_scripts/ready-environment.sh" ]; then
+  echo "Run as _scripts/ready-environment.sh"
   exit 1
 fi
 
@@ -13,19 +13,15 @@ BUNDLEDIR=vendor/bundle
 if [ ! -e vendor ]; then
   if [ "$USER" = "jenkins" ]; then
     mkdir vendor
-  elif [ "$(hostname)" = "coldpress" ]; then
+  elif [[ "$(hostname -f)" = *.cs.umn.edu ]]; then
     LOCALCACHE="/export/scratch/$USER-jekyll-cache"
     echo "Creating your local cache: $LOCALCACHE"
     mkdir "$LOCALCACHE"
     ln -s "$LOCALCACHE" vendor
   else
-    echo "When running on a UMN-CS machine we recommend you:"
-    echo "mkdir /export/scratch/$USER-jekyll-cache"
-    echo "ln -s /export/scratch/$USER-jekyll-cache vendor"
-    echo
-    echo "To suppress this error message and work locally, just run:"
-    echo "mkdir vendor"
+    echo "asdf"
     exit 1
+    mkdir vendor
   fi
 fi
 
