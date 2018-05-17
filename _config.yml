@@ -15,9 +15,18 @@ silver_base: "/silver"
 # Silver-generated can use this base:
 silver_gen_base: "/silver/grammars"
 
+# Tell Jekyll to pay attention to what's in _pages
 collections:
   pages:
     output: true
+
+# Tell Jekyll some default values for what's in _pages
+defaults:
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: sv_wiki
 
 # Exclusions
 exclude:

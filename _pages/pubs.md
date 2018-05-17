@@ -1,8 +1,7 @@
 ---
-layout: sv_wiki
-title: MELT group publications
+title: MELT Group Publications
 menu_title: Publications
-menu_weight: 120.0
+menu_weight: 500
 permalink: /pubs/
 ---
 

@@ -1,8 +1,7 @@
 ---
-layout: sv_wiki
 title: MELT Group Members
 menu_title: People
-menu_weight: 100.0
+menu_weight: 400
 permalink: /people/
 ---
 

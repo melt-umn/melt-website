@@ -1,8 +1,7 @@
 ---
-layout: sv_wiki
 title: Previous Releases
 menu_title: Previous Releases
-menu_weight: 150.0
+menu_weight: 0
 permalink: /downloads/previous-releases.html
 ---
 

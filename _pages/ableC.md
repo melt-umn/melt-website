@@ -1,14 +1,13 @@
 ---
-layout: sv_wiki
 title: AbleC
 menu_title: AbleC
-menu_weight: 60.0
+menu_weight: 300
 permalink: /ableC/
 ---
 
-# ableC: Attribute grammar-Based Language Extensions for C
+# AbleC: Attribute grammar-Based Language Extensions for C
 
-ableC is an implementation of C, at the C11 standard,
+AbleC is an implementation of C, at the C11 standard,
 using Silver.  This is used as a *host language* in our work on
 extensible languages.  
 

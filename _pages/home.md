@@ -1,7 +1,7 @@
 ---
-layout: sv_wiki
+title: Minnesota Extensible Language Tools
 menu_title: Home
-menu_weight: 0.0
+menu_weight: 0
 permalink: /
 ---
 
