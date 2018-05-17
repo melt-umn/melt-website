@@ -31,6 +31,7 @@ mkdir -p generated
 
 rm ./build.xml ./silver.extension.doc.extra.jar
 
+mkdir -p "$ORIG/silver/gen/"
 cp -r generated/doc/* "$ORIG/silver/gen/"
 
 rm -rf generated
