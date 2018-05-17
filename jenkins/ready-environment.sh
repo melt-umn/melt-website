@@ -10,7 +10,24 @@ fi
 GEMDIR=vendor/globalgem
 BUNDLEDIR=vendor/bundle
 
-mkdir -p vendor
+if [ ! -e vendor ]; then
+  if [ "$USER" = "jenkins" ]; then
+    mkdir vendor
+  elif [ "$(hostname)" = "coldpress" ]; then
+    LOCALCACHE="/export/scratch/$USER-jekyll-cache"
+    echo "Creating your local cache: $LOCALCACHE"
+    mkdir "$LOCALCACHE"
+    ln -s "$LOCALCACHE" vendor
+  else
+    echo "When running on a UMN-CS machine we recommend you:"
+    echo "mkdir /export/scratch/$USER-jekyll-cache"
+    echo "ln -s /export/scratch/$USER-jekyll-cache vendor"
+    echo
+    echo "To suppress this error message and work locally, just run:"
+    echo "mkdir vendor"
+    exit 1
+  fi
+fi
 
 ### Step 1: use gem to get bundler
 ### To avoid stepping on anything else, we're going to install it to
