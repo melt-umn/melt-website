@@ -1,6 +1,7 @@
 ---
 layout: sv_wiki
 title: Comparison functions
+menu_weight: 600
 ---
 
 Many higher order functions require functions to define equality or comparison between elements. Silver contains a few built-in comparison functions, thus allowing the user to avoid reinventing the wheel.

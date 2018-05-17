@@ -1,6 +1,7 @@
 ---
 layout: sv_wiki
 title: Functor attributes
+menu_weight: 200
 ---
 
 Note: this extension is a work in progress!  

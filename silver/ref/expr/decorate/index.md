@@ -1,6 +1,7 @@
 ---
 layout: sv_wiki
 title: Decoration
+menu_weight: 600
 ---
 
 ## decorate

@@ -1,6 +1,7 @@
 ---
 layout: sv_wiki
 title: Easy terminals
+menu_weight: 100
 ---
 
 

@@ -1,6 +1,7 @@
 ---
 layout: sv_wiki
 title: Pattern matching
+menu_weight: 300
 ---
 
 

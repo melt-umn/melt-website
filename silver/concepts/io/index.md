@@ -2,6 +2,7 @@
 layout: sv_wiki
 title: IO
 menu_title: IO
+menu_weight: 500
 ---
 
 > _**Note:**_ Silver now has support for Monads, so this is in the process of being obsoleted, eventually.  See <update this with a link> for more details.

@@ -1,6 +1,7 @@
 ---
 layout: sv_wiki
 title: Collections
+menu_weight: 1000
 ---
 
 # Collection Attributes

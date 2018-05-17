@@ -1,6 +1,7 @@
 ---
 layout: sv_wiki
 title: Modular well-definedness
+menu_weight: 700
 ---
 
 ## Running the analysis

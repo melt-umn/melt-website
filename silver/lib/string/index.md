@@ -1,6 +1,7 @@
 ---
 layout: sv_wiki
 title: String operations
+menu_weight: 100
 ---
 
 

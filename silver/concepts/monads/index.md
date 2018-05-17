@@ -1,6 +1,7 @@
 ---
 layout: sv_wiki
 title: Monads
+menu_weight: 1100
 ---
 
 Silver (finally) supports a limited form of monads, most notably for IO.  

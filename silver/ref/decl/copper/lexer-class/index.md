@@ -1,6 +1,7 @@
 ---
 layout: sv_wiki
 title: Lexer class declarations
+menu_weight: 100
 ---
 
 

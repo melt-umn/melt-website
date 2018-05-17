@@ -1,6 +1,7 @@
 ---
 layout: sv_wiki
 title: Code organization
+menu_weight: 200
 ---
 
 | generated/ | src and bin will be created here by default. Basically anything you find in here can be deleted. |

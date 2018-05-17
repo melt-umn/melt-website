@@ -1,6 +1,7 @@
 ---
 layout: sv_wiki
 title: New (undecoration)
+menu_weight: 700
 ---
 
 ## new

@@ -1,6 +1,8 @@
 ---
 layout: sv_wiki
 title: IO
+menu_title: IO
+menu_weight: 500
 ---
 
 > _**Note:**_ Silver now has support for Monads, so using these IO functions directly is now depricated.  See [here](/documentation/concepts/monads/index.md) for more details.  

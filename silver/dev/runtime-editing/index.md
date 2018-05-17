@@ -1,6 +1,7 @@
 ---
 layout: sv_wiki
 title: Editing the runtime in Eclipse
+menu_weight: 400
 ---
 
 ## Importing the project

@@ -2,6 +2,7 @@
 layout: sv_wiki
 title: LR parsing
 menu_title: LR Parsing
+menu_weight: 400
 ---
 
 # Shortest ever guide to LR parsing

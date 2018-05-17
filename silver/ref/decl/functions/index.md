@@ -1,6 +1,7 @@
 ---
 layout: sv_wiki
 title: Function declarations
+menu_weight: 600
 ---
 
 

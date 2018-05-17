@@ -1,6 +1,7 @@
 ---
 layout: sv_wiki
 title: Types
+menu_weight: 200
 ---
 
 

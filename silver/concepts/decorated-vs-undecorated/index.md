@@ -1,6 +1,7 @@
 ---
 layout: sv_wiki
 title: Decorated vs undecorated
+menu_weight: 300
 ---
 
 The distinction between decorated and undecorated types is one that some initially find confusing; this section aims to clear up such confusion.

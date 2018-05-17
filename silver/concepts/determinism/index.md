@@ -1,6 +1,7 @@
 ---
 layout: sv_wiki
 title: Modular determinism 
+menu_weight: 800
 ---
 
 ## Running the analysis

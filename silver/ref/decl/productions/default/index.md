@@ -1,6 +1,7 @@
 ---
 layout: sv_wiki
 title: Default productions
+menu_weight: 300
 ---
 
 

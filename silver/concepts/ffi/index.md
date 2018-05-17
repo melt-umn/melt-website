@@ -2,6 +2,7 @@
 layout: sv_wiki
 title: Foreign functions
 menu_title: FFI
+menu_weight: 900
 ---
 
 ## Adding dependencies to your Silver jar

@@ -1,6 +1,7 @@
 ---
 layout: sv_wiki
 title: Pairs
+menu_weight: 300
 ---
 
 

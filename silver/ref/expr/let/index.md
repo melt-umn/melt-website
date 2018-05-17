@@ -1,6 +1,7 @@
 ---
 layout: sv_wiki
 title: Let
+menu_weight: 400
 ---
 
 **Let syntax is not yet finalized, we currently discourage its use.**

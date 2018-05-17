@@ -1,6 +1,7 @@
 ---
 layout: sv_wiki
 title: Nonterminal declarations
+menu_weight: 100
 ---
 
 

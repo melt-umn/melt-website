@@ -1,6 +1,7 @@
 ---
 layout: sv_wiki
 title: Annotation declarations
+menu_weight: 1000
 ---
 
 

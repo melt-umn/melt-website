@@ -1,6 +1,7 @@
 ---
 layout: sv_wiki
 title: Attribute declarations
+menu_weight: 300
 ---
 
 

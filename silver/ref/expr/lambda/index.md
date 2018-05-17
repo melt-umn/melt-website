@@ -1,6 +1,7 @@
 ---
 layout: sv_wiki
 title: Lambda
+menu_weight: 500
 ---
 
 ```

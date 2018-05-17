@@ -1,6 +1,7 @@
 ---
 layout: sv_wiki
 title: Modules
+menu_weight: 100
 ---
 
 ## A grammar

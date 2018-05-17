@@ -1,6 +1,7 @@
 ---
 layout: sv_wiki
 title: Global constant declarations
+menu_weight: 700
 ---
 
 

@@ -1,6 +1,7 @@
 ---
 layout: sv_wiki
 title: Terminal expressions
+menu_weight: 800
 ---
 
 

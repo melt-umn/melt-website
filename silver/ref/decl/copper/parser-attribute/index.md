@@ -1,6 +1,7 @@
 ---
 layout: sv_wiki
 title: Parser attribute declarations
+menu_weight: 200
 ---
 
 

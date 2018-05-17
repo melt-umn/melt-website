@@ -1,6 +1,7 @@
 ---
 layout: sv_wiki
 title: Building Silver
+menu_weight: 100
 ---
 
 ## Prerequisites

@@ -1,6 +1,7 @@
 ---
 layout: sv_wiki
 title: Type declarations
+menu_weight: 800
 ---
 
 

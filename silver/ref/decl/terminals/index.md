@@ -1,6 +1,7 @@
 ---
 layout: sv_wiki
 title: Terminal declarations
+menu_weight: 500
 ---
 
 

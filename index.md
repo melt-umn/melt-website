@@ -2,6 +2,7 @@
 layout: sv_wiki
 menu_title: Home
 menu_weight: 0.0
+permalink: /
 ---
 
 Our main research interests are in declarative specifications for

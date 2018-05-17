@@ -1,6 +1,7 @@
 ---
 layout: sv_wiki
 title: Long term TODO list
+menu_weight: 300
 ---
 
 This list is primarily for entertainment.  However, it might turn out to be useful should the unthinkable happen, and Silver needs to get into proper shape, fast, before it has too many users. ;)
