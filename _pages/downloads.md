@@ -3,6 +3,7 @@ layout: sv_wiki
 title: Downloads
 menu_title: Downloads
 menu_weight: 140.0
+permalink: /downloads/
 ---
 
 # Silver

@@ -3,6 +3,7 @@ layout: sv_wiki
 title: MELT Group Members
 menu_title: People
 menu_weight: 100.0
+permalink: /people/
 ---
 
 We are:
@@ -18,7 +19,7 @@ Ph.D. graduates:
 * [Ted Kaminski](http://www-users.cs.umn.edu/~tedinski/), Ph.D., May 2017.
   * "[Reliably composable language extensions](https://www-users.cs.umn.edu/~kami0054/papers/kaminski-phd.pdf)"
 * Lijesh Krishnan, Ph.D., November, 2012. [Coverity](http://www.coverity.com/)
-  * "[Extensible Language via Modular Declarative Specifications](http://melt.cs.umn.edu/pubs/krishnan2012PhD/krishnan2012PhD.pdf)"
+  * "[Extensible Languages via Modular Declarative Specifications](http://melt.cs.umn.edu/pubs/krishnan2012PhD/krishnan2012PhD.pdf)"
 * [August Schwerdfeger](http://www.adventiumlabs.com/about-us/staff/technical-staff/august-schwerdfeger-phd), Ph.D., July, 2011. [Adventium Labs](http://www.adventiumlabs.com/)
   * "[Context-Aware Scanning and Determinism-Preserving Grammar Composition](http://melt.cs.umn.edu/pubs/schwerdfeger2010phd.pdf)"
 

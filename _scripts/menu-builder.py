@@ -63,6 +63,9 @@ class MenuItem:
 		if path.endswith('.md'):
 			self.url = path[:-3] + ".html"
 			fallback_title = os.path.split(path[:-3])[1] # file name
+		elif path.endswith('.html'):
+			self.url = path
+			fallback_title = os.path.split(path[:-5])[1] # file name
 		else:
 			self.url = path + "/"
 			fallback_title = os.path.split(path)[1] # dir name

@@ -37,7 +37,7 @@ for integer literal terminals.
 Regular expressions that are constant strings may be represented using single quotes, as seen in
 the declaration of the plus symbol in the same file:
 
-    terminal Plus t ’+’ ;
+    terminal Plus_t ’+’ ;
 
 
 Terminal declarations have the form

@@ -3,6 +3,7 @@ layout: sv_wiki
 title: AbleC
 menu_title: AbleC
 menu_weight: 60.0
+permalink: /ableC/
 ---
 
 # ableC: Attribute grammar-Based Language Extensions for C

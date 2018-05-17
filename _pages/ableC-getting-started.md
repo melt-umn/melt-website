@@ -3,6 +3,7 @@ layout: sv_wiki
 title: Getting started with ableC
 menu_title: Getting started
 menu_weight: 60.0
+permalink: /ableC/getting-started/
 ---
 
 

@@ -15,6 +15,10 @@ silver_base: "/silver"
 # Silver-generated can use this base:
 silver_gen_base: "/silver/grammars"
 
+collections:
+  pages:
+    output: true
+
 # Exclusions
 exclude:
   - Gemfile
