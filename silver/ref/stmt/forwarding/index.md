@@ -57,7 +57,7 @@ top::Expr ::= arg::Expr
 }
 ```
 
-> _**Note:**_ Although it is unlikely that calls to length would be nested too deeply, see [Decorated vs Undecorated Examples](Concept_DecVsUndec#Examples.md) for an explanation for why the production attribute has a decorated child.
+> _**Note:**_ Although it is unlikely that calls to length would be nested too deeply, see [Decorated vs Undecorated Examples](/silver/concepts/decorated-vs-undecorated/) for an explanation for why the production attribute has a decorated child.
 
 ### Forwarding to a higher order attribute
 

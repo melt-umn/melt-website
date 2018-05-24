@@ -52,7 +52,7 @@ the production.
 
 ## Collection attributes
 
-Currently, production attributes can be [collections]({{ "/concepts/collections/" | prepend: site.sv_wiki_base }}), but the legacy syntax must be used.
+Currently, production attributes can be [collections](/silver/concepts/collections/), but the legacy syntax must be used.
 
 ```
 {

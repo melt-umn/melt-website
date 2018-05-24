@@ -39,7 +39,7 @@ test is documented in our PLDI 2009 paper
 
 Copper is written in Java and generates parsers and scanner written
 in Java.   It is used by our attribute grammar system
-<a href="silver/index.html">Silver</a> and
+<a href="/silver/">Silver</a> and
 distributed with it.  It is also available as a stand-alone
 package.
 

@@ -34,7 +34,7 @@ substring(1, 5, "/path/file")
 mul(add(1,2), 3)
 ```
 
-Note that production application necessarily produces the undecorated type of the nonterminal it constructs. (See  [Decorated vs Undecorated]({{ "/concepts/decorated-vs-undecorated/" | prepend: site.sv_wiki_base }}) for more on the distinction between decorated and undecorated.)
+Note that production application necessarily produces the undecorated type of the nonterminal it constructs. (See  [Decorated vs Undecorated](/silver/concepts/decorated-vs-undecorated/) for more on the distinction between decorated and undecorated.)
 
 ## Partial Application
 

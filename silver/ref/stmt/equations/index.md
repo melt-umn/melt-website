@@ -69,10 +69,10 @@ in most imperative languages.
 Silver supports many types and operations over those types to write 
 expressions:
 
-+ [Numeric expressions](../../expr/numeric)
-+ [Boolean expressions](../../expr/booleans), 
-+ [comparison expressions](../../expr/comparisons) 
-+ [string operations and built-in functions](../../../lib/string)
-+ [other built-in functions](../../lib/other/)
++ [Numeric expressions](../../expr/numeric/)
++ [Boolean expressions](../../expr/booleans/), 
++ [comparison expressions](../../expr/comparisons/) 
++ [string operations and built-in functions](/silver/lib/string/)
++ [other built-in functions](/silver/lib/other/)
 
 are discussed within this Wiki.

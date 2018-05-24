@@ -8,7 +8,7 @@ menu_weight: 500
 * Contents
 {:toc}
 
-> _**Note:**_ Silver now has support for [Monads, so you may wish to use those instead](/documentation/concepts/monads/index.md).
+> _**Note:**_ Silver now has support for [Monads, so you may wish to use those instead](/silver/concepts/monads/).
 
 There are no real values of type _`IO`_, instead, this is a "token" value
 that is passed around in order to preserve the order of execution of
@@ -160,7 +160,7 @@ function appendFile
 IO ::= file::String contents::String i::IO
 ```
 
-Unlike [writeFile](Reference_IO#writeFile.md), appends
+Unlike `writeFile`, appends
 the string to the end of the file instead of truncating the file first.
 
 > _**Example:**_

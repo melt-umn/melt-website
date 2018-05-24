@@ -79,7 +79,7 @@ of the C programming language.
 
 ### Silver: an extensible attribute grammar system
 
-[Silver](silver) is our attribute grammar system.  The specifications
+[Silver](/silver/) is our attribute grammar system.  The specifications
 for ableC and its extensions are written in the Silver AG language. 
 
 Uniquely, Silver supports a modular analysis that extension writers
@@ -106,6 +106,6 @@ deterministic grammar.
 ## Acknowledgements:
 
 We are very grateful for funding from the [National Science
-Foundation](http://www.nsf.gov/), the McKnight Foundation, the
-[University of Minnesota](http://www.umn.edu), and
-[IBM](http://ibm.com) for funding different aspects of our research. 
+Foundation](https://www.nsf.gov/), the McKnight Foundation, the
+[University of Minnesota](https://twin-cities.umn.edu/), and
+[IBM](https://www.ibm.com/us-en/) for funding different aspects of our research. 

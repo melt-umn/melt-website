@@ -25,12 +25,12 @@ Requirements:
 **Mac OS X** has a few odd bits in the standard ``.h`` files that
 ableC currently does not accept.  For now, give it a try on a Linux
 box.  You can download a working VM with it all installed on the
-[downloads page](/downloads).
+[downloads page](/downloads/).
 
 ## Sample projects
 
 Once ableC is installed, take a look at the sample projects (included in the
-bundle, also available [here](https://github.com/melt-umn/ableC_sample_projects)).
+bundle, also available [here](https://github.com/melt-umn/ableC-sample-projects/)).
 Each of the sample projects briefly described below contains a README file with
 more information.
 
@@ -55,4 +55,4 @@ are composed will involve a marking token from at least one of the extensions.
 
 ## Writing extensions
 
-To get started writing extensions, please see the [ableC tutorials](https://github.com/melt-umn/ableC/tree/develop/tutorials).
+To get started writing extensions, please see the [ableC tutorials](https://github.com/melt-umn/ableC/tree/develop/tutorials/).

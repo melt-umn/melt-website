@@ -14,7 +14,7 @@ e::Expr ::= e1::Expr  e2::Expr
 }
 ```
 
-This page covers abstract productions. See also [concrete productions]({{ "/ref/decl/productions/concrete/" | prepend: site.sv_wiki_base }}), [aspect productions]({{ "/ref/decl/productions/aspect/" | prepend: site.sv_wiki_base }}), [default productions]({{ "/ref/decl/productions/default/" | prepend: site.sv_wiki_base }}).
+This page covers abstract productions. See also [concrete productions](/silver/ref/decl/productions/concrete/), [aspect productions](/silver/ref/decl/productions/aspect/), [default productions](/silver/ref/decl/productions/default/).
 
 ## Syntax
 

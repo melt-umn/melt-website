@@ -44,6 +44,11 @@ The [Silver](https://github.com/melt-umn/silver) documentation is found under [`
 * If a page needs a local table of contents, you can add one:
     * Contents
     {:toc}
+* There are three acceptable link styles. Links to directories should include the trailing slash.
+  1. Full paths from server root: `[link text](/silver/ref/decl/)`.
+  2. Short relative paths: `[text](../adjacent-dir/)`.
+  3. Jekyll links: `[text]({% link path/from/jekyll/root/to/file %})`. e.g. `{% link _pages/home.md %}` This has the advantage that links will get checked at jekyll build time! Probably this should be preferred
+  4. Notably anything involving prefixing roots to strings is obsolete. Fix it, please.
 
 ## How does this work?
 

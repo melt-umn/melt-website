@@ -10,7 +10,7 @@ menu_weight: 90.0
 
 Silver is rather distinct from many other programming languages, so some pointers on style are probably useful.
 
-The best external point of reference may be the [Scala style guide](http://docs.scala-lang.org/style/), though obviously huge swaths of it are irrelevant, and huge parts are missing.
+The best external point of reference may be the [Scala style guide](https://docs.scala-lang.org/style/), though obviously huge swaths of it are irrelevant, and huge parts are missing.
 
 ## Indentation
 

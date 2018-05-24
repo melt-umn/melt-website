@@ -17,7 +17,7 @@ Float
 IO
 ```
 
-For more information on these primitive types, see the corresponding sections on expressions for [Booleans]({{ "ref/expr/booleans/" | prepend: site.sv_wiki_base }}), [Numeric Operations]({{ "ref/expr/numeric/" | prepend: site.sv_wiki_base }}), [Strings]({{ "lib/string/" | prepend: site.sv_wiki_base }}), and [IO]({{ "lib/io/" | prepend: site.sv_wiki_base }}).)
+For more information on these primitive types, see the corresponding sections on expressions for [Booleans](/silver/ref/expr/booleans/), [Numeric Operations](/silver/ref/expr/numeric/), [Strings](/silver/lib/string/), and [IO](/silver/lib/io/).)
 
 ## Function and production types
 
@@ -48,7 +48,7 @@ Lists are given a special syntax for types:
 [ <Type> ]
 ```
 
-See [Lists]({{ "lib/list/" | prepend: site.sv_wiki_base }}) for more information on lists.
+See [Lists](/silver/lib/list/) for more information on lists.
 
 > _**Example:**_ The map function would have the following signature:
 ```
@@ -61,7 +61,7 @@ function map
 
 Nonterminal declarations create a type (as do terminal declarations.) All type
 names must be capitalized, as lower case names are considered type variables
-(see [Type Variables](Concept_Types#Type_variables.md).)
+(see [Type Variables](#type-variables).)
 
 > _**Example:**_ The following nonterminal declaration:
 ```
@@ -77,7 +77,7 @@ synthesized attribute transformed :: Expr;
 
 
 Nonterminals additionally have a "decorated" form, whose type is simply prefixed
-with the keyword _`Decorated`_.  See [Decorated vs Undecorated]({{ "concepts/decorated-vs-undecorated/" | prepend: site.sv_wiki_base }}) for more information.
+with the keyword _`Decorated`_.  See [Decorated vs Undecorated](/silver/concepts/decorated-vs-undecorated/) for more information.
 
 > _**Example:**_
 ```

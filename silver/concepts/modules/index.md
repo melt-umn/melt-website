@@ -43,7 +43,7 @@ imports another:module:name;
 
 All symbols in that grammar are imported, including any symbols in grammars that grammars exported by the imported grammar.
 
-See [the later section on import modifiers](Concept_Modules#Import_modifiers.md).
+See [the later section on import modifiers](#import-modifiers).
 
 ### Exporting other grammars
 

@@ -16,7 +16,7 @@ e::Expr ::= e1::Expr  '+'  e2::Expr
 
 ## Syntax
 
-A 'concrete' production is identical to an [abstract production]({{ "/ref/decl/productions/" | prepend: site.sv_wiki_base }}), except that it will be sent to the parser generator, if a parser is declared that includes the grammar the production is defined in.
+A 'concrete' production is identical to an [abstract production](/silver/ref/decl/productions/), except that it will be sent to the parser generator, if a parser is declared that includes the grammar the production is defined in.
 
 Concrete productions also have restrictions on the types of children, only terminals and nonterminals are allowed (and those nonterminals must have concrete productions).
 
@@ -38,7 +38,7 @@ This allows a dramatically more succinct description of concrete syntax. Names o
 
 ## Easy terminal extension
 
-The easy terminal extension allows [terminals declared using single quotes]({{ "/ref/decl/terminals/" | prepend: site.sv_wiki_base }}) to be referred to by those same single quotes, instead of by name.
+The easy terminal extension allows [terminals declared using single quotes](/silver/ref/decl/terminals/) to be referred to by those same single quotes, instead of by name.
 
 This is already shown in the example above with e.g. `'+'` and `'if'`.
 

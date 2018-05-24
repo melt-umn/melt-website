@@ -53,19 +53,19 @@ top::Stmt ::= l::Name '=' r::Expr
 
 > _`assignmentStmt`_ must be invoked with an undecorated name and expression. Attempting to pass it an already decorated name will result in a type error. Similarly, _`lcopy`_ must be initialized with a value of undecorated type, though in the example above, _`l`_ is automatically undecorated.
 
-This "automatic undecoration" behavior _only_ applies to names, not expressions.  If you call a function that returns a value of type _`Decorated Foo`_, and you try to assign this to a local of type _`Foo`_, you will receive a type error.  You will need to use the _`new`_ operator to manually un-decorate the type. See the [new operator]({{ "ref/expr/new/" | prepend: site.sv_wiki_base }}).
+This "automatic undecoration" behavior _only_ applies to names, not expressions.  If you call a function that returns a value of type _`Decorated Foo`_, and you try to assign this to a local of type _`Foo`_, you will receive a type error.  You will need to use the _`new`_ operator to manually un-decorate the type. See the [new operator](/silver/ref/expr/new/).
 
 ## Automatic decoration
 
 In addition to this automatic undecoration of children and locals, attempting to access an attribute of an undecorated type will automatically decorate it with no inherited attributes, and then access the attribute from that resulting temporary decorated tree.  This behavior is purely for convenience: there are many common synthesized attributes that do not depend on any inherited attributes (consider `fst` and `snd` of the `Pair` type.)
 
-This behavior _only_ applies to attribute accesses (and technically, also pattern matching), and not to any arbitrary expression that wants a decorated type.  If you try to call a function that takes a _`Decorated`_ parameter with an undecorated value, you will receive a type error. See [the decorate operator]({{ "ref/expr/decorate/" | prepend: site.sv_wiki_base }}) for explicitly creating a decorate value from an undecorated one.
+This behavior _only_ applies to attribute accesses (and technically, also pattern matching), and not to any arbitrary expression that wants a decorated type.  If you try to call a function that takes a _`Decorated`_ parameter with an undecorated value, you will receive a type error. See [the decorate operator](/silver/ref/expr/decorate/) for explicitly creating a decorate value from an undecorated one.
 
 ## Concrete example
 
 Consider the nonterminal type _`Expr`_ from the Simple tutorial grammar.  This nonterminal is decorated by the synthesized attribute _`errors`_ which depends on the inherited attribute _`env`_.  To compute errors on an expression such as "_`x + 3`_" we need contextual information indicating if _`x`_ has been declared or not.  This information is passed in as the inherited attribute _`env`_. Inside the production _`varRef`_ the value of _`errors`_ is based on the result of looking up the variable in the inherited attribute _`env`_.
 
-> The production _`add`_, below, in the abstract syntax computes the value of its _`errors`_ attribute from that of its children. (The assignment operator _`:=`_ is described in [the section on collections]({{ "/concepts/collections/" | prepend: site.sv_wiki_base }}) and can be read as the standard assignment _`=`_ for our purposes here.)
+> The production _`add`_, below, in the abstract syntax computes the value of its _`errors`_ attribute from that of its children. (The assignment operator _`:=`_ is described in [the section on collections](/silver/concepts/collections/) and can be read as the standard assignment _`=`_ for our purposes here.)
 ```
 abstract production add 
 e::Expr ::= l::Expr r::Expr 
@@ -92,7 +92,7 @@ An attribute of decorated type is called a reference attribute.
 Reference attributes are ideal for connecting variable uses with variable
 declarations.  This can be seen in the production _`varRef`_ in
 the Simple tutorial grammar and shown in an example on the
-[Production Attribute]({{ "/ref/stmt/locals/" | prepend: site.sv_wiki_base }}) page.
+[Production Attribute](/silver/ref/stmt/locals/) page.
 
 Since these attributes can also be viewed as records of the attribute values
 that occur on their nonterminal, it is sometimes also preferable to pass

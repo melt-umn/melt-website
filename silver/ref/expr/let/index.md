@@ -9,7 +9,7 @@ menu_weight: 400
 
 **Let syntax is not yet finalized, we currently discourage its use.**
 
-Usually, you can use [locals]({{ "/ref/stmt/locals/" | prepend: site.sv_wiki_base }}) instead.
+Usually, you can use [locals](/silver/ref/stmt/locals/) instead.
 
 ```
 let

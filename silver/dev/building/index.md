@@ -9,7 +9,7 @@ menu_weight: 100
 
 ## Prerequisites
 
-Go see the [installation guide](install-guide) on getting the latest
+Go see the [installation guide](/silver/install-guide/) on getting the latest
 development version to use. 
 
 ## Building

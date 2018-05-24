@@ -32,7 +32,7 @@ Only those type variables that appear in the nonterminal type on the right may a
 
 ## Convenience syntax
 
-The most strongly prefered, whenever possible, means of declaring attribute occurrences is described on the [nonterminal declaration page](Reference_Nonterminal#Convenience_extension.md).  There is also a convenient mention of merging occurs on declarations and [attribute declarations](Reference_Attribute#Convenience_extensions.md).
+The most strongly prefered, whenever possible, means of declaring attribute occurrences is described on the [nonterminal declaration page](/silver/ref/decl/nonterminals/).  There is also a convenient mention of merging occurs on declarations and [attribute declarations](/silver/ref/decl/attributes/).
 
 Additionally it is possible to declare more than one attribute, more than one nonterminal, or both in one occurs on declaration:
 
@@ -40,4 +40,4 @@ Additionally it is possible to declare more than one attribute, more than one no
 attribute env, pp, errors occurs on Expr, Stmt;
 ```
 
-However, this syntax also falls prey to the same limitation described on the [attribute](Reference_Attribute#Convenience_extensions.md) page.
+However, this syntax also falls prey to the same limitation described on the [attribute](/silver/ref/decl/attributes/) page.

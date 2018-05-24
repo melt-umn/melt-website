@@ -23,7 +23,7 @@ Attribute declarations note whether the attribute is `synthesized` or `inherited
 
 All type variables that appear in the type must be declared in the parameter list.
 
-For an explanation of the role of attributes, see [the section on attribute grammars](Concept_AttributeGrammars.md).  A deeply related syntax is the [occurs-on declaration]({{ "/ref/decl/occurs/" | prepend: site.silver_base }}).
+For an explanation of the role of attributes, see [the section on attribute grammars](/silver/tutorial/4_attribute_grammars/).  A deeply related syntax is the [occurs-on declaration](/silver/ref/decl/occurs/).
 
 ## Autocopy attributes
 
@@ -43,7 +43,7 @@ Attributes that may have their value influenced by aspects are called collection
 synthesized attribute errors :: [Message] with ++;
 ```
 
-This operator must be either `++` (for lists or strings), `||`, `&&`, or any user-defined function of type `Function(a ::= a a)`.  See [collection attributes]({{ "/concepts/collections/" | prepend: site.silver_base }}).
+This operator must be either `++` (for lists or strings), `||`, `&&`, or any user-defined function of type `Function(a ::= a a)`.  See [collection attributes](/silver/concepts/collections/).
 
 ## Convenience extensions
 
@@ -53,7 +53,7 @@ Attributes declarations and occurs-on declarations can be merged:
 synthesized attribute pp :: String occurs on Expr, Stmt;
 ```
 
-However, this should not be used in any circumstance where the nonterminal and the occurs-on declarations can be merged instead. (See the [nonterminal]({{ "/ref/decl/nonterminals/" | prepend: site.silver_base }}) documentation for that syntax.) For more reasons that just the stylistic: this syntax is more inflexible for parameterized attributes.
+However, this should not be used in any circumstance where the nonterminal and the occurs-on declarations can be merged instead. (See the [nonterminal](/silver/ref/decl/nonterminals/) documentation for that syntax.) For more reasons that just the stylistic: this syntax is more inflexible for parameterized attributes.
 
 > _**Example**_: To demonstrate the inflexibility, the following code will raise an error:
 ```

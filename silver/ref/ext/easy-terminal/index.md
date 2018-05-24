@@ -26,6 +26,6 @@ The single quotes **do not** permit any escaping. That is, backslash has no spec
 
 ## See also
 
-  * [easy terminal in terminal declarations](Reference_Terminal#Easy_terminal_extension.md)
-  * [easy terminal in production declarations](Reference_Production#Easy_terminal_extension.md)
-  * [easy terminal in expressions](Reference_TerminalExprs#Easy_terminal_extension.md) (as terminal literals)
+  * [easy terminal in terminal declarations](/silver/ref/decl/terminals/)
+  * [easy terminal in production declarations](/silver/ref/decl/productions/)
+  * [easy terminal in expressions](/silver/ref/expr/terminal/) (as terminal literals)

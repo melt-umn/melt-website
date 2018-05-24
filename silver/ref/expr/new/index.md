@@ -13,7 +13,7 @@ just(new(decorated_value))
 
 ## Semantics
 
-`new` is the inverse operation of `decorate`. See [Decorated vs Undecorated]({{ "/concepts/decorated-vs-undecorated/" | prepend: site.sv_wiki_base }}) for an explanation on what _`Decorated`_ means.
+`new` is the inverse operation of `decorate`. See [Decorated vs Undecorated](/silver/concepts/decorated-vs-undecorated/) for an explanation on what _`Decorated`_ means.
 
 The following syntax will undecorate a decorated tree:
 

@@ -10,7 +10,7 @@ menu_weight: 20.0
 
 ## Running Silver
 
-If you have followed the [installation guide]({{ "/install-guide/" | prepend: site.silver_base }}), you have a `silver` script in your `~/bin` which is typically invoked as follows:
+If you have followed the [installation guide](/silver/install-guide/), you have a `silver` script in your `~/bin` which is typically invoked as follows:
 
 ```
 silver grammar:to:build
@@ -49,7 +49,7 @@ Less common:
 
       If you want to see the generated flow-types and dependencies, then add the `--dump-flow-graph` flag.
 
-      More information on the modular well-definedness analysis can be found [here](../concepts/modular-well-definedness).
+      More information on the modular well-definedness analysis can be found [here](/silver/concepts/modular-well-definedness/).
 
   * `-G` _path_
     * Specifies where to store Silver-generated temporary files.  This overrides the value found in `SILVER_GEN`. (And the default is in the `generated` directory where Silver is installed.)
@@ -90,7 +90,7 @@ IOVal<Integer> ::= args::[String] ioin::IO
 }
 ```
 
-For an explanation of how IO works in Silver, see [IO Functions]({{ "/lib/io/" | prepend: site.silver_base }}).  The integer value wrapped inside `IOVal` is the exit status of the program (0 is success.)  And of course, the command line arguments are provided as a list of strings.
+For an explanation of how IO works in Silver, see [IO Functions](/silver/lib/io/).  The integer value wrapped inside `IOVal` is the exit status of the program (0 is success.)  And of course, the command line arguments are provided as a list of strings.
 
 Simple examples of main functions can be found in every tutorial distributed with Silver.
 

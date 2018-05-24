@@ -15,7 +15,7 @@ parse(str, filename).parseResult.ast.errors
 
 ## Attribute access
 
-Attributes are accessed from a decorated node (see [decorated vs undecorated]({{ "/concepts/decorated-vs-undecorated/" | prepend: site.sv_wiki_base }})) using the following syntax:
+Attributes are accessed from a decorated node (see [decorated vs undecorated](/silver/concepts/decorated-vs-undecorated/)) using the following syntax:
 
 _Expr_ `.` _identifier_
 

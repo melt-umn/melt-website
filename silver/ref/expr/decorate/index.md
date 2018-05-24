@@ -6,7 +6,7 @@ menu_weight: 600
 
 ## decorate
 
-See [Decorated vs Undecorated]({{ "/concepts/decorated-vs-undecorated/" | prepend: site.sv_wiki_base }}) for an explanation of what _`Decorated`_ means.
+See [Decorated vs Undecorated](/silver/concepts/decorated-vs-undecorated/) for an explanation of what _`Decorated`_ means.
 
 The following syntax will decorate an undecorated tree:
 
@@ -28,4 +28,4 @@ decorate folder with { input = ["Hello", "world"]; }.output
 > will decorate a value called _`folder`_ with the inherited attribute _`input`_, then demand the synthesized attribute _`output`_ from the resulting decorated node.
 
 
-The inverse operation is [new]({{ "/ref/expr/new/" | prepend: site.sv_wiki_base }}).
+The inverse operation is [new](/silver/ref/expr/new/).

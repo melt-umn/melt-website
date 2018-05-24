@@ -281,4 +281,4 @@ that decorate the tree, such as the type of expressions, are used in performing 
 Code optimization is an important phase in compilation and can be performed using attribute
 grammars but is beyond the scope of this tutorial.
 
-Next Section: [Running Silver](../5_running_silver)
+Next Section: [Running Silver](../5_running_silver/)
