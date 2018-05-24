@@ -1,11 +1,14 @@
 ---
 layout: sv_wiki
-title: Command line reference
+title: Silver command line reference
 menu_title: Command Line 
 menu_weight: 20.0
 ---
 
-# Running Silver
+* Contents
+{:toc}
+
+## Running Silver
 
 If you have followed the [installation guide]({{ "/install-guide/" | prepend: site.silver_base }}), you have a `silver` script in your `~/bin` which is typically invoked as follows:
 
@@ -91,7 +94,7 @@ For an explanation of how IO works in Silver, see [IO Functions]({{ "/lib/io/" |
 
 Simple examples of main functions can be found in every tutorial distributed with Silver.
 
-# Nailgunning Silver
+## Using Nailgun
 
 Under `support/nailgun` there are two scripts for running `nailgun` on Silver jars. These require `nailgun` of course and the scripts specifically require `bash`. (On lab machines the scripts will find a nailgun build under our project space automatically. On Ubuntu machines, you can `apt-get install nailgun` and it'll work.)
 

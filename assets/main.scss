@@ -16,11 +16,10 @@ $spacing-unit:     30px !default;
 $text-color:       #111 !default;
 $brand-color:      #2a7ae2 !default;
 $link-color:       #2a7ae2 !default;
-$site-accent-color: #c9afe9 !default;
+$site-accent-color: #b09542 !default;
 
 $background-color: #fdfdfd !default;
-$site-background:  #6f6878 !default;
-$background-color: #fdfdfd !default;
+$site-background:  #fff !default; // #bcb1b3
 $light-background: #f5f5f5 !default;
 
 $grey-color:       #828282 !default;
@@ -29,6 +28,7 @@ $grey-color-dark:  darken($grey-color, 25%) !default;
 $blockquote-color: darken($grey-color, 15%) !default;
 
 $content-width:    850px !default;
+$on-narrow-screen: 1237px !default;
 $on-palm:          600px !default;
 $on-laptop:        810px !default;
 
@@ -49,6 +49,9 @@ $code-background:  #eaeaf1 !default;
     }
 }
 
+@mixin relative-font-size($ratio) {
+  font-size: $base-font-size * $ratio;
+}
 
 
 // Import partials from `sass_dir` (defaults to `_sass`)

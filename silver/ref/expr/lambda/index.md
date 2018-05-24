@@ -4,6 +4,9 @@ title: Lambda
 menu_weight: 500
 ---
 
+* Contents
+{:toc}
+
 ```
 foldr(\a::Integer b::Integer -> a + b, 0, [1, 2, 3, 4])
 ```

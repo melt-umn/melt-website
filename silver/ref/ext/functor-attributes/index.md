@@ -4,6 +4,9 @@ title: Functor attributes
 menu_weight: 200
 ---
 
+* Contents
+{:toc}
+
 Note: this extension is a work in progress!  
 
 ```

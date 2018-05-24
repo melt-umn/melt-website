@@ -1,9 +1,7 @@
 <footer class="site-footer">
-
   <div class="wrapper">
-
+    Copyright &copy; {% if page.date %}{{ page.date | date: "%Y" }}{% else %}{{ "now" | date: "%Y" }}{% endif %}
   </div>
-
 </footer>
 
 <script>nav_hook();</script>

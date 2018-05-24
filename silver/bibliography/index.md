@@ -7,10 +7,6 @@ menu_weight: 1000.0
 
 This page is currently a draft! The bibtex may need massaging, and pdf links need to be filled in!
 
-
-
-# The Silver papers
-
 Here are some important publications directly related to Silver:
 
 ## Silver

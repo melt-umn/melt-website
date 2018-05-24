@@ -32,7 +32,7 @@ provides a full description of this process and some examples illustrating where
 Further information about Silver and Copper, links to the papers mentioned above, as well as
 the most current release of the tools are available at http://melt.cs.umn.edu.
 
-# References
+## References
 
 1. J. T. Boyland. Remote attribute grammars. *J. ACM*, 52(4):627–687, 2005.
 2. G. Hedin. Reference attribute grammars. *Informatica*, 24(3):301–317, 2000.

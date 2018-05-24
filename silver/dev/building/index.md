@@ -4,6 +4,9 @@ title: Building Silver
 menu_weight: 100
 ---
 
+* Contents
+{:toc}
+
 ## Prerequisites
 
 Go see the [installation guide](install-guide) on getting the latest

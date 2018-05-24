@@ -4,8 +4,7 @@ library "github.com/melt-umn/jenkins-lib"
 
 melt.setProperties(dummyNeedsToBeAtLeastOne: true)
 
-node {
-try {
+melt.trynode('melt-website') {
   stage("Setup") {
     checkout scm
     sh "_scripts/ready-environment.sh"
@@ -22,10 +21,5 @@ try {
     }
     // Once "deployed" a cron script will spot changes and copy to real site
   }
-} catch(e) {
-  melt.handle(e)
-} finally {
-  melt.notify(job: "melt-website")
 }
-} // node
 

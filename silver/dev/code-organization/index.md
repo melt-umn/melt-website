@@ -4,8 +4,12 @@ title: Code organization
 menu_weight: 200
 ---
 
+Project organization:
+
+|---
+| Path | Description |
+|---
 | generated/ | src and bin will be created here by default. Basically anything you find in here can be deleted. |
-|:-----------|:-------------------------------------------------------------------------------------------------|
 | runtime/java/ | The Silver runtime, written in Java. Should have decent JavaDocs.                                |
 | support/   | Random supporting files. Scripts, syntax highlighting stuff, etc.                                |
 | test/      | Tests for silver. Not a particularly good organization below it yet.                             |
@@ -17,9 +21,13 @@ menu_weight: 200
 | grammars/silver/testing | the testing harness stuff, both the library and the binary.                                      |
 | grammars/silver/langutil | standard library stuff, but specific to language processing                                      |
 
+Grammars organization:
+
+|---
+| Path | Description |
+|---
 | grammars/silver/definition/core | the central place to look for silver compiler stuff |
-|:--------------------------------|:----------------------------------------------------|
-| grammars/silver/definition/ (env|type|regex|concrete\_syntax) | Silver environment, type, regular expression syntax, and the concrete syntax for concrete syntax declarations in Silver. (Don't confuse this for Silver's concrete syntax!) |
+| grammars/silver/definition/ (env,type,regex,concrete\_syntax) | Silver environment, type, regular expression syntax, and the concrete syntax for concrete syntax declarations in Silver. (Don't confuse this for Silver's concrete syntax!) |
 | grammars/silver/analysis/       | typechecking is in here, that's about it            |
 | grammars/silver/translation     | The translation to Java is here                     |
 | grammars/silver/host            | a "host language" definition for silver.            |

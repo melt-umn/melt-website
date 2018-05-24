@@ -4,6 +4,8 @@ title: Lexer class declarations
 menu_weight: 100
 ---
 
+* Contents
+{:toc}
 
 ```
 lexer class IDENTIFIER;

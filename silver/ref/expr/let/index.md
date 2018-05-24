@@ -4,6 +4,9 @@ title: Let
 menu_weight: 400
 ---
 
+* Contents
+{:toc}
+
 **Let syntax is not yet finalized, we currently discourage its use.**
 
 Usually, you can use [locals]({{ "/ref/stmt/locals/" | prepend: site.sv_wiki_base }}) instead.

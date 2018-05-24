@@ -4,7 +4,8 @@ title: Other functions
 menu_weight: 800
 ---
 
-
+* Contents
+{:toc}
 
 ## toString / toInt / toFloat
 

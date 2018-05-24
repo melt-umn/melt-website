@@ -4,6 +4,8 @@ title: Attribute declarations
 menu_weight: 300
 ---
 
+* Contents
+{:toc}
 
 ```
 synthesized attribute pp :: Document;

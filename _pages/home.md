@@ -1,5 +1,6 @@
 ---
 title: Minnesota Extensible Language Tools
+page_title: About the MELT research group
 menu_title: Home
 menu_weight: 0
 permalink: /

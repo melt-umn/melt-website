@@ -4,6 +4,9 @@ title: Modular well-definedness
 menu_weight: 700
 ---
 
+* Contents
+{:toc}
+
 ## Running the analysis
 
 Run silver using the `--clean` and `--warn-all` flags.

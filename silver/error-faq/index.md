@@ -5,7 +5,7 @@ menu_title: Understanding Errors
 menu_weight: 80.0
 ---
 
-# Compile-time
+## Compile-time
 
 **error: duplicate equation for attribute _a_**
 
@@ -13,7 +13,7 @@ There are two definitions of the value of the attribute on the same production. 
 
 If the attribute is a collection, perhaps one should change from ':=' to '<-' (see Concept\_Collections).
 
-# Runtime
+## Runtime
 
 Stack trace errors commonly look like this:
 

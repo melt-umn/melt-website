@@ -4,6 +4,9 @@ title: Silver Eclipse Plugin
 menu_weight: 10.0
 ---
 
+* Contents
+{:toc}
+
 The Silver Plugin for Eclipse will color and build Silver projects from within
 Eclipse.
 

@@ -19,7 +19,7 @@ site:
 	_scripts/build-jekyll-site.sh
 
 serve:
-	JEKYLL_COMMAND="serve" _scripts/build-jekyll-site.sh
+	JEKYLL_COMMAND="serve --incremental" _scripts/build-jekyll-site.sh
 
 clean:
 	rm -rf "_site" ".sass-cache" "_data/sv_wiki.yml"

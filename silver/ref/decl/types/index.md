@@ -4,6 +4,8 @@ title: Type declarations
 menu_weight: 800
 ---
 
+* Contents
+{:toc}
 
 ```
 type EnvMap = TreeMap<String  Decorated Decl>;

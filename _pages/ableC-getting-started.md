@@ -1,12 +1,11 @@
 ---
-title: AbleC - Getting Started
+title: Getting started with AbleC
 menu_title: Getting started
 menu_weight: 0
 permalink: /ableC/getting-started/
 ---
 
-
-# Installation
+## Installation
 
 The easiest way to get started is with the ableC bundle.  It includes
 Silver, ableC, a collection of extensions, and some sample projects
@@ -28,7 +27,7 @@ ableC currently does not accept.  For now, give it a try on a Linux
 box.  You can download a working VM with it all installed on the
 [downloads page](/downloads).
 
-# Sample projects
+## Sample projects
 
 Once ableC is installed, take a look at the sample projects (included in the
 bundle, also available [here](https://github.com/melt-umn/ableC_sample_projects)).
@@ -54,6 +53,6 @@ independently-developed language extensions that have passed the modular
 determinism analysis. Any lexical ambiguities that arise when these grammars
 are composed will involve a marking token from at least one of the extensions.
 
-# Writing extensions
+## Writing extensions
 
 To get started writing extensions, please see the [ableC tutorials](https://github.com/melt-umn/ableC/tree/develop/tutorials).

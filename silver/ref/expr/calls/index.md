@@ -4,6 +4,8 @@ title: Function and production invocation
 menu_weight: 200
 ---
 
+* Contents
+{:toc}
 
 ```
 append([1,2], [3,4])
@@ -11,7 +13,7 @@ fromMaybe(1, just(2))
 cons(1, cons(2, nil()))
 ```
 
-# Function and production application
+## Syntax
 
 Functions and productions are invoked with identical syntax, which is similar to C/Java's (i.e. uncurried):
 

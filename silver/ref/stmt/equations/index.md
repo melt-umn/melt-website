@@ -4,6 +4,8 @@ title: Equations
 menu_weight: 10.0
 ---
 
+* Contents
+{:toc}
 
 ```
 lhs.syn = ... definition of synthesized attribute;
@@ -11,7 +13,7 @@ rhs.inh = ... definition of inherited attribute;
 local.inh = ... similar;
 ```
 
-# Attribute Definitions (or Equations)
+## Attribute Definitions (or Equations)
 
 Attribute definitions specify the values of attributes as some
 expression over the values of attributes on neighboring nodes in the

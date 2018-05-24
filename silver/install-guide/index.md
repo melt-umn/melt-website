@@ -5,7 +5,10 @@ menu_title: Installation Guide
 menu_weight: 10.0
 ---
 
-# Prerequisites
+* Contents
+{:toc}
+
+## Prerequisites
 
 [Java JDK, version 1.7](http://www.oracle.com/technetwork/java/javase/downloads/index.html) and [Apache ANT](http://ant.apache.org/bindownload.cgi). For Ubuntu users:
 
@@ -19,13 +22,13 @@ For OSX, using Homebrew (install a JDK separately):
 brew install coreutils ant
 ```
 
-# Getting Silver
+## Getting Silver
 
 The **latest release** can be [downloaded here](/downloads).
 
 To clone from GitHub instead, [see below](#using-the-latest-development-version).
 
-# Testing with tutorials
+## Testing things out by building the tutorials
 
 Here is an example session, running the hello world tutorial grammar:
 
@@ -39,7 +42,7 @@ Hello, World!
 
 If you have any issues, first try the [frequently asked question page]({{ "/faq/" | prepend: site.silver_base }}) to see if there are any questions like yours.
 
-# Installing the 'silver' script
+## Installing the 'silver' script
 
 ```
 silver$ ./support/bin/install-silver-bin

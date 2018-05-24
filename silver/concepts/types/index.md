@@ -4,9 +4,8 @@ title: Types
 menu_weight: 200
 ---
 
-
-
-# Types
+* Contents
+{:toc}
 
 The primitive types in Silver are:
 

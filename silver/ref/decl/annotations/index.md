@@ -4,6 +4,8 @@ title: Annotation declarations
 menu_weight: 1000
 ---
 
+* Contents
+{:toc}
 
 ```
 annotation origin :: Origin;

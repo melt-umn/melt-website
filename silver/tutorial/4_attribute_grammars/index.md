@@ -5,6 +5,9 @@ menu_title: Attribute Grammars
 menu_weight: 40.0
 ---
 
+* Contents
+{:toc}
+
 Attribute grammars are formal specifications that can be used to define the semantics, a *meaning*
 of some sort, to a program, expression, or phrase, in a language. Attribute grammars define
 semantics by specifying that certain semantic attributes (values) will be associated with certain
@@ -23,7 +26,7 @@ representing statements and expression so that it can be used to determine the t
 uses and then be used in type checking.
 
 
-# Synthesized attributes
+## Synthesized attributes
 
 In Silver, attribute declarations have the following form:
 
@@ -214,14 +217,14 @@ ic::Factor_c ::= i::IntLit_t
 }
 ```
 
-## Naming conventions
+### Naming conventions
 
 Note that concrete productions and nonterminals often have the suffix
 "_c" to distinguish them from their counterparts in the abstract syntax. This is only a naming
 convention and not part of the Silver specification language.
 
 
-# Inherited attributes
+## Inherited attributes
 
 Inherited attributes are those that propogate information down the syntax tree. These attributes
 are declared using the `inherited` modifier instead of the `synthesized` one, but are otherwise the

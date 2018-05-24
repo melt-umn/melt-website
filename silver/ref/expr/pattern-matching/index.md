@@ -4,6 +4,8 @@ title: Pattern matching
 menu_weight: 300
 ---
 
+* Contents
+{:toc}
 
 ```
 case lhs, rhs of

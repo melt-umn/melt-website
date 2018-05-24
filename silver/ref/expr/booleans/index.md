@@ -5,6 +5,8 @@ menu_title: Boolean
 menu_weight: 20
 ---
 
+* Contents
+{:toc}
 
 ```
 if first.isJust then first else second

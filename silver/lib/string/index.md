@@ -4,6 +4,8 @@ title: String operations
 menu_weight: 100
 ---
 
+* Contents
+{:toc}
 
 ```
 "[" ++ implode(", ", contents) ++ "]"
@@ -39,7 +41,7 @@ length ( <Expr> )
 All of the following string manipulation function are in the core library. For absolutely up-to-date documentation, you can see `String.sv` in core, distributed with Silver.
 
 
-**implode**
+### implode
 ```
 function implode
 String ::= sep::String lst::[String]
@@ -54,8 +56,8 @@ implode(", ", ["Hello", "World!"])
 
 > will produce the string `"Hello, World!"`.
 
-<br />
-**explode**
+
+### explode
 ```
 function explode
 [String] ::= sep::String str::String
@@ -70,8 +72,8 @@ explode("/", "/path/to/file")
 
 > will produce the list of strings `["", "path", "to", "file"]`.
 
-<br />
-**indexOf**
+
+### indexOf
 ```
 function indexOf
 Integer ::= needle::String haystack::String
@@ -92,8 +94,8 @@ indexOf("/", "C:\path\file")
 
 > will produce the integer -1.
 
-<br />
-**lastIndexOf**
+
+### lastIndexOf
 ```
 function lastIndexOf
 Integer ::= needle::String haystack::String
@@ -115,7 +117,7 @@ lastIndexOf("/", "C:\path\fil")
 > will produce the integer $-1$.
 
 
-**substring**
+### substring
 ```
 function substring
 String ::= start::Integer endl::Integer str::String
@@ -138,7 +140,7 @@ substring(indexOf("/", str) + 1, lastIndexOf("/", str), str)
 > will produce the string `"path"`.
 
 
-**startsWith / endsWith**
+### startsWith / endsWith
 ```
 function startsWith
 Boolean ::= pre::String s::String
@@ -149,7 +151,7 @@ Boolean ::= post::String s::String
 
 Tests if one string is a prefix (or suffix) of another string `s`.
 
-**isDigit / isAlpha / isSpace / isLower / isUpper**
+### isDigit / etc
 ```
 function isDigit
 Boolean ::= str::String

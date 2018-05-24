@@ -28,6 +28,23 @@ You'll find the basic MELT pages under [`_pages/`](_pages/).
 
 The [Silver](https://github.com/melt-umn/silver) documentation is found under [`silver/`](silver/), with the exception of the top-level description of Silver, which is found under [`_pages/silver.md`](_pages/silver.md).
 
+## YAML frontmatter
+
+* `layout` sets which template in `_layouts` should get used for this page. (Jekyll itself looks at this one.)
+* `title` controls the html page title, and may be used for the title `h1` at the top of a page. (These next two are used by the default layouts/includes.)
+* `page_title` overrides `title` for what appears in the `h1` title (replacing `title`, which is still the html `title` tag).
+* `menu_title` controls what appears in the menu on the left. (These next two are looked at by the `menu-builder.py` script.)
+* `menu_weight` controls the sort order of menu items at the same hierarchical level. It's a numbers.
+* `permalink` sets where this file should be generated instead of the usual filename. (Jekyll itself looks at this one.)
+
+**Styling notes:**
+
+* Since the `page_title` or `title` is the usual `h1` heading on a page, usually only `h2` headings should be used in the page contents. (i.e. ` ## Two hashes` in markdown.)
+* To make markdown easy to read in diffs, I like to put one whole sentence per line.
+* If a page needs a local table of contents, you can add one:
+    * Contents
+    {:toc}
+
 ## How does this work?
 
 A Jekyll collection is pretty much just a grouped pile of files.

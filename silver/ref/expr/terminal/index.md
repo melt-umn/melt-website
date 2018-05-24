@@ -4,6 +4,8 @@ title: Terminal expressions
 menu_weight: 800
 ---
 
+* Contents
+{:toc}
 
 ```
 -- earlier:
@@ -19,7 +21,7 @@ e::Expr ::= f::'foo'
 }
 ```
 
-# Terminals
+## Terminals
 
 The _`terminal`_ special form is the constructor for terminals:
 

@@ -5,7 +5,10 @@ menu_title: LR Parsing
 menu_weight: 400
 ---
 
-# Shortest ever guide to LR parsing
+* Contents
+{:toc}
+
+## Shortest ever guide to LR parsing
 
 LR parsers recognize syntax by essentially turning it into reverse polish notation, with the 'production rules' being the operators, and everything else just data.
 
@@ -29,7 +32,7 @@ which is equivalent to the usual reverse polish:
 
 `1 2 + 3 * 4 /`
 
-# Conflicts
+## Conflicts
 
   * **Shift** means "move on to the next token."
   * **Reduce** means "recognize this production."
@@ -38,13 +41,13 @@ Silver's parser generator, Copper, will report Shift/Reduce and Reduce/Reduce co
 
 The quickest route to understanding the problem is to open the `Parser_*.copperdump.html` file, and going to the parser state (in the "LALR DFA") an error is reported in, and take a look at what the parser's view of the world is.
 
-# Fixing errors
+## Fixing errors
 
 Unfortunately, beyond the scope of this document. (TODO: Someone suggest links to elsewhere for discussion and examples, perhaps?)
 
 Generally, the structure of the grammar must be changed somehow to recognize the same language, but in a manner the parser is capable of understanding.
 
-# How precedence works
+## How precedence works
 
 This is a brief explanation of how the precedence rules work, since this isn't always explained even to people who understand and are capable of writing LALR grammars.
 
@@ -55,7 +58,7 @@ There are two forms of precedence:
 
 Precedence is only used to resolve conflicts when (1) it's not a conflict due to insufficient lookahead, but rather due to an actual ambiguity in the grammar AND (2) exactly one behavior should always be preferred.  If either of these two are not the case, then it must be resolved through changing the grammar.
 
-## Operator precedence
+### Operator precedence
 
 To resolve shift/reduce conflicts, we must be able to relate the production and the terminal somehow. We accomplish this by using the shift terminal, and mapping every production to an _operator terminal_.
 
@@ -96,7 +99,7 @@ The parser has shifted `1 + 2` and `*` is the next symbol in the input, we are i
 
 We're looking at the `/` symbol, shift or reduce. Here, our reduce option is to emit MUL, which has operator `*` which has the same precedence as `/`. But, they're left associative, so the decision is to reduce.
 
-## Production precedence
+### Production precedence
 
 Reduce/Reduce conflicts simply require relating productions to other productions. Each production can optionally be assigned a precedence number. The highest number wins.
 
@@ -118,7 +121,7 @@ precedence=1
 
 Usually reduce/reduce conflicts are more interesting than this example. (TODO: pick a simple interesting one?)  Typically, however, it's often better to resolve RR conflicts by changing the grammar to more accurately express the language structure rather than ad-hoc sprinkling of these precedences.
 
-# Philosophy
+## Philosophy
 
 Why LR parsing? There are lots of alternatives, [PEG](http://en.wikipedia.org/wiki/Parsing_expression_grammar)s and GLR in particular. Answering this question requires context, though.
 

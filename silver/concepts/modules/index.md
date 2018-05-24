@@ -4,6 +4,9 @@ title: Modules
 menu_weight: 100
 ---
 
+* Contents
+{:toc}
+
 ## A grammar
 
 Unlike most languages, a compilation unit in Silver is not tied to a file, but instead to a directory.  A grammar ("module") consists of the declarations and definitions found in all files with a "_`.sv`_" suffix in the directory identifying the grammar.

@@ -2,6 +2,7 @@
 vendor
 .bundle
 .sass-cache
+.jekyll-metadata
 _site
 _data/sv_wiki.yml
 silver/gen

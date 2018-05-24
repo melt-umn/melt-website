@@ -4,6 +4,8 @@ title: Lists
 menu_weight: 200
 ---
 
+* Contents
+{:toc}
 
 ```
 1 :: 2 :: 3 :: 4 :: []
@@ -67,10 +69,11 @@ Alright, seriously now.  It'd be nice if we could eliminate this overlap, but we
 Unfortunately, no other operator really seems appropriate for any of these cases.  Fortunately, there is no ambiguity in Silver, because arbitrary expressions don't need to be given explicit type annotations. For now.
 
 
----
+## Functions
 
 
-## map
+### map
+
 > Applies the function _`f`_ to each element of the list _`l`_, and returns the resulting list.
 ```
 function map
@@ -83,7 +86,8 @@ map(null, [[],[1],[]])
 ```
 > will produce the list _`[true, false, true]`_.
 
-## foldr
+### foldr
+
 > Starting with the initial value _`i`_, the function _`f`_ is applied to the current intermediate value and the next element of the list, and the last intermediate value is returned as the result.  If the list is empty, the initial value is also the result.
 ```
 function foldr
@@ -96,7 +100,8 @@ foldr(stringConcat, "He", ["llo", ", ", "World!"])
 ```
 > will produce the string _`"Hello, World!"`_.
 
-## filter
+### filter
+
 > The function _`f`_ is applied to each element list _`lst`_, and the element is included in the final list only if the function returns true. The order of elements is preserved.
 ```
 function filter
@@ -107,13 +112,15 @@ function filter
 ```
 function isSilverFile
 Boolean ::= s::String
-{ return endsWith(".sv", s); }
-
+{
+  return endsWith(".sv", s);
+}
 silverFiles = filter(isSilverFile, directoryContents);
 ```
 > will assign to _`silverFiles`_ only those files that end in _`.sv`_.
 
-## containsBy
+### containsBy
+
 > Returns true if an only if the element _`elem`_ is in the list _`lst`_, as determined by the equality function _`eq`_.
 ```
 function containsBy
@@ -126,7 +133,8 @@ containsBy(stringEq, "ABC", ["A", "B", "C"])
 ```
 > will return _`false`_.
 
-## last
+### last
+
 > Returns the last element of the list. Ensure that the list is not empty, or it will raise an error (as _`head`_ does on an empty list.)
 ```
 function last
@@ -139,13 +147,15 @@ last(["A", "B", "C"])
 ```
 > will return _`"C"`_.
 
-## drop / dropWhile
+### drop / dropWhile
+
 > Returns the list remaining after _`number`_ elements have been removed from the beginning.  If the list does not have that many elements, the empty list is returned.
 > Or, returns the list remaining after the function _`f`_ returns false for the first time (including the element it returned false on.)
 ```
 function drop
 [a] ::= number::Integer lst::[a]
-
+```
+```
 function dropWhile
 [a] ::= f::Function(Boolean::=a) lst::[a]
 ```
@@ -156,13 +166,15 @@ drop(2, ["A", "B", "C"])
 ```
 > will return _`["C"]`_.
 
-## take / takeWhile
+### take / takeWhile
+
 > Returns the first _`number`_ elements of the list.  Or the whole list if there aren't that many elements in the list.
 > Or, returns the list up to the first element that _`f`_ returns false on (excluding the element that returns false.)
 ```
 function take
 [a] ::= number::Integer lst::[a]
-
+```
+```
 function takeWhile
 [a] ::= f::Function(Boolean::=a) lst::[a]
 ```
@@ -173,7 +185,8 @@ take(2, ["A", "B", "C"])
 ```
 > will return _`["A","B"]`_.
 
-## reverse
+### reverse
+
 > Returns the reverse of the list.
 ```
 function reverse
@@ -186,7 +199,8 @@ head(reverse(lst)) == last(lst)
 ```
 > will always return true, or raise an error on an empty list.
 
-## sortBy
+### sortBy
+
 > Sorts the list according to the comparison function _`lte`_.
 ```
 function sortBy

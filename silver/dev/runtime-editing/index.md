@@ -4,6 +4,9 @@ title: Editing the runtime in Eclipse
 menu_weight: 400
 ---
 
+* Contents
+{:toc}
+
 ## Importing the project
 
 I recommend just importing the project where you have it checked out, rather that attempting to use Eclipse's mercurial plugins or anything like that. This makes it easier to actually test/use the changes because Eclipse will then be editing the files where you have Silver checked out, instead of some separate workspace. (and because `./deep-rebuild` rebuilds the runtime automatically.)

@@ -4,7 +4,14 @@ title: New (undecoration)
 menu_weight: 700
 ---
 
-## new
+* Contents
+{:toc}
+
+```
+just(new(decorated_value))
+```
+
+## Semantics
 
 `new` is the inverse operation of `decorate`. See [Decorated vs Undecorated]({{ "/concepts/decorated-vs-undecorated/" | prepend: site.sv_wiki_base }}) for an explanation on what _`Decorated`_ means.
 

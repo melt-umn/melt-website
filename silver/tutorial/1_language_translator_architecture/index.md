@@ -5,6 +5,9 @@ menu_title: Language Translator Architecture
 menu_weight: 10.0
 ---
 
+* Contents
+{:toc}
+
 A compiler or source-to-source translator are tools that read in a text file containing a program and
 write out another text file containing the translation of that program.  For compilers, that generated
 program  is  in  a  low-level  language  such  as  assembly  language,  byte-codes  for  a  virtual  machine
@@ -23,7 +26,7 @@ It is common practice to construct language translators as a series or pipeline 
 that perform the major tasks in program translation.
 
 
-# Scanning
+## Scanning
 
 The scanning process reads in program text and recognizes its lexical syntax.  This
 process involve recognizing lexical constructs such as keywords (*e.g.* `while` or `if`), identifer names
@@ -49,7 +52,7 @@ tokens may be generated:
 *Semi<sub>t</sub>*(";")]
 
 
-# Parsing
+## Parsing
 
 The parsing process recognizes the syntactic structure in the sequence of tokens produced
 by the scanner.  This structure is represented as a tree.  For example, the parser would
@@ -62,13 +65,13 @@ concrete syntax, as opposed to a simplified abstract syntax that is sometimes us
 semantic analysis phase.
 
 
-## Semantic analysis
+### Semantic analysis
 
 This phases examines a tree representation of the program to perform analysis
 such as type checking and error reporting.
 
 
-## Code generation
+### Code generation
 
 This is the final phase in which some translation of the tree representation
 is generated.  This may be byte-code, machine code, or a translation to a language such as C. In

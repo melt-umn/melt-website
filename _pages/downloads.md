@@ -5,17 +5,17 @@ menu_weight: 600
 permalink: /downloads/
 ---
 
-# Silver
+## Silver
 
 * [Silver 0.4](/downloads/silver-0.4.0.tar.gz)
 
-# Copper
+## Copper
 
 * [CopperCompiler-0.5](/downloads/CopperCompiler-0.5.jar)
 * [CopperRuntime-0.5](/downloads/CopperRuntime-0.5.jar)
 * [copper-examples](/downloads/copper_examples.tar.gz)
 
-# ableC
+## ableC
 
 Version 0.1
 
@@ -25,7 +25,7 @@ Version 0.1
 * [ableC Virtual Box VM](/downloads/ableC_artifact_virtual_box_vm.tar.gz) - Virtual Box VM including Silver, ableC, several extensions, and sample projects
 
 
-# Previous releases
+## Previous releases
 
 * [Previous software releases](previous-releases.html)
 

@@ -4,7 +4,6 @@ title: Aspect productions
 menu_weight: 600
 ---
 
-# Aspect Productions
 
 Aspect productions provide a means for writing attribute definitions
 for a production outside of the definition of that production.  Their

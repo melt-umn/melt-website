@@ -4,6 +4,8 @@ title: Function declarations
 menu_weight: 600
 ---
 
+* Contents
+{:toc}
 
 ```
 function orElse

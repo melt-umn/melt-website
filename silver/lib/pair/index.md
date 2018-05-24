@@ -1,16 +1,14 @@
 ---
 layout: sv_wiki
-title: Pairs
+title: Pair
 menu_weight: 300
 ---
-
 
 ```
 local attribute symbolDef :: Pair<String Integer>;
 symbolDef = pair("a", 3);
 ```
 
-# Pair
 Pairs are also provided as a standard data structure in core.  Pairs are the
 first data structure that is completely unspecial--that is, it's an ordinary nonterminal with no special language support.
 

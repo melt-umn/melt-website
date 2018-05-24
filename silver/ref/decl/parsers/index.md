@@ -4,6 +4,8 @@ title: Parser function declarations
 menu_weight: 900
 ---
 
+* Contents
+{:toc}
 
 ```
 parser parse :: Root {

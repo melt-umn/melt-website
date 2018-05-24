@@ -4,6 +4,9 @@ title: Modular determinism
 menu_weight: 800
 ---
 
+* Contents
+{:toc}
+
 ## Running the analysis
 
 With a file such as:
@@ -32,7 +35,7 @@ Using ```--clean``` is not always necessary, but not using it can result in unde
 
 ---
 
-### Types of Errors Reported
+## Types of Errors Reported
 
 1. <... a long stack trace> ... ```Requested head of nil.```
 

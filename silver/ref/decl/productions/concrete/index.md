@@ -4,10 +4,8 @@ title: Concrete productions
 menu_weight: 100
 ---
 
-
 * Contents
 {:toc}
-
 
 ```
 concrete production plus
@@ -28,14 +26,12 @@ Syntax can be declared is a somewhat more natural way using `concrete production
 
 ```
 concrete productions  e::Expr
-| e1::Expr '+' e2::Expr
-    { e.ast = ast:plus(e1.ast, e2.ast); }
+| e1::Expr '+' e2::Expr   { e.ast = ast:plus(e1.ast, e2.ast); }
 | 'if' e1::Expr 
   'then' e2::Expr
   'else' e3::Expr
     { e.ast = ast:ifthen(e1.ast, e2.ast, e3.ast); }
-(named) | 'whatever'
-    { 
+(named_production) | 'whatever'   { ... }
 ```
 
 This allows a dramatically more succinct description of concrete syntax. Names of these productions are auto-generated as they're typically unnecessary, but if they are needed, the third case above shows how they can be provided.

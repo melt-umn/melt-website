@@ -4,6 +4,8 @@ title: Global constant declarations
 menu_weight: 700
 ---
 
+* Contents
+{:toc}
 
 ```
 global defaultSuffix :: String = "_sfx";

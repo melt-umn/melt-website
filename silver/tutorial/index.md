@@ -30,7 +30,7 @@ Section 2 we describe the components in a traditional compiler pipeline:  scanne
 analyzer, and code generator.  In the following sections we describe how to specify each of these using
 Silver and Copper.
 
-### Contents
+## Contents
 
 1. [Language Translation Architecture](1_language_translator_architecture)
 2. [Scanning](2_scanning)

@@ -4,6 +4,8 @@ title: Attribute access
 menu_weight: 100
 ---
 
+* Contents
+{:toc}
 
 ```
 pair(1,2).fst == 1

@@ -4,6 +4,8 @@ title: Terminal declarations
 menu_weight: 500
 ---
 
+* Contents
+{:toc}
 
 ```
 terminal Identifier /[A-Za-z_][A-Za-z0-9_]*/;

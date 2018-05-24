@@ -4,11 +4,10 @@ title: Decorated vs undecorated
 menu_weight: 300
 ---
 
+* Contents
+{:toc}
+
 The distinction between decorated and undecorated types is one that some initially find confusing; this section aims to clear up such confusion.
-
-
-
-# Decorated vs Undecorated
 
 Attribute grammars are a way of doing computations over trees, and there are two conceptually different types of trees for each nonterminal:
 

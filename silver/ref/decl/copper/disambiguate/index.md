@@ -5,6 +5,8 @@ menu_title: Disambiguation directives
 menu_weight: 10.0
 ---
 
+* Contents
+{:toc}
 
 ```
 disambiguate TypeName_t, Ident_t {
@@ -32,7 +34,7 @@ Within the action block must be a `pluck` statement, indicating which terminal i
 
 ### C
 
-See [Reference\_ParserAttribute]({{ "/ref/decl/copper/parser-attribute/" | prepend: site.silver_base }}).
+See [Parser Attributes]({{ "/ref/decl/copper/parser-attribute/" | prepend: site.silver_base }}).
 
 ### Non-reserved words
 

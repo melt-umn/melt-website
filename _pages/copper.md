@@ -1,11 +1,9 @@
 ---
-title: Copper
+title: Copper - a parser and scanner generator
 menu_title: Copper
 menu_weight: 200
 permalink: /copper/
 ---
-
-# Copper
 
 Copper is a parser and scanner generator that generates integrated LR
 parsers and context-aware scanners from language specifications based
@@ -50,7 +48,7 @@ href="http://github.com/melt-umn/copper">on GitHub</a>. We maintain
 downloads and information here for a legacy version, 0.5, used with
 older versions of Silver.
 
-#### Acknowledgments:
+## Acknowledgments:
 
 This material is based upon work supported by the National Science
 Foundation under grants 

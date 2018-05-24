@@ -5,6 +5,9 @@ menu_title: FFI
 menu_weight: 900
 ---
 
+* Contents
+{:toc}
+
 ## Adding dependencies to your Silver jar
 
 There is a flag you can pass on the command line, when building a jar using Silver, to depend on another external jar file:

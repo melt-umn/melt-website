@@ -4,6 +4,8 @@ title: Occurs declarations
 menu_weight: 400
 ---
 
+* Contents
+{:toc}
 
 ```
 attribute pp occurs on Expr;

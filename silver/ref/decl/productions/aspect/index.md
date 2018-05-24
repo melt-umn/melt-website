@@ -4,6 +4,8 @@ title: Aspect productions
 menu_weight: 200
 ---
 
+* Contents
+{:toc}
 
 ```
 aspect production plus

@@ -4,7 +4,8 @@ title: Forwarding equations
 menu_weight: 20.0
 ---
 
-# Forwarding
+* Contents
+{:toc}
 
 Forwarding is a mechanism for providing default values for attributes that we introduced to attribute grammars that is especially useful for defining language extensions.
 

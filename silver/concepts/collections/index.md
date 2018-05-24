@@ -1,10 +1,12 @@
 ---
 layout: sv_wiki
-title: Collections
+title: Collection attributes
+menu_title: Collections
 menu_weight: 1000
 ---
 
-# Collection Attributes
+* Contents
+{:toc}
 
 Attributes can optionally be specified as being _collection_ attributes.  Such attributes allow aspects to contribute values that are used to compute the final value of the attribute.  All attributes (synthesized, inherited, local, and production) can be collection attributes by indicating an operation to be used to combine the contributed values of the attribute.  Such attribute declarations have the form
 

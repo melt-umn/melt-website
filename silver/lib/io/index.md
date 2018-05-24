@@ -1,13 +1,14 @@
 ---
 layout: sv_wiki
-title: IO
+title: Input and Output
 menu_title: IO
 menu_weight: 500
 ---
 
-> _**Note:**_ Silver now has support for Monads, so using these IO functions directly is now depricated.  See [here](/documentation/concepts/monads/index.md) for more details.  
+* Contents
+{:toc}
 
-# Input and Output
+> _**Note:**_ Silver now has support for [Monads, so you may wish to use those instead](/documentation/concepts/monads/index.md).
 
 There are no real values of type _`IO`_, instead, this is a "token" value
 that is passed around in order to preserve the order of execution of

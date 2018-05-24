@@ -5,7 +5,8 @@ menu_title: FAQ
 menu_weight: 70.0
 ---
 
-
+* Contents
+{:toc}
 
 ## Why do I get a NoClassDefFoundError when trying to run a tutorial?
 

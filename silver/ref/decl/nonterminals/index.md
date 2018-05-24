@@ -4,6 +4,8 @@ title: Nonterminal declarations
 menu_weight: 100
 ---
 
+* Contents
+{:toc}
 
 ```
 nonterminal Expression;

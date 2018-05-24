@@ -4,6 +4,8 @@ title: Local equations
 menu_weight: 30.0
 ---
 
+* Contents
+{:toc}
 
 ```
 abstract production id

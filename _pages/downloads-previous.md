@@ -1,11 +1,11 @@
 ---
-title: Previous Releases
-menu_title: Previous Releases
+title: Downloads Previous Releases
+menu_title: Old Releases
 menu_weight: 0
 permalink: /downloads/previous-releases.html
 ---
 
-# Silver
+## Silver
 
 * [silver-latest](/downloads/silver-dev/silver-latest.tar.gz)
 * [silver-0.3.6](/downloads/silver-0.3.6.tar.gz)
@@ -22,13 +22,13 @@ permalink: /downloads/previous-releases.html
 * [silver-0.2.1](/downloads/silver-0.2.1.tgz)
 * [silver-0.1](/downloads/silver-0.1.tgz)
 
-# Copper
+## Copper
 
 * [CopperCompiler-0.5](/downloads/CopperCompiler-0.5.jar)
 * [CopperRuntime-0.5](/downloads/CopperRuntime-0.5.jar)
 * [copper-examples](/downloads/copper_examples.tar.gz)
 
-# ableC
+## ableC
 
 * [ableC-alpha1](/downloads/ableC-alpha1.tar.gz)
 

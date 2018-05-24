@@ -4,6 +4,8 @@ title: Parser attribute declarations
 menu_weight: 200
 ---
 
+* Contents
+{:toc}
 
 ```
 parser attribute indentStack :: [Integer] action {

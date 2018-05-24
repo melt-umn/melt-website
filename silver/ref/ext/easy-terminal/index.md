@@ -4,6 +4,8 @@ title: Easy terminals
 menu_weight: 100
 ---
 
+* Contents
+{:toc}
 
 ```
 terminal Keyword 'keyword';

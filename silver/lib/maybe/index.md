@@ -4,15 +4,12 @@ title: Maybe
 menu_weight: 400
 ---
 
-
 ```
 n.errors := case n.lookupName of
             | nothing() -> ["error!"]
             | just(_) -> []
             end;
 ```
-
-# Maybe
 
 Silver does not have 'null' values, unlike languages such as Java or
 C++, as these are a constant source of errors.  Instead,
