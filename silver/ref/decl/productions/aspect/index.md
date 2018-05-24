@@ -14,7 +14,7 @@ top::Expr ::= l::Expr  r::Expr
 }
 ```
 
-See also more general documentation on aspects [Concept\_Aspects]({{ "/concepts/aspects/" | prepend: site.sv_wiki_base }}).
+See also more general documentation on aspects [Concept\_Aspects](/silver/concepts/aspects/).
 
 ## Syntax
 

@@ -7,14 +7,6 @@ lang: "en"
 strict_front_matter: true
 timezone: "America/Chicago"
 
-# This one is deprecated...
-sv_wiki_base: "" # path from domain root to the silver wiki, used to emit "wiki links"
-# Stuff in melt-website can use nothing, or 'baseurl' if you insist
-# Stuff from silver repo's documentation needs a base url, so we give them these:
-silver_base: "/silver"
-# Silver-generated can use this base:
-silver_gen_base: "/silver/grammars"
-
 # Tell Jekyll to pay attention to what's in _pages
 collections:
   pages:

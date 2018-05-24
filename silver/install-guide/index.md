@@ -1,6 +1,6 @@
 ---
 layout: sv_wiki
-title: Installation guide
+title: Silver installation guide
 menu_title: Installation Guide
 menu_weight: 10.0
 ---
@@ -24,7 +24,7 @@ brew install coreutils ant
 
 ## Getting Silver
 
-The **latest release** can be [downloaded here](/downloads).
+The **latest release** can be [downloaded here](/downloads/).
 
 To clone from GitHub instead, [see below](#using-the-latest-development-version).
 
@@ -40,7 +40,7 @@ silver/tutorials/hello$ java -jar hello.jar
 Hello, World!
 ```
 
-If you have any issues, first try the [frequently asked question page]({{ "/faq/" | prepend: site.silver_base }}) to see if there are any questions like yours.
+If you have any issues, first try the [frequently asked question page](/silver/faq/) to see if there are any questions like yours.
 
 ## Installing the 'silver' script
 
@@ -114,5 +114,5 @@ any generated files, which may now be stale with the new version.
 
 ## Building Silver
 
-See [here]({{ "/dev/building" | prepend: site.silver_base }}).
+See [here](/silver/dev/building).
 
