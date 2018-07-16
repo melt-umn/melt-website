@@ -33,6 +33,8 @@ $ cd silver
 silver$ ./update
 ```
 
+Alternatively, the latest stable release can be found on the [Downloads](/downloads/) page.
+
 ## Testing things out by building the tutorials
 
 Here is an example session, running the hello world tutorial grammar:
