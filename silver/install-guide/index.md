@@ -19,7 +19,7 @@ apt-get install default-jdk ant git wget
 For OSX, using Homebrew (install a JDK separately):
 
 ```
-brew install coreutils ant git wget
+brew install coreutils ant wget
 ```
 
 ## Getting Silver
@@ -32,6 +32,11 @@ $ git clone https://github.com/melt-umn/silver.git
 $ cd silver
 silver$ ./update
 ```
+
+This will pull the latest changes, and update your working copy. It
+will also download the latest jars (which may be necessary! Silver is
+written in Silver, so there can be bootstrapping issues) and clear out
+any generated files, which may now be stale with the new version.
 
 Alternatively, the latest stable release can be found on the [Downloads](/downloads/) page.
 
@@ -74,21 +79,6 @@ Note that this differs from the previous example session by using the '`silver`'
 in `~/bin` instead of the local `silver-compile` script, and it is run
 from the `tutorials` directory instead of `tutorials/hello`.
 
-
-# Updating to the latest development version
-
-## Updating jars
-
-To update the version cloned from GitHub, run:
-
-```
-silver$ ./update
-```
-
-This will pull the latest changes, and update your working copy. It
-will also download the latest jars (which may be necessary! Silver is
-written in Silver, so there can be bootstrapping issues) and clear out
-any generated files, which may now be stale with the new version.
 
 ## Building Silver
 
