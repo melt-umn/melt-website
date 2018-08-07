@@ -7,15 +7,19 @@ permalink: /downloads/
 
 ## Silver
 
+* [Silver GitHub repository](https://github.com/melt-umn/silver)
 * [Silver 0.4](/downloads/silver-0.4.0.tar.gz)
 
 ## Copper
 
+* [Copper GitHub repository](https://github.com/melt-umn/copper)
 * [CopperCompiler-0.5](/downloads/CopperCompiler-0.5.jar)
 * [CopperRuntime-0.5](/downloads/CopperRuntime-0.5.jar)
 * [copper-examples](/downloads/copper_examples.tar.gz)
 
 ## ableC
+
+* [ableC GitHub repository](https://github.com/melt-umn/ableC)
 
 Version 0.1
 
