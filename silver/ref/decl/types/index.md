@@ -17,7 +17,9 @@ type Set<a> = [a];
 
 Transparent type aliases can be declared as follows:
 
-`type` _Identifier_ `<` _type variable list_ `>` `=` _type_ `;`
+<pre>
+type <i>Name</i> &lt; <i>type variables...</i> &gt; = <i>type</i>;
+</pre>
 
 Please note these are aliases, not actual new types. For that see [nonterminal declarations](/silver/ref/decl/nonterminals/).
 

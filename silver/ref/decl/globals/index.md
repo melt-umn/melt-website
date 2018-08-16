@@ -17,12 +17,16 @@ global ones :: [Integer] = 1 :: ones;
 
 Global values can be declared as follows:
 
-`global` _identifier_ `::` _Type_ `=` _expression_ `;`
+<pre>
+global <i>name</i> :: <i>Type</i> = <i>expression</i>;
+</pre>
 
 ## FAQ
 
 ### What's the point?
 
-Since Silver is a pure language (although holes exist), it's pretty much just for declaring constants.
+Globals are just for declaring constant values of some use.
+Since Silver is a pure language, globals don't have the same use as in some other languages (where they might be mutable, for isntance.)
 
-It's used most often by testing related code.
+Most commonly global values declarations used as part of testing code, declaring values that will get operated on in tests several different ways.
+

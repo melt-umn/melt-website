@@ -17,33 +17,36 @@ terminal BlockComment / \/\* ([^\*]|\*+[^\*\/])* \*+\/ /;
 
 Terminals are declared using the keyword `terminal` followed by a name, and a regular expression inside forward slashes (`/`).
 
-`terminal` _Identifier_ `/` _regular expression_ `/` `;`
+<pre>
+terminal <i>Name</i> /<i>regex</i>/ <i>terminal modifiers...</i>;
+</pre>
 
-The identifier, like all type names in Silver, must start with a capital letter.  Only standard DFA-style regular expressions are supported (e.g. no back references, etc.)
+The terminal name, like all type names in Silver, must start with a capital letter.
+Only standard DFA-style regular expressions are supported (e.g. no back references, lookahead, etc.)
 
 Character classes are not currently supported, but are in the works.
 
-Whitespace inside the regex is allowed and **ignored**. If whitespace is desired in the regular expression it should be escaped (`'\ '`).
+Whitespace inside the regex is allowed and **whitespace is presently ignored**.
+If whitespace is desired in the regular expression it should be escaped (`'\ '`).
 
 ## Easy terminal extension
 
-An extension allows a terminal declaration to use single-quote non-regular expressions.  For example:
+An extension allows a terminal declaration to use single-quoted string literals (non-regexes).
+For example:
 
 ```
 terminal Boolean  'bool';
 terminal Multiply '*';
 ```
 
-## "Attributes"
+## Terminal "attributes"
 
-Values of terminal type have a small number of pseudo-attributes:
+From a value of a terminal type, you can access two pseudo-attributes.
+The `lexeme` gives the string that matched the regex, and `location` gives the location information of where the terminal was found in the parsed file.
 
-| Attribute | Type | Value |
-|:----------|:-----|:------|
-| lexeme    | String | The string the terminal matched |
-| filename  | String | The filename the terminal purports to be from |
-| line      | Integer | The starting line of the terminal (begins counting with 1) |
-| column    | Integer | The starting column of the terminal (begins counting with 0) |
+
+Note that for location information, `line` starts at 1, and `column` starts at 0.
+Different editors use different conventions... unfortunately.
 
 ## Terminal Modifiers
 
@@ -64,7 +67,8 @@ terminal Plus  '+' precedence = 11;
 terminal Times '*' precedence = 12;
 ```
 
-The numbers are arbitrary, relative to each other. High number means "binds more tightly."
+The numbers are arbitrary, relative to each other.
+A higher number means "binds more tightly."
 
 ### Terminal association
 
@@ -75,7 +79,8 @@ terminal Plus  '+' precedence = 11, association = left;
 terminal Times '*' precedence = 12, association = left;
 ```
 
-'left' and 'right' are valid. Absent a declaration, terminals are assumed to be non-associative.
+'left' and 'right' are valid.
+Absent a declaration, terminals are assumed to be non-associative.
 
 ## Copper-specific modifiers
 
@@ -85,7 +90,7 @@ Terminals can be assigned multiple lexer classes:
 
 ```
 terminal Global 'global' lexer classes {KEYWORD};
-terminal Length 'length' lexer classes {KEYWORD,BUILTIN};
+terminal Length 'length' lexer classes {KEYWORD, BUILTIN};
 ```
 
 ### Dominates/submits
@@ -121,4 +126,5 @@ Inside this action block, a couple of variables are available:
 | line     | Integer | The starting line of this terminal (begins with 1) |
 | column   | Integer | The starting column of this terminal (begins with 0) |
 
-In addition, the `filename`, `line`, and `column` variables can be assigned to in the action block, but this updates the position the _next_ terminal will believe it starts at, not the current terminal. (This is often used to deal with CPP directives in the parser.)
+In addition, the `filename`, `line`, and `column` variables can be assigned to in the action block, but this updates the position the _next_ terminal will believe it starts at, not the current terminal.
+(This is often used to deal with CPP directives in the parser.)

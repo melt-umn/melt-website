@@ -27,9 +27,9 @@ An [SLE 2011 paper](http://www-users.cs.umn.edu/~evw/pubs/kaminski11sle/index.ht
 
 Silver also has a modular analysis ([see this SLE 2012 paper](http://www-users.cs.umn.edu/~evw/pubs/kaminski12sle/index.html)) that can be used in extensible languages to ensure that the composition of independently developed language extensions (that all pass this analysis) compose to form a *well-defined* attribute grammar.
 
-Silver comes bundled with [Copper](../copper/index.html), our parser and context-aware scanner generator.
+Silver comes bundled with [Copper](../copper/), our parser and context-aware scanner generator.
 
-[AbleC](/ableC/index.html) is written in Silver.
+[AbleC](/ableC/) is written in Silver.
 Silver itself is bootstrapped and written in Silver.
 We have also used Silver to implement extensible versions of Java (see this paper) and Promela, the specification language for the Spin model checker (see this paper).
 

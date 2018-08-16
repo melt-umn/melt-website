@@ -82,5 +82,5 @@ from the `tutorials` directory instead of `tutorials/hello`.
 
 ## Building Silver
 
-See [here](/silver/dev/building).
+See [here](/silver/dev/building/).
 
