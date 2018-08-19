@@ -7,6 +7,8 @@ menu_weight: 300
 * Contents
 {:toc}
 
+Quick examples:
+
 ```
 synthesized attribute pp :: Document;
 

@@ -1,11 +1,13 @@
 ---
 layout: sv_wiki
-title: Concrete productions
+title: Concrete production declarations
 menu_weight: 100
 ---
 
 * Contents
 {:toc}
+
+Quick examples:
 
 ```
 concrete production plus
@@ -20,7 +22,7 @@ A 'concrete' production is identical to an [abstract production](/silver/ref/dec
 
 Concrete productions also have restrictions on the types of children, only terminals and nonterminals are allowed (and those nonterminals must have concrete productions).
 
-## Convenience for concrete syntax
+## Declaring many productions
 
 Syntax can be declared is a somewhat more natural way using `concrete productions` (note the plural.)
 

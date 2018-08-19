@@ -7,6 +7,8 @@ menu_weight: 650
 * Contents
 {:toc}
 
+Quick examples:
+
 ```
 flowtype Expr =
   decorate {env, returnType},

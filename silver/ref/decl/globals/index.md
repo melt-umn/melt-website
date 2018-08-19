@@ -7,6 +7,8 @@ menu_weight: 700
 * Contents
 {:toc}
 
+Quick examples:
+
 ```
 global defaultSuffix :: String = "_sfx";
 
@@ -20,6 +22,8 @@ Global values can be declared as follows:
 <pre>
 global <i>name</i> :: <i>Type</i> = <i>expression</i>;
 </pre>
+
+Types are required.
 
 ## FAQ
 

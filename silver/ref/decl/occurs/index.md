@@ -7,6 +7,8 @@ menu_weight: 400
 * Contents
 {:toc}
 
+Quick examples:
+
 ```
 attribute pp occurs on Expr;
 

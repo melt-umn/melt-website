@@ -7,6 +7,8 @@ menu_weight: 100
 * Contents
 {:toc}
 
+Quick examples:
+
 ```
 nonterminal Expression;
 nonterminal List<a>;
@@ -25,9 +27,9 @@ nonterminal <i>Name</i> &lt; <i>type variables...</i> &gt;;
 The name, like all type names in Silver, must start with a capital letter.
 Type variables must be lower case.
 
-## Convenience extension
+## Quickly declaring occurrences
 
-An extension allows a nonterminal declaration to include a comma-separated list of attribute occurrences using the `with` keyword.
+Silver also allows a nonterminal declaration to include a comma-separated list of [attribute occurrences](/silver/ref/decl/occurs/) using the `with` keyword.
 For example:
 
 ```
@@ -40,10 +42,10 @@ The use of this extension is highly encouraged.
 
 ## Analogy to data types
 
-Nonterminals in Silver are somewhat similar to datatypes in other functional languages.
+Nonterminals in Silver are somewhat similar to data types in other functional languages, like Haskell.
 The major initially noticeable difference is that Silver does not require a fixed list of constructors (and we use different names, calling constructors [productions](/silver/ref/decl/productions/).)
 
-Similarly, nonterminals are somewhat like abstract class declarations in other object-oriented languages.
+Similarly, nonterminals are somewhat like abstract class declarations in other object-oriented languages, like Java.
 The major initially noticeable difference is the lack of a fixed list of (virtual) methods (and in Silver they're called [attributes](/silver/ref/decl/attributes/) and must be declared to [occur](/silver/ref/decl/occurs/) on the nonterminal.)
 
 ## Concrete Syntax
@@ -55,15 +57,24 @@ If not, then it's not considered part of the concrete syntax.
 
 ## Closed nonterminals
 
-These should be used sparingly for representing languages.
+These should be used sparingly for representing languages, except for pure concrete syntax.
 
-Fundamentally, there is a choice in how we should achieve composable extensions: should we permits new semantics openly, and require new syntax to be defined in terms of semantically equivalent syntax? (i.e. forwarding)
-For nearly all AST types, the answer is yes.
-But for some, and for many programming tasks, the answer is the opposite: we should permits new syntax openly, and require any new semantics be defined in terms of existing semantics.
+There is a duality in the approach we can take to making an extensible data type.
+For (non-closed) nonterminals, we leave open the ability to declare new attribute occurrences, but we expect there (in the [modular well-definedness analysis](/silver/concepts/modular-well-definedness/)) to be a fixed set of non-forwarding productions (in the "host language").
 
-Closed nonterminals allow the latter.
-Beginners should typically **only use them for concrete syntax** at first.
-(As concrete syntax typically just constructs an abstract syntax, and so we do not need open semantic extensibility.)
+This is the generally correct design for nearly all AST-like nodes.
+To do otherwise impairs practical extensibility.
 
-The only practical effect of closed nonterminals is how it affects the [modular well-definedness analysis](/silver/concepts/modular-well-definedness/).
+However, for some kinds of data structures (or for pure concrete syntax) the dual approach is desired.
+We want to close off the ability to introduce new (non-[defaulted](/silver/ref/decl/productions/default/)) attribute occurrences, but now permit introduction of arbitrary new non-forwarding productions.
+This impairs the ability to analyze these trees in novel ways, but allows new productions which have no equivalent tree they could have forwarded to.
+
+In practice, closed nonterminals are used to describe purely concrete syntax.
+
+```
+closed nonterminal Expr_c with ast<Expr>;
+```
+
+This kind of type needs no new attributes, everything should just construct an appropriate abstract representation, and the interesting work can happen there.
+
 

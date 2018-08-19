@@ -7,6 +7,8 @@ menu_weight: 800
 * Contents
 {:toc}
 
+Quick examples:
+
 ```
 type EnvMap = TreeMap<String  Decorated Decl>;
 
@@ -27,4 +29,7 @@ Please note these are aliases, not actual new types. For that see [nonterminal d
 
 ### Is there a newtype equivalent?
 
-Not yet, but someday.
+Haskell's `newtype` declares an _opaque_ type alias, meaning the new type name is not transparently equal to what it wraps.
+Instead, the type must be explicitly wrapped and unwrapped.
+Silver has no support for this yet, other than emulating it by using a nonterminal and production.
+

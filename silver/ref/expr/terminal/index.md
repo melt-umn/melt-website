@@ -7,6 +7,8 @@ menu_weight: 800
 * Contents
 {:toc}
 
+Quick examples:
+
 ```
 -- earlier:
 terminal Identifier /[A-Za-z]/;
@@ -23,35 +25,33 @@ e::Expr ::= f::'foo'
 
 ## Terminals
 
-The _`terminal`_ special form is the constructor for terminals:
+The `terminal` special form of expression is the constructor for terminals:
 
-```
-terminal ( <Type> , <Expr :: String> )
-terminal ( <Type> , <Expr :: String> , <Expr :: Integer> , <Expr :: Integer> )
-terminal ( <Type> , <Expr :: String> , <Expr> )
-```
+<pre>
+terminal ( <i>Terminal type</i>, <i>lexeme expression</i>, <i>Location expression</i> )
+terminal ( <i>Terminal type</i>, <i>lexeme expression</i> )
+</pre>
 
-The first parameter is the type of the terminal to create. The second parameter is the lexeme of the terminal to create.  Silver makes no restriction that the lexeme must match the regular expression the terminal was declared with.
+The first "parameter" is the type of the terminal to create.
+The second parameter is the lexeme of the terminal to create.
+Silver makes no restriction that the lexeme must match the regular expression the terminal was declared with.
 
-In the second form, the line and column values for the terminal are provided. In the first form, these attributes will be given the value -1. In the third form, the terminal simply obtains these attributes from another terminal (of any type, not only the same type of terminal.)
+In the second form, bogus values for a location will be invented.
 
 ## Easy terminal extension
 
-Terminals declared using single quotes, rather than a regular expression, may be constructed quickly in the same manner:
+Terminals declared using single quotes, rather than a regular expression, may be constructed quickly in the same manner.
 
-```
-... foo('foo') ... -- constructs the foo production above, and a terminal 'foo' to give as its child
-```
+That is, instead of `terminal(For_kwd, "for")` one can write `'for'`.
 
 ## Terminal attributes
 
-There are four terminal attributes:
+There are two special terminal attributes:
 
-```
-<Expr> . lexeme
-<Expr> . filename
-<Expr> . line
-<Expr> . column
-```
+<pre>
+<i>expression</i> . lexeme
+<i>expression</i> . location
+</pre>
 
-Both _`lexeme`_ and _`filename`_ are _`String`_s, while _`line`_ and _`column`_ are _`Integer`_s.  The file name comes from the second parameter passed to the parse function. (See \ref{sec:copper:parser}.)
+The `lexeme` is the string matched, and `location` is the `Location` the string was matched from.
+

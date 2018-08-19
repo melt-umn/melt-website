@@ -7,6 +7,8 @@ menu_weight: 500
 * Contents
 {:toc}
 
+Quick examples:
+
 ```
 terminal Identifier /[A-Za-z_][A-Za-z0-9_]*/;
 

@@ -7,6 +7,8 @@ menu_weight: 600
 * Contents
 {:toc}
 
+Quick examples:
+
 ```
 function orElse
 Maybe<a> ::= l::Maybe<a> r::Maybe<a>
@@ -38,7 +40,7 @@ Sometimes the function should have taken a reference (`Decorated Expr`) type ins
 All parameters are passed lazily.
 There is currently no strictness annotation.
 
-## Aspects
+## Aspecting functions
 
 ```
 aspect function driver
