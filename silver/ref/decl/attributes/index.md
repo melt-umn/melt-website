@@ -22,8 +22,8 @@ Attributes may also be parameterized in their types.
 If they are not parameterized, the angle brackets are omitted:
 
 <pre>
-synthesized attribute <i>name</i> &lt; <i>type variables...</i> &gt :: <i>type</i>;
-inherited attribute <i>name</i> &lt; <i>type variables...</i> &gt :: <i>type</i>;
+synthesized attribute <i>name</i> &lt; <i>type variables...</i> &gt; :: <i>type</i>;
+inherited attribute <i>name</i> &lt; <i>type variables...</i> &gt; :: <i>type</i>;
 </pre>
 
 All type variables that appear in the type must be declared in the type parameter list.
