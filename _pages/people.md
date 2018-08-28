@@ -19,7 +19,7 @@ Ph.D. graduates:
   * "[Reliably composable language extensions](https://www-users.cs.umn.edu/~kami0054/papers/kaminski-phd.pdf)"
 * Lijesh Krishnan, Ph.D., November, 2012. [Coverity](http://www.coverity.com/)
   * "[Extensible Languages via Modular Declarative Specifications](http://melt.cs.umn.edu/pubs/krishnan2012PhD/krishnan2012PhD.pdf)"
-* [August Schwerdfeger](http://www.adventiumlabs.com/about-us/staff/technical-staff/august-schwerdfeger-phd), Ph.D., July, 2011. [Adventium Labs](http://www.adventiumlabs.com/)
+* [August Schwerdfeger](http://www.adventiumlabs.com/about-us/staff/technical-staff/august-schwerdfeger-phd), Ph.D., July, 2010. [Adventium Labs](http://www.adventiumlabs.com/)
   * "[Context-Aware Scanning and Determinism-Preserving Grammar Composition](http://melt.cs.umn.edu/pubs/schwerdfeger2010phd.pdf)"
 
 M.S. graduates:
