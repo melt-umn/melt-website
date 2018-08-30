@@ -27,9 +27,9 @@ cd "$SV"
 # Run silver to generate some docs
 mkdir -p generated
 
-./support/bin/silver --doc --clean silver:extension:doc:extra
+./support/bin/silver --dont-translate --doc --clean silver:extension:doc:extra
 
-rm ./build.xml ./silver.extension.doc.extra.jar
+rm ./build.xml
 
 mkdir -p "$ORIG/silver/gen/"
 cp -r generated/doc/* "$ORIG/silver/gen/"
