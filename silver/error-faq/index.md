@@ -5,15 +5,18 @@ menu_title: Understanding Errors
 menu_weight: 80.0
 ---
 
-## Compile-time
+## Compiler error messages
 
 **error: duplicate equation for attribute _a_**
 
-There are two definitions of the value of the attribute on the same production. Both definitions should emit this error message, so you should be able to find them.
+There are two (or more) definitions for the value of the attribute _a_ on the same production.
+Both definitions should emit this error message, so you should be able to the other one (especially if it's in an aspect in another grammar).
 
-If the attribute is a collection, perhaps one should change from ':=' to '<-' (see Concept\_Collections).
+If the attribute is a collection, perhaps the intention is for one equation to change from `:=` to `<-` (see more about [collections](/silver/concept/collections)).
 
-## Runtime
+
+## Runtime stack traces
+
 
 Stack trace errors commonly look like this:
 
@@ -25,22 +28,43 @@ Stack trace errors commonly look like this:
 
 There are a few things to note about how to read this output:
 
-  * They begin with something in parenthesis. For things in the Silver Runtime, this is shortened to an abbreviation (like DN.307). For things coming from generated code, there is a full package and class name, followed by a file name and line number.
-  * Each production is identified by the `System.identityHashCode` value of its decorated node, and (if present at all) the location annotation attached to that node. The identity allows spotting the same node in the stack trace, and the location is occasionally helpful when tracking down bugs with your program: often it's easier to diagnose a problem when you know what bit of syntax lead to it.
-  * **Begin reading stack traces at the bottom**: that's often where the only relevant bit is.
-  * Silver stack traces do NOT show thunk evaluation, which means they can occasionally be misleading. The underlying (large!) Java stack traces will be printed instead if you set the SILVER\_TRACE environment variable to 1.
+* They begin with something in parenthesis.
+For things in the Silver Runtime, this is shortened to an abbreviation (like `DN.307`).
+For things coming from generated code, there is a full package and class name, followed by a file name and line number (like `silver.definition.type.PunifyCheck in PunifyCheck.java:116`).
+
+* Each production is identified by the `System.identityHashCode` value of its decorated node, and (if present at all) the location annotation attached to that node.
+The identity allows spotting the same node in the stack trace, and the location is occasionally helpful when tracking down bugs with your program: often it's easier to diagnose a problem when you know what bit of syntax lead to it.
+
+* **Begin reading stack traces at the bottom**: that's often where the only relevant bit is.
+
+* Silver stack traces do NOT show thunk evaluation, which means they can occasionally be misleading, as thunks means evaluation can "jump" elsewhere.
+The underlying (large!) Java stack traces will be printed instead if you set the `SILVER_TRACE` environment variable to `1`.
+
+
+### Stack trace messages
+
 
 **Inherited attribute _a_ not provided to _p1_ by _p2_**
 
-Unfortunately this error provides little clue about how _p2_ appeared in its parent node. It could be a child, a local, or an "anonymous" decorate site using the `decorate foo with {...}` syntax. Or, one may have written `x.foo` on an undecorated value `x`, which implicitly creates a decorated node (with no inherited attributes!) on which to evaluated `foo`.
+Unfortunately this error provides little clue about how the production _p1_ appeared in its parent node (_p2_).
+This is annoying, because the problem likely needs to be fixed by changing _p2_, _somehow_.
 
-If the cause is not obvious, begin by tracking down which nonterminal the production _p2_ belongs to, and then track down **all** aspects of the production _p1_. Look for anywhere a value of that appropriate type might be accessed.
+It could be a child, a local, or an "anonymous" decorate site (using the `decorate foo with {...}` syntax).
+Or, one may have written `x.foo` on an undecorated value `x`, which implicitly creates a decorated node (with no inherited attributes!) on which to evaluated `foo`.
 
-**While evaling inh _a_ for forward in _p_**
+If the cause is not obvious, begin by tracking down which nonterminal the production _p2_ belongs to, and then track down **all** aspects of the production _p1_.
+Look for anywhere a value of that appropriate type might be accessed.
 
+It may also be helpful to run the MWDA on your grammar, which will warn statically about places where inherited equations may be missing.
+This should make it much easier to find the cause of the problem... if you're not swamped by many MWDA problems.
+See [how to run the MWDA](/silver/concepts/modular-well-definedness/).
+
+
+**While evaling inh _a_ for forward in _p_**  
 **While evaling syn via forward in _p_**
 
-Neither of these tracing message indicate which attribute, as that's a bit redundant. Look below them until forwarding ends and you should see something like:
+Neither of these tracing message indicate which attribute is being evaluated, as that's a bit redundant.
+Look below them until forwarding ends and you should see something like:
 
 ```
 (DN.313): While evaling syn via forward in 'silver:definition:core:application' (5a659a05, Command.sv:98:30)
@@ -49,3 +73,5 @@ Neither of these tracing message indicate which attribute, as that's a bit redun
 ```
 
 Here, we're accessing `upSubst` from an `application` which forwarded to `functionApplication` which forwarded to `functionInvocation`, where there was an equation answering.
+
+
