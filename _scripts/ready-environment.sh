@@ -19,8 +19,9 @@ if [ ! -e vendor ]; then
     mkdir "$LOCALCACHE"
     ln -s "$LOCALCACHE" vendor
   else
-    echo "asdf"
-    exit 1
+    echo "Non-CS.UMN machine. Creating a local 'vendor' directory."
+    echo "--------------------------------------------------------"
+    echo
     mkdir vendor
   fi
 fi

@@ -21,6 +21,6 @@ echo "Building site..."
 bundle exec jekyll ${JEKYLL_COMMAND}
 
 # Make group permissions same as user, will be preserved when copied later
-if [ $JEKYLL_COMMAND = "build" ]; then
+if [ "$JEKYLL_COMMAND" = "build" ]; then
   chmod -R g=u _site
 fi

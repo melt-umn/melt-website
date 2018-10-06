@@ -2,8 +2,9 @@ SHELL := /bin/bash
 
 usage:
 	@echo "To do local development of the site:"
-	@echo "make env    (once, to get setup)"
-	@echo "make serve  (to incrementally rebuild the site and locally host it)"
+	@echo "make env    (once, initially, to get setup.)"
+	@echo "make site   (to rebuild the static site, or alternatively:)"
+	@echo "make serve  (to incrementally rebuild the site and locally host it.)"
 
 # The full site build process
 all: env doc site
