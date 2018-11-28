@@ -43,10 +43,16 @@ in Java.   It is used by our attribute grammar system
 distributed with it.  It is also available as a stand-alone
 package.
 
-Current versions of Copper are maintained <a
-href="http://github.com/melt-umn/copper">on GitHub</a>. We maintain
-downloads and information here for a legacy version, 0.5, used with
-older versions of Silver.
+## Downloads and documentation:
+
+Current versions of Copper are maintained <a href="http://github.com/melt-umn/copper">on GitHub</a>:
+
+* <a href="https://github.com/melt-umn/copper/releases">Binary distributions</a>
+* <a href="https://github.com/melt-umn/copper/blob/master/doc/manual/CopperUserManual.md">Online manual</a>
+* <a href="http://melt.cs.umn.edu/copper/current/javadoc">Javadoc</a>
+
+A download for a legacy version, 0.5, used with older versions of
+Silver, is available <a href="/downloads/previous-releases.html">here</a>.
 
 ## Acknowledgments:
 
