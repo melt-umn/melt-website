@@ -55,4 +55,4 @@ are composed will involve a marking token from at least one of the extensions.
 
 ## Writing extensions
 
-To get started writing extensions, please see the [ableC tutorials](https://github.com/melt-umn/ableC/tree/develop/tutorials/).
+To get started writing extensions, please see these [ableC tutorials](https://github.com/melt-umn/ableC/tree/develop/tutorials/).
