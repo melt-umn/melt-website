@@ -25,7 +25,7 @@ based on the following:
   extension](https://github.com/melt-umn/ableC-cilk) adds the Cilk
   features of ``spawn`` and ``sync``.  It translates ``cilk``
   functions into the same slow and fast clones of the the Cilk-to-C
-  translator and uses the (MIT
+  translator and uses the [MIT
   Cilk](https://doi.org/10.1145/277650.277727) runtime as the target
   of this translation. 
 - Halide; [this ableC
