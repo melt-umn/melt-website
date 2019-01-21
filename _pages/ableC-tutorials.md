@@ -7,8 +7,8 @@ permalink: /ableC/tutorial/
 
 ## Building parallel programming language constructs in the AbleC extensible C compiler framework
 
-We are holding an AbleC tutorial at the ACM Symposium on the
-Principles and Practice of Parallel Programming (PPoPP) on Saturday, February
+We are holding an [AbleC tutorial at the ACM Symposium on the
+Principles and Practice of Parallel Programming](https://ppopp19.sigplan.org/track/PPoPP-2019-Workshops-and-Tutorials#event-overview) (PPoPP) on Saturday, February
 16, 2019.  
 This tutorial will teach participants how to create
 expressive language extensions to the ableC extensible C compiler
