@@ -20,15 +20,16 @@ For this part in particular, read the Scala guide.  The short version:
   * No hard 80 column limit, but you should pay attention to it!
   * If wrapping an expression using a binary operator (like ++) put the line break AFTER the operator, not before.
   * If wrapping function calls, or complex expressions, try to put line breaks earlier so that the "unit of indent" is kept small (2!) instead of very large.
+  * Indented lines that start with parentheses can put the open parens one column to the left, to avoid shuffling of subsequent indentation when adding parens.
 
 ```
   lhs.attr = 
     case lhs.context of
     | something(a, b) -> 
-        if something_is_okay
+       (if something_is_okay
         then workOn(a) ++ [i, j, k] ++
              workOn(b)
-        else []
+        else [])
     | _ -> []
     end;
 ```
