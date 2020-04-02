@@ -167,8 +167,18 @@ Otherwise, the append operator is used to combine the value of the attribute on 
 
 # Global propagate
 In some cases we wish to propagate an attribute on all productions of a nonterminal with no exceptions.  Instead of adding `propagate` statements (and potentially aspects) for all productions, we can instead write
-```propagate attr1, attr2, ... on NT1, NT2, ...;```
-This generates an [aspect production](../aspects) for all known non-forwarding productions of these nonterminals with `propagate attr1, attr2, ...;` in the body.
+```
+propagate attr1, attr2, ... on NT1, NT2, ...;
+```
+This generates an [aspect production](../aspects) for all known non-forwarding productions of these nonterminals.
+Each of these aspect productions will contain `propagate attr1, attr2, ...;` in its body.
+
+Sometimes one may wish to propagate on *almost* all productions of a nonterminal, but don't want to write `propagate` on all but a few production bodies.
+This can be avoided by instead writing 
+```
+propagate attr1, attr2, ... on NT1, NT2, ... except prod1, prod2, ...;
+```
+This will generate propagating aspect productions for all but the listed productions.
 
 We generally do not wish to propagate on forwarding productions as doing so would often be interfering, and the host language does not know about all forwarding productions anyway.  However if one does in fact wish to propagate on forwarding productions as well, they can simply add explicit propagate statements for each of these productions.
 
