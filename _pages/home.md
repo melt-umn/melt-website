@@ -103,6 +103,17 @@ Copper also has a modular analysis that can be used to ensure that
 certified language extension grammars will compose into a
 deterministic grammar. 
 
+## Archival versions of software and theses
+
+Many of our software artifacts (at significant releases) are archived
+on the [Data Repository of the University of Minnesota
+(DRUM)[(https://conservancy.umn.edu/handle/11299/166578) and can be
+found from the [MELT group landing
+page](http://hdl.handle.net/11299/206558) on the DRUM.
+
+Some Ph.D. dissertations from group members can also be found from the
+MELT landing page.
+
 ## Acknowledgements:
 
 We are very grateful for funding from the [National Science
