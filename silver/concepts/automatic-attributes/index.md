@@ -329,7 +329,7 @@ On the other productions, we can statically determine that the rule does not mat
 Propagating a strategy attribute on a production will also automatically propagate any of its lifted continuation strategy attributes.
 
 Expanding the forwarding of `elimPlusZero_cont`, we get
-````
+```
 synthesized attribute elimPlusZero<a>::Maybe<a>;
 synthesized attribute elimPlusZero_cont<a>::Maybe<a>;
 
