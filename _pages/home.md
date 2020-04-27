@@ -107,7 +107,7 @@ deterministic grammar.
 
 Many of our software artifacts (at significant releases) are archived
 on the [Data Repository of the University of Minnesota
-(DRUM)[(https://conservancy.umn.edu/handle/11299/166578) and can be
+(DRUM)](https://conservancy.umn.edu/handle/11299/166578) and can be
 found from the [MELT group landing
 page](http://hdl.handle.net/11299/206558) on the DRUM.
 
