@@ -176,7 +176,7 @@ Each of these aspect productions will contain `propagate attr1, attr2, ...;` in 
 Sometimes one may wish to propagate on *almost* all productions of a nonterminal, but don't want to write `propagate` on all but a few production bodies.
 This can be avoided by instead writing 
 ```
-propagate attr1, attr2, ... on NT1, NT2, ... except prod1, prod2, ...;
+propagate attr1, attr2, ... on NT1, NT2, ... excluding prod1, prod2, ...;
 ```
 This will generate propagating aspect productions for all but the listed productions.
 
