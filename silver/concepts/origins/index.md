@@ -29,7 +29,8 @@ OK.
  1. Mark everything that has a `location` annotation as `tracked`
  2. Get rid of the `location` annotation and associated swizzling
  4. Instead of using `top.location` for error messages instead raise errors/etc with `errFromOrigin(top, ...)`/etc
- 5. Start building your project with `--no-redex` instead of `--no-origins` (if you were) and build it `--clean`ly [at least once](#build-issues)
+ 5. If you have cases where you need to raise an error and were previously taking the location as an argument instead use `errFromOrigin(ambientOrigin(), ...)`
+ 6. Start building your project with `--no-redex` instead of `--no-origins` (if you were) and build it `--clean`ly [at least once](#build-issues)
 
 In cases where swizzling was not just `location=top.location` you an add an `attachNote logicalLocationNote(loc);` statement, getting `loc` from `getParsedOriginLocationOrFallback(node)`.
 This statement means that that a node constructed in the body alongside that statement is traced back to a textual location that location will be used instead of the textual location of the node on which the rule was defined.
@@ -75,6 +76,11 @@ This is what we currently do with the `location` annotation in many places.
 This common use case is wrapped up with the helper functions `getUrOrigin(...)` which returns the last item in the origin chain (if there is one) and `getParsedOriginLocation(...)` which gets the last item in the origin chain and - if it is a `parsedOriginInfo` indicating it was constructed in Copper - yields the `Location`.
 In situations where the logical textual origin of a node is not the textual origin of the node on which the rule which constructed it was defined one can attach a `logcialLocationNote(loc)` to it which will be used by `getParsedOriginLocation` instead.
 
+The origin information (the LHS, notes, interesting-ness or other source information) is tracked by the runtime and generated code and flows throughout running silver code.
+When a function or lambda is called the origin information from it's call site is used for values constructed in it.
+This means that while it's not possible to ask for the origin of a function instantiation proper (while this does make sense from the function-as-a-node-with-a-single-attribute-called-return PoV, it's not the silver model) it is possible to get the same information by constructing a value and asking for it's origin.
+There is a production in the origins runtime support specifically called for this called `ambientOrigin()` (of type `ambientOriginNT`).
+For example if you have a helper function like `checkArgs :: [Message] ::= [Expr] [Expr] Location` and call it from a `binOp` production using the production's location as an argument, you can instead omit that argument and use `errFromOrigin(ambientOrigin(), ...)` to produce the error `Message`.
 
 
 ## Origin Types in Silver
@@ -95,7 +101,6 @@ Each production has a `OriginInfoType` member that describes where and how the n
    - `setFromFFIOIT()` indicating the node was constructed in a context where origins information had been lost as a result of passing through a FFI boundary that does not preserve it (e.g. when something is constructed in a comparison function invoked from the java runtime Silver value comparator shim)
    - `setFromEntryOIT()` indicating the node was constructed in entry function
    - `setInGlobalOIT()` indicating the node is a constant
-
 
 
 ## Example
