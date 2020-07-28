@@ -25,15 +25,44 @@ The redex then represents the node that catalyzed the movement of the child to t
 
 ## I don't care about the theory - someone told me I could use this instead of the location annotation
 
-OK.
+OK. Here is the whirlwind porting guide:
  1. Mark everything that has a `location` annotation as `tracked`
- 2. Get rid of the `location` annotation and associated swizzling
+ 2. Get rid of the `location` annotation and associated swizzling 🎉🎉🎉
  4. Instead of using `top.location` for error messages instead raise errors/etc with `errFromOrigin(top, ...)`/etc
- 5. If you have cases where you need to raise an error and were previously taking the location as an argument instead use `errFromOrigin(ambientOrigin(), ...)`
- 6. Start building your project with `--no-redex` instead of `--no-origins` (if you were) and build it `--clean`ly [at least once](#build-issues)
+ 5. Start building your project with `--no-redex` instead of `--no-origins` (if you were) and build it `--clean`ly [at least once](#build-issues)
+
+### More complex idioms
+
+Another way to think about adding origin tracking if all you care about is replacing `location` is that the entire codebase gets an implicit `Location` argument that is handled by the runtime.
+This implicit argument always refers to the location of the nonterminal the rule currently executing was defined on (so in functions it refers to the location of the nonterminal that invoked the function.)
+The implicit location argument can be altered then by way of `attachNote logicalLocationNote(loc);` which sets the implicit location argument to `loc` for the entire block of declerations it occurs on, or `attachNote logicalLocationNote(loc) on {expr}` which sets it only for the context of `expr`.
+
+**It's more complicated + powerful + cooler than that, but that mental model will totally work for ridding yourself of `location` :)**
 
 In cases where swizzling was not just `location=top.location` you an add an `attachNote logicalLocationNote(loc);` statement, getting `loc` from `getParsedOriginLocationOrFallback(node)`.
 This statement means that that a node constructed in the body alongside that statement is traced back to a textual location that location will be used instead of the textual location of the node on which the rule was defined.
+
+What do you want to mark `tracked`? Maybe more than just what had a `location`.
+Origin tracking can also replace manually tracking the source location that definition nonterminals in environments need to keep track of.
+Children in definition nonterminals representing definition location and attributes holding the same can be removed.
+Marking the definition nonterminal `tracked` will (usually) do the same (assuming it is constructed in a rule on the node it originates from - if not, use `logicalLocationNote` to adjust it.)
+
+How about cases where a `Location` is passed into a function? It can (almost always) be removed.
+Generally instead of taking a location in helpers one can use the implicit origin information that flows into functions.
+Origins from the call-site of the function apply to values constructed within.
+If the function was called with `top.location` and that value was used to construct new nodes, the observable behavior in tracking the source location will be the exact same.
+If something other than `top.location` was used, a `logicalLocationNote` can be used to adjust the origin information at the call site of the function.
+If a `Location` is passed with the express purpose of raising an error it can be removed as well.
+Either use `errFromOrigin` with one of the arguments as the origin, or use `errFromorigin(ambientOrigin(), ...)` to raise the error using the origin information flowing into the function.
+(The source location can also be derived using `getParsedOriginLocationOrFallback(ambientOrigin())` if that is needed for e.g. an error message.)
+
+What about cases where a lambda takes a Location?
+This comes up in code where (for example) `Expr`s define a attribute that is a lambda for how to do some manipulation (e.g. take the address) of them.
+Imagine we have an `Expr` type with a attribute `addressOfProd` (taken from AbleC) that is of the type `Expr ::= Location`.
+The reason for this is so that when we invoke `someExpr.addressOfProd(top.location)` the resulting tree is built using the location of the address-of operator, not of the original expression.
+When we rewrite this code to use origins, we can remove the `Location` argument, meaning the type will be just `Expr ::= ` and the invocation will be just `someExpr.addressOfProd()`.
+Since the call site will pick up origins information from the node it is a rule on (`top`) it will flow correctly into the lambda invocation.
+For example if we had a production with a rule like `top.addressOfProd = (\loc::Location -> someOtherProd(location=loc))` can can change it to a 0-argument lambda `top.addressOfProd = (\ -> someOtherProd())`.
 
 
 ## Origins in Silver
@@ -74,7 +103,7 @@ If the chain of origins is `foo ---originates-from-node---> bar ---originates-fr
 One very practical application is that we can get this chain of origin information, find the last one, and find the source location the object at the end of the chain originates from.
 This is what we currently do with the `location` annotation in many places.
 This common use case is wrapped up with the helper functions `getUrOrigin(...)` which returns the last item in the origin chain (if there is one) and `getParsedOriginLocation(...)` which gets the last item in the origin chain and - if it is a `parsedOriginInfo` indicating it was constructed in Copper - yields the `Location`.
-In situations where the logical textual origin of a node is not the textual origin of the node on which the rule which constructed it was defined one can attach a `logcialLocationNote(loc)` to it which will be used by `getParsedOriginLocation` instead.
+In situations where the logical textual origin of a node is not the textual origin of the node on which the rule which constructed it was defined one can attach a `logicalLocationNote(loc)` to it which will be used by `getParsedOriginLocation` instead.
 
 The origin information (the LHS, notes, interesting-ness or other source information) is tracked by the runtime and generated code and flows throughout running silver code.
 When a function or lambda is called the origin information from it's call site is used for values constructed in it.
@@ -83,7 +112,7 @@ There is a production in the origins runtime support specifically called for thi
 For example if you have a helper function like `checkArgs :: [Message] ::= [Expr] [Expr] Location` and call it from a `binOp` production using the production's location as an argument, you can instead omit that argument and use `errFromOrigin(ambientOrigin(), ...)` to produce the error `Message`.
 
 
-## Origin Types in Silver
+### Origin Types in Silver
 
 In Silver the notion from the paper is extended and generalized to provide origins that can also encode different ways of producing nodes that are not part of the simple attribute grammar described in the paper.
 Each different set of possible origin info is described by a production of `OriginInfo`.
@@ -91,7 +120,7 @@ Each production has a `OriginInfoType` member that describes where and how the n
  - `originOriginInfo(typ, origin, originNotes, newlyConstructed)` contains a link to the node that this node originates from (`origin`), notes (`originNotes`) and the interesting flag (`newlyConstructed`). The possible values for `typ` (`OriginInfoType`s) are:
    - `setAtConstructionOIT()` indicating the node was constructed normally. The origin link is to the node on which the rule that constructed this node occured.
    - `setAtNewOIT()` indicating the node was constructed in a call to `new` to undecorate something. The origin link is to the node that was `new`ed.
-   - `setAtForwardingOIT()` indicating the node was forwarded to. The origin link is to the node that was forwarded to (see later, this is weird.)
+   - `setAtForwardingOIT()` indicating the node was forwarded to. The origin link is to a copy of this node from which you can find out where it was constructed.
    - `setFromReflectionOIT()` indicating the node is an `AST` created from `reflect`. The origin link is to the node that was reflected on.
    - `setFromReificationOIT()` indicating the node was created from an `AST` by `reify`. The origin link is to the reflective representation the node was reified from.
  - `originAndRedexOriginInfo(typ, origin, originNotes, redex, redexNotes, newlyConstructed)` contains a link to the node that this node originates from (`origin`), notes on that link (`originNotes`), a link to the node that is the redex of a transformation that moved this node (`redex`), notes on that link (`redexNotes`), and the interesting flag (`newlyConstructed`). The only value for `typ` this can have is `setAtAccessOIT()`.
@@ -101,6 +130,85 @@ Each production has a `OriginInfoType` member that describes where and how the n
    - `setFromFFIOIT()` indicating the node was constructed in a context where origins information had been lost as a result of passing through a FFI boundary that does not preserve it (e.g. when something is constructed in a comparison function invoked from the java runtime Silver value comparator shim)
    - `setFromEntryOIT()` indicating the node was constructed in entry function
    - `setInGlobalOIT()` indicating the node is a constant
+
+
+### Implementation, runtime, and FFI
+
+`tracked`ness is implemented in the silver compiler as part of the `nonterminalType`.
+Initially it was held in the `ntDcl` for that `nonterminalType` (which is where the `closed` qualifier goes.)
+That seems like it would be preferable, but the way `import` works means that that `ntDcl` is not always available.
+In the situation that a production is imported (and used) without the nonterminal being imported (e.g. `import silver:langutil only err`) we can have knowledge of the production without the nonterminal to which it belongs.
+Since whenever we construct or manipulate a nonterminal we need to know it's `tracked`ness this meant that the `tracked`ness had to go in the `nonterminalType`.
+
+The `OriginInfo` for a node is treated as a hidden child and evaluated strictly.
+It is held in the `NOriginInfo origin` field of `Node` and may be `null` if the node instance belongs to a nonterminal type that isn't `tracked`.
+These `OriginInfo`s are normal silver production instances.
+They need to be un`tracked` to make it actually possible to construct them without infinite regress.
+All productions of `OriginInfoType` are instantiated at startup as singletons and held in `OriginsUtil`.
+The stdlib accessors for origins are Java FFI functions that call out to helpers on `OriginsUtil`.
+
+During runtime the origin context exists as a `common.originContext` object.
+These are analogous to all the stuff added to the left side of the turnstile in the evaluation semantics for the AG-with-origins in the paper.
+These objects are immutable (since they get captured into closures and `DecoratedNode`s).
+They hold information similar-to but different-than `OriginInfo` nonterminal instances, and generate `OriginInfo` nonterminal instances.
+They are handed around as an additional parameter to function calls and baked into `Lazy`s/`Thunk`s as captured variables.
+They are tacked onto `DecoratedNode`s as something of an ugly hack.
+
+Depending on the context of the code being emitted we try to avoid passing them around/constructing them when not needed.
+In expressions in rules that are defined in a block on a production we always know the left hand side and can statically determine the notes that apply, so we construct the `OriginContext` only at the sites where we need to produce an `OriginInfo`.
+In expressions that occur in functions (including lambdas) we need to take the `OriginContext` as an additional parameter to `.invoke` because the context depends on the caller.
+Lastly for expressions occurring in weird spots (e.g. parser actions, globals) we need to use a bogus `OriginContext`.
+`translation:java:core/Origins.sv` contains the logic for what to do each of these cases.
+Each `BlockContext` gains a `originsContextSource :: ContextOriginInfoSource` which is one of:
+ - `useContextLhsAndRules()` indicating that the lhs and rules can be derives statically (i.e. this expression is only ever evaluated on a `DecoratedNode` where the undecoration is the lhs and the rules can be determined statically from the `originRules()` attribute on the `Expr`.)
+ - `useRuntimePassedInfo` indicating the context should be retrieved from the runtime-passed java value stored in `originCtx` and swizzled through thunks and function calls etc
+ - `useBogusInfo(name)` indicating the context is garbage (parser action or global) and the `name` indicates which of the special `variety`s of `OriginInfo` should be used (see below)
+
+When they do produce `OriginInfo` nonterminals they only produce `originOriginInfo` or `otherOriginInfo`s. 
+`originAndRedexOriginInfo`s are attached to nodes that have been moved *later* by expanding an existing `originOriginInfo` using the origins context at the time of tree motion to set the redex and redex notes without modifying the origin and origin notes.
+They have a `variety` field which is one of:
+ - `NORMAL`, indicating that the field `lhs` holds the context node and `notes` holds the nodes attached to the current context. This corresponds to `originOriginInfo(setAtConstructionOIT(), lhs, notes, isInteresting)`
+ - `MAINFUNCTION` corresponding to `otherOriginInfo(setFromEntryOIT(), ...)`
+ - `FFI` corresponding to `otherOriginInfo(setFromFFIOIT(), ...)`
+ - `PARSERACTION` corresponding to `otherOriginInfo(setFromParserActionOIT(), ...)`
+ - `GLOBAL` corresponding to `otherOriginInfo(setInGlobalOIT(), ...)`
+The `lhs` and `notes` fields are meaningless unless `variety == NORMAL`.
+All `variety`s except `NORMAL` are instantiated as singletons: `OriginContext.MAINFUNCTION_CONTEXT` etc.
+When a node is newly constructed the context's `makeNewConstructionOrigin(bool)` function is called returning the appropriate `OriginInfo` object.
+
+When redexes are attached (when `expr.attr` is evaluated the result gets a redex pointing to the context of the access) it is by calling `OriginContext.attrAccessCopy(Node)` (if the value is a known-to-be-tracked nonterminal) or `OriginContext.attrAccessCopyPoly(Object)` (if the value is of a parametric type and has been monomorphized to `Object`.)
+This copies the node (using it's `.copy(newRedex, newRules)`) and returns the new copy that has a `originAndRedexOriginInfo` that got it's origin and origin notes from the old origin and it's redex and redex notes from the passed context.
+Similarly when a node if produced by `new` the result of `.undecorate()` has `.duplicate` called on it which performs a deep copy where the new nodes have `originOriginInfo(setAtNewOIT(), ...)` pointing back to the node they were copied form.
+Lastly when a node is used as a forward `.duplicateForForwarding` is called on it to mark that, returning a shallow copy with a `originOriginInfo(setAtForwardingOIT(), ...)` pointing to the node with the 'real' origin info (this is kind of an ugly hack, but was preferable to introducing a new and unique pair of `origin(AndRedex)AndForward` OIs.)
+`.duplicate`, `.duplicateForForwarding` and `.copy` are specialized per-nonterminal, and a default implementation in `Node` simply ignores the request and does not do the copy (warnings can be uncommented there to see if this is happening - it won't affect correctness but will waste time.)
+
+When control flow passes into java-land and then back into silver (i.e. when the raw treemap code invokes a java operation that calls back into silver using a `SilverComparator`) a context is needed.
+Since there isn't a (good) way to indicate to the comparator where in silver it was called (we could attach the context when it was constructed, but this is the creation site of the tree not the invocation site of the comparison) it just gets a garbage context: `OriginContext.FFI_CONTEXT` which turns into a `otherOriginInfo(setFromFFIOIT(), ...)` if it constructs nodes.
+
+The last special case is the main function, which is called with `OriginContext.MAINFUNCTION_CONTEXT` by the runtime entry code.
+
+
+### Limitations and contracts
+
+ - Code shouldn't assume that the `origin` is correctly set even on `tracked` nonterminals. It might not be in the case of bugs (although there aren't any currently known) or incorrect native code (either in `foreign` blocks or in a native extension (we have those, right?))
+ - `OriginInfo` can't be `tracked` (otherwise it's impossible to construct them without infinite regress)
+ - `OriginInfo` productions are "sacred" (name and shape are compiler-assumed) and can't be changed without compiler and runtime support
+ - `OriginInfoType` productions are "sacred" (name and shape are compiler-assumed) and can't be changed without compiler and runtime support
+ - `OriginInfoType` productions are instantiated as singletons inside the runtime and don't have OI (same issue as above)
+ - `List` isn't tracked and would need some special support from the runtime and compiler to be tracked. This would probably have disastrous performance implications if we changed it.
+ - Some types are directly mentioned in the silver compiler as `nonterminalType`s and need to have a compiler-decided `tracked`ness. This `tracked`ness is alterable but requires compiler changes. Such types (and their current `tracked`ness) are as follows:
+   - `core:Location` - no
+   - `core:OriginNote` - no (see above)
+   - `core:Either` - no
+   - `core:reflect:AST` - yes
+   - `core:List` - no (see above)
+   - `silver:rewrite:Strategy` - no
+   - `core:Maybe` - no
+   - `core:ParseResult` - no
+   - `silver:langutil:Message` - yes
+   - `ide:IdeProperty` - no
+   - `core:IOVal` - no
+ - Foreign types can't be `tracked`, and some FFI interfaces don't preserve origins information (see [above](#imlementation-runtime-and-ffi))
 
 
 ## Example
