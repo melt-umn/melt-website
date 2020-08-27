@@ -140,19 +140,26 @@ That seems like it would be preferable, but the way `import` works means that th
 In the situation that a production is imported (and used) without the nonterminal being imported (e.g. `import silver:langutil only err`) we can have knowledge of the production without the nonterminal to which it belongs.
 Since whenever we construct or manipulate a nonterminal we need to know it's `tracked`ness this meant that the `tracked`ness had to go in the `nonterminalType`.
 
+`tracked` nonterminals extend `TrackedNode` which in turn extend `Node`.
+Non`tracked` nonterminals still directly extend `Node`.
+`Node` should be used to represent an untracked node or a node of unknown trackedness.
+The only case where it's possible to have to attach OI to a unknown-trackedness node is attaching a redex, which is done with a runtime `instanceof` check.
 The `OriginInfo` for a node is treated as a hidden child and evaluated strictly.
-It is held in the `NOriginInfo origin` field of `Node` and may be `null` if the node instance belongs to a nonterminal type that isn't `tracked`.
+It is held in the `NOriginInfo origin` field of `TrackedNode`.
+It shouldn't be `null`, but it's possible if FFI produced a bad origin or if there is a bug.
 These `OriginInfo`s are normal silver production instances.
 They need to be un`tracked` to make it actually possible to construct them without infinite regress.
 All productions of `OriginInfoType` are instantiated at startup as singletons and held in `OriginsUtil`.
 The stdlib accessors for origins are Java FFI functions that call out to helpers on `OriginsUtil`.
 
-During runtime the origin context exists as a `common.originContext` object.
+During runtime the origin context exists as a `common.OriginContext` object.
 These are analogous to all the stuff added to the left side of the turnstile in the evaluation semantics for the AG-with-origins in the paper.
 These objects are immutable (since they get captured into closures and `DecoratedNode`s).
 They hold information similar-to but different-than `OriginInfo` nonterminal instances, and generate `OriginInfo` nonterminal instances.
 They are handed around as an additional parameter to function calls and baked into `Lazy`s/`Thunk`s as captured variables.
 They are tacked onto `DecoratedNode`s as something of an ugly hack.
+`FunctionNode`s extend `Node` not `TrackedNode`, since they never escape the invocation.
+They are constructed and decorated with `TopNode` in order to provide an environment for evaluation of locals though, so when they are decorated the `DecoratedNode` gets the `originCtx` passed into the function invocation.
 
 Depending on the context of the code being emitted we try to avoid passing them around/constructing them when not needed.
 In expressions in rules that are defined in a block on a production we always know the left hand side and can statically determine the notes that apply, so we construct the `OriginContext` only at the sites where we need to produce an `OriginInfo`.
@@ -176,7 +183,7 @@ The `lhs` and `notes` fields are meaningless unless `variety == NORMAL`.
 All `variety`s except `NORMAL` are instantiated as singletons: `OriginContext.MAINFUNCTION_CONTEXT` etc.
 When a node is newly constructed the context's `makeNewConstructionOrigin(bool)` function is called returning the appropriate `OriginInfo` object.
 
-When redexes are attached (when `expr.attr` is evaluated the result gets a redex pointing to the context of the access) it is by calling `OriginContext.attrAccessCopy(Node)` (if the value is a known-to-be-tracked nonterminal) or `OriginContext.attrAccessCopyPoly(Object)` (if the value is of a parametric type and has been monomorphized to `Object`.)
+When redexes are attached (when `expr.attr` is evaluated the result gets a redex pointing to the context of the access) it is by calling `OriginContext.attrAccessCopy(TrackedNode)` (if the value is a known-to-be-tracked nonterminal) or `OriginContext.attrAccessCopyPoly(Object)` (if the value is of a parametric type and has been monomorphized to `Object` - this is a noop if it is not actually a `TrackedNode` at runtime.)
 This copies the node (using it's `.copy(newRedex, newRules)`) and returns the new copy that has a `originAndRedexOriginInfo` that got it's origin and origin notes from the old origin and it's redex and redex notes from the passed context.
 Similarly when a node if produced by `new` the result of `.undecorate()` has `.duplicate` called on it which performs a deep copy where the new nodes have `originOriginInfo(setAtNewOIT(), ...)` pointing back to the node they were copied form.
 Lastly when a node is used as a forward `.duplicateForForwarding` is called on it to mark that, returning a shallow copy with a `originOriginInfo(setAtForwardingOIT(), ...)` pointing to the node with the 'real' origin info (this is kind of an ugly hack, but was preferable to introducing a new and unique pair of `origin(AndRedex)AndForward` OIs.)
