@@ -11,10 +11,10 @@ GEMDIR=vendor/globalgem
 BUNDLEDIR=vendor/bundle
 
 if [ ! -e vendor ]; then
-  if [ "$USER" = "jenkins" ]; then
+  if [ "$(whoami)" = "jenkins" ]; then
     mkdir vendor
   elif [[ "$(hostname -f)" = *.cs.umn.edu ]]; then
-    LOCALCACHE="/export/scratch/$USER-jekyll-cache"
+    LOCALCACHE="/export/scratch/$(whoami)-jekyll-cache"
     echo "Creating your local cache: $LOCALCACHE"
     mkdir "$LOCALCACHE"
     ln -s "$LOCALCACHE" vendor
