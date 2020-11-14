@@ -25,8 +25,7 @@ Functions and production have types that look similar to their signatures, but w
 the names removed:
 
 ```
-Function ( <Type> ::= <Type> ...)
-Production ( <Type> ::= <Type> ...)
+(<Type> ::= <Type> ...)
 ```
 
 > _**Example:**_ The following function signature:
@@ -36,7 +35,7 @@ String ::= lst::String index::Integer
 ```
 > has type
 ```
-Function(String ::= String Integer)
+(String ::= String Integer)
 ```
 
 
@@ -53,7 +52,7 @@ See [Lists](/silver/lib/list/) for more information on lists.
 > _**Example:**_ The map function would have the following signature:
 ```
 function map
-[b] ::= Function(b ::= a) [a]
+[b] ::= (b ::= a) [a]
 ```
 
 

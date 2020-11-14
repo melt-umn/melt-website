@@ -1,3 +1,4 @@
+
 ---
 layout: sv_wiki
 title: Modular determinism 
@@ -63,7 +64,7 @@ Using ```--clean``` is not always necessary, but not using it can result in unde
 
    ##### Potential solutions:  
 
-   1. Don't run a determinism test on this grammar. This should eventually change to be some sort of warning, indicating that the grammar passes but that the test is inneffective. 
+   1. Don't run a determinism test on this grammar. This should eventually change to be some sort of warning, indicating that the grammar passes but that the test is ineffective. 
 
    2. If this is intentional, move these productions to a grammar that also has a production with a marking terminal at the front. If this is unintentional (there are productions with a marking terminal, but they're binary operators, for example) then the grammar needs to be changed to move the marking terminal to the front of a production.
 

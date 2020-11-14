@@ -53,7 +53,7 @@ Attributes that may have their value influenced by aspects are called collection
 synthesized attribute errors :: [Message] with ++;
 ```
 
-This operator must be either `++` (for lists or strings), `||`, `&&`, or any user-defined function of type `Function(a ::= a a)`.
+This operator must be either `++` (for lists or strings), `||`, `&&`, or any user-defined function of type `(a ::= a a)`.
 In practice, this is almost always list append.
 See [collection attributes](/silver/concepts/collections/).
 
