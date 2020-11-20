@@ -181,4 +181,4 @@ More convenient syntax for congruence traversals is also provided: `traverse add
 An example implementation of the lambda calculus using term rewriting can be found [here](https://github.com/melt-umn/lambda-calculus/blob/develop/grammars/edu.umn.cs.melt.lambdacalc/term_rewriting/Eval.sv).
 
 # Further reading
-More information on reflection, term rewriting, and its applications in Silver can be found in our COLA paper [Reflection of Terms in Attribute Grammars: Design and Applications]().
+More information on reflection, term rewriting, and its applications in Silver can be found in our COLA paper [Reflection of Terms in Attribute Grammars: Design and Applications](https://www-users.cs.umn.edu/~evw/pubs/kramer21cola).

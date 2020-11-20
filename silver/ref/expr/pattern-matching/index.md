@@ -45,6 +45,27 @@ end
 ```
 > produces a string value based on the value of _`val`_.
 
+## Guards
+
+Pattern guards allow one to write more specific patterns that involve expressions.  Guards can either be Boolean conditions or patterns.  For example,
+
+```
+case val of
+| just(x) when x > 0 -> x
+| _ -> 42
+end
+```
+is an example of a Boolean guard, where the first pattern will only match when the expression `x > 0` evaluates to `true`.
+
+An example of a pattern guard is
+```
+case name of
+| just(n) when lookupBy(stringEq, n, top.env) matches just(ty) -> ty
+| _ -> errorType()
+end
+```
+Here the first pattern only matches when the value of the expression `lookupBy(...)` matches the pattern `just(ty)`.
+
 ## TODO
 
 This page needs expanding and many of the old notes are now out of date.
@@ -53,5 +74,4 @@ This page needs expanding and many of the old notes are now out of date.
   * Decoration
   * Noting the types that can be matched on (int,string,list, any nonterminal type) and the syntax
   * mention GADTs?
-  * Compilation behavior (left-right, rather that top-bottom, maybe note this as known bug)
 

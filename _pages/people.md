@@ -11,7 +11,11 @@ We are:
 * Lucas Kramer, Ph.D. student
 * Travis Carlson, Ph.D. student
 * Dawn Michaelson, Ph.D. student
-* Nathan Ringo, undergraduate student
+* Allie Hanson, Ph.D. student
+* Nathan Ringo, M.S. student
+* Ian Kariniemi, M.S. student
+* Louis Goessling, undergraduate student
+* Aaron Councilman, undergraduate student
 
 Ph.D. graduates:
 
