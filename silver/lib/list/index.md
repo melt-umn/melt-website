@@ -77,7 +77,7 @@ Unfortunately, no other operator really seems appropriate for any of these cases
 > Applies the function _`f`_ to each element of the list _`l`_, and returns the resulting list.
 ```
 function map
-[b] ::= f::Function(b ::= a)  l::[a]
+[b] ::= f::(b ::= a)  l::[a]
 ```
 
 > _**Example:**_
@@ -91,7 +91,7 @@ map(null, [[],[1],[]])
 > Starting with the initial value _`i`_, the function _`f`_ is applied to the current intermediate value and the next element of the list, and the last intermediate value is returned as the result.  If the list is empty, the initial value is also the result.
 ```
 function foldr
-b ::= f::Function(b ::= a b)  i::b  l::[a]
+b ::= f::(b ::= a b)  i::b  l::[a]
 ```
 
 > _**Example:**_
@@ -105,7 +105,7 @@ foldr(stringConcat, "He", ["llo", ", ", "World!"])
 > The function _`f`_ is applied to each element list _`lst`_, and the element is included in the final list only if the function returns true. The order of elements is preserved.
 ```
 function filter
-[a] ::= f::Function(Boolean ::= a) lst::[a]
+[a] ::= f::(Boolean ::= a) lst::[a]
 ```
 
 > _**Example:**_
@@ -124,7 +124,7 @@ silverFiles = filter(isSilverFile, directoryContents);
 > Returns true if an only if the element _`elem`_ is in the list _`lst`_, as determined by the equality function _`eq`_.
 ```
 function containsBy
-Boolean ::= eq::Function(Boolean ::= a a)  elem::a  lst::[a]
+Boolean ::= eq::(Boolean ::= a a)  elem::a  lst::[a]
 ```
 
 > _**Example:**_
@@ -157,7 +157,7 @@ function drop
 ```
 ```
 function dropWhile
-[a] ::= f::Function(Boolean::=a) lst::[a]
+[a] ::= f::(Boolean::=a) lst::[a]
 ```
 
 > _**Example:**_
@@ -176,7 +176,7 @@ function take
 ```
 ```
 function takeWhile
-[a] ::= f::Function(Boolean::=a) lst::[a]
+[a] ::= f::(Boolean::=a) lst::[a]
 ```
 
 > _**Example:**_
@@ -204,7 +204,7 @@ head(reverse(lst)) == last(lst)
 > Sorts the list according to the comparison function _`lte`_.
 ```
 function sortBy
-[a] ::= lte::Function(Boolean ::= a a) lst::[a]
+[a] ::= lte::(Boolean ::= a a) lst::[a]
 ```
 
 > _**Note:**_

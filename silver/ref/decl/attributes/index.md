@@ -53,9 +53,19 @@ Attributes that may have their value influenced by aspects are called collection
 synthesized attribute errors :: [Message] with ++;
 ```
 
-This operator must be either `++` (for lists or strings), `||`, `&&`, or any user-defined function of type `Function(a ::= a a)`.
+This operator must be either `++` (for lists or strings), `||`, `&&`, or any user-defined function of type `(a ::= a a)`.
 In practice, this is almost always list append.
 See [collection attributes](/silver/concepts/collections/).
+
+## Automatically propagated attributes
+
+Some repetitive idioms exist in synthesized attribute specifications that we would like to avoid writting boilerplate for by hand.
+These attributes fall into various common patterns ("functor", "monoid", etc.)
+
+A set of extensions to Silver allows for such attributes to be specially declared, and a new statement `propagate attr1, attr2, ...;` to
+be used to specify on a production or nonterminal that equations for the attributes should be automatically generated.
+
+See [automatic attributes](/silver/concepts/automatic-attributes/).
 
 ## Convenience extensions
 
