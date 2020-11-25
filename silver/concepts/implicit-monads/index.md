@@ -56,6 +56,11 @@ We do not need to write the failure cases, only the success cases, resulting in 
 ```
 Our rewriting will translate this into an equation equivalent to the original equation from above, which always gives a result, success or failure.
 
+The implementation described in this page is based on our SLE paper [Monadification of attribute grammars](https://doi.org/10.1145/3426425.3426941).
+
+We have started to make use of monadification in our software (such as in [this pull request](https://github.com/melt-umn/ableC/pull/176#issuecomment-731640092)).
+We plan to continue to use it to reduce boilerplate.
+
 
 ## Monads
 
