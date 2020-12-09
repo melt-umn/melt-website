@@ -207,7 +207,7 @@ The last special case is the main function, which is called with `OriginContext.
    - `core:Location` - no
    - `core:OriginNote` - no (see above)
    - `core:Either` - no
-   - `core:reflect:AST` - yes
+   - `core:reflect:*` - yes
    - `core:List` - no (see above)
    - `silver:rewrite:Strategy` - no
    - `core:Maybe` - no
@@ -216,6 +216,8 @@ The last special case is the main function, which is called with `OriginContext.
    - `ide:IdeProperty` - no
    - `core:IOVal` - no
  - Foreign types can't be `tracked`, and some FFI interfaces don't preserve origins information (see [above](#imlementation-runtime-and-ffi))
+
+ When `--no-origins` is used it does not alter whether or not the type is considered tracked in the compiler, it just disables codegen for origins. For types that are contractually tracked and need to be constructed from runtime code (only `core:reflect:*` at this time), they should be added to `translation/java/core/origins.sv:getTypesWithRuntimeContractualConstructor` to have it generate a `constructTakingOrigin` static method that forwards to the normal constructor with or without the origin argument depending on if `--no-origins` is used.
 
 
 ## Example
