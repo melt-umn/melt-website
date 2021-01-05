@@ -7,19 +7,19 @@ melt.setProperties(dummyNeedsToBeAtLeastOne: true)
 melt.trynode('melt-website') {
   stage("Setup") {
     checkout scm
-    sh "_scripts/ready-environment.sh"
+    sh "setup-build-env"
   }
   stage("Generate") {
-    sh "_scripts/build-silver-docs.sh"
+    // sh "_scripts/build-silver-docs.sh"
   }
   stage("Build") {
-    sh "_scripts/build-jekyll-site.sh"
+    sh "_scripts/build-site"
   }
-  if (env.BRANCH_NAME == 'master') {
-    stage("Deploy") {
-      sh "_scripts/deploy-site.sh"
-    }
-    // Once "deployed" a cron script will spot changes and copy to real site
-  }
+  // if (env.BRANCH_NAME == 'master') {
+  //   stage("Deploy") {
+  //     sh "_scripts/deploy-site.sh"
+  //   }
+  //   // Once "deployed" a cron script will spot changes and copy to real site
+  // }
 }
 

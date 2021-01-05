@@ -1,0 +1,9 @@
+---
+more:
+  - name: News
+    ref: "/posts"
+    icon: "notification"
+  - name: "Github"
+    ref: "https://github.com/melt-umn"
+    external: true
+    icon: "github"
