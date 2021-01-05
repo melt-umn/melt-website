@@ -49,6 +49,9 @@ Less common:
 
       If you want to see the generated flow-types and dependencies, then add the `--dump-flow-graph` flag.
 
+  * `--mwda`
+    * Perform the modular well-definedness analysis and report any violations as errors (rather than warnings).
+
       More information on the modular well-definedness analysis can be found [here](/silver/concepts/modular-well-definedness/).
 
   * `-G` _path_
