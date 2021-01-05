@@ -7,13 +7,13 @@ melt.setProperties(dummyNeedsToBeAtLeastOne: true)
 melt.trynode('melt-website') {
   stage("Setup") {
     checkout scm
-    sh "setup-build-env"
+    sh "./setup-build-env"
   }
   stage("Generate") {
     // sh "_scripts/build-silver-docs.sh"
   }
   stage("Build") {
-    sh "_scripts/build-site"
+    sh "./build-site"
   }
   // if (env.BRANCH_NAME == 'master') {
   //   stage("Deploy") {
