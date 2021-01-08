@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 set -exuo pipefail
 rm hugo 2>/dev/null
 curl -L https://github.com/gohugoio/hugo/releases/download/v0.80.0/hugo_0.80.0_Linux-64bit.tar.gz | tar xz hugo
