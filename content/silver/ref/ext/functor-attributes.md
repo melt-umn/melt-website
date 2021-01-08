@@ -23,7 +23,7 @@ functor attrbutes, such as generating the host tree produced after forwarding, o
 
 ## Syntax
 Currently, the only support for functor attributes is in the form of a propagate production statment, written as
-```propagage foo, bar, baz```
+```propagate foo, bar, baz```
 This simply generates the equations for the enclosing production.  The generated equations simply call the
 constructor for the enclosing production, with the result of accessing the attribute on each child as the
 parameters.  If the attribute does not occur on a child, or a child is not an undecorated nonterminal, then the
