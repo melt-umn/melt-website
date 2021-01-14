@@ -1,0 +1,7 @@
+#!/bin/bash
+set -exuo pipefail
+rm hugo 2>/dev/null ||true
+curl -L https://github.com/gohugoio/hugo/releases/download/v0.80.0/hugo_0.80.0_Linux-64bit.tar.gz | tar xz hugo
+rm -rf themes/hugo-geekdoc 2>/dev/null ||true
+mkdir -p themes/hugo-geekdoc/
+curl -L https://github.com/thegeeklab/hugo-geekdoc/releases/latest/download/hugo-geekdoc.tar.gz | tar -xz -C themes/hugo-geekdoc/ --strip-components=1

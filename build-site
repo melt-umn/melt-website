@@ -1,0 +1,3 @@
+#!/bin/bash
+set -exuo pipefail
+./hugo --gc
