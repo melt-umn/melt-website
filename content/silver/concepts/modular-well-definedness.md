@@ -7,10 +7,10 @@ weight: 700
 
 ## Running the analysis
 
-Run silver using the `--clean` and `--warn-all` flags.
+Run silver using the `--clean` and `--mwda` flags.
 
 ```
-silver --clean --warn-all my:project:grammar
+silver --clean --mwda my:project:grammar
 ```
 
 Note that `--clean` is not, strictly speaking, necessary, but the build system does not currently dirty enough grammars by default, and you may unexpectedly miss warnings from grammars it decides do not need to be re-analyzed.

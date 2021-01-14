@@ -48,6 +48,9 @@ Less common:
 
       More information on the modular well-definedness analysis can be found [here](/silver/concepts/modular-well-definedness/).
 
+  * `--mwda`
+    * Perform the modular well-definedness analysis and report any violations as errors (rather than warnings).
+
   * `-G` _path_
     * Specifies where to store Silver-generated temporary files.  This overrides the value found in `SILVER_GEN`. (And the default is in the `generated` directory where Silver is installed.)
 
