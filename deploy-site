@@ -7,6 +7,8 @@ TO=/export/scratch/melt-jenkins/custom-website-dump
 
 mkdir -p "$TO"
 
+cp cron-install-site "$FROM/"
+
 ### Let's do the copy:
 
 # slashes are meaningful
