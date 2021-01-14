@@ -1,4 +1,4 @@
-baseURL = "http://example.org/"
+baseURL = "http://melt.cs.umn.edu/"
 languageCode = "en-us"
 title = "Minnesota Extensible Language Tools Group"
 theme = "hugo-geekdoc"
