@@ -30,7 +30,7 @@ newgrp cs-melt << EOF
 EOF
 
 # Don't leave our script in the website
-rm $WEBSITE/cron-install-site
+rm $WEBSITE/cron-install-site.sh
 
 echo "Success"
 date
