@@ -181,6 +181,4 @@ This will generate propagating aspect productions for all but the listed product
 
 We generally do not wish to propagate on forwarding productions as doing so would often be interfering, and the host language does not know about all forwarding productions anyway.  However if one does in fact wish to propagate on forwarding productions as well, they can simply add explicit propagate statements for each of these productions.
 
-In some cases some non-forwarding propagate statements may not be exported by the definition of the nonterminal, such as with closed nonterminals or optioned grammars.  In these cases explicit propagate statements are required as well, however these will be caught by the flow analysis.
-
-Note that global propagate is only permitted when the attribute should be propagated for all productions; attempting to also write an explicit equation will result in a duplicate equation flow error.  This is not a particularly severe restriction, as requiring that a global propagate means that the attribute is indeed propagated for all productions will result in more maintainable specifications.
+In some cases some non-forwarding propagate statements may not be exported by the definition of the nonterminal, such as with closed nonterminals or optioned grammars.  In these cases explicit propagate statements are required as well, however the omission of these will be caught by the flow analysis.
