@@ -18,12 +18,11 @@ The tuple type is written `(a, b, ..., n)`, where `a`, `b`, and `n` are all type
 ```
 local attribute priorityError :: (Integer, String, String);
 priorityError = (3, "Too high!", "Too low!");
-
 ```
 
 ## Selector Syntax
 
-Individual tuple elements may be accessed using the tuple selector syntax, which utilizes a dot "`.`" operator following the tuple expression and the position of the element we would like to access expressed as an integer constant. Tuple access indices begin at `1`.
+Individual tuple elements may be accessed using the tuple selector syntax, which utilizes a dot "`.`" operator following the tuple expression and the position of the element we would like to access expressed as an integer constant. Tuple access indices begin at 1.
 
 > _**Example:**_
 ```
@@ -92,6 +91,6 @@ The tuple selector syntax described above is thus recommended for tuples with mo
 
 ## See also
 
-Up to date information about this data structure can be found in _`extension/tuple`_.
-
 * [Pair](/silver/lib/pair/)
+
+Up to date information about this data structure can be found in _`extension/tuple`_.
