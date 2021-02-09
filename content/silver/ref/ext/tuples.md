@@ -18,7 +18,10 @@ The tuple type is written `(a, b, ..., n)`, where `a`, `b`, and `n` are all type
 ```
 local attribute priorityError :: (Integer, String, String);
 priorityError = (3, "Too high!", "Too low!");
+
 ```
+
+## Selector Syntax
 
 Individual tuple elements may be accessed using the tuple selector syntax, which utilizes a dot "`.`" operator following the tuple expression and the position of the element we would like to access expressed as an integer constant. Tuple access indices begin at `1`.
 
@@ -30,6 +33,22 @@ else
   if priorityError.1 < 1
     then print("Error: " ++ priorityError.3, ioin)
   else print("No serious errors.", ioin);
+```
+
+Here, `priorityError.1 = 3`, `priorityError.2 = "Too high!"`, and `priorityError.3 = "Too low!"`.
+
+## Pattern Matching
+
+Silver supports pattern matching on tuples. Wildcards "`_`" may be used in place of the tuple itself, or in place of individual tuple elements, as follows:
+
+> _**Example:**_
+```
+case tuple of
+  | ("zero", "zero", "one") -> "one"
+  | (_, "one", "zero") -> "I arbitrarily don't like this input"
+  | ("zero", "one", "one") -> "three"
+  | _ -> "I don't like this either." 
+  end;
 ```
 
 ## Indutive Implementation
