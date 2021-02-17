@@ -67,7 +67,7 @@ Specified in roughly similar manner as [EBNF form](https://en.wikipedia.org/wiki
 `attr-name` refers to the name of the attribute you want to define aspect productions for. 
 
 `match-rule-list` is a list of patterns constructed much like pattern matching. The subpatterns beneath them can be any valid pattern for pattern matching, but the pattern at the top should
-only be `varPattern` (where you just provide a name),`Production Patterns`, or `Wildcard` patterns only.
+only be variable patterns (where you just provide a name),production patterns, or wildcard patterns only.
 
 The term `'using' ('<-' | ':=' | '=')` means that you can provide the operator that is used to assign to your new attribute. It defaults to `=` if you don't provide this.
 
@@ -87,7 +87,7 @@ aspect bagList on top::BazExpr using <- of
 end;
 ```
 
-You can also define your custom name using a `varPattern`, like so (the last pattern demonstrates this), but only for the default production will this one work.
+You can also define your custom name using a name pattern, like so (the last pattern demonstrates this), but only for the default production will this one work.
 
 ```
 synthesized attribute gAttribute :: String occurs on BazExpr;
@@ -99,7 +99,7 @@ end;
 ```
 
 
-Note that `varPatterns` and `Wildcard` patterns can shadow other ones, as in the following, where the `bazInit3(_,val)` aspect production is not made, because the `coolName` varPattern shadows it.
+Note that variable patterns and wildcard patterns can shadow other ones, as in the following, where the `bazInit3(_,val)` aspect production is not made, because the `coolName` varPattern shadows it.
 
 ```
 aspect bagList2 on top::BazExpr using <- of
