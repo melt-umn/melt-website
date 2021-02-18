@@ -3,16 +3,10 @@
 set -eu
 
 FROM=public
-TO=/export/scratch/melt-jenkins/custom-website-dump
+TO=/export/scratch/melt-jenkins/custom-stable-dump
 
 mkdir -p "$TO"
-
-cp cron-install-site.sh "$FROM/"
-
 ### Let's do the copy:
 
-# slashes are meaningful
-rsync -a --delete "$FROM/" "$TO/"
-# -a is archive mode: rlptgoD (recurse, links, perms, time, group, owner, devices)
-# --delete  Remove files from destination not in src
-
+cd $FROM
+tar cvzf $TO/website.tar *
