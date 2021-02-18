@@ -40,4 +40,4 @@ else print("No serious errors.", ioin)
 Up to date information about this data structure can be found in _`core/Pair.sv`_.
 
 > _**Note:**_
-> In future versions of Silver, we may add syntactic sugar for pairs as _`(3, "OH NO!")`_. And similarly for types.  However, this is not present yet.
+> Pairs can be expressed using tuple syntax as _`(3, "OH NO!")`_. See the [tuples](/silver/ref/ext/tuples/) page for more information.

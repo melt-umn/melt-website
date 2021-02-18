@@ -3,7 +3,7 @@ title: Reflection & Term Rewriting
 weight: 600
 ---
 
-# Reflection
+## Reflection
 Some operations that we would like to perform on trees in Silver are not possible to express nicely with attributes, or doing so requires a large amount of boilerplate - for example, serializing and de-serializing terms, or performing template-style substitutions.  The reflection library provides a solution to this, by providing an alternative uniform representation of terms with the `AST` nonterminal, defined as
 ```
 nonterminal AST;
@@ -52,7 +52,9 @@ top::NamedAST ::= n::String v::AST
 
 Two functions allow arbitrary values to be transformed to and from the `AST` representation:
 * `reflect :: (AST ::= a)` converts an arbitrary value to an `AST`; values that have no such representation (e.g. functions and `Decorated` references) are wrapped in `anyAST`.
-* `reify :: (Either<String a> ::= AST)` converts an `AST` back to either an ordinary value or an error message if the `AST` is not well-sorted.
+* `reify :: runtimeTypeable a => (Either<String a> ::= AST)` converts an `AST` back to either an ordinary value or an error message if the `AST` is not well-sorted.
+
+The `runtimeTypeable a` type constraint on `reify` requires that `a` has a runtime type representation; all builtin types have such a representation, but foreign types do not, and type variables do not unless they in turn are explicitly constrained to be `runtimeTypeable`.
 
 Users may define new attributes on the `AST` type, rather than on all concerned nonterminals.  For example a generalized pretty-printing operation is defined (see [`silver:langutil:reflect`](https://github.com/melt-umn/silver/blob/develop/grammars/silver/langutil/reflect/AST.sv)) as
 ```
@@ -92,13 +94,13 @@ top::ASTs ::=
 
 Other applications of rewriting are
 * [In Silver's serialization library](https://github.com/melt-umn/silver/tree/develop/grammars/silver/reflect), used internally by the Silver compiler for handling interface files;
-* [In Silver's meta-translation library](https://github.com/melt-umn/silver/blob/develop/grammars/silver/metatranslation/Translation.sv), used to support extensions to Silver that provide object-language concrete syntax for tree construction;
+* [In Silver's meta-translation library](https://github.com/melt-umn/silver/blob/develop/grammars/silver/compiler/metatranslation/Translation.sv), used to support extensions to Silver that provide object-language concrete syntax for tree construction;
 * [A demo staged language interpreter](https://github.com/melt-umn/meta-ocaml-lite)
 
-# Term rewriting
+## Term rewriting
 Another significant use of reflection is in implementing a Stratego-style strategic term rewriting library/language extension that works on undecorated terms.  Note that Silver also supports a mechanism for rewriting on decorated trees ([strategy attributes](../strategy-attributes)) that is generally preferred, as it is more efficient and better integrated with other features such as attributes and forwarding; however there are still some situations in which term rewriting is preferred, such as [in implementing template instantiation](https://github.com/melt-umn/ableC-templating).
 
-## Core library
+### Core library
 Strategies are represented by the `Strategy` type, and are built by a number of combinators.  The main ones are as follows:
 * `id :: (Strategy ::= )`
 * `fail :: (Strategy ::= )`
@@ -133,7 +135,9 @@ global elimPlusZero::Strategy =
       id()));
 ```
 
-## Extension features
+The function `rewriteWith :: runtimeTypeable a => (Maybe<a> ::= Strategy a)` provided by the library applies a strategy to a term.
+
+### Extension features
 The above system is implemented purely as a Silver library using the reflection mechanism; however defining strategies in this way is highly inconvenient.  For this reason a corresponding collection of language extensions to Silver provide new syntax that makes using the library less painful.
 
 One such extension provides new infix operators `<*` and `<+` for sequence and left-choice, respectively.  These are used in implementing a number of generally-useful utility strategies in the library; some of the more commonly used ones include
@@ -164,8 +168,6 @@ top::Strategy ::= s::Strategy
 * `allTopDown` applies its operand to each subterm starting from the root term, stopping in a subterm when its argument succeeds.  This is roughly analagous to a [functor transformation](../automatic-attributes).
 * `innermost` repeatedly applies its operand to the innermost, leftmost expression in a term, only moving up the tree once all sub-terms are fully reduced.
 
-A new expression `rewriteWith(strategy, term)` provided by the extension applies a strategy to a term.
-
 New syntax is provided for defining rewrite rules, based on the existing syntax for [pattern matching](../../ref/expr/pattern-matching).  Using this the `x + 0 -> x` strategy could be specified as
 ```
 global elimPlusZero::Strategy = bottomUp(try(
@@ -179,5 +181,5 @@ More convenient syntax for congruence traversals is also provided: `traverse add
 
 An example implementation of the lambda calculus using term rewriting can be found [here](https://github.com/melt-umn/lambda-calculus/blob/develop/grammars/edu.umn.cs.melt.lambdacalc/term_rewriting/Eval.sv).
 
-# Further reading
+## Further reading
 More information on reflection, term rewriting, and its applications in Silver can be found in our COLA paper [Reflection of Terms in Attribute Grammars: Design and Applications](https://www-users.cs.umn.edu/~evw/pubs/kramer21cola).
