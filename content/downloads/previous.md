@@ -4,7 +4,7 @@ title: Previous Releases
 
 ## Silver
 
-* [silver-latest](/downloads/silver-dev/silver-latest.tar.gz)
+* [silver-latest](/downloads/silver-dev/jars/silver-latest.tar.gz)
 * [silver-0.3.6](/downloads/silver-0.3.6.tar.gz)
 * [silver-0.3.5](/downloads/silver-0.3.5.tar.gz)
 * [silver-0.3.4](/downloads/silver-0.3.4.tar.gz)

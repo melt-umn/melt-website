@@ -5,6 +5,7 @@ title: Downloads
 ## Silver
 
 * [Silver GitHub repository](https://github.com/melt-umn/silver)
+* [silver-latest](/downloads/silver-dev/jars/silver-latest.tar.gz)
 * [Silver 0.4](/downloads/silver-0.4.0.tar.gz)
 
 ## Copper
@@ -28,5 +29,5 @@ Version 0.1
 
 ## Previous releases
 
-* [Previous software releases](previous-releases.html)
+* [Previous software releases](/downloads/previous/)
 
