@@ -9,4 +9,5 @@ mkdir -p "$TO"
 ### Let's do the copy:
 
 cd $FROM
-tar cvzf $TO/website.tar.gz *
+tar cvzf website.tar.gz *
+mv website.tar.gz $TO/
