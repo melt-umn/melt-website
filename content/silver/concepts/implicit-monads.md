@@ -1,6 +1,6 @@
 ---
 title: Implicit Monads
-weight: 200
+weight: 600
 ---
 
 {{< toc >}}
