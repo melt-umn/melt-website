@@ -157,7 +157,8 @@ Kinds may be thought of as the "types of types": i.e. a value has a type, and a 
 All the types described above (e.g. `Maybe Integer` or `[Integer]`) have kind `*` -- that is, they are the type of a value.
 However, higher-kinded types also exist.  `Maybe` by itself has kind `* -> *`;
 it can be thought of as a type-level "function" that expects to be applied to one type argument.
-`[]` is the unapplied list type constructor, also of kind `* -> *`.
+`[]` is the unapplied list type constructor, also of kind `* -> *`;
+`[Integer]` is just syntactic sugar for `[]<Integer>`.
 
 Type variables may refer to higher-kinded types.
 > _**Example:**_ _`f`_ has kind `* -> *`:
@@ -181,9 +182,22 @@ class Functor (f :: * -> *) {
 }
 ```
 
-Nonterminal types may be parameterized by higher-kinded type variables,
+Types of kind `* -> * -> *` and higher can be partially applied; all unsupplied type arguments must be provided as `_`.
+> _**Example:**_ `Either` has kind `* -> * -> *`, so `Either<String _>` has kind `* -> *`; `Either<String>` is illegal.
+
+Partially-applied type arguments must be filled in from left to right;
+it is illegal for a supplied type argument to follow one that is not supplied.
+> _**Example:**_ `Either<_ String>` is illegal.
+
+Function types can also be partially applied by writing a function signature type containing `_` in place of parameter/result types.
+When a higher-kinded function type is applied, the parameter types are filled in before the return type.
+> _**Example:**_ `(_ ::= Integer _)` has kind `* -> * -> *`;  writing
+> `(_ ::= Integer _)<String Boolean>` is equivalent to `(Boolean ::= Integer String)`.
+
+Nonterminal types may also be parameterized by higher-kinded type variables,
 resulting in kinds such as `(* -> *) -> *`.
-> _**Example:**_ This is somewhat uncommon, but one place where this is useful is for something known as _monad transformers_,
+> _**Example:**_ Higher-kinded type parameters are somewhat uncommon,
+> but one place where they are useful is for something known as _monad transformers_,
 > such as `MaybeT`:
 ```
 synthesized attribute run<a> :: a;
@@ -198,26 +212,14 @@ top::MaybeT<m a> ::= x::m<Maybe<a>>
 
 ```
 > Here `MaybeT` has kind `(* -> *) -> * -> *`: it transforms a type of kind `* -> *` into a type of kind `* -> *`,
-> e.g. `MaybeT<[] Integer>` has kind `*`.
+> e.g. `MaybeT<[] _>` is a type of kind `* -> *`, and `Maybe<[] Integer>` has kind `*`.
 
-Types of kind `* -> * -> *` and higher can be partially applied; all unsupplied type arguments must be provided as `_`.
-> _**Example:**_ `Either` has kind `* -> * -> *`, so `Either<String _>` has kind `* -> *`; `Either<String>` is illegal.
-
-Partially-applied type arguments must be filled in from left to right;
-it is illegal for a supplied type argument to follow one that is not supplied.
-> _**Example:**_ `Either<_ String>` is illegal.
-
-Function types can also be partially applied by writing a function signature type containing `_` in place of parameter/result types.
-When a higher-kinded function type is applied, the parameter types are filled in before the return type.
-> _**Example:**_ `(_ ::= Integer _)` has kind `* -> * -> *`;  writing
-> `(_ ::= Integer _)<String Boolean>` is equivalent to `(Boolean ::= Integer String)`.
-
-Type aliases can also have kinds other than `*`
+Type aliases can also have kinds other than `*`.
 > _**Example:**_
 ```
 type Optional = Maybe;
 ```
-> declares `Optional` as an alias of kind `* -> *` for `Maybe`
+> declares `Optional` as a type alias of kind `* -> *` for `Maybe`
 
 Note that type aliases that are declared with type parameters aren't really types --
 they must be fully applied everywhere that they are referenced.
