@@ -92,13 +92,13 @@ top::ASTs ::=
 ...
 ```
 
-Other applications of rewriting are
+Other applications of reflection are
 * [In Silver's serialization library](https://github.com/melt-umn/silver/tree/develop/grammars/silver/reflect), used internally by the Silver compiler for handling interface files;
 * [In Silver's meta-translation library](https://github.com/melt-umn/silver/blob/develop/grammars/silver/compiler/metatranslation/Translation.sv), used to support extensions to Silver that provide object-language concrete syntax for tree construction;
 * [A demo staged language interpreter](https://github.com/melt-umn/meta-ocaml-lite)
 
 ## Term rewriting
-Another significant use of reflection is in implementing a Stratego-style strategic term rewriting library/language extension that works on undecorated terms.  Note that Silver also supports a mechanism for rewriting on decorated trees ([strategy attributes](../strategy-attributes)) that is generally preferred, as it is more efficient and better integrated with other features such as attributes and forwarding; however there are still some situations in which term rewriting is preferred, such as [in implementing template instantiation](https://github.com/melt-umn/ableC-templating).
+Another significant use of reflection is in implementing a Stratego-style strategic term rewriting library/language extension that works on undecorated terms.  Note that Silver also supports a mechanism for rewriting on decorated trees ([strategy attributes](/silver/concepts/strategy-attributes)) that is generally preferred, as it is more efficient and better integrated with other features such as attributes and forwarding; however there are still some situations in which undecorated term rewriting is needed, such as [in implementing template instantiation](https://github.com/melt-umn/ableC-templating).
 
 ### Core library
 Strategies are represented by the `Strategy` type, and are built by a number of combinators.  The main ones are as follows:
@@ -165,10 +165,10 @@ top::Strategy ::= s::Strategy
 * `try` applies its operand strategy, and always succeeds.
 * `repeat` applies its operand repeatedly until failure, and succeeds with the last successful result.
 * `bottomUp` applies its operand to each subterm starting from the leaf terms, and fails if any applications fail.
-* `allTopDown` applies its operand to each subterm starting from the root term, stopping in a subterm when its argument succeeds.  This is roughly analagous to a [functor transformation](../automatic-attributes).
+* `allTopDown` applies its operand to each subterm starting from the root term, stopping in a subterm when its argument succeeds.  This is roughly analagous to a [functor transformation](/silver/concepts/automatic-attributes).
 * `innermost` repeatedly applies its operand to the innermost, leftmost expression in a term, only moving up the tree once all sub-terms are fully reduced.
 
-New syntax is provided for defining rewrite rules, based on the existing syntax for [pattern matching](../../ref/expr/pattern-matching).  Using this the `x + 0 -> x` strategy could be specified as
+New syntax is provided for defining rewrite rules, based on the existing syntax for [pattern matching](/silver/ref/expr/pattern-matching).  Using this the `x + 0 -> x` strategy could be specified as
 ```
 global elimPlusZero::Strategy = bottomUp(try(
   rule on Expr of

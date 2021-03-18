@@ -3,9 +3,9 @@ title: Strategy attributes
 weight: 600
 ---
 
-[Functor attributes](../strategy-attributes) and [forwarding](../../ref/stmt/forwarding) both allow for limited notions of rewriting on a tree.  However, neither approach is well suited to expressing complex (and potentially iterative) transformations, as such as performing optimizations.
+[Functor attributes](/silver/concepts/automatic-attributes) and [forwarding](/silver/ref/stmt/forwarding) both allow for limited notions of rewriting on a tree.  However, neither approach is well suited to expressing complex (and potentially iterative) transformations, as such as performing optimizations.
 
-[Reflection-based term rewriting](../reflection) in Silver allows for Stratego-style strategic term rewriting on undecorated terms.  While this is desirable in some cases, term rewriting does not allow the use of inherited attributes in rules, or respect forwarding.
+[Reflection-based term rewriting](/silver/concepts/reflection) in Silver allows for Stratego-style strategic term rewriting on undecorated terms.  While this is desirable in some cases, term rewriting does not allow the use of inherited attributes in rules, or respect forwarding.
 
 *Tree rewriting* using *strategy attributes* provides an alternative.  In this approach rewrite rules and strategies are compiled into higher order attributes and equations, thus performing rewriting on decorated trees rather than undecorated terms.  This allows for natural integration with other attribute grammar features, such as accessing attributes on the tree being rewritten in rewrite rule expressions.
 
