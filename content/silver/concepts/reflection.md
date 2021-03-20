@@ -165,7 +165,7 @@ top::Strategy ::= s::Strategy
 * `try` applies its operand strategy, and always succeeds.
 * `repeat` applies its operand repeatedly until failure, and succeeds with the last successful result.
 * `bottomUp` applies its operand to each subterm starting from the leaf terms, and fails if any applications fail.
-* `allTopDown` applies its operand to each subterm starting from the root term, stopping in a subterm when its argument succeeds.  This is roughly analagous to a [functor transformation](/silver/concepts/automatic-attributes).
+* `allTopDown` applies its operand to each subterm starting from the root term, stopping in a subterm when its argument succeeds.  This is roughly analogous to a [functor transformation](/silver/concepts/automatic-attributes).
 * `innermost` repeatedly applies its operand to the innermost, leftmost expression in a term, only moving up the tree once all sub-terms are fully reduced.
 
 New syntax is provided for defining rewrite rules, based on the existing syntax for [pattern matching](/silver/ref/expr/pattern-matching).  Using this the `x + 0 -> x` strategy could be specified as

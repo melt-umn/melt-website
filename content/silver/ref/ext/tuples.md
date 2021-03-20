@@ -50,7 +50,7 @@ case tuple of
   end;
 ```
 
-## Indutive Implementation
+## Inductive Implementation
 
 Tuples are implemented inductively using the construction of ordered pairs, e.g. we forward a tuple `(a, b, c, d)` to `Pair<a Pair<b Pair<c d>>>`. This means that the following examples are equivalent:
 
@@ -78,7 +78,7 @@ pair(pair("I'm", "not"), pair(pair("a", 5), "tuple"))
 
 ### Consequences for element access
 
-Because tuples forward to nested pairs, elements may also be accessed using the `fst` and `snd` attributes that occur on `Pair`, although this syntax may be less immediately intutive. For example, the `priorityError` tuple defined above would have the following element accesses via `fst` and `snd` attributes:
+Because tuples forward to nested pairs, elements may also be accessed using the `fst` and `snd` attributes that occur on `Pair`, although this syntax may be less immediately intuitive. For example, the `priorityError` tuple defined above would have the following element accesses via `fst` and `snd` attributes:
 
 ```
 priorityError.fst = 3

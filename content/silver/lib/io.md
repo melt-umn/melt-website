@@ -139,7 +139,7 @@ IOVal<Integer> ::= s::String i::IO
 ```
 
 Executes a shell command.  Specifically executes _`bash -c`_. (And thus, may not
-work on windows, unless executing under cygwin or similar.)
+work on windows, unless executing under Cygwin or similar.)
 
 Avoid using this if possible.  If you need to perform some ordinary form of IO Silver does not yet support, please request it on the \texttt{melt-help@cs.umn.edu} mailing list.
 
@@ -193,7 +193,7 @@ Checks if a file is an ordinary file.  (non-directory, non-special)
 ```
 isFile("/etc/passwd", ioin)
 ```
-> returns is true (wrapped). On linux, anyway.
+> returns is true (wrapped). On Linux, anyway.
 
 ### isDirectory
 ```

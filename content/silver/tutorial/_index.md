@@ -7,7 +7,7 @@ geekdocCollapseSection: true
 This tutorial provides a brief introduction to Silver, an extensible attribute grammar system, and
 Copper,  a parser and context-aware scanner generator.  These tools have been developed by the
 MELT  group  at  the  University  of  Minnesota  for  specifying  extensible  languages  and  generating
-compilers and translators from these language specifcations.
+compilers and translators from these language specifications.
 
 This tutorial is intended for readers with no experience in building language processors such as
 compilers, source-to-source translators, or interpreters.  It assumes that readers are familiar with

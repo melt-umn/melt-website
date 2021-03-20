@@ -3,7 +3,7 @@ title: Bibliography
 weight: 1000
 ---
 
-This page is currently a draft! The bibtex may need massaging, and pdf links need to be filled in!
+This page is currently a draft! The bibtex may need massaging, and PDF links need to be filled in!
 
 Here are some important publications directly related to Silver:
 

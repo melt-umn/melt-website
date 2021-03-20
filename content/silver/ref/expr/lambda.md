@@ -28,6 +28,6 @@ They can be applied, partially applied, passed as parameters, etc.
 
 Any values in scope are implicitly captured and can be used, even if the resulting function is passed outside the scope of the captured values.
 
-There is really no interaction or special behavior with nonterminals/flow analysys/etc.
+There is really no interaction or special behavior with nonterminals/flow analysis/etc.
 Decorated and undecorated nonterminals can be captured and used as parameters as expected.
 
