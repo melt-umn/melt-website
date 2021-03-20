@@ -51,7 +51,7 @@ Other grammars can be exported by a grammar using the `exports` statement:
 exports more:modules;
 ```
 
-No modifiers are possible on an `exports` statement.  There is no equivalent `export` statment.
+No modifiers are possible on an `exports` statement.  There is no equivalent `export` statement.
 
 ### Conditional exports
 
