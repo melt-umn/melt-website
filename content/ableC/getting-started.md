@@ -31,7 +31,7 @@ bundle, also available [here](https://github.com/melt-umn/ableC-sample-projects/
 Each of the sample projects briefly described below contains a README file with
 more information.
 
-* The "down on the farm" project makes use of the sqlite, conditional tables,
+* The "down on the farm" project makes use of the SQLite, conditional tables,
 algebraic data types, and regular expression extensions to analyze a database of
 farm animals to compute income and expenses.
 

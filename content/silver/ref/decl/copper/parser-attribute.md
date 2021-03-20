@@ -19,7 +19,7 @@ parser attribute seenTypes :: [String] action {
 
 Parser attributes are mutable values available in imperative action blocks during parsing. They are declared as:
 
-`parser` `attribute` _indentifier_ `::` _type_ `action` `{` _initialization action_ `}`;
+`parser` `attribute` _identifier_ `::` _type_ `action` `{` _initialization action_ `}`;
 
 The initialization block is run before the parser begins. Different parser attributes will initialize in no specific order.
 

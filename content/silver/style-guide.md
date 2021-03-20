@@ -38,7 +38,7 @@ For this part in particular, read the Scala guide.  The short version:
   * Have a newline after the identifier
   * Put the whole signature on a line or lines to itself
   * Give the opening/closing brace its own line.
-  * Consider using double spaces between rhs elements in the signature, and no spaces between identifier and type.
+  * Consider using double spaces between RHS elements in the signature, and no spaces between identifier and type.
 
 ```
 function trippend

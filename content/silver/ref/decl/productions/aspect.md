@@ -33,7 +33,7 @@ top::Expr ::= _ _
 ## Semantics
 
 Aspects permit attribute equations to be written separately from wherever the production was originally defined.
-They do this by mimicing the declaration of the original production, able to choose its own names for children and LHS, reducing coupling to the original declaration.
+They do this by mimicking the declaration of the original production, able to choose its own names for children and LHS, reducing coupling to the original declaration.
 
 Redefinition of attributes is not permitted.
 Aspects are only meant to give equations for newly declared attribute occurrences.

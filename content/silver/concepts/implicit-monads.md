@@ -72,7 +72,7 @@ Until this changes, we are limited to the specific monads which Silver explicitl
 These monads (functors over type `T`) are:
 * `Maybe<T>`, with constructors `just(T)` for success and `nothing` for failure
 * `Either<S T>`, with constructors `right(T)` for success and `left(S)` for failure with an error code of type `S`
-* `[T]`, a list representing nondeteriministic computations
+* `[T]`, a list representing nondeterministic computations
 * `State<S T>`, representing a computation resulting in type `T` carrying a computational state of type `S`
 * `IOMonad<T>`, threading input and output through a computation resulting in type `T`
 

@@ -68,7 +68,7 @@ mkdir -p JARS-BAK
 cp jars/* JARS-BAK/
 ```
 
-before beginning something that might threaten Silver's ability to build itself. You could always re-./fetch-jars, but this is faster. And that directory name is already in .hgignore. :)
+before beginning something that might threaten Silver's ability to build itself. You could always re-./fetch-jars, but this is faster. And that directory name is already in .gitignore. :)
 
 ## MELT folks on UMN CS machines
 

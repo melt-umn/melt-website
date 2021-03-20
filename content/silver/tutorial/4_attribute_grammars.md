@@ -9,7 +9,7 @@ Attribute grammars are formal specifications that can be used to define the sema
 of some sort, to a program, expression, or phrase, in a language. Attribute grammars define
 semantics by specifying that certain semantic attributes (values) will be associated with certain
 nodes in the syntax tree and providing equations that specify how the values of these attributes are
-to be computed. Don Knuth’s 1968 paper "Semantics of Context Free Languages" [3] introduced
+to be computed. Don Knuth's 1968 paper "Semantics of Context Free Languages" [3] introduced
 attribute grammars and is essential reading.
 
 Attributes may be associated with nonterminals in the grammar. Attributes that are used to
@@ -223,16 +223,16 @@ convention and not part of the Silver specification language.
 
 ## Inherited attributes
 
-Inherited attributes are those that propogate information down the syntax tree. These attributes
+Inherited attributes are those that propagate information down the syntax tree. These attributes
 are declared using the `inherited` modifier instead of the `synthesized` one, but are otherwise the
 same.
 
 The file `BetterPP.sv` in the tutorial grammar `dc` defines a synthesized attribute `bpp` that
-unparses the abstract syntax tree without the use of unneccessary parenthesis. For example, for an
+unparses the abstract syntax tree without the use of unnecessary parenthesis. For example, for an
 expression such as `1 + 2 * 3`, the value of the `pp` attribute on the root of the abstract syntax tree
 is `(1 + (2 * 3))` while the value of `bpp` on the same node is `1 + 2 * 3`. To compute `bpp`, a couple
 of inherited attributes are defined. One is `enclosingOpPrecedence` which indicates the operator
-predence of the operator on the enclosing parent of the node. Another, `leftOrRight`, indicates if
+precedence of the operator on the enclosing parent of the node. Another, `leftOrRight`, indicates if
 an expression appears as the left or right child of the enclosing binary operator node. These values
 are used to determine if the `bpp` of the node should be wrapped in parenthesis or not.
 
@@ -272,7 +272,7 @@ the inherited attributes of the children of the production.
 This phase of most language translators has no real analog in our simple
 expression language `dc`. A simple way to generate code is by using a string synthesized attribute
 to compute the translation. As an exercise the reader could define a synthesized attribute than
-generates the postfix version of the expresssion. In most programming languages other attributes
+generates the postfix version of the expression. In most programming languages other attributes
 that decorate the tree, such as the type of expressions, are used in performing the translation.
 
 Code optimization is an important phase in compilation and can be performed using attribute

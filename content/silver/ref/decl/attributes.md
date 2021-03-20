@@ -57,7 +57,7 @@ See [collection attributes](/silver/concepts/collections/).
 
 ## Automatically propagated attributes
 
-Some repetitive idioms exist in synthesized attribute specifications that we would like to avoid writting boilerplate for by hand.
+Some repetitive idioms exist in synthesized attribute specifications that we would like to avoid writing boilerplate for by hand.
 These attributes fall into various common patterns ("functor", "monoid", etc.)
 
 A set of extensions to Silver allows for such attributes to be specially declared, and a new statement `propagate attr1, attr2, ...;` to

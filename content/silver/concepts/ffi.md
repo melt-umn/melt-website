@@ -58,7 +58,7 @@ function append
 
 This is semi-intentionally not documented here. The Silver runtime is subject to change, always.
 
-However, there are good examples of doing so. Primarily, our silver-eclipse runtime calls from Java code into Silver, and there are examples in the silver runtime of doing so as well. Reading over the entirety of the `common` and `common.javainterop` packages in the SilverRuntime will be helpful. These should have some JavaDoc as well (if there is insufficient api documentation somewhere in there, please file a bug!)
+However, there are good examples of doing so. Primarily, our silver-eclipse runtime calls from Java code into Silver, and there are examples in the silver runtime of doing so as well. Reading over the entirety of the `common` and `common.javainterop` packages in the SilverRuntime will be helpful. These should have some JavaDoc as well (if there is insufficient API documentation somewhere in there, please file a bug!)
 
 General notes, however:
 

@@ -11,7 +11,7 @@ Silver contains many other constructs that are useful in defining extensible and
 languages such as forwarding [5], reference attributes [2], collection attributes [1], parametric poly-
 morphism, and import and export statements for the modular specification and composition of
 languages. These are described in more detail in the upcoming guide "Building extensible and
-domain-specific langauges using Silver and Copper." The guide assumes no knowledge of Silver
+domain-specific languages using Silver and Copper." The guide assumes no knowledge of Silver
 or Copper, but does assume the basic understanding of scanners, parsers, and attribute grammars
 that this tutorial aims to provide.
 

@@ -46,7 +46,7 @@ You need to tell the project which grammar to build. You can do this either by e
 
 This is not YET practical due to slow performance.
 
-First, builds use a ton of memory, and this does not seem to be adequately released between builds. Partly this might be due to a lack of garbage collection (some explicit calls might help), but there may be some possibility of a memory leak as well. Use of the Silver plugin on the Silver source *seems* manageable if you're willing to devote 2GB of ram to Eclipse, but that's assuming there is no memory leak, so continued use is not managable. This needs investigating.
+First, builds use a ton of memory, and this does not seem to be adequately released between builds. Partly this might be due to a lack of garbage collection (some explicit calls might help), but there may be some possibility of a memory leak as well. Use of the Silver plugin on the Silver source *seems* manageable if you're willing to devote 2GB of ram to Eclipse, but that's assuming there is no memory leak, so continued use is not manageable. This needs investigating.
 
 Mostly, the problem is that the 'build' step passes no information to the 'postbuild' step, so every save causes two builds to occur: one to mark errors in the IDE, one to generate Java files.
 

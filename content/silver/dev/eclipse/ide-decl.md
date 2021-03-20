@@ -83,7 +83,7 @@ lexer class KEYWORD font = font_keyword;
 
 ## Build process
 
-  1. Run `silver --clean the:grammar`. e.g. `silver --clean silver:composed:idetest`. Right now, `--clean` is necessary for an ide build.
+  1. Run `silver --clean the:grammar`. e.g. `silver --clean silver:composed:idetest`. Right now, `--clean` is necessary for an IDE build.
   1. This will produce, where silver generates code `generated/ide/the.grammar/` (e.g. `generated/ide/silver.composed.idetest`). You should run `mvn package` under `updatesite/` This will build the plugin, and create a repo on disk eclipse can install from.
   1. Start eclipse, do software install and paste in the FULL PATH to `generated/ide/the.grammar/updatesite/target/repository`. It should find your software.
 

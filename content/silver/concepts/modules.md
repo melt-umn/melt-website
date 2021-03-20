@@ -108,7 +108,7 @@ imports silver:langutil:pp with implode as ppimplode;
 import core with append as listappend, List as BuiltinList;
 ```
 
-Renaming is also supported in conjuction with `only` and `hiding`:
+Renaming is also supported in conjunction with `only` and `hiding`:
 
 ```
 import core only Maybe, orElse with orElse as maybeOrElse;
