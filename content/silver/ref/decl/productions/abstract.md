@@ -1,6 +1,6 @@
 ---
 title: Abstract production declarations
-weight: 200
+weight: 50
 ---
 
 {{< toc >}}

@@ -16,7 +16,7 @@ e::Expr ::= e1::Expr  '+'  e2::Expr
 
 ## Syntax
 
-A 'concrete' production is identical to an [abstract production](/silver/ref/decl/productions/), except that it will be sent to the parser generator, if a parser is declared that includes the grammar the production is defined in.
+A 'concrete' production is identical to an [abstract production](/silver/ref/decl/productions/abstract), except that it will be sent to the parser generator, if a parser is declared that includes the grammar the production is defined in.
 
 Concrete productions also have restrictions on the types of children, only terminals and nonterminals are allowed (and those nonterminals must have concrete productions).
 
