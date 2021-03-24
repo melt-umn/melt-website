@@ -78,9 +78,9 @@ This should make obtaining location much easier.
 ## Feature wishlist
 
 Annotations are a feature that's not fully matured, and so sometimes there are missing features we'd like.
-[A wishlist is tracked on github](https://github.com/melt-umn/silver/issues/32).
+[A wishlist is tracked on GitHub](https://github.com/melt-umn/silver/issues/32).
 
-## Acknowledgements
+## Acknowledgments
 
 The idea for annotations was shamelessly stolen from [Rascal](https://www.rascal-mpl.org/). Yoink!
 

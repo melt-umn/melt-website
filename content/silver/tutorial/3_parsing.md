@@ -134,7 +134,7 @@ type `Root_c`.
 3. `parseErrors` which is a string containing a description of the parse errors if the parse was
 not successful.
 
-The file `Main.sv` also makes use of Silverâ€™s rather esoteric input/output constructs defined in
+The file `Main.sv` also makes use of Silver's€™s rather esoteric input/output constructs defined in
 the [Running Silver Section](../5_running_silver/).
 
 

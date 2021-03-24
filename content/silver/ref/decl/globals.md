@@ -28,7 +28,7 @@ Types are required.
 ### What's the point?
 
 Globals are just for declaring constant values of some use.
-Since Silver is a pure language, globals don't have the same use as in some other languages (where they might be mutable, for isntance.)
+Since Silver is a pure language, globals don't have the same use as in some other languages (where they might be mutable, for instance.)
 
 Most commonly global values declarations used as part of testing code, declaring values that will get operated on in tests several different ways.
 

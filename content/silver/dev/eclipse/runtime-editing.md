@@ -35,7 +35,7 @@ At this point, everything should be built and working in Eclipse.
 
 | silver | A main function for invoking the Silver compiler. (To set up the class path to find the runtime jars, etc.) |
 |:-------|:------------------------------------------------------------------------------------------------------------|
-| common.rawlib | Adaptors for some Java datastructures, so they can be called easier from Silver.                            |
+| common.rawlib | Adapters for some Java data structures, so they can be called easier from Silver.                            |
 | common.javainterop | Some utilities for working with Silver stuffs from Java code. (currently iterator for lists and comparator from silver functions.) |
 | common.exceptions | Contains the Silver-specific exceptions. See the JavaDocs for the class for details.                        |
 | common | See below                                                                                                   |
@@ -67,7 +67,7 @@ Related attribute-grammary stuffs:
   * **NodeFactory** - Represents the type of Silver functions.
   * **AttributeSection** - A kind **NodeFactory** for accessing an attribute (the (.pp) syntax)
   * **PartialNodeFactory** - Implements partial application.
-  * **TopNode** - A decorated node that errors if it's ever used. Maybe slightly nicer than using 'null' whenever a 'context' is required, but nonexistant.
+  * **TopNode** - A decorated node that errors if it's ever used. Maybe slightly nicer than using 'null' whenever a 'context' is required, but nonexistent.
 
 **Util** is just a random collection of static methods, often used by the 'core' library.
 

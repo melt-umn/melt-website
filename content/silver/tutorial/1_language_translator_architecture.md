@@ -26,7 +26,7 @@ that perform the major tasks in program translation.
 ## Scanning
 
 The scanning process reads in program text and recognizes its lexical syntax.  This
-process involve recognizing lexical constructs such as keywords (*e.g.* `while` or `if`), identifer names
+process involve recognizing lexical constructs such as keywords (*e.g.* `while` or `if`), identifier names
 (*e.g.* `x`, `area`, etc.), literal values (*e.g.* `1`, `3.14`, `"Hello"`, etc.)  and generating a sequence of
 *tokens*,one for each such recognized construct.  This sequence of tokens is passed on to the parsing phase
 that follows.  The scanner is also responsible for recognizing and removing comments from the input

@@ -34,7 +34,7 @@ For example, the example parser at the top of this page has type `(ParseResult<R
 The two parameters are (1) the string to actually parse and (2) the name of the "file" being parsed.
 (e.g. This will appear in the `filename` attribute of terminal locations.)
 
-`ParseResult` is a standary library data structure indicating either `parseSuccess` or `parseFailure` along with the errors or syntax tree result.
+`ParseResult` is a standard library data structure indicating either `parseSuccess` or `parseFailure` along with the errors or syntax tree result.
 
 All concrete syntax in the listed grammars in included in what's sent to the parser generator, including those grammars they export.
 Silver will use [Copper](/copper/) to construct an [LALR(1) parser](/silver/concepts/lr-parsing/).

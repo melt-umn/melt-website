@@ -33,7 +33,7 @@ OK. Here is the whirlwind porting guide:
 
 Another way to think about adding origin tracking if all you care about is replacing `location` is that the entire codebase gets an implicit `Location` argument that is handled by the runtime.
 This implicit argument always refers to the location of the nonterminal the rule currently executing was defined on (so in functions it refers to the location of the nonterminal that invoked the function.)
-The implicit location argument can be altered then by way of `attachNote logicalLocationNote(loc);` which sets the implicit location argument to `loc` for the entire block of declerations it occurs on, or `attachNote logicalLocationNote(loc) on {expr}` which sets it only for the context of `expr`.
+The implicit location argument can be altered then by way of `attachNote logicalLocationNote(loc);` which sets the implicit location argument to `loc` for the entire block of declarations it occurs on, or `attachNote logicalLocationNote(loc) on {expr}` which sets it only for the context of `expr`.
 
 **It's more complicated + powerful + cooler than that, but that mental model will totally work for ridding yourself of `location` :)**
 
@@ -116,7 +116,7 @@ In Silver the notion from the paper is extended and generalized to provide origi
 Each different set of possible origin info is described by a production of `OriginInfo`.
 Each production has a `OriginInfoType` member that describes where and how the node was created and contains a list of `OriginNotes` attached from code that influenced the creation of the node.
  - `originOriginInfo(typ, origin, originNotes, newlyConstructed)` contains a link to the node that this node originates from (`origin`), notes (`originNotes`) and the interesting flag (`newlyConstructed`). The possible values for `typ` (`OriginInfoType`s) are:
-   - `setAtConstructionOIT()` indicating the node was constructed normally. The origin link is to the node on which the rule that constructed this node occured.
+   - `setAtConstructionOIT()` indicating the node was constructed normally. The origin link is to the node on which the rule that constructed this node occurred.
    - `setAtNewOIT()` indicating the node was constructed in a call to `new` to undecorate something. The origin link is to the node that was `new`ed.
    - `setAtForwardingOIT()` indicating the node was forwarded to. The origin link is to a copy of this node from which you can find out where it was constructed.
    - `setFromReflectionOIT()` indicating the node is an `AST` created from `reflect`. The origin link is to the node that was reflected on.
@@ -165,7 +165,7 @@ In expressions that occur in functions (including lambdas) we need to take the `
 Lastly for expressions occurring in weird spots (e.g. parser actions, globals) we need to use a bogus `OriginContext`.
 `translation:java:core/Origins.sv` contains the logic for what to do each of these cases.
 Each `BlockContext` gains a `originsContextSource :: ContextOriginInfoSource` which is one of:
- - `useContextLhsAndRules()` indicating that the lhs and rules can be derives statically (i.e. this expression is only ever evaluated on a `DecoratedNode` where the undecoration is the lhs and the rules can be determined statically from the `originRules()` attribute on the `Expr`.)
+ - `useContextLhsAndRules()` indicating that the LHS and rules can be derives statically (i.e. this expression is only ever evaluated on a `DecoratedNode` where the undecoration is the LHS and the rules can be determined statically from the `originRules()` attribute on the `Expr`.)
  - `useRuntimePassedInfo` indicating the context should be retrieved from the runtime-passed java value stored in `originCtx` and swizzled through thunks and function calls etc
  - `useBogusInfo(name)` indicating the context is garbage (parser action or global) and the `name` indicates which of the special `variety`s of `OriginInfo` should be used (see below)
 
@@ -181,7 +181,7 @@ The `lhs` and `notes` fields are meaningless unless `variety == NORMAL`.
 All `variety`s except `NORMAL` are instantiated as singletons: `OriginContext.MAINFUNCTION_CONTEXT` etc.
 When a node is newly constructed the context's `makeNewConstructionOrigin(bool)` function is called returning the appropriate `OriginInfo` object.
 
-When redexes are attached (when `expr.attr` is evaluated the result gets a redex pointing to the context of the access) it is by calling `OriginContext.attrAccessCopy(TrackedNode)` (if the value is a known-to-be-tracked nonterminal) or `OriginContext.attrAccessCopyPoly(Object)` (if the value is of a parametric type and has been monomorphized to `Object` - this is a noop if it is not actually a `TrackedNode` at runtime.)
+When redexes are attached (when `expr.attr` is evaluated the result gets a redex pointing to the context of the access) it is by calling `OriginContext.attrAccessCopy(TrackedNode)` (if the value is a known-to-be-tracked nonterminal) or `OriginContext.attrAccessCopyPoly(Object)` (if the value is of a parametric type and has been monomorphized to `Object` - this is a no-op if it is not actually a `TrackedNode` at runtime.)
 This copies the node (using it's `.copy(newRedex, newRules)`) and returns the new copy that has a `originAndRedexOriginInfo` that got it's origin and origin notes from the old origin and it's redex and redex notes from the passed context.
 Similarly when a node if produced by `new` the result of `.undecorate()` has `.duplicate` called on it which performs a deep copy where the new nodes have `originOriginInfo(setAtNewOIT(), ...)` pointing back to the node they were copied form.
 Lastly when a node is used as a forward `.duplicateForForwarding` is called on it to mark that, returning a shallow copy with a `originOriginInfo(setAtForwardingOIT(), ...)` pointing to the node with the 'real' origin info (this is kind of an ugly hack, but was preferable to introducing a new and unique pair of `origin(AndRedex)AndForward` OIs.)
@@ -285,7 +285,7 @@ The tree `negate(const(1))` expands to `sub(const(0), const(1))` and then simpli
 ![](../negate_1.svg)
 
 We can see that the simplified copy of `const(1)` originates from the expanded copy which originates from the original copy.
-Since the transformations for `const` are noops (the shape of the rule `top.expd = const(i)` trivially mirrors the shape of the production `production const top::Expr ::= i::Integer`) the expanded and simplified nodes are ovals, indicating that the rule that produced them was not 'interesting'.
+Since the transformations for `const` are no-ops (the shape of the rule `top.expd = const(i)` trivially mirrors the shape of the production `production const top::Expr ::= i::Integer`) the expanded and simplified nodes are ovals, indicating that the rule that produced them was not 'interesting'.
 We can also see that generally since the simplification for this tree are all 'boring' simplified nodes originate from the expanded nodes and are not marked interesting (are ovals).
 More interesting is the step that converted the `negate` to a `sub`.
 We can see that the `sub` node and the `const(0)` node are both marked as originating from the `negate` node - this is because they were produced by expressions in a rule that was evaluated on that node.
@@ -296,9 +296,9 @@ The tree `mul(const(1), const(2))` expands to `mul(const(1), const(2))` and then
 
 ![](../mul_1_2.svg)
 
-We can see that since the expansion step is a noop the nodes are marked uninteresting and originate simply.
+We can see that since the expansion step is a no-op the nodes are marked uninteresting and originate simply.
 The interesting change is the simplification step. The `mul(const(1), const(2))` reduces to just `const(2)` - the `mul` and `const(1)` nodes disappear and the `const(2)` is in the resulting tree in the location that the `mul` originally was.
-We can see that the resulting `const(2)` originates as expected from the `const(2)` in the expanded tree, but has an additional dotted line ot the `mul` node for it's redex.
+We can see that the resulting `const(2)` originates as expected from the `const(2)` in the expanded tree, but has an additional dotted line to the `mul` node for it's redex.
 This means that the `simp` rule on the `mul` node catalyzed the motion of the `const(2)` from it's previous position in the tree to it's new position where the `mul` node was.
 We can also see that the redex edge for the `const(2)` node in the output has the `dbgNote` from the simplification case of the match attached to it (as a member of the `redexNotes` - but not `originNotes` - list.)
 This is because the node was effective over the expression that moved the `const(2)` to it's resulting position (`r.simp` in the `simp` rule for `mul`) but not the expression that constructed it (`top.simp = const(i)` in `const`.)
@@ -307,10 +307,10 @@ This is because the node was effective over the expression that moved the `const
 
 ## Compiler Flags
 
-There are a few compiler flags that can be passed to `silver` to control origins tracking behaviour:
- - `--force-origins` causes the compiler to treat every nonterminal as if it was marked `tracked`. This is very useful for playing around with origins in an existing codebase and for figuring out what you need to track (build wiht `--force-origins`; look at origins trace; track everything included.) This can be pretty (+15% to +30% vs no origins) slow.
+There are a few compiler flags that can be passed to `silver` to control origins tracking behavior:
+ - `--force-origins` causes the compiler to treat every nonterminal as if it was marked `tracked`. This is very useful for playing around with origins in an existing codebase and for figuring out what you need to track (build with `--force-origins`; look at origins trace; track everything included.) This can be pretty (+15% to +30% vs no origins) slow.
  - `--no-origins` does the opposite, causing the compiler to completely disable origins, including the context swizzling machinery in generated code. This is recommended if you aren't going to use them since it will remove almost all overhead in generated code.
- - `--no-redex` causes the code to not track redexes. Redexes are a neat feature and a cool part of the theory but not neccesary if all you want to do is avoid having to use a `location` annotation for error messages. This can be somewhat (5%) faster than leaving redexes on if you aren't using them.
+ - `--no-redex` causes the code to not track redexes. Redexes are a neat feature and a cool part of the theory but not necessary if all you want to do is avoid having to use a `location` annotation for error messages. This can be somewhat (5%) faster than leaving redexes on if you aren't using them.
  - `--tracing-origins` causes the code to attach notes indicating the control flow path that lead to constructing each node to it's origins. This can be a neat debugging feature, but is also quite slow.
 
 

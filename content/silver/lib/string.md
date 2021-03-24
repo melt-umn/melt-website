@@ -158,5 +158,5 @@ Boolean ::= str::String
 (All of these functions have the same signature.)
 
 Tests if all characters of a string are digits
-(or letters, whitespace, uppercase, or lowercase.)  May in practice be unicode
+(or letters, whitespace, uppercase, or lowercase.)  May in practice be Unicode
 aware, but this behavior hasn't quite been finalized yet.

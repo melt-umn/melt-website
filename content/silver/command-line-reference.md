@@ -13,7 +13,7 @@ If you have followed the [installation guide](/silver/install-guide/), you have 
 silver grammar:to:build
 ```
 
-If you do not want to use the `silver` script, or are on a platform other than linux, you will likely want to write a build script that looks something like the following:
+If you do not want to use the `silver` script, or are on a platform other than Linux, you will likely want to write a build script that looks something like the following:
 
 ```
 java -Xss4M -Xmx1800M -jar $SILVER_HOME/jars/silver.composed.Default.jar  grammar:to:build
@@ -76,7 +76,7 @@ they are documented here nonetheless.
 For the `silver` script, there is also
 
   * `SVJVM_FLAGS`
-    * Used to adjust flags sent to the jvm. For example, `SVJVM_FLAGS="-Xss8M -Xmx4000M -verbose:gc" silver grammar:to:build` (bash syntax) will give the jvm more memory and print some information every time a garbage collection happens.
+    * Used to adjust flags sent to the JVM. For example, `SVJVM_FLAGS="-Xss8M -Xmx4000M -verbose:gc" silver grammar:to:build` (bash syntax) will give the JVM more memory and print some information every time a garbage collection happens.
 
 ## The `main` function
 
@@ -96,13 +96,13 @@ Simple examples of main functions can be found in every tutorial distributed wit
 
 ## Using Nailgun
 
-Under `support/nailgun` there are two scripts for running `nailgun` on Silver jars. These require `nailgun` of course and the scripts specifically require `bash`. (On lab machines the scripts will find a nailgun build under our project space automatically. On Ubuntu machines, you can `apt-get install nailgun` and it'll work.)
+Under `support/nailgun` there are two scripts for running `nailgun` on Silver jars. These require `nailgun` of course and the scripts specifically require `bash`. (On lab machines the scripts will find a Nailgun build under our project space automatically. On Ubuntu machines, you can `apt-get install nailgun` and it'll work.)
 
-Nailgun runs everything in one jvm, saving repeated warm-up time. For largish test suites, this is possibly huge: our ableC test suite went from 45 minutes to 2.
+Nailgun runs everything in one JVM, saving repeated warm-up time. For largish test suites, this is possibly huge: our ableC test suite went from 45 minutes to 2.
 
 To use these scripts, run `./install-sv-nailgun` in `support/nailgun`. This requires `~/bin` and bash.
 
-To use nailgun, first initialize your bash shell with **`. sv-nailgun`**. Note that's "dot space" not "./". This 'sources' the script into your bash shell, setting some environment variables and adding some functions. If it fails, there should be some sort of error message.
+To use Nailgun, first initialize your bash shell with **`. sv-nailgun`**. Note that's "dot space" not "./". This 'sources' the script into your bash shell, setting some environment variables and adding some functions. If it fails, there should be some sort of error message.
 
 Next you initialize the jar you want to run repeatedly with **`sv-serve <jarfile>`**. Unless an error appears, this should work.
 
@@ -112,4 +112,4 @@ When done, call **`sv-serve-stop`** to stop that JVM.
 
 Enjoy the speedups.
 
-**Mac OS X Bug**: you probably need Homebrew. The default `sed` command on OSX is broken somehow and this will cause errors when you run `sv-call` complaining that it can't find exactly the right class that it should be able to find. The trouble is that there's a unprintable trailing carriage return that should be stripped out, but apparently isn't. Install GNU sed instead and everything should be okay.
+**Mac OS X Bug**: you probably need Homebrew. The default `sed` command on macOS is broken somehow and this will cause errors when you run `sv-call` complaining that it can't find exactly the right class that it should be able to find. The trouble is that there's a unprintable trailing carriage return that should be stripped out, but apparently isn't. Install GNU sed instead and everything should be okay.

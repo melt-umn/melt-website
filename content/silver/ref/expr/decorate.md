@@ -41,7 +41,7 @@ decorate folder with { input = ["Hello", "world"]; }.output
 ## `new`
 
 `new` is the inverse operation of `decorate`.
-It will take an explictly decorated valued (e.g. of type `Decorated Expr`) and produce the undecorate valued (e.g. of type `Expr`).
+It will take an explicitly decorated valued (e.g. of type `Decorated Expr`) and produce the undecorate valued (e.g. of type `Expr`).
 
 The following syntax will undecorate a decorated tree:
 

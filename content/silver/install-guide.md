@@ -13,7 +13,7 @@ weight: 10.0
 apt-get install default-jdk ant git wget
 ```
 
-For OSX, using Homebrew (install a JDK separately):
+For macOS, using Homebrew (install a JDK separately):
 
 ```
 brew install coreutils ant wget

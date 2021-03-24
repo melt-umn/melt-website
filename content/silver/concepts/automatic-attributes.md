@@ -4,7 +4,7 @@ weight: 600
 ---
 
 # Overview
-Some repetitive idioms exist in AG specifications that we would like to avoid writting boilerplate for by hand.
+Some repetitive idioms exist in AG specifications that we would like to avoid writing boilerplate for by hand.
 These attributes fall into various common patterns (functor, monoid, etc.)
 As a first step, we add an extension to Silver such that in production bodies we can write
 ```

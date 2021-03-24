@@ -18,7 +18,7 @@ There are a number of consequences to this distinction:
   * Attributes can only be accessed from decorated trees.  (Some tricks may obscure this fact, see below.)
   * Undecorated trees can be decorated any number of times, potentially with different inherited attributes each time.  Each of these will produce a distinct decorated tree.
 
-## Why the disctinction?
+## Why the distinction?
 
 It comes from the two-stage form of application that attribute grammars have.
 
