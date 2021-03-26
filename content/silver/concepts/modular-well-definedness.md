@@ -78,6 +78,14 @@ This is slightly trickier.  Silver will not require that all inherited attribute
 
 Generally, the solution to these warnings is to add an equation for the inherited attribute.  However, in some cases, the real solution may be to determine why Silver believes it needs an inherited attribute that you are certain it does not. This can be somewhat tricky, as the culprit could be anywhere.  There does exist a `--dump-flow-graph` flag that produces a dot file, however this is typically too large to actually visualize.  It might be useful to grep, however.
 
+### Errors involving references
+
+Accessing an inherited attribute on a reference that doesn't have that attribute is an error - _e.g._ accessing `env` on a `Decorated Expr with {}`.  The reference type should include the attribute (`Decorated Expr with {env}`).  Similarly accessing a synthesized attribute that depends on such an inherited attribute is also an error.
+
+If the reference type involves a [polymorphic inherited](/silver/concepts/decorated-vs-undecorated/#inhset-types) (`Decorated Expr with i`), then you may need to add a minimum subset constraint to the function/production/instance (`{env} subset i`).
+
+Conversely, taking an unbounded reference of type `Decorated Expr with i` is also a problem: we are saying we can produce a reference with any set of inherited attributes, but since we don't know about all the attributes that might be demanded, we can't possibly supply all of them.  This can be solved with a maximum subset constraint that specifies what attributes are indeed available (`i subset {env, attr1, attr2}`).
+
 ## Tracking down flow problems
 
 Flow type errors have an annoying tendency to be non-local.

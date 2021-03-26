@@ -108,7 +108,8 @@ top::Foo<i> ::= ref::Decorated Expr with i
 Sometimes we don't want to require an exact set of inherited attributes, but we still want to be somewhat more specific than allowing any set.  This can be achieved using subset type constraints; these are a built-in special type constraint similar to [type class type constraints](/silver/ref/decl/typeclasses/#type-constraints), of the form `i1 subset i2`, where `i1` and `i2` have kind `InhSet`.
 
 > _**Example:**_
-> A helper function to access the `typerep` synthesized on `Expr` references might have a subset constraint, if we know that computing `typerep` always requires the `env` inherited attribute:
+> A helper function to access the `typerep` synthesized on `Expr` references might have a subset constraint, if we know that computing `typerep` always requires the `env` inherited attribute. 
+> We can use a subset constraint to establish the minimum reference set:
 ```
 function getTyperep
 {env} subset i => Type ::= e::Decorated Expr with i
@@ -119,6 +120,7 @@ function getTyperep
 
 > _**Example:**_
 > A helper function that decorates expressions with default values for any set of inherited attributes requires the resulting references to have only the known attributes:
+> We can use a subset constraint to enforce a maximum reference set:
 ```
 function getRef
 i subset {env, frame, returnType} =>
