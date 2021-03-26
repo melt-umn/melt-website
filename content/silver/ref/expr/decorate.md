@@ -26,12 +26,13 @@ decorate <i>expression</i> with { <i>inherited attribute</i> = <i>expression</i>
 
 The initial expression is expected to be undecorated.
 Each inherited attribute should occur on the type of the initial expression.
+The type of the result is a `Decorated` type with the specified inherited attributes
 
 > _**Example:**_
 ```
 decorate expr with { env = [pair("x", 1), pair("y", 2)]; }
 ```
-> will decorate an undecorated expression with an environment binding two variables.
+> will decorate an undecorated expression with an environment binding two variables, producing a value of type `Decorated Expr with {env}`.
 ```
 decorate folder with { input = ["Hello", "world"]; }.output
 ```
@@ -41,13 +42,15 @@ decorate folder with { input = ["Hello", "world"]; }.output
 ## `new`
 
 `new` is the inverse operation of `decorate`.
-It will take an explicitly decorated valued (e.g. of type `Decorated Expr`) and produce the undecorate valued (e.g. of type `Expr`).
+It will take an explicitly decorated valued (e.g. of type `Decorated Expr with {env}`) and produce the undecorate valued (e.g. of type `Expr`).
 
 The following syntax will undecorate a decorated tree:
 
 <pre>
 new(<i>expression</i>)
 </pre>
+
+`new` is actually just a foreign function, of type `(a ::= Decorated a with i)`, where `i` is a type variable of [kind `InhSet`](/silver/concepts/decorated-vs-undecorated/#inhset-types).
 
 ## Implicit coercion?
 

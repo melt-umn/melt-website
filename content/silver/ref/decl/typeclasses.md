@@ -1,5 +1,5 @@
 ---
-title: Type Classes
+title: Type class and instance declarations
 weight: 600
 ---
 

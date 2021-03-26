@@ -9,7 +9,7 @@ weight: 30
 
 Possibilities:
 
-  * Be sure you're using a reasonable JVM. `java -version` should be at least Java 1.6. We know silver does NOT work with `gcj`. Use OpenJDK or the Oracle distributions.
+  * Be sure you're using a reasonable JVM. `java -version` should be at least Java 1.8. We know silver does NOT work with `gcj`. Use OpenJDK or the Oracle distributions.
   * You have moved Silver since building that jar.  In the default build mode, Silver hard codes an absolute path to the runtime jars into generated jars. Try simply rebuilding the tutorial:
 ```
 ./silver-compile --clean
@@ -33,6 +33,6 @@ If not, please file a bug report.
 
 Unfortunately, the JVM isn't required to support tail call elimination, and Silver, being a purely functional language, can sometimes exhaust stack space.
 
-The solution is to use the `-Xss` option the JVM provides to give it more stack space.  The default script (`support/bin/silver`) uses `-Xmx2000M -Xss4M`, which is nearly always enough.
+The solution is to use the `-Xss` option the JVM provides to give it more stack space.  The default script (`support/bin/silver`) uses `-Xmx4000M -Xss20M`, which is nearly always enough.
 
 (In the past, the `-Xmx` option was usually necessary to increase heap space, too. These days, it just doesn't really hurt to leave it.)

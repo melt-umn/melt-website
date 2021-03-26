@@ -47,20 +47,20 @@ This is especially useful in host languages that might not have any forwarding p
 flowtype Expr = forward {env};
 ```
 
-Second, you can use `decorate` to specify a special "blessed set" of attributes that are expected to be present/necessary for references (`Decorated` nonterminals).
+Second, you can use `decorate` to specify a special "blessed set" of attributes as the default set of attributes that are expected to be present/necessary for references (`Decorated` nonterminals).
 Strictly speaking, this isn't necessarily a "flow type" but we just use this same syntax, and it mostly has the same meaning.
-To take a reference to a decorated tree, this set must be supplied, and when accessing from a reference, this set are the only inherited attributes presumed to be supplied.
-
 ```
 flowtype Expr = decorate {env, returnType};
 ```
+In this case writing the type `Decorated Expr` is equivalent syntactic shorthand for writing `Decorated Expr with {env, returnType}`.
+To take a reference of this type to a decorated tree, this set must be supplied, and when accessing from a reference of this type, this set are the only inherited attributes presumed to be supplied.
 
 
 Finally, there is one last special case.
 In practice, it is frequently useful to be able to set the `decorate` "flow type" and re-use that value for many synthesized attributes.
 (This is a result of the "infectious" nature of using references withing a tree.
 Once you have a production with a reference as a child, quite a lot of attributes start to have identical flow types to `decorate`.)
-To support making these easier to write and maintain, we allow `decorate` to be used in place of the name of an inherited attribute, _if an explicit flow type is already given for `decorate`.
+To support making these easier to write and maintain, we allow `decorate` to be used in place of the name of an inherited attribute, _if_ an explicit flow type is already given for `decorate`.
 This is illustrated in the example above with `isLValue`:
 
 ```

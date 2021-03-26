@@ -9,7 +9,7 @@ The distinction between decorated and undecorated types is one that some initial
 
 Attribute grammars are a way of doing computations over trees, and there are two conceptually different types of trees for each nonterminal:
 
-  * The undecorated type is a bare-bones data type that simply represents the tree itself.  This is nearly identical to how the tree might be represented as a Haskell data type, for example.
+  * The undecorated type, also referred to as a _term_, is a bare-bones data type that simply represents the tree itself.  This is nearly identical to how the tree might be represented as a Haskell data type, for example.
   * The decorated type, on the other hand, is the fully attributed tree.  Decorated trees contain not just their (now decorated) children but also the values of all synthesized and inherited attributes that occur on the corresponding nonterminal.
 
 There are a number of consequences to this distinction:
@@ -25,6 +25,8 @@ It comes from the two-stage form of application that attribute grammars have.
 Stage 1 takes a production and applies it to its children.  This yields an _undecorated_ type.
 
 Stage 2 takes an undecorated type, and applies it to a set of inherited attributes.  This yields the _decorated_ type.
+
+Note that there are actually multiple decorated types possible for a nonterminal, depending on what inherited attributes have been provided to the referenced tree.  For example we might have `Decorated Expr with {env}` or  `Decorated Expr with {env, frame, returnType}` - the type specifies that the reference has been given _at least_ these attributes.  But for convenience we let just `Decorated Expr` refer to being decorated with all known inherited attributes, as a default.  [This default can be overridden.](/silver/ref/decl/flowtypes/)
 
 ## Implicit decoration
 
@@ -75,7 +77,61 @@ e::Expr ::= l::Expr r::Expr
 ```
 > What may be initially confusing is that the declared type of child _`l`_ is the undecorated type _`Expr`_ yet this production clearly accesses the synthesized attribute _`errors`_ on that node. The reason this is allowed is that inside the curly braces we are really working with decorated trees since inherited attributes of the children may be assigned here.  And we see above that the _`env`_ attribute is being assigned to the child _`l`_. In the body of the production _`l`_ does have the type _`Decorated Expr`_. The production _`add`_ does take an undecorated _`Expr`_ as its first (and second) argument, thus the type given for _`l`_ is accurate.  The production assigns the necessary inherited attributes to its children in its body and thus, in the body, the synthesized attributes of its children can be accessed.
 
-## Examples
+## More specific reference types
+As mentioned previously, `Decorated Expr` is really just a shorthand for `Decorated Expr with {env}`, if `{env}` is the default reference set for `Expr`.  References as different sets of attributes are different types - so a `Decorated Expr with {env}` cannot be passed into a function expecting a `Decorated Expr with {env, frame}`.  Since extensions can introduce new inherited attributes, the ability to use references with a set that is different than the default is particularly useful developing extensions that use references.
+
+### `InhSet` types
+Sometimes one wishes to write a function or [type class](/silver/ref/decl/typeclasses/) instance that works over any type of reference, rather than just a particular set of inherited attributes.  An example of this can be seen in Silver's testing framework, for displaying values in failing tests:
+```
+class ShowTestValue a {
+  showTestValue :: (String ::= a);
+}
+instance ShowTestValue a {
+  showTestValue = \ x::a -> show(80, reflect(x).pp);
+}
+instance ShowTestValue a => ShowTestValue Decorated a with i {
+  showTestValue = \ x::Decorated a with i -> showTestValue(new(x));
+}
+```
+We want to show ordinary nonterminal and primitive values using [reflection](/silver/concepts/reflection/#reflection), however this cannot handle references.  Thus we have a more specific instance to undecorate any type of reference before it is printed.  `i` in `Decorated a with i` is a type variable used in place of a set of inherited attributes - in fact, inherited attribute sets are themselves types!  They are not the types of values, rather inherited attribute set types have a new [kind](/silver/concepts/types/#kinds), written `InhSet`.  
+
+> _**Example:**_
+> The `InhSet` kind can appear anywhere that non-`*` kinds are permitted, for example as a type parameter to a nonterminal:
+```
+nonterminal Foo<(i :: InhSet)>;
+production foo
+top::Foo<i> ::= ref::Decorated Expr with i
+{ ... }
+```
+
+### `subset` type constraint
+Sometimes we don't want to require an exact set of inherited attributes, but we still want to be somewhat more specific than allowing any set.  This can be achieved using subset type constraints; these are a built-in special type constraint similar to [type class type constraints](/silver/ref/decl/typeclasses/#type-constraints), of the form `i1 subset i2`, where `i1` and `i2` have kind `InhSet`.
+
+> _**Example:**_
+> A helper function to access the `typerep` synthesized on `Expr` references might have a subset constraint, if we know that computing `typerep` always requires the `env` inherited attribute:
+```
+function getTyperep
+{env} subset i => Type ::= e::Decorated Expr with i
+{
+  return e.typerep;
+}
+```
+
+> _**Example:**_
+> A helper function that decorates expressions with default values for any set of inherited attributes requires the resulting references to have only the known attributes:
+```
+function getRef
+i subset {env, frame, returnType} =>
+Decorated Expr with i ::= e::Expr
+{
+  e.env = [];
+  e.frame = defaultFrame();
+  e.returnType = nothing();
+  return e;
+}
+```
+
+## More Examples
 
 ### Higher-order (undecorated)
 
