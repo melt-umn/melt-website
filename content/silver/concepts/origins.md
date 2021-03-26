@@ -282,7 +282,7 @@ Due to implementation details the input tree is marked interesting (it is intere
 
 The tree `negate(const(1))` expands to `sub(const(0), const(1))` and then simplifies (a no-op) to `sub(const(0), const(1))`:
 
-![](../negate_1.svg)
+![](/silver/concepts/negate_1.svg)
 
 We can see that the simplified copy of `const(1)` originates from the expanded copy which originates from the original copy.
 Since the transformations for `const` are no-ops (the shape of the rule `top.expd = const(i)` trivially mirrors the shape of the production `production const top::Expr ::= i::Integer`) the expanded and simplified nodes are ovals, indicating that the rule that produced them was not 'interesting'.
@@ -294,7 +294,7 @@ The note does not appear on the origin of the `const(1)` because it was not mani
 
 The tree `mul(const(1), const(2))` expands to `mul(const(1), const(2))` and then simplifies to `const(2)`:
 
-![](../mul_1_2.svg)
+![](/silver/concepts/mul_1_2.svg)
 
 We can see that since the expansion step is a no-op the nodes are marked uninteresting and originate simply.
 The interesting change is the simplification step. The `mul(const(1), const(2))` reduces to just `const(2)` - the `mul` and `const(1)` nodes disappear and the `const(2)` is in the resulting tree in the location that the `mul` originally was.
