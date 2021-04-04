@@ -7,7 +7,7 @@ weight: 10.0
 
 ## Prerequisites
 
-[Java JDK, version 1.7](http://www.oracle.com/technetwork/java/javase/downloads/index.html), [Apache ANT](http://ant.apache.org/bindownload.cgi), Git and wget. For Ubuntu users:
+[Java JDK, version 1.7](http://www.oracle.com/technetwork/java/javase/downloads/index.html), [Apache Ant](http://ant.apache.org/bindownload.cgi), Git and wget. For Ubuntu users:
 
 ```
 apt-get install default-jdk ant git wget
