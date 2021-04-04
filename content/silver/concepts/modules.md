@@ -7,9 +7,11 @@ weight: 100
 
 ## A grammar
 
-Unlike most languages, a compilation unit in Silver is not tied to a file, but instead to a directory.  A grammar ("module") consists of the declarations and definitions found in all files with a "_`.sv`_" suffix in the directory identifying the grammar.
+Unlike most languages, a compilation unit in Silver is not tied to a file, but instead to a directory.  A grammar ("module") consists of the declarations and definitions found in all files with a "_`.sv`_" or "_`.sv.md`_" suffix in the directory identifying the grammar.
 
-For example, `a:module:name` corresponds to `a/modules/name/*.sv` in the first matching directory in the grammar search path given to the Silver compiler.
+For example, `a:module:name` corresponds to `a/modules/name/*.sv` and `a/modules/name/*.sv.md` in the first matching directory in the grammar search path given to the Silver compiler.
+
+Files ending in `.sv` are processed as described below; for more information on how `.sv.md` files are processed, see [the Literate Silver docs](../literate-silver/).
 
 The Silver files in a grammar optionally specify their grammar name as the first declaration of the file.  This practice is recommended, to avoid any potential problems with grammar search paths.
 

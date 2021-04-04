@@ -111,11 +111,11 @@ function filter
 function isSilverFile
 Boolean ::= s::String
 {
-  return endsWith(".sv", s);
+  return endsWith(".sv", s) || endsWith(".sv.md", s);
 }
 silverFiles = filter(isSilverFile, directoryContents);
 ```
-> will assign to _`silverFiles`_ only those files that end in _`.sv`_.
+> will assign to _`silverFiles`_ only those files that end in _`.sv`_ or _`.sv.md`_.
 
 ### containsBy
 
