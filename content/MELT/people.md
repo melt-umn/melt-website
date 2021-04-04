@@ -10,7 +10,7 @@ We are:
 * Travis Carlson, Ph.D. student
 * Dawn Michaelson, Ph.D. student
 * Allie Hanson, Ph.D. student
-* Nathan Ringo, M.S. student
+* [Nathan Ringo](https://remexre.xyz/), M.S. student
 * Ian Kariniemi, M.S. student
 * Louis Goessling, undergraduate student
 * Aaron Councilman, undergraduate student
