@@ -10,7 +10,7 @@ melt.trynode('melt-website') {
     sh "./setup-build-env"
   }
   stage("Generate") {
-    // sh "_scripts/build-silver-docs.sh"
+    sh "./gen-docs"
   }
   stage("Build") {
     sh "./build-site"
