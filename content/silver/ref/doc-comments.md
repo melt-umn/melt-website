@@ -29,7 +29,9 @@ class SomeTypeclass f {
 
 Doc comments may not appear within definitions (regular comments may still.)
 
-By default, all of the documentation for a grammar will be emitted to a single markdown file. This instead be configured to split some or all of the files in the grammar into their own documentation page. Doc comment behavior may configured by using [directives inside comments](#config-directives). 
+By default, all of the documentation for a grammar will be emitted to a single markdown file. This instead be configured to split some or all of the files in the grammar into their own documentation page. Doc comment behavior may configured by using [directives inside comments](#config-directives).
+
+Grammars with no docs will not be emitted at all, and at this time this prevents their children from being shown. A good workaround is to add `@@{- @config excludeGrammar false -}` to some file in the grammar if nothing else.
 
 ## Running the documentation generation step and viewing doc statistics
 
