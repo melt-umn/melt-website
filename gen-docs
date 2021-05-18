@@ -38,6 +38,8 @@ mkdir -p generated
 rm ./build.xml
 
 mkdir -p "$ORIG/silver/gen/"
+rm -rf "$ORIG/content/silver/gen/*"
+git checkout -- content/silver/gen/_index.md #sorry
 cp -r generated/doc/* "$ORIG/content/silver/gen/"
 
 
