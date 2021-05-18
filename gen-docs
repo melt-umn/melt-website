@@ -33,7 +33,7 @@ fi
 # Run silver to generate some docs
 mkdir -p generated
 
-./support/bin/silver --dont-translate --doc --clean silver:extension:doc:extra
+./support/bin/silver --dont-translate --doc --clean silver:compiler:extension:doc:extra
 
 rm ./build.xml
 
