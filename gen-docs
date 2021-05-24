@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -eu
+set -exu
 
 if [ $0 != "./gen-docs" ]; then
   echo "Run as ./gen-docs"
@@ -15,6 +15,8 @@ if [ ! -d "$SVWORKSPACE" ]; then
   echo "$SVWORKSPACE not found (default is for coldpress)"
   exit 1
 fi
+
+SVWORKSPACE=$(realpath $SVWORKSPACE)
 
 if [ -d "$SV" ]; then
   rm -rf "$SV"
@@ -49,7 +51,7 @@ weight: 100000
 geekdocBreadcrumb: false
 ---
 
-Contents of `[GRAMMAR]`: {{< toc-tree >}} """.replace("GRAMMAR", grammar))
+Contents of \`[GRAMMAR]\`: {{< toc-tree >}} """.replace("GRAMMAR", grammar))
 EOF
 
 mkdir -p "$ORIG/silver/gen/"
