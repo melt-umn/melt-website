@@ -7,7 +7,7 @@ if [ $0 != "./fetch-docs" ]; then
   exit 1
 fi
 
-: ${DOCPATH=/export/scratch/melt-jenkins/silver-custom-doc/}
+: ${DOCPATH=/export/scratch/melt-jenkins/custom-silver-doc/}
 
 if [ ! -d "$DOCPATH" ]; then
   echo "\$DOCPATH not found (default is for coldpress)"
