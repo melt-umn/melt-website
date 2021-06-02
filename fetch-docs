@@ -7,16 +7,16 @@ if [ $0 != "./fetch-docs" ]; then
   exit 1
 fi
 
-: ${SVWORKSPACE=/export/scratch/melt-jenkins/custom-silver}
+: ${DOCPATH=/export/scratch/melt-jenkins/silver-custom-doc/}
 
-if [ ! -d "$SVWORKSPACE" ]; then
-  echo "\$SVWORKSPACE not found (default is for coldpress)"
+if [ ! -d "$DOCPATH" ]; then
+  echo "\$DOCPATH not found (default is for coldpress)"
   exit 1
 fi
 
 rm -rf content/silver/gen/*
 git checkout -- content/silver/gen/_index.md #sorry
-cp -r $SVWORKSPACE/generated/doc/* content/silver/gen/
+cp -r $DOCPATH/* content/silver/gen/
 
 python3 <<EOF
 import glob, os
