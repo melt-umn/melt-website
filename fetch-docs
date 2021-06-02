@@ -1,0 +1,34 @@
+#!/bin/bash
+
+set -eu
+
+if [ $0 != "./fetch-docs" ]; then
+  echo "Run as ./fetch-docs"
+  exit 1
+fi
+
+: ${SVWORKSPACE=/export/scratch/melt-jenkins/custom-silver}
+
+if [ ! -d "$SVWORKSPACE" ]; then
+  echo "\$SVWORKSPACE not found (default is for coldpress)"
+  exit 1
+fi
+
+rm -rf content/silver/gen/*
+git checkout -- content/silver/gen/_index.md #sorry
+cp -r $SVWORKSPACE/generated/doc/* content/silver/gen/
+
+python3 <<EOF
+import glob, os
+for dir in glob.iglob('content/silver/gen/*/**/', recursive=True):
+	if '_index.md' not in os.listdir(dir):
+		grammar = dir.replace("content/silver/gen/", "", 1).replace("/", ":")[:-1]
+		with open(os.path.join(dir, '_index.md'), 'w') as fd:
+			fd.write("""---
+title: "[GRAMMAR]"
+weight: 100000
+geekdocBreadcrumb: false
+---
+
+Contents of \`[GRAMMAR]\`: {{< toc-tree >}} """.replace("GRAMMAR", grammar))
+EOF

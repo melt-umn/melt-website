@@ -9,8 +9,8 @@ melt.trynode('melt-website') {
     checkout scm
     sh "./setup-build-env"
   }
-  stage("Generate") {
-    sh "./gen-docs"
+  stage("FetchDocs") {
+    sh "./fetch-docs"
   }
   stage("Build") {
     sh "./build-site"
