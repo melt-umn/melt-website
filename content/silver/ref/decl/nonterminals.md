@@ -53,6 +53,16 @@ Nothing specific to the nonterminal designates whether it is a "concrete syntax 
 The only distinction is whether or not any `concrete` productions are declared for a nonterminal.
 If not, then it's not considered part of the concrete syntax.
 
+### Layout
+
+By default the ignored whitespace ("[layout](/silver/concepts/layout)") terminals for a nonterminal are inferred from the [ignore terminals](/silver/ref/decl/terminals#ignore-terminals).
+However the inferred layout can also be overridden on the declaration of the nonterminal, for example
+```
+terminal CustomCommentThing_t /##.*/;
+nonterminal Foo layout {CustomCommentThing_t} with ...;
+```
+
+
 ## Closed nonterminals
 
 These should be used sparingly for representing languages, except for pure concrete syntax.
@@ -74,5 +84,4 @@ closed nonterminal Expr_c with ast<Expr>;
 ```
 
 This kind of type needs no new attributes, everything should just construct an appropriate abstract representation, and the interesting work can happen there.
-
 
