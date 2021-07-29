@@ -44,7 +44,7 @@ This is already shown in the example above with e.g. `'+'` and `'if'`.
 
 ## Concrete syntax modifiers
 
-There are three additional pieces of information that may be attached to concrete productions:
+There are a few additional pieces of information that may be attached to concrete productions:
 
 ### Production precedence
 
@@ -92,23 +92,7 @@ It is possible to examine the children of the production, but only the undecorat
 
 ### Layout
 
-Presently, the ignored whitespace (the "layout") of a production defaults to all ignore terminals included in the parser. This is not ideal and will likely change in the future to something more modular.
-
-The layout is a set of ignored terminals inserted between every element on the right-hand side of a production. So:
-
-```
-Decl ::= 'typedef' Type Identifiers ';'
-```
-
-will (in effect) be expanded to
-
-```
-Decl ::= 'typedef' Layout Type Layout Identifiers Layout ';'
-```
-
-Note that before and after the first and last signature element there is no `Layout` added: that's the responsibility of the parent production, whatever that may be.
-
-To control the layout on a specific production, an explicit set of terminals can be supplied:
+To control the [layout](/concepts/layout) on a specific production, an explicit set of terminals can be supplied:
 
 ```
 concrete production parameterizedString
@@ -119,7 +103,7 @@ layout {}
 }
 ```
 
-In this example, we've suppressed all layout for _this production only_, and so we'd presumably also want to add this line to every production of `StringBody`, too.
+In this example, we've suppressed all layout for _this production only_, and so we'd presumably also want to [set the layout of the `StringBody` nonterminal](/silver/ref/decl/nonterminals#layout), too.
 
 
 ### Multiple production modifiers

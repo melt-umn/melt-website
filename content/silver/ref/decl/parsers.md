@@ -47,7 +47,6 @@ Not yet.
 
 ### How do I control the layout accepted before/after the root nonterminal?
 
-Silver currently just makes all "ignore terminals" be the global layout that's expected before/after the starting nonterminal.
-Eventually there will be syntax to control this for a parser, just like there is on productions.
-But for now, that's the only option.
+By default the layout terminals of the root nonterminal are used as the layout before and after the root nonterminal.
+This can also be overridden by in the parser declaration block, by specifying e.g. `layout { WhiteSpace, Comment };` or `layout {};`.
 

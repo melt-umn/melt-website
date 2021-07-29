@@ -58,6 +58,8 @@ Ignored layout terminals can be specified for an entire grammar prefixing the te
 ignore terminal WhiteSpace /[\n\t\ ]+/;
 ```
 
+The [layout](/silver/concepts/layout) of nonterminals by default includes all ignore terminals exported by the grammar in which the nonterminal is declared.
+
 ### Terminal precedence
 
 Operator terminals can be given a parsing precedence:
