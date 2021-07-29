@@ -6,7 +6,7 @@ weight: 400
 {{< toc >}}
 
 Most scanner generators (such as Flex) require one to specify a global set of ignored terminals.
-Silver (and Copper) do things differently, since sometimes we want embed one language in another that has different notions of comments/whitespace.
+Silver (and Copper) do things differently, since sometimes we want to embed one language in another that has different notions of comments/whitespace.
 
 ## Production layout
 
@@ -23,6 +23,11 @@ Decl ::= 'typedef' Layout Type Layout Identifiers Layout ';'
 ```
 
 Note that before and after the first and last signature element there is no `Layout` added: that's the responsibility of the parent production, whatever that may be.
+
+## Root layout
+
+The set of layout terminals allowed before and after the start symbol in a parser is also known as the root layout.
+By default this is just the layout of the root nonterminal, but this can be [customized in a parser declaration](/silver/ref/decl/parsers#how-do-i-control-the-layout-accepted-beforeafter-the-root-nonterminal).
 
 ## Layout inference
 
@@ -55,7 +60,7 @@ grammar c;
 imports a;
 nonterminal C;
 ```
-the layout of `C` would be `{}`.
+the layout of `C` would be `{}`, meaning no terminals are ignored.
 
 The reason for this behavior is that new nonterminals introduced by an extension are typically only reachable from the host language, and one typically wishes them to use the host language layout as well.
 Host languages may also be divided into multiple grammars in a similar fashion.
