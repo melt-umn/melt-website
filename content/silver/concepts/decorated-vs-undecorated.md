@@ -78,7 +78,7 @@ e::Expr ::= l::Expr r::Expr
 > What may be initially confusing is that the declared type of child _`l`_ is the undecorated type _`Expr`_ yet this production clearly accesses the synthesized attribute _`errors`_ on that node. The reason this is allowed is that inside the curly braces we are really working with decorated trees since inherited attributes of the children may be assigned here.  And we see above that the _`env`_ attribute is being assigned to the child _`l`_. In the body of the production _`l`_ does have the type _`Decorated Expr`_. The production _`add`_ does take an undecorated _`Expr`_ as its first (and second) argument, thus the type given for _`l`_ is accurate.  The production assigns the necessary inherited attributes to its children in its body and thus, in the body, the synthesized attributes of its children can be accessed.
 
 ## More specific reference types
-As mentioned previously, `Decorated Expr` is really just a shorthand for `Decorated Expr with {env}`, if `{env}` is the default reference set for `Expr`.  References as different sets of attributes are different types - so a `Decorated Expr with {env}` cannot be passed into a function expecting a `Decorated Expr with {env, frame}`.  Since extensions can introduce new inherited attributes, the ability to use references with a set that is different than the default is particularly useful developing extensions that use references.
+As mentioned previously, `Decorated Expr` is really just a shorthand for `Decorated Expr with {env}`, if `{env}` is the default reference set for `Expr`.  References with different sets of attributes are different types - so a `Decorated Expr with {env}` cannot be passed into a function expecting a `Decorated Expr with {env, frame}`.  Since extensions can introduce new inherited attributes, the ability to use references with a set that is different than the default is particularly useful developing extensions that use references.
 
 ### `InhSet` types
 Sometimes one wishes to write a function or [type class](/silver/ref/decl/typeclasses/) instance that works over any type of reference, rather than just a particular set of inherited attributes.  An example of this can be seen in Silver's testing framework, for displaying values in failing tests:
@@ -108,7 +108,7 @@ top::Foo<i> ::= ref::Decorated Expr with i
 Sometimes we don't want to require an exact set of inherited attributes, but we still want to be somewhat more specific than allowing any set.  This can be achieved using subset type constraints; these are a built-in special type constraint similar to [type class type constraints](/silver/ref/decl/typeclasses/#type-constraints), of the form `i1 subset i2`, where `i1` and `i2` have kind `InhSet`.
 
 > _**Example:**_
-> A helper function to access the `typerep` synthesized on `Expr` references might have a subset constraint, if we know that computing `typerep` always requires the `env` inherited attribute. 
+> A helper function to access the `typerep` synthesized attribute on `Expr` references might have a subset constraint, if we know that computing `typerep` always requires the `env` inherited attribute. 
 > We can use a subset constraint to establish the minimum reference set:
 ```
 function getTyperep
@@ -119,7 +119,7 @@ function getTyperep
 ```
 
 > _**Example:**_
-> A helper function that decorates expressions with default values for any set of inherited attributes requires the resulting references to have only the known attributes:
+> A helper function that decorates expressions with default values for any set of inherited attributes requires the resulting references to have only the known attributes.
 > We can use a subset constraint to enforce a maximum reference set:
 ```
 function getRef
