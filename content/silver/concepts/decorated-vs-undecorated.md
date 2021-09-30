@@ -55,6 +55,25 @@ top::Stmt ::= l::Name '=' r::Expr
 
 This "automatic undecoration" behavior _only_ applies to names, not expressions.  If you call a function that returns a value of type _`Decorated Foo`_, and you try to assign this to a local of type _`Foo`_, you will receive a type error.  You will need to use the _`new`_ operator to manually un-decorate the type. See the [new operator](/silver/ref/expr/new/).
 
+### Inferring decoratedness
+Whether a name is being referenced as decorated or undecorated is determined via type inference.  However, if a name is passed into a polymorphic function, the "possibly decorated" type will be left unspecialized and will default to the decorated type.  The undecorated type can be forced in these cases by calling _`new`_ on the argument.
+
+If a [type class](/silver/ref/decl/typeclasses/) method is called with a possibly decorated type, and an instance exists for the undecorated but not the decorated form of the type (excluding [`typeError` instances](/silver/ref/decl/typeclasses#typeerror-constraints)), the undecorated type will be used.  This behavior is provided for convenience to avoid needing to call _`new`_.
+
+> For example in the following production:
+```
+instance Eq Name { eq = ...; }
+
+abstract production nameAssignStmt
+top::Stmt ::= l::Name '=' r::Name
+{
+  forwards to
+    if l == r then nullStmt()
+    else assignmentStmt(l, refExpr(r)); 
+}
+```
+> `l == r` is equivalent to `eq(l, r)`; the type `Name` rather than `Decorated Name with {}` will be inferred for `l` and `r`, because an instance exists for `Eq Name` but not `Eq Decorated Name with {}`
+
 ## Automatic decoration
 
 In addition to this automatic undecoration of children and locals, attempting to access an attribute of an undecorated type will automatically decorate it with no inherited attributes, and then access the attribute from that resulting temporary decorated tree.  This behavior is purely for convenience: there are many common synthesized attributes that do not depend on any inherited attributes (consider `fst` and `snd` of the `Pair` type.)

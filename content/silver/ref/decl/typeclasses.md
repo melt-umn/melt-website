@@ -117,3 +117,11 @@ instance Functor Maybe {
     end;
 }
 ```
+
+## `typeError` constraints
+Sometimes a general instance may match a type, but fail to match the instance's type constraints.  This can lead to rather confusing error messages, thus it is sometimes helpful to specify a more specific instance that always fails with nicer error message:
+```
+instance typeError "Decorated types do not support equality" => Eq Decorated a with i {
+  eq = error("type error");
+}
+```
