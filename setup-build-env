@@ -4,8 +4,12 @@ rm hugo 2>/dev/null ||true
 
 # uncomment the appropriate line for your OS/architecture
 # (feel free to add yours if it is not here.)
+
+# for linux:
 curl -L https://github.com/gohugoio/hugo/releases/download/v0.80.0/hugo_0.80.0_Linux-64bit.tar.gz | tar xz hugo
-#curl -L https://github.com/gohugoio/hugo/releases/download/v0.80.0/hugo_0.80.0_macOS-64bit.tar.gz | tar xz hugo
+
+# for MacOS:
+# curl -L https://github.com/gohugoio/hugo/releases/download/v0.80.0/hugo_0.80.0_macOS-64bit.tar.gz | tar xz hugo
 
 rm -rf themes/hugo-geekdoc 2>/dev/null ||true
 mkdir -p themes/hugo-geekdoc/
