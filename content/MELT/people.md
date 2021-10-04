@@ -5,19 +5,21 @@ url: /people
 
 We are:
 
-* [Eric Van Wyk](http://www-users.cs.umn.edu/~evw/), Associate Professor
+* [Eric Van Wyk](http://www-users.cs.umn.edu/~evw/), Professor
 * Lucas Kramer, Ph.D. student
-* Travis Carlson, Ph.D. student
 * Dawn Michaelson, Ph.D. student
+* Travis Carlson, Ph.D. student
 * Allie Hanson, Ph.D. student
+* Luke Bessant, Ph.D. student
 * [Nathan Ringo](https://remexre.xyz/), M.S. student
 * Ian Kariniemi, M.S. student
 * Louis Goessling, undergraduate student
-* Aaron Councilman, undergraduate student
+* Kelton Obrien, undergraduate student
 
 Ph.D. graduates:
 
-* [Ted Kaminski](http://www-users.cs.umn.edu/~tedinski/), Ph.D., May 2017.
+* [Ted Kaminski](http://www-users.cs.umn.edu/~tedinski/), Ph.D.,
+  May 2017. Amazon
   * "[Reliably composable language extensions](https://www-users.cs.umn.edu/~kami0054/papers/kaminski-phd.pdf)"
 * Lijesh Krishnan, Ph.D., November, 2012. [Coverity](http://www.coverity.com/)
   * "[Extensible Languages via Modular Declarative Specifications](http://melt.cs.umn.edu/pubs/krishnan2012PhD/krishnan2012PhD.pdf)"
@@ -26,18 +28,26 @@ Ph.D. graduates:
 
 M.S. graduates:
 
-* Patrick Stephen, M.S.
+* Patrick Stephen, M.S., 2017
 * Vince Alm, M.S.
 * Kevin Williams, M.S., 2014. Microsoft, X++ Programming Language group
-* Ming Zhou, M.S., November, 2013. Microsoft, Visual Studio group
-* Praveen Kambam Sugavanam, M.S., November, 2013. Amazon
-* Derek Bodin, M.S.
-* Paul Johnson, M.S.
+* Ming Zhou, M.S., 2013. Microsoft, Visual Studio group
+* Praveen Kambam Sugavanam, M.S., 2013. Amazon
+* Mark Leverntz, M.S., 2008
+* Yogesh Mali, M.S., 2008
+* Derek Bodin, M.S., 2008
+* Mark Benson, M.S., 2007
+* Paul Johnson, M.S., 2007
+* Jing Yang, M.S., 2002
 
-Other alumni:
-
+B.S. graduates:
+* Aaron Councilman, B.S. 2021, now in the University of Illinois Ph.D. program
+* Joseph Blanchard, B.S. 2021
+* Violent Chang, B.S., 2020, now in Ph.D. program at Maryland
+* Gordon Chen, B.S., 2020, now in M.S. program at UMass
 * Charlie Hofer, undergraduate student
-* Kevin Viratyosin, undergraduate student
+* Kevin Viratyosin, B.S., 2018, Facebook
+
 
 We share many interests with our colleagues in the department and thus work closely with them.
 These include:
