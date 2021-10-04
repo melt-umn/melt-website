@@ -3,7 +3,6 @@ title: Automatic attributes
 weight: 600
 ---
 
-# Overview
 Some repetitive idioms exist in AG specifications that we would like to avoid writing boilerplate for by hand.
 These attributes fall into various common patterns (functor, monoid, etc.)
 As a first step, we add an extension to Silver such that in production bodies we can write
@@ -12,6 +11,10 @@ propagate attr1, attr2, ...;
 ```
 This statement is overloaded for different kinds of attributes, forwarding to the appropriate equations on the production.
 
+# Inherited attributes
+If `env` is declared as an inherited attribute, then just writing `propagate env;` in a production body will generate copy equations for `env` on all children with the attribute.
+
+This is a recommended alternative to using [autocopy attributes](/silver/ref/decl/attributes/#autocopy-attributes), which may be deprecated at some point in the future.
 
 # Monoid attributes
 Monoid attributes allow for collections of values to be assembled and passed up the tree.
@@ -159,10 +162,228 @@ top::Stmt ::= lifted::Decls
 ```
 
 A functor attribute is implemented as just an ordinary synthesized attribute whose type is the same as the type of the nonterminal on which it occurs.  To enable this, a functor attribute forwards to an ordinary synthesized attribute with a type parameter `a`.
-Functor attributes provide an overload for attribute occurrence such that `occurs on` for a functor attribute with no type argument provided will forward to will forward to an attribute occurrence with the nonterminal provided as the type argument.
+Functor attributes provide an overload for attribute occurrence such that `occurs on` for a functor attribute with no type argument provided will forward to an attribute occurrence with the nonterminal provided as the type argument.
 
 `propagate` is overloaded for functor attributes such that propagating a functor attribute will result in an equation that constructs the same production with the result of accessing the attribute on all children.
 Any children on which the attribute does not occur are simply used unchanged in the new tree.
+
+# Destruct attributes
+Destruct attributes can be thought of as sort of an inverse of functor attributes; functor attributes are to tree construction as destruct attributes are to tree deconstruction via pattern matching.  A destruct attribute is an inherited attribute on some tree that decomposes another decorated tree of the same shape; it is an error if a destruct attribute is ever demanded from a tree whose parent was constructed by a different production than the one provided in the attribute.
+
+```
+destruct attribute compareTo;
+
+nonterminal Type;
+
+attribute compareTo occurs on Type;
+
+abstract production intType
+top::Type ::=
+{
+  propagate compareTo;
+}
+
+abstract production dataType
+top::Type ::= name::String
+{
+  propagate compareTo;
+}
+
+abstract production fnType
+top::Type ::= a::Type b::Type
+{
+  propagate compareTo;
+}
+
+```
+
+A destruct attribute might be used for comparing types in a functional language implementation.  The above translates to the following equivalent specification:
+
+```
+inherited attribute compareTo<a (i::InhSet)>::Decorated a with i;
+
+nonterminal Type;
+
+attribute compareTo<Type {}> occurs on Type;
+
+abstract production intType
+top::Type ::=
+{
+  -- No children for which to propagate the attribute
+}
+
+abstract production dataType
+top::Type ::= name::String
+{
+  -- No children for which to propagate the attribute
+}
+
+abstract production fnType
+top::Type ::= a::Type b::Type
+{
+  a.compareTo =
+    case top.compareTo of
+    | fnType(a2, b2) -> a2
+    | _ -> error("Destruct attribute compareTo demanded on child a of production fnType when given value doesn't match")
+    end;
+  b.compareTo =
+    case top.compareTo of
+    | fnType(a2, b2) -> b2
+    | _ -> error("Destruct attribute compareTo demanded on child a of production fnType when given value doesn't match")
+    end;
+}
+```
+
+The type of a destruct attribute is a [`Decorated` (reference) type](/silver/concepts/decorated-vs-undecorated/), such that attributes may be accessed on the corresponding tree.  The type of the destructed tree and the inherited attributes carried by the reference are specified as two type parameters on the attribute, of kind * and [InhSet](/silver/concepts/decorated-vs-undecorated/#inhset-types).
+
+Destruct attributes provide an overload for attribute occurrence such that `occurs on` for a destruct attribute with no type arguments will forward to an attribute occurrence with the nonterminal and `{}` (the empty set of inherited attributes) provided as the type arguments.  Often one wishes to make use of inherited attributes on the deconstructed tree; if a single type argument is provided, it will be used as the set of inherited attributes for the reference.  For example writing
+```
+attribute compareTo<{someInh}> occurs on Type;
+```
+will forward to
+```
+attribute compareTo<{someInh} Type> occurs on Type;
+```
+giving a type `Decorated Type with {someInh}`; thus we could access `a.compareTo.someInh` in the `fnType` production.
+
+Destruct attributes are typically used in conjunction with equality or ordering attributes, described next.
+
+# Equality attributes
+Equality attributes are used to compare trees for equality.  They are synthesized attributes of type `Boolean` that work in conjunction with a destruct attribute that specifies the tree to compare; the declaration of an equality attribute specifies what inherited attribute should be used.
+
+```
+equality attribute isEqual with compareTo
+  occurs on Type;
+
+aspect production intType
+top::Type ::=
+{
+  propagate isEqual;
+}
+
+abstract production dataType
+top::Type ::= name::String
+{
+  propagate isEqual;
+}
+
+abstract production fnType
+top::Type ::= a::Type b::Type
+{
+  propagate isEqual;
+}
+```
+
+The above translates to the following equivalent specification: 
+
+```
+synthesized attribute isEqual::Boolean occurs on Type;
+
+aspect production intType
+top::Type ::=
+{
+  top.isEqual =
+    case top.compareTo of
+    | intType() -> true
+    | _ -> false
+    end;
+}
+
+abstract production dataType
+top::Type ::= name::String
+{
+  top.isEqual =
+    case top.compareTo of
+    | dataType(name2) -> name == name2
+    | _ -> false
+    end;
+}
+
+abstract production fnType
+top::Type ::= a::Type b::Type
+{
+  top.isEqual =
+    case top.compareTo of
+    | fnType(_, _) -> a.isEqual && b.isEqual
+    | _ -> false
+    end;
+}
+```
+
+The `==` operator is used to compare any children that do not have the `isEqual` attribute.
+
+Note for any nonterminal types that have the standard `isEqual` and `compareTo` attributes defined in `silver:core`, the `==` operator itself is overloaded to use them for comparison.  Thus propagating `compareTo` and `isEqual` on a nonterminal type is comparable to writing `deriving Eq` in Haskell or similar languages.
+
+# Ordering attributes
+Ordering attributes are used define a total ordering for trees, e.g. to sort them or use them as map keys.  An ordering attribute pair consists of a "key" synthesized attribute of type `String` that assigns a unique identifier to every production, and the "result" synthesized attribute of type `Integer` that is similar in nature to an equality attribute.  The value of the result attribute is negative if the compared tree is "less" than the other, positive if it is "greater", and 0 if the trees are equal.
+
+```
+ordering attribute compareKey, compare with compareTo
+  occurs on Type;
+
+aspect production intType
+top::Type ::=
+{
+  propagate compareKey, compare;
+}
+
+abstract production dataType
+top::Type ::= name::String
+{
+  propagate compareKey, compare;
+}
+
+abstract production fnType
+top::Type ::= a::Type b::Type
+{
+  propagate compareKey, compare;
+}
+```
+
+The above translates to the following equivalent specification: 
+
+```
+synthesized attribute compareKey::String occurs on Type;
+synthesized attribute compare::Integer occurs on Type;
+
+aspect production intType
+top::Type ::=
+{
+  top.compareKey = "example:intType";
+  top.compare =
+    case top.compareTo of
+    | intType() -> 0
+    | _ -> silver:core:compare(top.compareKey, top.compareTo.compareKey)
+    end;
+}
+
+abstract production dataType
+top::Type ::= name::String
+{
+  top.compareKey = "example:dataType";
+  top.compare =
+    case top.compareTo of
+    | dataType(name2) -> silver:core:compare(name, name2)
+    | _ -> silver:core:compare(top.compareKey, top.compareTo.compareKey)
+    end;
+}
+
+abstract production fnType
+top::Type ::= a::Type b::Type
+{
+  top.compareKey = "example:fnType";
+  top.compare =
+    case top.compareTo of
+    | fnType(_, _) -> if a.compare != 0 then a.compare else b.compare
+    | _ -> silver:core:compare(top.compareKey, top.compareTo.compareKey)
+    end;
+}
+```
+
+If the compared productions do not match, then they are compared according to their names as determined by the key attribute, using the standard library function `compare` from the [`Ord` type class](/silver/gen/silver/core/Ord/).
+Otherwise the children of the matching production that have the attribute are compared via the attribute; any that lack the attribute are compared using the `compare` function.
+
+Note for any nonterminal types that have the standard `compareKey`, `compare` and `compareTo` attributes defined in `silver:core`, the `compare` function itself (and other comparison operators) are overloaded to use the attributes for comparison.  Thus propagating `compareKey`, `compare` and `compareTo` on a nonterminal type is comparable to writing `deriving Ord` in Haskell or similar languages.
 
 # Global propagate
 In some cases we wish to propagate an attribute on all productions of a nonterminal with no exceptions.  Instead of adding `propagate` statements (and potentially aspects) for all productions, we can instead write
