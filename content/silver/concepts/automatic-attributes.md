@@ -167,8 +167,26 @@ Functor attributes provide an overload for attribute occurrence such that `occur
 `propagate` is overloaded for functor attributes such that propagating a functor attribute will result in an equation that constructs the same production with the result of accessing the attribute on all children.
 Any children on which the attribute does not occur are simply used unchanged in the new tree.
 
+Note that explicitly providing a different type as the type parameter is permitted, however attempting to propagate the attribute in this case would result in an error.  One may however wish to reuse a functor attribute in a different context, and provide explicit equations:
+
+```
+nonterminal ExtStmt with host<Stmt>;
+
+abstract production extThing
+top::ExtStmt ::= ...
+{
+  top.host = seqStmt(..., ...);
+}
+```
+
 # Destruct attributes
-Destruct attributes can be thought of as sort of an inverse of functor attributes; functor attributes are to tree construction as destruct attributes are to tree deconstruction via pattern matching.  A destruct attribute is an inherited attribute on some tree that decomposes another decorated tree of the same shape; it is an error if a destruct attribute is ever demanded from a tree whose parent was constructed by a different production than the one provided in the attribute.
+Consider the problem of comparing two trees in some fashion, for example in checking them for equality.  Some mechanism is needed to associate the nodes of two decorated trees of (possibly) the same shape.
+
+Destruct attributes can be thought of as sort of an inverse of functor attributes; functor attributes are to tree construction as destruct attributes are to tree deconstruction via pattern matching.
+
+A destruct attribute is an inherited attribute on some tree that decomposes another decorated tree of the same shape; it is an error if a destruct attribute is ever demanded from a tree whose parent was constructed by a different production than the one provided in the attribute.
+
+A destruct attribute might be used for comparing types in a functional language implementation.  Here types are represented by a `Type` nonterminal, with constructors for integer types, named data types, and function types:
 
 ```
 destruct attribute compareTo;
@@ -190,14 +208,14 @@ top::Type ::= name::String
 }
 
 abstract production fnType
-top::Type ::= a::Type b::Type
+top::Type ::= arg::Type ret::Type
 {
   propagate compareTo;
 }
 
 ```
 
-A destruct attribute might be used for comparing types in a functional language implementation.  The above translates to the following equivalent specification:
+The above translates to the following equivalent specification:
 
 ```
 inherited attribute compareTo<a (i::InhSet)>::Decorated a with i;
@@ -219,16 +237,16 @@ top::Type ::= name::String
 }
 
 abstract production fnType
-top::Type ::= a::Type b::Type
+top::Type ::= arg::Type ret::Type
 {
   a.compareTo =
     case top.compareTo of
-    | fnType(a2, b2) -> a2
+    | fnType(arg2, ret2) -> arg2
     | _ -> error("Destruct attribute compareTo demanded on child a of production fnType when given value doesn't match")
     end;
   b.compareTo =
     case top.compareTo of
-    | fnType(a2, b2) -> b2
+    | fnType(arg2, ret2) -> ret2
     | _ -> error("Destruct attribute compareTo demanded on child a of production fnType when given value doesn't match")
     end;
 }
@@ -300,11 +318,11 @@ top::Type ::= name::String
 }
 
 abstract production fnType
-top::Type ::= a::Type b::Type
+top::Type ::= arg::Type ret::Type
 {
   top.isEqual =
     case top.compareTo of
-    | fnType(_, _) -> a.isEqual && b.isEqual
+    | fnType(_, _) -> arg.isEqual && ret.isEqual
     | _ -> false
     end;
 }
@@ -369,12 +387,12 @@ top::Type ::= name::String
 }
 
 abstract production fnType
-top::Type ::= a::Type b::Type
+top::Type ::= arg::Type ret::Type
 {
   top.compareKey = "example:fnType";
   top.compare =
     case top.compareTo of
-    | fnType(_, _) -> if a.compare != 0 then a.compare else b.compare
+    | fnType(_, _) -> if arg.compare != 0 then arg.compare else ret.compare
     | _ -> silver:core:compare(top.compareKey, top.compareTo.compareKey)
     end;
 }
