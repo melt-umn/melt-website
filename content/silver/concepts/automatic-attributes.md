@@ -170,7 +170,9 @@ Any children on which the attribute does not occur are simply used unchanged in 
 Note that explicitly providing a different type as the type parameter is permitted, however attempting to propagate the attribute in this case would result in an error.  One may however wish to reuse a functor attribute in a different context, and provide explicit equations:
 
 ```
-nonterminal ExtStmt with host<Stmt>;
+nonterminal ExtStmt;
+
+attribute host<Stmt> occurs on ExtStmt;
 
 abstract production extThing
 top::ExtStmt ::= ...
@@ -180,7 +182,7 @@ top::ExtStmt ::= ...
 ```
 
 # Destruct attributes
-Consider the problem of comparing two trees in some fashion, for example in checking them for equality.  Some mechanism is needed to associate the nodes of two decorated trees of (possibly) the same shape.
+Consider the problem of comparing two trees in some fashion, for example checking them for equality.  Some mechanism is needed to associate the nodes of two decorated trees of (possibly) the same shape.  This can be done by an inherited (destruct) attribute passing a [reference](/silver/concepts/decorated-vs-undecorated/#reference-decorated) to one tree being compared down the other, and a corresponding synthesized ([equality](/silver/concepts/automatic-attributes/#equality-attributes)) attribute that at every production determines whether the current tree is equal to the one that was passed down.
 
 Destruct attributes can be thought of as sort of an inverse of functor attributes; functor attributes are to tree construction as destruct attributes are to tree deconstruction via pattern matching.
 
@@ -208,7 +210,7 @@ top::Type ::= name::String
 }
 
 abstract production fnType
-top::Type ::= arg::Type ret::Type
+top::Type ::= inputType::Type outputType::Type
 {
   propagate compareTo;
 }
@@ -237,16 +239,16 @@ top::Type ::= name::String
 }
 
 abstract production fnType
-top::Type ::= arg::Type ret::Type
+top::Type ::= inputType::Type outputType::Type
 {
   a.compareTo =
     case top.compareTo of
-    | fnType(arg2, ret2) -> arg2
+    | fnType(inputType2, outputType2) -> inputType2
     | _ -> error("Destruct attribute compareTo demanded on child a of production fnType when given value doesn't match")
     end;
   b.compareTo =
     case top.compareTo of
-    | fnType(arg2, ret2) -> ret2
+    | fnType(inputType2, outputType2) -> outputType2
     | _ -> error("Destruct attribute compareTo demanded on child a of production fnType when given value doesn't match")
     end;
 }
@@ -286,7 +288,7 @@ top::Type ::= name::String
 }
 
 abstract production fnType
-top::Type ::= a::Type b::Type
+top::Type ::= inputType::Type outputType::Type
 {
   propagate isEqual;
 }
@@ -318,11 +320,11 @@ top::Type ::= name::String
 }
 
 abstract production fnType
-top::Type ::= arg::Type ret::Type
+top::Type ::= inputType::Type outputType::Type
 {
   top.isEqual =
     case top.compareTo of
-    | fnType(_, _) -> arg.isEqual && ret.isEqual
+    | fnType(_, _) -> inputType.isEqual && outputType.isEqual
     | _ -> false
     end;
 }
@@ -387,12 +389,12 @@ top::Type ::= name::String
 }
 
 abstract production fnType
-top::Type ::= arg::Type ret::Type
+top::Type ::= inputType::Type outputType::Type
 {
   top.compareKey = "example:fnType";
   top.compare =
     case top.compareTo of
-    | fnType(_, _) -> if arg.compare != 0 then arg.compare else ret.compare
+    | fnType(_, _) -> if inputType.compare != 0 then inputType.compare else outputType.compare
     | _ -> silver:core:compare(top.compareKey, top.compareTo.compareKey)
     end;
 }
