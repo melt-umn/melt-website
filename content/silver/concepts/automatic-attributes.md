@@ -14,12 +14,40 @@ This statement is overloaded for different kinds of attributes, forwarding to th
 # Inherited attributes
 If `env` is declared as an inherited attribute, then just writing `propagate env;` in a production body will generate copy equations for `env` on all children with the attribute.
 
+```
+inherited attribute env::Env;
+
+nonterminal Stmt with env;
+
+abstract production seqStmt
+top::Stmt ::= s1::Stmt s2::Stmt
+{
+  propagate env;
+}
+```
+
+This translates to the following equivalent specification:
+
+```
+inherited attribute env::Env;
+
+nonterminal Stmt with env;
+
+abstract production seqStmt
+top::Stmt ::= s1::Stmt s2::Stmt
+{
+  s1.env = top.env;
+  s2.env = top.env;
+}
+```
+
 This is a recommended alternative to using [autocopy attributes](/silver/ref/decl/attributes/#autocopy-attributes), which may be deprecated at some point in the future.
 
 # Monoid attributes
 Monoid attributes allow for collections of values to be assembled and passed up the tree.
 The type of a monoid attribute must be in the monoid category, having an empty value and append operator (e.g. `[]` and `++` for lists.)
 
+A common use of monoid attributes is collecting a list of error messages up a syntax tree.  For example in ableC,
 ```
 monoid attribute errors::[Message] with [], ++;
 
@@ -52,7 +80,7 @@ top::Stmt ::= c::Expr  t::Stmt  e::Stmt
 }
 ```
 
-An example monoid attribute is `errors` in ableC.  This translates to the following equivalent specification:
+This translates to the following equivalent specification:
 
 ```
 synthesized attribute errors::[Message] with ++;
@@ -92,11 +120,15 @@ This means that non-propagated equations must use `:=` instead of `=`, and addit
 When propagated on a production with no children on which the attribute occurs, the empty value is used.
 Otherwise, the append operator is used to combine the value of the attribute on all children with the attribute.
 
+Monoid attributes commonly have list, string, integer or Boolean types.  If the type of the attribute is in the `Monoid` type class (as is the case with strings and lists), then the empty value and operator (the `with [], ++`) can be omitted.
+
 # Functor attributes
 Functor attributes allow for a mapping-style transformation over a tree, where we only wish to modify the tree in a few
 places.
 Thus the type of a functor attribute is effectively in the functor category, being a nonterminal that in some way encapsulates values that we wish to modify.
 Functor transformations are distinct from forwarding, as these transformed trees are not necessarily semantically equivalent to the original tree. Also more than one functor transformation of the same tree is possible, while a production may only have one forward.
+
+An example functor transformation is `host` in ableC, which transforms away ``injection'' productions by lifting declarations to higher points in the tree.
 
 ```
 functor attribute host;
@@ -128,7 +160,6 @@ top::Stmt ::= lifted::Decls
 }
 ```
 
-An example functor transformation is `host` in ableC, which transforms away ``injection'' productions by lifting declarations to higher points in the tree.
 This translates to the following equivalent specification:
 
 ```
@@ -241,12 +272,12 @@ top::Type ::= name::String
 abstract production fnType
 top::Type ::= inputType::Type outputType::Type
 {
-  a.compareTo =
+  inputType.compareTo =
     case top.compareTo of
     | fnType(inputType2, outputType2) -> inputType2
     | _ -> error("Destruct attribute compareTo demanded on child a of production fnType when given value doesn't match")
     end;
-  b.compareTo =
+  outputType.compareTo =
     case top.compareTo of
     | fnType(inputType2, outputType2) -> outputType2
     | _ -> error("Destruct attribute compareTo demanded on child a of production fnType when given value doesn't match")
@@ -264,7 +295,7 @@ will forward to
 ```
 attribute compareTo<{someInh} Type> occurs on Type;
 ```
-giving a type `Decorated Type with {someInh}`; thus we could access `a.compareTo.someInh` in the `fnType` production.
+giving a type `Decorated Type with {someInh}`; thus we could access `inputType.compareTo.someInh` in the `fnType` production.
 
 Destruct attributes are typically used in conjunction with equality or ordering attributes, described next.
 
