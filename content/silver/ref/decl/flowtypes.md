@@ -57,7 +57,7 @@ To take a reference of this type to a decorated tree, this set must be supplied,
 
 
 Finally, there is one last special case.
-In practice, it is frequently useful to be able to set the `decorate` "flow type" and re-use that value for many synthesized attributes.
+In practice, it is frequently useful to be able to set the `decorate` or "flow type" and re-use that value for many synthesized attributes.
 (This is a result of the "infectious" nature of using references withing a tree.
 Once you have a production with a reference as a child, quite a lot of attributes start to have identical flow types to `decorate`.)
 To support making these easier to write and maintain, we allow `decorate` to be used in place of the name of an inherited attribute, _if_ an explicit flow type is already given for `decorate`.
@@ -67,13 +67,16 @@ This is illustrated in the example above with `isLValue`:
 flowtype Expr = decorate {env, returnType}, isLValue {decorate};
 ```
 
+Similarly, we also permit setting the `forward` flow type and using that in an extension flow type specification.
+This is useful in specifying flow types for extension attributes on host nonterminals, as these are required to always contain at least the host-language forward flow type for the nonterminal.
+
+```
+flowtype Expr = forward {env};
+...
+flowtype myExtSyn {forward, myExtInh} on Expr;
+```
+
 ## FAQ
-
-### Why can I use the `decorate` shorthand, but not `forward`?
-
-We just haven't encountered the need for it yet.
-Usually, it's the host language that specifies explicit flow types, and extensions generally get away with flow type inference.
-It's extensions that would probably most benefit from `forward`. Probably?
 
 ### In the attribute-oriented syntax, why can't I vary the inherited set?
 
