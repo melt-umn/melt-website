@@ -76,7 +76,7 @@ abstract production d
 top::Nonterminal ::= x::Nonterminal
 { forwards to a(x); }
 ```
-The result of the following pattern matching will be `0` because we have an exact match in the first clasue in the form of the pattern `d(_)`:
+The result of the following pattern matching will be `0` because we have an exact match in the first clause in the form of the pattern `d(_)`:
 ```
 case d(c()) of
 | d(_) -> 0
