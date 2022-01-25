@@ -168,7 +168,7 @@ It can't simply add additional attributes to the reference, so there's not reall
 aspect production decExpr
 top::Expr ::= child::Decorated Expr
 {
-  production transDeclsChild::Decorated Expr with {decorate, transDeclsIn} = child;
+  production transDeclsChild::Expr = child;
   transDeclsChild.typeEnv = top.typeEnv;
   -- equations for any other host-language inherited attributes in transDecls' flowtype
   transDeclsChild.transDeclsIn = top.transDeclsIn;
@@ -188,7 +188,7 @@ top::Expr ::= child::Decorated Expr
 }
 ```
 
-However, this isn't possible, since we don't know that `child` doesn't have existing attributes on it.
+However, this isn't possible, since we don't know that `child` doesn't already have an equation for `transDeclsIn`.
 For example, another extension could add:
 
 ```silver
@@ -220,9 +220,8 @@ If you were to instead write:
 aspect production decExpr
 top::Expr ::= child::PartiallyDecorated Expr
 {
-  production transDeclsChild::PartiallyDecorated Expr with {decorate, transDeclsIn} = child;
-  transDeclsChild.transDeclsIn = top.transDeclsIn;
-  top.transDecls = transDeclsChild.transDecls;
+  child.transDeclsIn = top.transDeclsIn;
+  top.transDecls = child.transDecls;
 }
 ```
 
@@ -258,10 +257,10 @@ Similarly, it is also illegal to take multiple partially decorated references to
 production bazExpr
 top::Expr ::= child::Expr
 {
-  production child1::PartiallyDecorated Expr with {decorate, barInh} = child;
+  production child1::PartiallyDecorated Expr = child;
   child1.barInh = true;
 
-  production child2::PartiallyDecorated Expr with {decorate, barInh} = child;
+  production child2::PartiallyDecorated Expr = child;
   child2.barInh = true;
 
   top.barSyn = child1.barSyn || child2.barSyn;
