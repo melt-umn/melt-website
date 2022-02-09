@@ -67,10 +67,32 @@ Here the first pattern only matches when the value of the expression `lookupBy(.
 ## Matching Through Forwarding
 
 Because Silver is an extensible language and we allow matching on the productions of a nonterminal type, we want to be able to handle new productions with old pattern matches.
-To do this, when we try to match a pattern, we forward if we do not initially have a match.
-This gives us the semantics of matching the first pattern which the value can match.
+To do this, when we try to match a pattern for a production, we forward if we do not initially have a match.
+We maintain behavior similar to pattern matching in functional languages even as we add this new behavior.
+For example, the `case` expression
+```
+case x of
+| p1 -> e1
+| p2 -> e2
+| p3 -> e3
+end
+```
+is equivalent to
+```
+case x of
+| p1 -> e1
+| _ -> case x of
+       | p2 -> e2
+       | _ -> case x of
+              | p3 -> e3
+              end
+       end
+end
+```
+and adding a match rule to the end of a `case` expression does not affect earlier matches found.
 
-For example, suppose we have the following production:
+Let us look at how matching through forwarding works.
+Suppose we have the following production:
 ```
 abstract production d
 top::Nonterminal ::= x::Nonterminal
@@ -121,8 +143,34 @@ end
 ```
 The relative order of patterns for forwarding and non-forwarding productions is relevant for which pattern matches.
 In this example, the `d(_)` pattern will never be reached because any trees built by the `d` production will match the `a(_)` pattern.
+This is the same as placing a more general pattern before a more specific pattern in non-forwarding pattern matching.
 To match a forwarding production, place it at the beginning of the clauses.
 It is not an error to place it later, but it is unlikely the resulting semantics are the intended ones.
+
+Matching through forwarding occurs on a production basis, not a pattern basis.
+To see what we mean by this, suppose we have the following production:
+```
+abstract production foo
+top::Nt ::= c::Integer
+{
+  forwards to if c == 1 then foo(0) else bar(c);
+}
+```
+We try to match against the `foo` production with this `case` expression:
+```
+case x of
+| foo(0) -> -1
+| foo(a) -> a
+| _ -> 0
+end
+```
+If `x = foo(1)`, we match the second rule, `foo(a) -> a`.
+We try to match the `foo` pattern constructor of the first rule, which succeeds, then try to match the `0` pattern, which fails.
+We do not try forwarding `x` at this point to see if it will become `foo(0)`, instead moving on to the next match rule.
+This is what we mean by matching through forwarding occurring on a production basis:  we only forward to try to match a production pattern constructor if we could not match that constructor already, not if that constructor was matched but its children did not match the subpatterns.
+There is no clearly correct decision between forwarding per production and forwarding per pattern.
+The current implementation strategy for `case` expressions leaves no choice, but alternative implementation strategies are possible and could be used in the future.
+One should not rely on this behavior since it may change; however, the only cases where it becomes relevant are the cases where a production which may forward to itself is used as a pattern with structured subpatterns, and most users will not encounter this situation.
 
 ## Completeness Analysis
 
