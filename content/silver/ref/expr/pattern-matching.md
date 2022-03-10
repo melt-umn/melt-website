@@ -66,11 +66,37 @@ Here the first pattern only matches when the value of the expression `lookupBy(.
 
 ## Matching Through Forwarding
 
-Because Silver is an extensible language and we allow matching on the productions of a nonterminal type, we want to be able to handle new productions with old pattern matches.
-To do this, when we try to match a pattern, we forward if we do not initially have a match.
-This gives us the semantics of matching the first pattern which the value can match.
+Because Silver is used to write extensible languages where new productions can be added and we allow matching on the productions of a nonterminal type, we want to be able to handle new productions with existing pattern matches.
+For example, if we have a `case` expression matching on the known productions `p1()` and `p2()` and an extension adds a production `p3()`, we still want the `case` expression to give a result when given a tree built by `p3()` rather than an error for not finding a match.
+To do this, we try matching each clause in order.
+For each pattern, we try to match the tree against the pattern as it is.
+If this does not succeed and the tree forwards, we try to match the pattern against the forward.
+We only move to the next clause when the match fails and the tree being matched does not forward.
+We maintain behavior similar to pattern matching in functional languages even as we add this new behavior.
+For example, the `case` expression
+```
+case x of
+| p1 -> e1
+| p2 -> e2
+| p3 -> e3
+end
+```
+is equivalent to
+```
+case x of
+| p1 -> e1
+| _ -> case x of
+       | p2 -> e2
+       | _ -> case x of
+              | p3 -> e3
+              end
+       end
+end
+```
+and adding a match rule to the end of a `case` expression does not affect earlier matches found.
 
-For example, suppose we have the following production:
+Let us look at how matching through forwarding works.
+Suppose we have the following production:
 ```
 abstract production d
 top::Nonterminal ::= x::Nonterminal
@@ -96,11 +122,7 @@ case d(c()) of
 end
 ```
 
-If we rearrange the rules in this last `case` expression, we get the same result.
-Matching `d(c())` against `b(_, _)` fails, so we forward and try again.
-Matching `a(c())` against `b(_, _)` also fails.
-Since we have no more forwards to try matching, we move on to the next pattern and try matching `d(c())` against it.
-When this fails, we forward again and find a match.
+If we rearrange the rules in this last `case` expression to form the following one, we get the same result:
 ```
 case d(c()) of
 | b(_, _) -> 2
@@ -108,9 +130,12 @@ case d(c()) of
 | c() -> 3
 end
 ```
-Suppose we rearrange the order of patterns from the case expression above with the `d(_)` pattern, placing it at the end of the match instead of the beginning.
-We will *not* get the same result in this case, since we take the first pattern which matches.
-We try to match `d(c())` against `a(_)`, which succeeds after forwarding, and the result is `1` rather than `0` as before.
+Matching `d(c())` against `b(_, _)` fails, so we forward and try again.
+Matching `a(c())` against `b(_, _)` also fails, and `a` does not forward so matching the pattern fails.
+We then move on to the next pattern and try matching `d(c())` against it.
+When matching `d(c())` against `a(_)` fails, we forward to `a(c())` and find a match.
+
+Suppose we rearrange the order of patterns from the case expression above with the `d(_)` pattern, placing it at the end of the match instead of the beginning:
 ```
 case d(c()) of
 | a(_) -> 1
@@ -119,10 +144,38 @@ case d(c()) of
 | d(_) -> 0
 end
 ```
+We will *not* get the same result in this case, since we take the first pattern which matches.
+We try to match `d(c())` against `a(_)`, which succeeds after forwarding, and the result is `1` rather than `0` as before.
+
 The relative order of patterns for forwarding and non-forwarding productions is relevant for which pattern matches.
 In this example, the `d(_)` pattern will never be reached because any trees built by the `d` production will match the `a(_)` pattern.
+This has the same effect as placing a more general pattern before a more specific pattern in non-forwarding pattern matching.
 To match a forwarding production, place it at the beginning of the clauses.
-It is not an error to place it later, but it is unlikely the resulting semantics are the intended ones.
+It does not cause a compile-time error to place it later, but it is unlikely the resulting semantics are the intended ones.
+
+Matching through forwarding occurs on a production basis, not a pattern basis, meaning we only forward to try to match a production pattern constructor if we could not match that constructor already, not if that constructor was matched but its children did not match the subpatterns.
+To see what we mean by this, suppose we have the following production:
+```
+abstract production foo
+top::Nt ::= c::Integer
+{
+  forwards to if c == 1 then foo(0) else bar(c);
+}
+```
+We try to match against the `foo` production with this `case` expression:
+```
+case foo(1) of
+| foo(0) -> -1
+| foo(a) -> a
+| _ -> 0
+end
+```
+We try to match the `foo` pattern constructor of the first rule, which succeeds, then try to match the `0` pattern, which fails.
+We do not try forwarding `foo(1)` at this point to see if it will become `foo(0)`, instead moving on to the next match rule which succeeds.
+
+There is no clearly correct decision between forwarding per production and forwarding per pattern.
+The current implementation strategy for `case` expressions leaves no choice, but alternative implementation strategies are possible and could be used in the future.
+One should not rely on this behavior since it may change; however, the only cases where it becomes relevant are the cases where a production which may forward to itself is used as a pattern with structured subpatterns, and most users will not encounter this situation.
 
 ## Completeness Analysis
 
