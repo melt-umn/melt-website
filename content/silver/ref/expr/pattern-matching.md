@@ -122,7 +122,7 @@ case d(c()) of
 end
 ```
 
-If we rearrange the rules in this last `case` expression, we get the same result:
+If we rearrange the rules in this last `case` expression to form the following one, we get the same result:
 ```
 case d(c()) of
 | b(_, _) -> 2
