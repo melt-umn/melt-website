@@ -149,9 +149,9 @@ We try to match `d(c())` against `a(_)`, which succeeds after forwarding, and th
 
 The relative order of patterns for forwarding and non-forwarding productions is relevant for which pattern matches.
 In this example, the `d(_)` pattern will never be reached because any trees built by the `d` production will match the `a(_)` pattern.
-This is the same as placing a more general pattern before a more specific pattern in non-forwarding pattern matching.
+This has the same effect as placing a more general pattern before a more specific pattern in non-forwarding pattern matching.
 To match a forwarding production, place it at the beginning of the clauses.
-It is not an error to place it later, but it is unlikely the resulting semantics are the intended ones.
+It does not cause a compile-time error to place it later, but it is unlikely the resulting semantics are the intended ones.
 
 Matching through forwarding occurs on a production basis, not a pattern basis, meaning we only forward to try to match a production pattern constructor if we could not match that constructor already, not if that constructor was matched but its children did not match the subpatterns.
 To see what we mean by this, suppose we have the following production:
