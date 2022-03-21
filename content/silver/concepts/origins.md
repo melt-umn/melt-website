@@ -183,7 +183,7 @@ When a node is newly constructed the context's `makeNewConstructionOrigin(bool)`
 
 When redexes are attached (when `expr.attr` is evaluated the result gets a redex pointing to the context of the access) it is by calling `OriginContext.attrAccessCopy(TrackedNode)` (if the value is a known-to-be-tracked nonterminal) or `OriginContext.attrAccessCopyPoly(Object)` (if the value is of a parametric type and has been monomorphized to `Object` - this is a no-op if it is not actually a `TrackedNode` at runtime.)
 This copies the node (using it's `.copy(newRedex, newRules)`) and returns the new copy that has a `originAndRedexOriginInfo` that got it's origin and origin notes from the old origin and it's redex and redex notes from the passed context.
-Similarly when a node if produced by `new` the result of `.undecorate()` has `.duplicate` called on it which performs a deep copy where the new nodes have `originOriginInfo(setAtNewOIT(), ...)` pointing back to the node they were copied form.
+Similarly when a node is produced by `new` the result of `.undecorate()` has `.duplicate` called on it which performs a deep copy where the new nodes have `originOriginInfo(setAtNewOIT(), ...)` pointing back to the node they were copied form.
 Lastly when a node is used as a forward `.duplicateForForwarding` is called on it to mark that, returning a shallow copy with a `originOriginInfo(setAtForwardingOIT(), ...)` pointing to the node with the 'real' origin info (this is kind of an ugly hack, but was preferable to introducing a new and unique pair of `origin(AndRedex)AndForward` OIs.)
 `.duplicate`, `.duplicateForForwarding` and `.copy` are specialized per-nonterminal, and a default implementation in `Node` simply ignores the request and does not do the copy (warnings can be uncommented there to see if this is happening - it won't affect correctness but will waste time.)
 
@@ -200,13 +200,11 @@ The last special case is the main function, which is called with `OriginContext.
  - `OriginInfo` productions are "sacred" (name and shape are compiler-assumed) and can't be changed without compiler and runtime support
  - `OriginInfoType` productions are "sacred" (name and shape are compiler-assumed) and can't be changed without compiler and runtime support
  - `OriginInfoType` productions are instantiated as singletons inside the runtime and don't have OI (same issue as above)
- - `List` isn't tracked and would need some special support from the runtime and compiler to be tracked. This would probably have disastrous performance implications if we changed it.
  - Some types are directly mentioned in the silver compiler as `nonterminalType`s and need to have a compiler-decided `tracked`ness. This `tracked`ness is alterable but requires compiler changes. Such types (and their current `tracked`ness) are as follows:
    - `core:Location` - no
    - `core:OriginNote` - no (see above)
    - `core:Either` - no
    - `core:reflect:*` - yes
-   - `core:List` - no (see above)
    - `silver:rewrite:Strategy` - no
    - `core:Maybe` - no
    - `core:ParseResult` - no
@@ -215,7 +213,7 @@ The last special case is the main function, which is called with `OriginContext.
    - `core:IOVal` - no
  - Foreign types can't be `tracked`, and some FFI interfaces don't preserve origins information (see [above](#imlementation-runtime-and-ffi))
 
- Types that CANNOT be tracked (currently just `core:OriginInfo`, `core:OriginInfoType`, and `core:List` (because it's translation is special)) are listed in `translation/java/core/origins.sv:getSpecialCaseNoOrigins` and will never be treated as tracked.
+ Types that CANNOT be tracked (currently just `core:OriginInfo`, `core:OriginInfoType`, and `core:OriginNote`) are listed in `translation/java/core/origins.sv:getSpecialCaseNoOrigins` and will never be treated as tracked.
 
  When `--no-origins` is used it does not alter whether or not the type is considered tracked in the compiler, it just disables codegen for origins. For types need to be constructed from runtime code you should construct them using the `rtConstruct` static method that forwards to the normal constructor with or without the origin argument depending on if `--no-origins` is used.
 
