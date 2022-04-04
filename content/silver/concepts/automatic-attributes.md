@@ -454,3 +454,21 @@ This will generate propagating aspect productions for all but the listed product
 We generally do not wish to propagate on forwarding productions as doing so would often be interfering, and the host language does not know about all forwarding productions anyway.  However if one does in fact wish to propagate on forwarding productions as well, they can simply add explicit propagate statements for each of these productions.
 
 In some cases some non-forwarding propagate statements may not be exported by the definition of the nonterminal, such as with closed nonterminals or optioned grammars.  In these cases explicit propagate statements are required as well, however the omission of these will be caught by the flow analysis.
+
+# Threaded Attributes
+
+Sometimes you want attributes to be threaded through the tree in a particular way.
+
+You might setup a threaded attribute like so
+```
+threaded attribute inh, syn;
+```
+
+And use it by calling it in this way.
+
+`propagate inh, syn;` generates `child1.inh = top.inh; child2.inh = child1.syn; top.syn = child2.syn;` on non-forwarding prods
+
+or ` child1.inh = top.inh; child2.inh = child1.syn; forward.inh = child2.syn;`
+on forwarding prods
+
+You can also do `thread inh, syn on top, child1, child2, prodattr1, prodattr2, top;` to adjust the order of threading or include prod attrs/locals  
