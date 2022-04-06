@@ -436,6 +436,26 @@ Otherwise the children of the matching production that have the attribute are co
 
 Note for any nonterminal types that have the standard `compareKey`, `compare` and `compareTo` attributes defined in `silver:core`, the `compare` function itself (and other comparison operators) are overloaded to use the attributes for comparison.  Thus propagating `compareKey`, `compare` and `compareTo` on a nonterminal type is comparable to writing `deriving Ord` in Haskell or similar languages.
 
+
+# Threaded Attributes
+
+Sometimes you want pairs of attributes to be threaded through the tree in a particular way. This might be useful if you're doing a substitution context in Hindley Milner Type inference, or you want to assign
+ids to nodes in a tree ordered by their position in the tree structure.
+
+You might setup a threaded attribute like so
+```
+threaded attribute inh, syn;
+```
+
+And use it by calling it in this way.
+
+`propagate inh, syn;` generates `child1.inh = top.inh; child2.inh = child1.syn; top.syn = child2.syn;` on non-forwarding prods
+
+or ` child1.inh = top.inh; child2.inh = child1.syn; forward.inh = child2.syn;`
+on forwarding prods
+
+You can also do `thread inh, syn on top, child1, child2, prodattr1, prodattr2, top;` to adjust the order of threading or include prod attrs/locals  
+
 # Global propagate
 In some cases we wish to propagate an attribute on all productions of a nonterminal with no exceptions.  Instead of adding `propagate` statements (and potentially aspects) for all productions, we can instead write
 ```
@@ -455,20 +475,3 @@ We generally do not wish to propagate on forwarding productions as doing so woul
 
 In some cases some non-forwarding propagate statements may not be exported by the definition of the nonterminal, such as with closed nonterminals or optioned grammars.  In these cases explicit propagate statements are required as well, however the omission of these will be caught by the flow analysis.
 
-# Threaded Attributes
-
-Sometimes you want attributes to be threaded through the tree in a particular way.
-
-You might setup a threaded attribute like so
-```
-threaded attribute inh, syn;
-```
-
-And use it by calling it in this way.
-
-`propagate inh, syn;` generates `child1.inh = top.inh; child2.inh = child1.syn; top.syn = child2.syn;` on non-forwarding prods
-
-or ` child1.inh = top.inh; child2.inh = child1.syn; forward.inh = child2.syn;`
-on forwarding prods
-
-You can also do `thread inh, syn on top, child1, child2, prodattr1, prodattr2, top;` to adjust the order of threading or include prod attrs/locals  
