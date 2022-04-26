@@ -444,17 +444,22 @@ ids to nodes in a tree ordered by their position in the tree structure.
 
 You might setup a threaded attribute like so
 ```
-threaded attribute inh, syn;
+threaded attribute inh, syn :: Context;
 ```
 
 And use it by calling it in this way.
 
 `propagate inh, syn;` generates `child1.inh = top.inh; child2.inh = child1.syn; top.syn = child2.syn;` on non-forwarding prods
-
 or ` child1.inh = top.inh; child2.inh = child1.syn; forward.inh = child2.syn;`
-on forwarding prods
+on forwarding prods.
 
-You can also do `thread inh, syn on top, child1, child2, prodattr1, prodattr2, top;` to adjust the order of threading or include prod attrs/locals  
+By default the children of productions are traversed left-to-right, but the direction of threading can also be specified manually:
+```
+threaded attribute inh1, syn1 :: Context direction = left to right;
+threaded attribute inh2, syn2 :: Context direction = right to left;
+```
+
+You can also do `thread inh, syn on top, child1, child2, prodattr1, prodattr2, top;` instead of propagate to more precisely specify the order of threading or include prod attrs/locals.
 
 # Global propagate
 In some cases we wish to propagate an attribute on all productions of a nonterminal with no exceptions.  Instead of adding `propagate` statements (and potentially aspects) for all productions, we can instead write
