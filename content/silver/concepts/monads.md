@@ -20,43 +20,13 @@ State is a bit different, in that it has its own type, compared with the maybe a
 State is actually represented as a nonterminal, with pureState, pureState, getState, and setState as the constructors. The evaluation happens by threading the state value through the tree in a synthesized and inherited attribute, and the monadic value is returned as another synthesized attribute.  In order to actually run the computation involving state, functions runState or evalState can be called which provide the input attributes and then return the results. 
 
 ## IO
-IO can be thought of as essentially similar to the State monad, except that instead of threading a value which can be accessed by the user, an 'IO token' is threaded.  This is further described in the reference on the old IO system <Insert link>.  The basic constructors for IO actions are productions that run the basic IO functions as represented in the library.  
+IO can be thought of as essentially similar to the State monad, except that instead of threading a value which can be accessed by the user, an 'IO token' is threaded.  This is further described in the reference on the [old IO system](/silver/concepts/io/).  The basic constructors for IO actions are productions that run the basic IO functions as represented in the library.  
 
 One issue with this is that the result of an IO action occurring isn't the only side effect possible.  Running a computation takes time, so it would be important to be able to force a specific ordering of evaluation to occur.  Sometimes demanding the IO token from an action could cause other computation values to be demanded before demanding the input IO token.  To avoid this issue, when the IO token or value out is demanded from a bindIO node, the IO token is demanded from the left child via unsafeTrace to force the IO actions to be performed before any intensive computations that would occur before the IO token out from the right child could be performed.  
 
 ## Do notation
-Since endlessly nesting bind calls is annoying, we can use 'do notation', instead.  At its simplest, a do expression looks like:
-```
-do {
-  <action1>;
-  val1 <- <action2>;
-  val2 <- <action3 involving val1>;
-  <action 4 involving val1 and 2>;
-  return <expression involving val1 and 2>;
-}
-```
-Each action has a monadic type, and the vals are names.  This translates to a sequence of binds, of the expressions on the right hand side of <- and a lambda with val1 as a parameter and the translation of the rest as the body.
-Sometimes we want to ignore the value returned by an action, in which case the lambda has a dummy parameter that gets ignored.
-`return` is simply syntactic sugar for calling `pure`.
-
-We sometimes may also wish to bind non-monadic values within a monadic computation.  We may also wish to conditionally perform monadic actions, by nesting `do`-expressions inside of `if`s.  For example:
-```
-local result::IOMonad<Integer> = do {
-  txt::String <- readFileM("file.txt");
-  let isEmpty::Boolean = length(txt) == 0;
-  if isEmpty then
-    printM("Empty!\n)
-  else pure(());
-  if txt == "Hello" then do {
-    printM("World");
-    return 2;
-  }
-  else
-    pure(length(txt));
-};
-```
-
-The `bind` and `pure` operations for any particular monadic type are specified via type classes.  Silver also implements [GHC's applicative do desugaring](https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/applicative_do.html), using the `map` and `ap` methods of the `Functor` and `Applicative` type classes in place of `bind` where possible; this sometimes allows for better efficiency.  
+Expressing complex monadic computations in terms of `bind`, `pure` and lambda expressions can become tedious and hard to read.
+Silver supports syntactic sugar for this in the form of [do-notation](/content/silver/ref/expr/do).
 
 ## TODO
 I'm not including the documentation for specific functions here, yet.  This seems like it should be generated?  
