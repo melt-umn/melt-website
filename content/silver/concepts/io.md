@@ -1,9 +1,13 @@
 ---
-title: IO
+title: Token-based IO
 weight: 500
 ---
 
-> _**Note:**_ Silver now has support for Monads, so this is in the process of being obsoleted, eventually.  See <update this with a link> for more details.
+> _**Note:**_ Silver now has support for Monads, so this threaded-token approach to IO is mostly[^1] obsolete.  See [here](/silver/concepts/monads) for more details.
+
+[^1]: There still might be some cases where token-based IO is more appropriate - e.g. an analysis that requires performing IO might be cleaner using an IO token
+passed through the tree with seperate threaded attributes than "infecting" everything with an IO monad (although [implicit monads](/silver/concepts/implicit-monads)
+should also be considered as a solution.) The `IO` monad itself is implemented using token IO, so this won't be going away any time soon, at least.
 
 Silver's IO support ~~is~~**was** terrible. Let's get that out of the way right from the beginning. Silver programs are largely intended to (1) read a file in its entirety and (2) write a file in its entirety, while (3) maybe printing some messages to the console. If you try to be fancier, you'll be all _smdh_.
 
@@ -13,7 +17,7 @@ Start with `main`:
 
 ```
 function main 
-IOVal<Integer> ::= args::[String] ioin::IO
+IOVal<Integer> ::= args::[String] ioin::IOToken
 {
   return ...;
 }
@@ -25,16 +29,16 @@ Lets take a look at some types:
 
 ```
 abstract production ioval
-top::IOVal<a> ::= i::IO v::a
+top::IOVal<a> ::= i::IOToken v::a
 
-function print
-IO ::= s::String i::IO
+function printT
+IO ::= s::String i::IOToken
 
-function readFile
-IOVal<String> ::= s::String i::IO
+function readFileT
+IOVal<String> ::= s::String i::IOToken
 
-function writeFile
-IO ::= file::String contents::String i::IO
+function writeFileT
+IO ::= file::String contents::String i::IOToken
 ```
 
 So, first off, if you're getting used to Silver conventions, you'll notice that `ioval` has its parameters _backwards_ from what you'd expect. This is indefensible. Sorry.
@@ -62,7 +66,7 @@ I invite you to marvel at this code:
  - Run units until a non-zero error code is encountered.
  -}
 function runAll
-IOVal<Integer> ::= l::[Unit] i::IO
+IOVal<Integer> ::= l::[Unit] i::IOToken
 {
   local attribute now :: Unit;
   now = head(l);
@@ -84,7 +88,7 @@ How did pre-monad Haskell get around this? Our `IOVal` type isn't really adequat
 
 ```
 abstract production ioval
-IOVal<a> ::= f::(Pair<a IO> ::= IO)
+IOVal<a> ::= f::(Pair<a IO> ::= IOToken)
 ```
 
 How demand was driven (demanding the value or the IO token), in this case, doesn't matter, because both will trigger calling the function, which will trigger demanding the previous IO token. All good.
