@@ -26,7 +26,7 @@ One issue with this is that the result of an IO action occurring isn't the only 
 
 ## Do notation
 Expressing complex monadic computations in terms of `bind`, `pure` and lambda expressions can become tedious and hard to read.
-Silver supports syntactic sugar for this in the form of [do-notation](/content/silver/ref/expr/do).
+Silver supports syntactic sugar for this in the form of [do-notation](/silver/ref/expr/do).
 
 ## TODO
 I'm not including the documentation for specific functions here, yet.  This seems like it should be generated?  
