@@ -119,6 +119,7 @@ This means that non-propagated equations must use `:=` instead of `=`, and addit
 
 When propagated on a production with no children on which the attribute occurs, the empty value is used.
 Otherwise, the append operator is used to combine the value of the attribute on all children with the attribute.
+This includes [partially decorated](/silver/concepts/partial-decoration) children, since we typically wish to consider them in analyses, but excludes decorated children, since they have typically been fully analyzed elsewhere.
 
 Monoid attributes commonly have list, string, integer or Boolean types.  If the type of the attribute is in the `Monoid` type class (as is the case with strings and lists), then the empty value and operator (the `with [], ++`) can be omitted.
 
@@ -211,6 +212,8 @@ top::ExtStmt ::= ...
   top.host = seqStmt(..., ...);
 }
 ```
+
+Note that propagating a functor attribute on a production with a [partially decorated](/silver/concepts/partial-decoration) child will result in an error, as the generated equation will take a partially decorated reference to the child, which is not permitted outside of unique contexts such as forwards-to equations. Typically the intended behavior for a functor attribute on a production with partially decorated children is to compute the attribute on the children, however an attribute on a partially decorated tree yields an undecorated term, meaning a different production must be used to construct the result.
 
 # Destruct attributes
 Consider the problem of comparing two trees in some fashion, for example checking them for equality.  Some mechanism is needed to associate the nodes of two decorated trees of (possibly) the same shape.  This can be done by an inherited (destruct) attribute passing a [reference](/silver/concepts/decorated-vs-undecorated/#reference-decorated) to one tree being compared down the other, and a corresponding synthesized ([equality](/silver/concepts/automatic-attributes/#equality-attributes)) attribute that at every production determines whether the current tree is equal to the one that was passed down.
