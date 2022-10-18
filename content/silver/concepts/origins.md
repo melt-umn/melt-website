@@ -185,7 +185,7 @@ When redexes are attached (when `expr.attr` is evaluated the result gets a redex
 This copies the node (using it's `.copy(newRedex, newRules)`) and returns the new copy that has a `originAndRedexOriginInfo` that got it's origin and origin notes from the old origin and it's redex and redex notes from the passed context.
 Similarly when a node is produced by `new` the result of `.undecorate()` has `.duplicate` called on it which performs a deep copy where the new nodes have `originOriginInfo(setAtNewOIT(), ...)` pointing back to the node they were copied form.
 Lastly when a node is used as a forward `.duplicateForForwarding` is called on it to mark that, returning a shallow copy with a `originOriginInfo(setAtForwardingOIT(), ...)` pointing to the node with the 'real' origin info (this is kind of an ugly hack, but was preferable to introducing a new and unique pair of `origin(AndRedex)AndForward` OIs.)
-`.duplicate`, `.duplicateForForwarding` and `.copy` are specialized per-nonterminal, and a default implementation in `Node` simply ignores the request and does not do the copy (warnings can be uncommented there to see if this is happening - it won't affect correctness but will waste time.)
+`.duplicate`, `.duplicateForForwarding` and `.copy` are specialized per-nonterminal.
 
 When control flow passes into java-land and then back into silver (i.e. when the raw treemap code invokes a java operation that calls back into silver using a `SilverComparator`) a context is needed.
 Since there isn't a (good) way to indicate to the comparator where in silver it was called (we could attach the context when it was constructed, but this is the creation site of the tree not the invocation site of the comparison) it just gets a garbage context: `OriginContext.FFI_CONTEXT` which turns into a `otherOriginInfo(setFromFFIOIT(), ...)` if it constructs nodes.
@@ -311,10 +311,5 @@ There are a few compiler flags that can be passed to `silver` to control origins
  - `--no-redex` causes the code to not track redexes. Redexes are a neat feature and a cool part of the theory but not necessary if all you want to do is avoid having to use a `location` annotation for error messages. This can be somewhat (5%) faster than leaving redexes on if you aren't using them.
  - `--tracing-origins` causes the code to attach notes indicating the control flow path that lead to constructing each node to it's origins. This can be a neat debugging feature, but is also quite slow.
 
-
-
-## Build Issues
-
-Because of [the issues with the silver build system](https://github.com/melt-umn/silver/issues/36) it's possible to get in situations where either semantically wrong code (no origins when there should be), inefficient code, or crashing code is generated if `--clean` is not used after changing compiler flags or trackedness of nonterminals.
-To avoid this: **rebuild with `--clean` every time you (1) change the `tracked`ness of something or (2) change any of the compiler flags relating to origins (`--force-origins`, `--no-origins`, `--no-redex`, `--tracing-origins`.)**
-TODO: Fix #36 and resolve this issue.
+Just changing compiler flags that affect the translation will not cause anything to be re-translated if none of the grammar source files have been touched.
+Thus you should re-build with `--clean` when changing any of the above compiler flags.
