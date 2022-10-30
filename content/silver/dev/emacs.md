@@ -1,5 +1,6 @@
 ---
 title: Emacs Support with LSP
+weight: 250
 ---
 
 {{< toc >}}
