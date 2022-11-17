@@ -12,9 +12,8 @@ Project organization:
 | support/   | Random supporting files. Scripts, syntax highlighting stuff, etc.                                |
 | test/      | Tests for silver. Not a particularly good organization below it yet.                             |
 | tutorials/ | Tutorials, to be distributed with Silver.                                                        |
-| grammars/core/ | The always-included silver library. Probably renamed silver:prelude, someday.                    |
-| grammars/lib/ | DEPRECATED. Old place to jam random libraries.                                                   |
-| grammars/silver/ | where most things should be. Also the compiler. Someday, the compiler will probably be pushed under silver:compiler |
+| grammars/silver/core/ | The always-included silver library.     |
+| grammars/silver/compiler | the Silver compiler implementation |
 | grammars/silver/util | silver:util is deprecated, but stuff below it isn't necessarily, and some of the grammars below it should be considered "standard library" |
 | grammars/silver/testing | the testing harness stuff, both the library and the binary.                                      |
 | grammars/silver/langutil | standard library stuff, but specific to language processing                                      |
@@ -23,14 +22,14 @@ Grammars organization:
 
 | Path | Description |
 |-----|-----|
-| grammars/silver/definition/core | the central place to look for silver compiler stuff |
-| grammars/silver/definition/ (env,type,regex,concrete\_syntax) | Silver environment, type, regular expression syntax, and the concrete syntax for concrete syntax declarations in Silver. (Don't confuse this for Silver's concrete syntax!) |
-| grammars/silver/analysis/       | typechecking is in here, that's about it            |
-| grammars/silver/translation     | The translation to Java is here                     |
-| grammars/silver/host            | a "host language" definition for silver.            |
-| grammars/silver/extensions      | pure extensions to the silver "host language"       |
-| grammars/silver/modifications   | pieces of the core Silver language that are pretty self-contained, but not true, pure extensions |
-| grammars/silver/composed        | Where the main function lies                        |
+| grammars/silver/compiler/definition/core | the central place to look for silver compiler stuff |
+| grammars/silver/compiler/definition/ (env,type,regex,concrete\_syntax) | Silver environment, type, regular expression syntax, and the concrete syntax for concrete syntax declarations in Silver. (Don't confuse this for Silver's concrete syntax!) |
+| grammars/silver/compiler/analysis/       | typechecking, flow analysis, etc.           |
+| grammars/silver/compiler/translation     | The translation to Java is here                     |
+| grammars/silver/compiler/host            | a "host language" definition for silver.            |
+| grammars/silver/compiler/extensions      | pure extensions to the silver "host language"       |
+| grammars/silver/compiler/modifications   | pieces of the core Silver language that are pretty self-contained, but not true, pure extensions |
+| grammars/silver/compiler/composed        | Where the main function lies                        |
 
 ## FAQ
 

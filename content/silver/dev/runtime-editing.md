@@ -1,35 +1,9 @@
 ---
-title: Editing the runtime in Eclipse
+title: Silver runtime
 weight: 400
 ---
 
 {{< toc >}}
-
-## Importing the project
-
-I recommend just importing the project where you have it checked out, rather that attempting to use Eclipse's mercurial plugins or anything like that. This makes it easier to actually test/use the changes because Eclipse will then be editing the files where you have Silver checked out, instead of some separate workspace. (and because `./deep-rebuild` rebuilds the runtime automatically.)
-
-File -> Import -> Existing projects into workspace
-
-Select `runtime/java` wherever you have Silver checked out (e.g. `~/repos/silver/runtime/java`). It should find the project 'common'.
-
-## Fixing configuration issues
-
-You will probably have build errors at this point.
-
-Right click on the project, select 'Properties'. Go to the 'Java Build Path' panel, and click the 'Libraries' tab on the right side of the window.
-
-Edit both 'bin' and 'CopperRuntime.jar'. (It should be obvious from the paths.)'
-
-(At this point, I had Eclipse bug out and not let me select a directory for bin. You may have to delete this entry and click 'Add external class folder'. Editing it alone may not work for some reason.)
-
-**Try to avoid committing the changes to the 'runtime/java/.classpath' file, so we don't just step all over each other with this change.**
-
-## Make sure Silver is built
-
-Run `deep-rebuild` once, to make sure 'bin' gets populated. Then click 'refresh' on the project to have it see the changes.
-
-At this point, everything should be built and working in Eclipse.
 
 ## A tour of the runtime
 
