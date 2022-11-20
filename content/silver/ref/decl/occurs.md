@@ -58,7 +58,7 @@ with different behavior over different types.  By analogy, occurs-on declaration
 
 With type classes, we sometimes would like to abstract over any type that has an instance of some type class,
 which we can do by writing type class type constraints.
-Similarly, we sometimes would like to abstract over any type that has some attribute(s) occuring on it.
+Similarly, we sometimes would like to abstract over any type that has some attribute(s) occurring on it.
 This can be done using attribute occurs-on constraints, for example
 ```
 function getErrors
@@ -73,7 +73,7 @@ attribute errors {env} occurs on a =>
 Here `attribute env occurs on a` is a constraint stating values of type `a` can be supplied with the inherited attribute `env`.
 `attribute errors {env} occurs on a` states that the attribute `errors` can be demanded from `a` values that have been decorated
 with at least `env`.
-To call `getErrors` for some type `Foo`, the attrbutes `env` and `errors` must occur on `Foo`,
+To call `getErrors` for some type `Foo`, the attributes `env` and `errors` must occur on `Foo`,
 and the [flow type](/silver/concepts/modular-well-definedness/) of `errors` on `Foo` must be no larger than `{env}`.
 
 The flow type in a synthesized occurs-on type constraint can also be polymorphic - for example,
