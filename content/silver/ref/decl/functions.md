@@ -30,7 +30,6 @@ Functions must also contain a [return statement](/silver/ref/stmt/return/).
 ## Semantics
 
 Like the children of productions, function parameters may be supplied inherited attributes in the function body, and are considered implicitly decorated.
-Unlike productions, there is no parent for autocopy attributes to come from.
 
 Passing undecorated types to a function, accessing an attribute, and getting errors about missing inherited attribute equations is a common mistake for new Silver programmers.
 Sometimes the function should have taken a reference (`Decorated Expr`) type instead of the undecorated (`Expr`) type.

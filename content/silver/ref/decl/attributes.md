@@ -29,20 +29,6 @@ All type variables that appear in the type must be declared in the type paramete
 For an explanation of the role of attributes, see [the section on attribute grammars](/silver/tutorial/4_attribute_grammars/).
 A deeply related concept is the [occurs-on declaration](/silver/ref/decl/occurs/).
 
-## Autocopy attributes
-
-For language processing, nearly all `inherited` attributes are better described as `autocopy` attributes:
-
-<pre>
-autocopy attribute <i>name</i> :: <i>type</i>;
-</pre>
-
-Autocopy attributes differ from inherited attributes in that some equations are automatically generated.
-Unless an attribute equation in a production body gives a different rule, the attribute is simply copied from the parent to all children the attribute also occurs on.
-
-Note that currently, autocopy attributes are not permitted to be parameterized.
-This restriction may or may not be lifted in the future.
-
 ## Collection attributes
 
 Attributes that may have their value influenced by aspects are called collection attributes, and are declared by giving the attribute an associated _composition operator_ using `with`:
