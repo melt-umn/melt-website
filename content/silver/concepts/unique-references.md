@@ -1,15 +1,13 @@
 ---
-title: Partial Decoration
+title: Unique References and Incremental Decoration
 weight: 300
 ---
 
 {{< toc >}}
 
-Partially decorated references are an extension to Silver's notion of [references to decorated trees](/silver/concepts/decorated-vs-undecorated).
+Unique references are an extension to Silver's notion of [references to decorated trees](/silver/concepts/decorated-vs-undecorated).
 
-**NOTE**: This feature is more experimental than average, and is subject to change!
-
-## The Exponential Redecoration Problem and `decExpr`
+## Motivating Example - The Exponential Redecoration Problem and `decExpr`
 
 Let's take as an example, compiling a simple language with integers, booleans, and overloaded operators.
 This language has an overloaded `&`, so that:
@@ -37,7 +35,7 @@ top::Expr ::= lhs::Expr  rhs::Expr
 ```
 
 However, this has a big performance problem hiding in it!
-`lhs` and `rhs` must be undecorated terms in order to be passed to `exprsCons`, so after decoration inference, the code is equivalent to:
+`lhs` and `rhs` must be undecorated terms in order to be passed to `exprsCons`, so after type inference, the code is equivalent to:
 
 ```silver
 production andExpr
@@ -208,33 +206,40 @@ In this case, the `child.transDeclsIn` equation in `decExpr` can't work, since t
 
 [^rmattrs]: One might have the idea that we could just make a copy of the tree, and remove any attribute values that somehow depend on the attributes being supplied. However actually storing the needed dependency information at run time would add quite a bit of overhead and complexity, and we would still like to share the portions of the tree that don't depend on the removed attributes - this is more difficult to achieve than it may appear.
 
-## Partial Decoration as a Solution
+## Unique References as a Solution
 
-Partial Decoration makes it sound to write `child.transDeclsIn`, under some conditions.
-It introduces a new variety of type, `PartiallyDecorated ... with ...`.
+Unique references make it sound to write `child.transDeclsIn`, under some conditions.
+It introduces a new variety of type, `UniqueDecorated ... with ...`.
 
-`PartiallyDecorated Expr` is a tree that was originally decorated with *only* the [reference set](/silver/concepts/decorated-vs-undecorated/#more-specific-reference-types) of attributes, rather than *at least* the reference set of attributes.
-If you were to instead write:
+`UniqueDecorated Expr` is a *unique* reference to a decorated `Expr` -
+a unique reference to this tree does not exist anywhere else
+(although there may be more ordinary references, of type `Decorated Expr`.)
+Furthermore this tree must have been originally decorated with *only* the
+[reference set](/silver/concepts/decorated-vs-undecorated/#more-specific-reference-types) of attributes,
+rather than *at least* the reference set of attributes (as is the case for `Decorated Expr`.)
+These two constraints make it safe to supply inherited attribute equations to a unique reference,
+without fear of introducing duplicate equations.
 
+For example, one can now write
 ```silver
 aspect production decExpr
-top::Expr ::= child::PartiallyDecorated Expr
+top::Expr ::= child::UniqueDecorated Expr
 {
   child.transDeclsIn = top.transDeclsIn;
   top.transDecls = child.transDecls;
 }
 ```
+Here `child` refers to the same original tree that was decorated in `fooExpr` (or elsewhere).
+However we can now supply `transDeclsIn` to this tree, allowing one to access `transDecls`,
+while reusing any other attributes that were originally computed on `child`.
 
-This will reuse any thunks that are already present on `child`, like the original `decExpr` did.
-However, `transDecls` now works!
+## Restrictions on Unique References
 
-## Restrictions on Partially Decorated References
+Decorating a tree with additional attributes works by *mutating* the original tree to add the additional attribute equations.
+This means that we must be sure that any time we take a unique reference to a tree, we must be sure never to decorate the original tree with more attributes!
 
-Decorating a partially-decorated tree with additional attributes works by *mutating* the original tree to add the additional attribute equations.
-This means that we must be sure that any time we take a partially decorated reference to a tree, we must be sure never to decorate the original tree with more attributes!
-
-These requirements are enforced with several restrictions in the flow analysis.
-First, if we take a partially decorated reference to some child or local (termed a _decoration site_), it is a flow error to supply any inherited equations that are not in the reference set:
+These requirements are enforced with several restrictions in the flow analysis, and a new _uniqueness analysis_.
+First, if we take a unique reference to some child or local (termed a _decoration site_), it is a flow error to supply any inherited equations that are not in the reference set:
 
 ```silver
 production barExpr
@@ -247,29 +252,53 @@ top::Expr ::= child::Expr
 }
 
 production barFwd
-top::Expr ::= child::PartiallyDecorated Expr with {env}
+top::Expr ::= child::UniqueDecorated Expr with {env}  -- Doesn't contain barInh!
 { ... }
 ```
-In the above, a flow error is raised on the equation for `barInh` in the `barExpr` production; this is potentially a duplicate equation, as we are taking a partially decorated reference to `child` with only `env` in the forward for `barExpr`. The `barFwd` production could have an equation `child.barInh = false;`, which would conflict with this one.
+In the above, a flow error is raised on the equation for `barInh` in the `barExpr` production; this is potentially a duplicate equation, as we are taking a unique reference to `child` with only `env` in the forward for `barExpr`. The `barFwd` production could have an equation `child.barInh = false;`, which would conflict with this one.
 
-Similarly, it is also illegal to take multiple partially decorated references to the same decoration site:
+Similarly, it is also illegal to take multiple unique references to the same decoration site:
 ```silver
 production bazExpr
 top::Expr ::= child::Expr
 {
-  production child1::PartiallyDecorated Expr = child;
+  production child1::UniqueDecorated Expr = child;
   child1.barInh = true;
 
-  production child2::PartiallyDecorated Expr = child;
-  child2.barInh = true;
+  production child2::UniqueDecorated Expr = child;  -- Duplicate unique reference!
+  child2.barInh = false;
 
   top.barSyn = child1.barSyn || child2.barSyn;
 }
 ```
 
-## Caveats
+The uniqueness analysis restricts the places where it is legal to take a unique reference.
+For example, it is illegal to take a unique reference in an attribute equation,
+as value of the attribute may be accessed and decorated in multiple places.
+The analysis is essentially a special case of linear types, with some special consideration of Silver's semantics for undecoration.
+Essentially, the analysis states that a unique reference may only be taken in a unique context,
+where a unique context means an expression whose result is known to only be decorated once.
+An expression is in a unique context if it is:
+1. The forwards-to expressions of a production
+2. The right side of an equation for a local or production attribute
+3. The `then` or `else` branch of an `if` in a unique context
+4. A clause of a `case` in a unique context
+5. An argument in a call to a known function or production, where the child/parameter is not a type variable
+6. An argument in an arbitrary function application, where the parameter is not a type variable or undecorated nonterminal type
+7. The return expression of a function, if the function has a `UniqueDecorated` parameter
+8. The body of a lambda, if the unique reference is to a `UniqueDecorated` lambda parameter
 
-However there are some situations where a partially decorated reference may be supplied with the same attributes twice, that are not caught by the flow analysis.  For example:
+Cases 1 and 2 above are unique contexts, because although the values of these expressions are decorated every time the production is decorated (or the function is called, in the case of locals in a function), these values are newly created every time the enclosing production is decorated - thus, they are only decorated once.
+
+Cases 3 and 4 are self-evident - these values of these sub-expressions are decorated when the enclosing expression is decorated.
+
+Case 6 constitutes a unique context because no production/function that passes the uniqueness analysis can decorate a unique reference argument more than once,
+and no other type besides a nonterminal can be decorated at all.
+The parameter/child must however be monomorphic (cannot contain type variables), as there is no restriction preventing polymorphic values from being duplicated -
+solving this would require introducing some notion of linear types.
+For now this 
+
+For example:
 ```silver
 production quxExpr
 top::Expr ::= child::Expr
@@ -280,11 +309,8 @@ top::Expr ::= child::Expr
 production doubleExpr
 top::Expr ::= e::Expr
 {
-  forwards to mulExpr(e, e);
+  forwards to addExpr(e, e);
 }
 ```
-Here the (poorly implemented, but currently 100% legal!) `doubleExpr` decorates its child twice by forwarding to `mulExpr`.  If `doubleExpr` is passed a `decExpr`, any inherited equations written on `decExpr` will cause the `PartiallyDecorated Expr` will be decorated twice. This currently results in a run-time error.
+Here  `doubleExpr` decorates its child twice by forwarding to `addExpr`.  If `doubleExpr` is passed a `decExpr`, any inherited equations written on `decExpr` will cause the `UniqueDecorated Expr` to be decorated twice.
 
-In the future, some sort of substructural type system (e.g. linear types) or other use analysis may be implemented to prevent these situations, however it is possible that such an analysis will be overly restrictive (for example, we may need to effectively ban `new`.)
-
-Alternatively, we may choose to silently ignore when a tree is decorated with the same attribute more than once, and implement some randomized testing approach to verify that subsequent decorations provided the same attribute values. However it is always best to avoid decorating a tree multiple times for performance reasons, as outlined above.
