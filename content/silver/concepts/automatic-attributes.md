@@ -41,7 +41,8 @@ top::Stmt ::= s1::Stmt s2::Stmt
 }
 ```
 
-This is a recommended alternative to using [autocopy attributes](/silver/ref/decl/attributes/#autocopy-attributes), which may be deprecated at some point in the future.
+This mechanism replaced "autocopy attributes", a variant of inherited attributes in which attribute values were implicitly copied down the tree.
+This feature was removed because of the potential for undesired (and potentially incorrect!) implicit equations.
 
 # Monoid attributes
 Monoid attributes allow for collections of values to be assembled and passed up the tree.
