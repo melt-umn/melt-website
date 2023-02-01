@@ -186,7 +186,8 @@ top::Expr ::= child::Decorated Expr
 }
 ```
 
-However, this isn't possible, since we don't know that `child` doesn't already have an equation for `transDeclsIn`.
+However, this isn't possible, since we don't know that `child` doesn't already have an equation for `transDeclsIn`
+wherever it was originally decorated.
 For example, another extension could add:
 
 ```silver
@@ -208,10 +209,12 @@ In this case, the `child.transDeclsIn` equation in `decExpr` can't work, since t
 
 ## Unique References as a Solution
 
-Unique references make it sound to write `child.transDeclsIn`, under some conditions.
-It introduces a new variety of type, `UniqueDecorated ... with ...`.
+Unique references make it sound to provide `child.transDeclsIn`, under some conditions.
+It introduces a new variety of type, `Decorated! ... with ...`.
+`Decorated!` is pronounced "unique decorated"; the syntax is inspired from set theory,
+where ! can refer to a unique member of a set.
 
-`UniqueDecorated Expr` is a *unique* reference to a decorated `Expr` -
+`Decorated! Expr` is a *unique* reference to a decorated `Expr` -
 a unique reference to this tree does not exist anywhere else
 (although there may be more ordinary references, of type `Decorated Expr`.)
 Furthermore this tree must have been originally decorated with *only* the
@@ -223,7 +226,7 @@ without fear of introducing duplicate equations.
 For example, one can now write
 ```silver
 aspect production decExpr
-top::Expr ::= child::UniqueDecorated Expr
+top::Expr ::= child::Decorated! Expr
 {
   child.transDeclsIn = top.transDeclsIn;
   top.transDecls = child.transDecls;
@@ -252,7 +255,7 @@ top::Expr ::= child::Expr
 }
 
 production barFwd
-top::Expr ::= child::UniqueDecorated Expr with {env}  -- Doesn't contain barInh!
+top::Expr ::= child::Decorated! Expr with {env}  -- Doesn't contain barInh!
 { ... }
 ```
 In the above, a flow error is raised on the equation for `barInh` in the `barExpr` production; this is potentially a duplicate equation, as we are taking a unique reference to `child` with only `env` in the forward for `barExpr`. The `barFwd` production could have an equation `child.barInh = false;`, which would conflict with this one.
@@ -262,10 +265,10 @@ Similarly, it is also illegal to take multiple unique references to the same dec
 production bazExpr
 top::Expr ::= child::Expr
 {
-  production child1::UniqueDecorated Expr = child;
+  production child1::Decorated! Expr = child;
   child1.barInh = true;
 
-  production child2::UniqueDecorated Expr = child;  -- Duplicate unique reference!
+  production child2::Decorated! Expr = child;  -- Duplicate unique reference!
   child2.barInh = false;
 
   top.barSyn = child1.barSyn || child2.barSyn;
@@ -285,14 +288,14 @@ An expression is in a unique context if it is:
 4. A clause of a `case` in a unique context
 5. An argument in a call to a known function or production, where the child/parameter is not a type variable
 6. An argument in an arbitrary function application, where the parameter is not a type variable or undecorated nonterminal type
-7. The return expression of a function, if the function has a `UniqueDecorated` parameter
-8. The body of a lambda, if the unique reference is to a `UniqueDecorated` lambda parameter
+7. The return expression of a function, if the function has a `Decorated!` parameter
+8. The body of a lambda, if the unique reference is to a `Decorated!` lambda parameter
 
 Cases 1 and 2 above are unique contexts, because although the values of these expressions are decorated every time the production is decorated (or the function is called, in the case of locals in a function), these values are newly created every time the enclosing production is decorated - thus, they are only decorated once.
 
 Cases 3 and 4 are self-evident - these values of these sub-expressions are decorated when the enclosing expression is decorated.
 
-Case 6 constitutes a unique context because no production/function that passes the uniqueness analysis can decorate a unique reference argument more than once,
+Case 5 constitutes a unique context because no production/function that passes the uniqueness analysis can decorate a unique reference argument more than once,
 and no other type besides a nonterminal can be decorated at all.
 The parameter/child must however be monomorphic (cannot contain type variables), as there is no restriction preventing polymorphic values from being duplicated -
 solving this would require introducing some notion of linear types.
@@ -312,5 +315,5 @@ top::Expr ::= e::Expr
   forwards to addExpr(e, e);
 }
 ```
-Here  `doubleExpr` decorates its child twice by forwarding to `addExpr`.  If `doubleExpr` is passed a `decExpr`, any inherited equations written on `decExpr` will cause the `UniqueDecorated Expr` to be decorated twice.
+Here  `doubleExpr` decorates its child twice by forwarding to `addExpr`.  If `doubleExpr` is passed a `decExpr`, any inherited equations written on `decExpr` will cause the `Decorated! Expr` to be decorated twice.
 
