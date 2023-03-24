@@ -49,3 +49,9 @@ e::Expr ::= l::Expr r::Expr
 ```
 
 > The final value of _`errors`_ on a tree node constructed by the _`add`_ production will contain any errors defined on its children (including type errors computed by aspects on the productions defining the children) and any type errors computed in the aspect above.
+
+
+[Threaded attributes](/silver/concepts/automatic-attributes/#threaded-attributes) can also be declared as collection attributes:
+```
+threaded attribute countIn, countOut :: Integer with +;
+```
