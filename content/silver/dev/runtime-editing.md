@@ -47,7 +47,6 @@ Related attribute-grammary stuffs:
 
 Ignore this crap:
 
-  * **Decorator** - will go away. Currently just junk about how autocopy gets implemented.
   * **IOToken** - not yet used, but will eventually just be the '`IO`' value.
   * **Statistics** - ignore it. Nasty.
 

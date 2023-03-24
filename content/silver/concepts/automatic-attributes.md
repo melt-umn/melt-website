@@ -41,8 +41,8 @@ top::Stmt ::= s1::Stmt s2::Stmt
 }
 ```
 
-Propagated inherited attributes replaced "autocopy attributes", where the copy equations were implicit on all children with the attribute.
-This feature was removed due to the potential for unintended equations, with no ability to suppress them.
+This mechanism replaced "autocopy attributes", a variant of inherited attributes in which attribute values were implicitly copied down the tree.
+This feature was removed because of the potential for undesired (and potentially incorrect!) implicit equations.
 
 # Monoid attributes
 Monoid attributes allow for collections of values to be assembled and passed up the tree.
