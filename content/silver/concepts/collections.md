@@ -49,3 +49,22 @@ e::Expr ::= l::Expr r::Expr
 ```
 
 > The final value of _`errors`_ on a tree node constructed by the _`add`_ production will contain any errors defined on its children (including type errors computed by aspects on the productions defining the children) and any type errors computed in the aspect above.
+
+
+[Threaded attributes](/silver/concepts/automatic-attributes/#threaded-attributes) can also be declared as collection attributes:
+```
+threaded attribute <inh-name>, <syn-name> :: <type> with <op>;
+```
+
+> _**Example:**_ This is useful for patterns such as incrementing a unique identifier counter:
+```
+threaded attribute idIn, idOut :: Integer with + occurs on Expr;
+propagate idIn, idOut on Expr;
+production foo
+top::Expr ::= e1::Expr e2::Expr
+{
+  e1.idIn <- 1;
+
+  local id::Integer = top.idIn;
+}
+```
