@@ -315,5 +315,27 @@ top::Expr ::= e::Expr
   forwards to addExpr(e, e);
 }
 ```
-Here  `doubleExpr` decorates its child twice by forwarding to `addExpr`.  If `doubleExpr` is passed a `decExpr`, any inherited equations written on `decExpr` will cause the `Decorated! Expr` to be decorated twice.
+Here `doubleExpr` decorates its child twice by forwarding to `addExpr`.  If `doubleExpr` is passed a `decExpr`, any inherited equations written on `decExpr` will cause the `Decorated! Expr` to be decorated twice.
 
+We additionally add a restriction in the type system that fresh type variables cannot be specialized to unique reference types.  This is to prevent someone from writing something such as
+```silver
+production addInt
+top::Expr ::= a::Decorated! Expr  b::Decorated! Expr
+{ ... }
+
+production notOp
+top::Expr ::= a::Expr
+{ forwards to a.typerep.notProd(a); }
+
+synthesized attribute notProd::(Expr ::= Decorated! Expr);
+
+production duplicator  -- Could also be a function
+top::Expr ::= x::a fn::(Expr ::= a a)
+{ forwards to fn(x, x); }
+production thingType
+top::Type ::=
+{
+  top.notOp = duplicator(_, addInt);
+}
+```
+where `addInt` is supplied with the same unique reference twice.
