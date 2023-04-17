@@ -53,5 +53,18 @@ e::Expr ::= l::Expr r::Expr
 
 [Threaded attributes](/silver/concepts/automatic-attributes/#threaded-attributes) can also be declared as collection attributes:
 ```
-threaded attribute countIn, countOut :: Integer with +;
+threaded attribute <inh-name>, <syn-name> :: <type> with <op>;
+```
+
+> _**Example:**_ This is useful for patterns such as incrementing a unique identifier counter:
+```
+threaded attribute idIn, idOut :: Integer with + occurs on Expr;
+propagate idIn, idOut on Expr;
+production foo
+top::Expr ::= e1::Expr e2::Expr
+{
+  e1.idIn <- 1;
+
+  local id::Integer = top.idIn;
+}
 ```
