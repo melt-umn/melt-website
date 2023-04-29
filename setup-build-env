@@ -13,4 +13,4 @@ curl -L https://github.com/gohugoio/hugo/releases/download/v0.80.0/hugo_0.80.0_L
 
 rm -rf themes/hugo-geekdoc 2>/dev/null ||true
 mkdir -p themes/hugo-geekdoc/
-curl -L https://github.com/thegeeklab/hugo-geekdoc/releases/latest/download/hugo-geekdoc.tar.gz | tar -xz -C themes/hugo-geekdoc/ --strip-components=1
+curl -L https://github.com/thegeeklab/hugo-geekdoc/releases/download/v0.10.1/hugo-geekdoc.tar.gz | tar -xz -C themes/hugo-geekdoc/ --strip-components=1
