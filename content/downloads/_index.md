@@ -6,7 +6,8 @@ title: Downloads
 
 * [Silver GitHub repository](https://github.com/melt-umn/silver)
 * [silver-latest](/downloads/silver-dev/jars/silver-latest.tar.gz)
-* [Silver 0.4](/downloads/silver-0.4.0.tar.gz)
+* [Silver 0.4.5](/downloads/silver-0.4.5.tar.gz)
+* [Silver LSP VS Code extension](https://melt.cs.umn.edu/downloads/silverlsp-latest.vsix)
 
 ## Copper
 
