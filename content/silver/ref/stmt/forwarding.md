@@ -40,7 +40,7 @@ But, forwarding is often used in a few other common ways:
 Single-dispatch based on types, for example, is easy to implement using forwarding. Types can be given an attribute like the following:
 
 ```
-synthesized attribute lengthDispatcher :: Production(Expr ::= Decorated Expr);
+synthesized attribute lengthDispatcher :: (Expr ::= Decorated Expr);
 ```
 
 Using the inheritance method of the previous section, the default type can set this attribute to an error production, and relevant types (such as strings and lists) can override that with a production specialized to their types.
