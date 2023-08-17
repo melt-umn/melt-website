@@ -24,6 +24,12 @@ instance Eq Float {
 
 `Eq` is a type class in the standard library, providing the functions `eq` and `neq` (the `==` and `!=` operators forward to calls to these functions.)  Implementations of these functions are provided for various types by defining _instances_.  The `Eq` type class provides defaults for both of these methods, such that instances need only provide an implementation for one function or the other.
 
+## Deriving Instances
+For some type classes (currently `Eq` and `Ord`), the compiler can automatically generate instances for nonterminals:
+```
+derive Eq, Ord on MyNT;
+```
+
 ## Type constraints
 Type classes may be used as constraints on variables in type signatures; any constraints on a function's type must be resolved in order to use the function.  The members of a type class automatically have the declared class as a constraint; for example in type checking `eq(42, 128)` the constraint `Eq Integer` must be resolved, by looking up that instance.
 
