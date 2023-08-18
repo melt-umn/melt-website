@@ -68,6 +68,17 @@ and(l.ast, r.ast, location=lhs.location)
 
 The named arguments **must** come after the ordered arguments.
 
+## Production types with annotations
+
+The type of a production for a nonterminal with annotations is a function type with named parameters, for example one could write:
+
+```
+global myAnd::(Expr ::= Expr Expr; location::Location) = and;
+```
+
+Currently, productions with annotations are the only way of creating a function with named parameters.
+In the future we may generalize this to support arbitrary functions with named parameters.
+
 ## Implicit location
 
 In the standard library there is a `location` annotation that the parser has special understanding of.

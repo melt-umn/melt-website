@@ -56,3 +56,7 @@ Annotations are supplied to a production as named parameters after the ordered p
 add(l.ast, r.ast, location=this.location)
 ```
 
+Named annotation parameters can also be converted to ordered parameters in a partial application:
+```
+add(_, _, location=_)
+```
