@@ -41,6 +41,8 @@ top::Stmt ::= s1::Stmt s2::Stmt
 }
 ```
 
+For productions with [unique reference](/silver/concepts/unique-refs) children, the attribute is only copied down if it is not already been supplied in the child's [reference set](/silver/concepts/decorated-vs-undecorated).
+
 This mechanism replaced "autocopy attributes", a variant of inherited attributes in which attribute values were implicitly copied down the tree.
 This feature was removed because of the potential for undesired (and potentially incorrect!) implicit equations.
 
@@ -455,7 +457,7 @@ And use it by calling it in this way.
 
 `propagate inh, syn;` generates `child1.inh = top.inh; child2.inh = child1.syn; top.syn = child2.syn;` on non-forwarding prods
 or ` child1.inh = top.inh; child2.inh = child1.syn; forward.inh = child2.syn;`
-on forwarding prods.
+on forwarding prods. [Unique reference](/silver/concepts/unique-refs) children are only included in the chaining if the inherited attribute reference type isn't in the [reference set](/silver/concepts/decorated-vs-undecorated).
 
 By default the children of productions are traversed left-to-right, but the direction of threading can also be specified manually:
 ```
