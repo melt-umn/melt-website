@@ -450,7 +450,7 @@ Boolean ::= a::Type b::Type
 {
   a.compareTo = b;
   b.compareTo = a;
-  return a.typeEqual;
+  return a.isTypeEqual;
 }
 
 instance Eq Type {
