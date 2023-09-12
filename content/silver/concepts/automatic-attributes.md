@@ -372,6 +372,7 @@ Note for any nonterminal types that have the standard `isEqual` and `compareTo` 
 # Bidirectional equality attributes
 Bidirectional equality attributes are a variant of equality attributes for defining symmetric comparisons on nonterminals, where for some productions some specialized, non-structural behavior is desired - for example in implementing unification, or error handling in type checking.  If a regular equality attribute were used, overriding on some productions would only have an effect in one direction; one would need to override the attribute on every production to include the special case.
 
+For example, consider the case of implementing type equality with an `errorType` that should be considered equal to any other type.
 Instead of just passing one tree down as an inherited attribute to the other tree, we would like to pass both trees in to the corresponding trees.  This can be done with a destruct attribute, where the reference set is set to contain the attribute itself:
 
 ```
@@ -441,6 +442,21 @@ top::Type ::= inputType::Type outputType::Type
 ```
 
 As with equality attributes, `==` is used to compare any children that don't have the propagated partial attribute.
+
+The above attributes could then be used to define a function for comparing types:
+```
+function typesEqual
+Boolean ::= a::Type b::Type
+{
+  a.compareTo = b;
+  b.compareTo = a;
+  return a.typeEqual;
+}
+
+instance Eq Type {
+  eq = typesEqual;
+}
+```
 
 # Ordering attributes
 Ordering attributes are used define a total ordering for trees, e.g. to sort them or use them as map keys.  An ordering attribute pair consists of a "key" synthesized attribute of type `String` that assigns a unique identifier to every production, and the "result" synthesized attribute of type `Integer` that is similar in nature to an equality attribute.  The value of the result attribute is negative if the compared tree is "less" than the other, positive if it is "greater", and 0 if the trees are equal.
