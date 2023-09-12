@@ -371,6 +371,95 @@ The `==` operator is used to compare any children that do not have the `isEqual`
 
 Note for any nonterminal types that have the standard `isEqual` and `compareTo` attributes defined in `silver:core`, the `==` operator itself is overloaded to use them for comparison.  Thus propagating `compareTo` and `isEqual` on a nonterminal type is comparable to writing `deriving Eq` in Haskell or similar languages.
 
+# Bidirectional equality attributes
+Bidirectional equality attributes are a variant of equality attributes for defining symmetric comparisons on nonterminals, where for some productions some specialized, non-structural behavior is desired - for example in implementing unification, or error handling in type checking.  If a regular equality attribute were used, overriding on some productions would only have an effect in one direction; one would need to override the attribute on every production to include the special case.
+
+For example, consider the case of implementing type equality with an `errorType` that should be considered equal to any other type.
+Instead of just passing one tree down as an inherited attribute to the other tree, we would like to pass both trees in to the corresponding trees.  This can be done with a destruct attribute, where the reference set is set to contain the attribute itself:
+
+```
+destruct attribute compareTo;
+attribute compareTo<{compareTo}> occurs on Type;
+propagate compareTo on Type;
+```
+
+A bidirectional equality attribute consists of two Boolean synthesized attribute: the final result of the comparison, and the partial result of the comparison in one direction.  On each production, the partial attribute is propagated like a normal equality attribute, while the total attribute checks if the partial attribute succeeded in either direction.  The partial attribute can then be overridden on a production, and will have the desired affect in both directions. 
+```
+biequality attribute isTypeEqual, isTypeEqualPartial with compareTo occurs on Type;
+
+aspect production errorType
+top::Type ::= tv::TyVar
+{
+  propagate isTypeEqual;
+  top.isTypeEqualPartial = true;
+}
+
+abstract production dataType
+top::Type ::= name::String
+{
+  propagate isTypeEqual, isTypeEqualPartial;
+}
+
+abstract production fnType
+top::Type ::= inputType::Type outputType::Type
+{
+  propagate isTypeEqual, isTypeEqualPartial;
+}
+```
+
+The above translates to the following equivalent specification: 
+
+```
+synthesized attribute isTypeEqual::Boolean occurs on Type;
+synthesized attribute isTypeEqualPartial::Boolean occurs on Type;
+
+aspect production intType
+top::Type ::=
+{
+  top.isTypeEqual = top.isTypeEqualPartial || top.compareTo.isTypeEqualPartial;
+  top.isTypeEqualPartial = true;
+}
+
+abstract production dataType
+top::Type ::= name::String
+{
+  top.isTypeEqual = top.isTypeEqualPartial || top.compareTo.isTypeEqualPartial;
+  top.isTypeEqualPartial =
+    case top.compareTo of
+    | dataType(name2) -> name == name2
+    | _ -> false
+    end;
+}
+
+abstract production fnType
+top::Type ::= inputType::Type outputType::Type
+{
+  top.isTypeEqual = top.isTypeEqualPartial || top.compareTo.isTypeEqualPartial;
+  top.isTypeEqualPartial =
+    case top.compareTo of
+    | fnType(_, _) -> inputType.isTypeEqual && outputType.isTypeEqual
+    | _ -> false
+    end;
+}
+```
+
+As with equality attributes, `==` is used to compare any children that don't have the propagated partial attribute.
+
+The above attributes could then be used to define a function for comparing types:
+```
+function typesEqual
+Boolean ::= a::Type b::Type
+{
+  a.compareTo = b;
+  b.compareTo = a;
+  return a.isTypeEqual;
+}
+
+instance Eq Type {
+  eq = typesEqual;
+}
+```
+
 # Ordering attributes
 Ordering attributes are used define a total ordering for trees, e.g. to sort them or use them as map keys.  An ordering attribute pair consists of a "key" synthesized attribute of type `String` that assigns a unique identifier to every production, and the "result" synthesized attribute of type `Integer` that is similar in nature to an equality attribute.  The value of the result attribute is negative if the compared tree is "less" than the other, positive if it is "greater", and 0 if the trees are equal.
 
