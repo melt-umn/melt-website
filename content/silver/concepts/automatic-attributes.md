@@ -443,7 +443,7 @@ top::Type ::= inputType::Type outputType::Type
 }
 ```
 
-As with equality attributes, `==` is used to compare any children that don't have the propagated partial attribute.
+As with equality attributes, `==` is used as a fallback to compare any children that don't use the biequality attributes for comparison; `==` is inserted when propagating the partial attribute for any children that don't have the total attribute.
 
 The above attributes could then be used to define a function for comparing types:
 ```
