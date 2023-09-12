@@ -370,15 +370,18 @@ The `==` operator is used to compare any children that do not have the `isEqual`
 Note for any nonterminal types that have the standard `isEqual` and `compareTo` attributes defined in `silver:core`, the `==` operator itself is overloaded to use them for comparison.  Thus propagating `compareTo` and `isEqual` on a nonterminal type is comparable to writing `deriving Eq` in Haskell or similar languages.
 
 # Bidirectional equality attributes
-Bidiectional equality attributes are a variant of equality attributes for performing an equality-like comparison in both directions.  This can be useful in implementing unification, or error handling in type checking.
+Bidirectional equality attributes are a variant of equality attributes for defining symmetric comparisons on nonterminals, where for some productions some specialized, non-structural behavior is desired - for example in implementing unification, or error handling in type checking.  If a regular equality attribute were used, overriding on some productions would only have an effect in one direction; one would need to override the attribute on every production to include the special case.
 
-A bidirection equality attribute consists of two Boolean synthesized attribute: the final result of the comparison, and the partial result of the comparison in one direction.
+Instead of just passing one tree down as an inherited attribute to the other tree, we would like to pass both trees in to the corresponding trees.  This can be done with a destruct attribute, where the reference set is set to contain the attribute itself:
 
 ```
 destruct attribute compareTo;
 attribute compareTo<{compareTo}> occurs on Type;
 propagate compareTo on Type;
+```
 
+A bidirectional equality attribute consists of two Boolean synthesized attribute: the final result of the comparison, and the partial result of the comparison in one direction.  On each production, the partial attribute is propagated like a normal equality attribute, while the total attribute checks if the partial attribute succeeded in either direction.  The partial attribute can then be overridden on a production, and will have the desired affect in both directions. 
+```
 biequality attribute isTypeEqual, isTypeEqualPartial with compareTo occurs on Type;
 
 aspect production errorType
@@ -404,11 +407,8 @@ top::Type ::= inputType::Type outputType::Type
 The above translates to the following equivalent specification: 
 
 ```
-destruct attribute compareTo;
-attribute compareTo<{compareTo}> occurs on Type;
-propagate compareTo on Type;
-
 synthesized attribute isTypeEqual::Boolean occurs on Type;
+synthesized attribute isTypeEqualPartial::Boolean occurs on Type;
 
 aspect production intType
 top::Type ::=
