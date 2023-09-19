@@ -21,7 +21,7 @@ There are a few different ways of installing the VS Code extension.
 
 ### From the extension marketplace
 
-The extension is published on the extension marketplace; simply search for the extension "Silver LSP" with publisher MELT.
+The extension is published on the VS Code extension marketplace; simply search for the extension "Silver LSP" with publisher MELT.
 Note that this may not always be up to date with the latest version of Silver.
 An alternative version of the Silver compiler can be specified in the extension settings by providing a path to `silver/jars/silver.composed.Default.jar` in your installation of Silver,
 however this may misbehave if breaking changes have been made to the portions of the Silver compiler called from Java code in the language server implementation.
@@ -51,7 +51,7 @@ This can be used from VS Code by right-clicking on a name and choosing "Go to De
 Note that there are a few bugs in these when dealing with features that are extensions in the Silver compiler, such as pattern matching.
 
 There is a command "Clean Silver language server workspace" that performs a clean rebuild of all grammars.
-In the future, we hope to add support for addition commands to perform refactoring, generate stub aspect definitions, etc.
+In the future, we hope to add support for additional commands to perform refactoring, generate stub aspect definitions, etc.
 
 ### Using alternate extended versions of Silver
 
@@ -66,17 +66,22 @@ in this case `edu:umn:cs:melt:exts:silver:ableC:composed:with_all:svParse`.
 ### Using the Silver plugin to develop Silver
 
 The VS Code extension is packaged with the grammars for Silver's standard library, such as `silver:core`, `silver:util` and `silver:langutil`.
-However if the silver repository is included in a workspace, the local version will override the checked-out one.
+However if the silver repository is included in a workspace, the workspace version of these grammars will override the packaged ones.
 I typically also set the "Compiler jar" to `jars/silver.composed.Default.jar` to use my latest, locally built Silver jars.
 
 Running the MWDA on Silver is very slow and resource intensive; I typically leave it disabled except when tracking down flow errors.
 When running the analysis I have the JVM args set to `-Xmx12G -Xss40M`.  This may not be feasible on a machine with <16 GB of RAM.
 
-## Language server development
+There is also an issue where sometimes the language server process is not killed upon closing or reloading VS Code.
+If you notice an excessive number of Java processes hogging memory, you can run `pkill -9 java` to kill them all;
+the active VS Code instance will automatically re-launch its language server.
+
+## Silver language server development
 
 ### Code structure
 
-The language server is implemented using the [https://github.com/eclipse-lsp4j/lsp4j](LSP4J) library providing Java bindings for the language server protocol.
+The language server is implemented using the [LSP4J](https://github.com/eclipse-lsp4j/lsp4j) library,
+which provides Java bindings for the language server protocol.
 
 * There are some utilities for hooking up Silver code to LSP4J, located at `silver/runtime/lsp4j`;
 this is intended for reuse in implementing language servers for other languages with Silver implementations.

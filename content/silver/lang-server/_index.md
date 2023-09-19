@@ -1,5 +1,5 @@
 ---
-title: Language Server Protocol
+title: Language Server
 geekdocCollapseSection: true
 weight: 900
 ---
