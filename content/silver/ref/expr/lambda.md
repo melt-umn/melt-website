@@ -10,6 +10,9 @@ Quick examples:
 ```
 (\x::String -> x ++ x)
 foldr(\a::Integer b::Integer -> a + b, 0, [1, 2, 3, 4])
+map((\x -> x + 1), [1, 2, 3, 4])
+(\ _ -> ())
+(\ _::String _::String -> true)
 ```
 
 ## Syntax
@@ -18,8 +21,14 @@ foldr(\a::Integer b::Integer -> a + b, 0, [1, 2, 3, 4])
 \ <i>parameters</i> -> <i>expression</i>
 </pre>
 
-All parameters must be given explicit types, just as in normal function declarations.
-However, you don't need to explicitly provide the return type, only the parameter types.
+A parameter can have either an explicit or an inferred type, as well as an optional name.
+The possible forms lambda parameter declarations can take are illustrated below.
+You don't need to explicitly provide the return type.
+
+```
+\ x::Integer _::String y _ -> ...
+```
+The first parameter has an explicit name and type, the second has only an explicit type, the third has only an explicit name, and the final has neither a name nor a declared type.
 
 ## Semantics
 

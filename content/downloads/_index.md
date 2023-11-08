@@ -1,5 +1,6 @@
 ---
 title: Downloads
+weight: -60
 ---
 
 ## Silver
