@@ -53,15 +53,20 @@ Aspect functions are forbidden from using `return`, their purpose is only to inf
 Aspecting functions is discouraged.
 Future changes may deprecate this feature.
 
-## FAQ
+## Concise function declarations
+A more concise function declaration can often be used in cases where a function simply returns an expression. Examples:
+```
+fun foldr b ::= f::(b ::= a b)  i::b  l::[a] =
+  if null(l) then i else f(head(l), foldr(f, i, tail(l)));
 
-### Why is the syntax so verbose?
+fun lookup Eq a => Maybe<b> ::= lst::[(a, b)] key::a = 
+  case lst of
+    [] -> nothing()
+  | h::t -> if fst(h) == key then just(snd(h)) else lookup (t, key)
+  end;
 
-Silver functions were initially discouraged from use, as we tried to see how much we could do in an "attribute grammar-oriented" way, instead of resorting to traditional functional programming.
-Over time, we developed a better understanding of where and why attribute grammars were interesting, but the syntax remained.
-
-Eventually, there will likely be a more direct function declaration syntax in Silver, for various reasons.
-(This syntax, for example, doesn't easily support adding type class constraints, if Silver ever gains type classes.)
-But this syntax will remain, not just for compatibility reasons, but because it will be the only function declaration syntax that mimics the ability to decorate children (as productions do).
-(Consider, for example, that Silver lambda expressions treat undecorated children as actually undecorated.)
-
+fun getName
+  attribute name i occurs on a => 
+  Integer ::= inst::Decorated a with i = inst.name;
+```
+These functions do not require a decoration context, which makes the concise function representation more efficient than ordinary functions. Functions of this style are simply treated as global named lambda expressions. 
