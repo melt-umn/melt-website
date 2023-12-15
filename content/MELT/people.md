@@ -8,13 +8,24 @@ We are:
 * [Eric Van Wyk](http://www-users.cs.umn.edu/~evw/), Professor
 * Lucas Kramer, Ph.D. student
 * Dawn Michaelson, Ph.D. student
-* Travis Carlson, Ph.D. student
-* Allie Hanson, Ph.D. student
 * Luke Bessant, Ph.D. student
-* [Nathan Ringo](https://remexre.xyz/), M.S. student
-* Ian Kariniemi, M.S. student
-* Louis Goessling, undergraduate student
-* Kelton Obrien, undergraduate student
+* [Nathan Ringo](https://remexre.xyz/), Ph.D. student
+
+Undergraduate research students
+* Divine Adefiranye
+* Sadia Ahmed
+* William Anderson
+* Gopesh Bajaj
+* Morgan Bozeman
+* Michael Cauthorn
+* Matthew Feraru
+* Andrew Guerra
+* Max Lalonde
+* Linglong Meng
+* Kelton Obrien
+* Jack Steege
+
+
 
 Ph.D. graduates:
 
@@ -28,6 +39,9 @@ Ph.D. graduates:
 
 M.S. graduates:
 
+* Allie Hanson, M.S. 2023
+* Ian Kariniemi, M.S. 2023
+* Travis Carlson, M.S. 2021
 * Patrick Stephen, M.S., 2017
 * Vince Alm, M.S.
 * Kevin Williams, M.S., 2014. Microsoft, X++ Programming Language group
@@ -41,9 +55,10 @@ M.S. graduates:
 * Jing Yang, M.S., 2002
 
 B.S. graduates:
+* Louis Goessling, B.S. 2023
 * Aaron Councilman, B.S. 2021, now in the University of Illinois Ph.D. program
 * Joseph Blanchard, B.S. 2021
-* Violent Chang, B.S., 2020, now in Ph.D. program at Maryland
+* Violet Chang, B.S., 2020, now in Ph.D. program at Maryland
 * Gordon Chen, B.S., 2020, now in M.S. program at UMass
 * Charlie Hofer, undergraduate student
 * Kevin Viratyosin, B.S., 2018, Facebook
