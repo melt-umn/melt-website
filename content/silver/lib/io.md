@@ -30,11 +30,8 @@ The first parameter is the IO token, and the second is the value to wrap up.
 
 > _**Example:**_
 ```
-function main
-IOVal<Integer> ::= args::[String] ioin::IO
-{
-  return ioval(print("Hi\n", ioin), 0);
-}
+fun main IOVal<Integer> ::= args::[String] ioin::IO =
+  ioval(print("Hi\n", ioin), 0);
 ```
 > is a Silver program that prints _`"Hi"`_, and exits with a successful error code.
 

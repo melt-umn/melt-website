@@ -90,6 +90,13 @@ IOVal<Integer> ::= args::[String] ioin::IO
 }
 ```
 
+or, more concisely:
+
+```
+fun main IOVal<Integer> ::= args::[String] ioin::IO = 
+  ioval(ioin, 0);
+```
+
 For an explanation of how IO works in Silver, see [IO Functions](/silver/lib/io/).  The integer value wrapped inside `IOVal` is the exit status of the program (0 is success.)  And of course, the command line arguments are provided as a list of strings.
 
 Simple examples of main functions can be found in every tutorial distributed with Silver.
