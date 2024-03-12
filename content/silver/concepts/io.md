@@ -23,6 +23,13 @@ IOVal<Integer> ::= args::[String] ioin::IOToken
 }
 ```
 
+or
+
+```
+fun main IOVal<Integer> ::= args::[String] ioin::IOToken =
+  ...;
+```
+
 You get an _input IO token_ `ioin`. You are then responsible for threading this through every IO function you call, in the correct order, and then out through the standard "IO and also some other value" type called `IOVal`.
 
 Lets take a look at some types:

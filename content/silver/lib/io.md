@@ -29,10 +29,22 @@ The first parameter is the IO token, and the second is the value to wrap up.
 > _**Note:**_ There is an unofficial convention for Silver standard library functions to place the "primary" value last.  _`ioval`_ arguably violates this convention, for legacy reasons.
 
 > _**Example:**_
+
+```
+function main 
+IOVal<Integer> ::= args::[String] ioin::IO
+{
+  return ioval(printT("Hi\n", ioin), 0);
+}
+```
+
+or
+
 ```
 fun main IOVal<Integer> ::= args::[String] ioin::IO =
-  ioval(print("Hi\n", ioin), 0);
+  ioval(printT("Hi\n", ioin), 0);
 ```
+
 > is a Silver program that prints _`"Hi"`_, and exits with a successful error code.
 
 ## Important IO functions
