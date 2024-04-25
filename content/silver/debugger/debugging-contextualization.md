@@ -105,7 +105,7 @@ programmer to specify the syntax rules and semantics of a new programming langua
 ## `SimplifiedContextStack.java`
 ### Functionality
 - Core of contextualization for debugging: the 'SimplifiedContextStack' is basically a heavyweight decorator over a ContextStack to generate a simplified (one node per tree order/horizontal-edge encountered) stack.
-- Its `ContextStack` member full_stack is dynamically updated while debugging occurs. Then, extracting a contextualization from a SimplifiedContextStack requires calling 'updateSimplifiedStack()' to create an updated `SimplifiedContextStack` (of `SimplifiedConextBox` objects) based on the current  state of the ContextStack full_stack.  
+- Its `ContextStack` member `full_stack` is dynamically updated while debugging occurs. Then, extracting a contextualization from a SimplifiedContextStack requires calling 'updateSimplifiedStack()' to create an updated `SimplifiedContextStack` (of `SimplifiedConextBox` objects) based on the current  state of the ContextStack `full_stack`.  
 - It currently can print some primitive text representations to a text file, or generate a better HTML file. (Filenames can be specified upon SimplifiedContextStack construction).
 - **THIS IS THE FINAL RESULT OF CONTEXTUALIZATION: RENDERING THIS FILE.**
 
@@ -125,7 +125,7 @@ programmer to specify the syntax rules and semantics of a new programming langua
 - Tree Order represents how many horizontal edges have been navigated across (by type separately).
 - Text Syntax represents the current path through concrete syntax.
 - `text_syntax` should store parsed concrete syntax when (x, y) from tree order are both 0. Otherwise, it will be the pretty print representation. This is for the first production associated with a SimplifiedContextBox (widest-spanning)
-- `syntax_to_highlight` should be highlighted within text_syntax. It represents the deepest (least-spanning) navigated-to node within the path of productions such a box represents. 
+- `syntax_to_highlight` should be highlighted within `text_syntax`. It represents the deepest (least-spanning) navigated-to node within the path of productions such a box represents. 
 - Productions Visited. Just a list of production names this box's abstract syntax tree path represents. They should be added with increasing tree depth.
 
 - Interesting Features. Records which nodes are associated with horizontal edges themselves. This info comes from `NodeContextMessage` objects stored in the basic ContextStack from which a SimplifiedContextStack is built from.
@@ -133,7 +133,7 @@ programmer to specify the syntax rules and semantics of a new programming langua
 - There are currently HTML and toString representations of an individual box. When adding/generating HTML, the headers are added within SimplifiedContextStack. 
 
 ### TODOs
-- *POTENTIAL FUTURE RESEARCH PROJECT:* some extra information while doing tree traversal will be needed to make highlighting unique if there are multiple instances of syntax_to_highlight within text_syntax.
+- *POTENTIAL FUTURE RESEARCH PROJECT:* some extra information while doing tree traversal will be needed to make highlighting unique if there are multiple instances of `syntax_to_highlight` within `text_syntax`.
 
 
 ## `ProductionName.java`
