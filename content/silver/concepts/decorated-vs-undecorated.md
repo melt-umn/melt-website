@@ -215,4 +215,4 @@ top::Expr ::= foo::Expr '~~>' bar::Expr
 ```
 
 With this change, the children are only decorated once.  This eliminates the problem, but introduces a restriction: all inherited attributes the function application might wish to give to its children, must be given by the operator instead.
-It is possible to avoid this restriction by using [unique references](/silver/concepts/unique-refs).
+It is possible to avoid this restriction by using [tree sharing](/silver/concepts/tree-sharing).

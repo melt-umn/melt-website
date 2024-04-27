@@ -3,6 +3,8 @@ title: Automatic attributes
 weight: 600
 ---
 
+{{< toc >}}
+
 Some repetitive idioms exist in AG specifications that we would like to avoid writing boilerplate for by hand.
 These attributes fall into various common patterns (functor, monoid, etc.)
 As a first step, we add an extension to Silver such that in production bodies we can write
@@ -40,8 +42,6 @@ top::Stmt ::= s1::Stmt s2::Stmt
   s2.env = top.env;
 }
 ```
-
-For productions with [unique reference](/silver/concepts/unique-refs) children, the attribute is only copied down if it is not already been supplied in the child's [reference set](/silver/concepts/decorated-vs-undecorated).
 
 This mechanism replaced "autocopy attributes", a variant of inherited attributes in which attribute values were implicitly copied down the tree.
 This feature was removed because of the potential for undesired (and potentially incorrect!) implicit equations.
@@ -122,7 +122,7 @@ This means that non-propagated equations must use `:=` instead of `=`, and addit
 
 When propagated on a production with no children on which the attribute occurs, the empty value is used.
 Otherwise, the append operator is used to combine the value of the attribute on all children with the attribute.
-This includes [unique reference](/silver/concepts/unique-refs) children, since we typically wish to consider them in analyses, but excludes decorated children, since they have typically been fully analyzed elsewhere.
+This includes [shared](/silver/concepts/tree-sharing) children, since we typically wish to consider them in analyses, but excludes decorated children, since they have typically been fully analyzed elsewhere.
 
 Monoid attributes commonly have list, string, integer or Boolean types.  If the type of the attribute is in the `Monoid` type class (as is the case with strings and lists), then the empty value and operator (the `with [], ++`) can be omitted.
 
@@ -216,7 +216,7 @@ top::ExtStmt ::= ...
 }
 ```
 
-Note that propagating a functor attribute on a production with a [unique reference](/silver/concepts/unique-refs) child will result in an error, as the generated equation will take a unique reference to the child, which is not permitted outside of unique contexts such as forwards-to equations. Typically the intended behavior for a functor attribute on a production with unique reference children is to compute the attribute on the children, however an attribute on a unique reference tree yields an undecorated term, meaning a different production must be used to construct the result.
+Note that propagating a functor attribute on a production with a [shared](/silver/concepts/tree-sharing) child will result in an error, as the generated equation will attempt to apply the production with shared children, which is not permitted outside of forwards-to equations. In most cases, a dispatching production that forwards to this production should instead be used in an explicit equation.
 
 # Destruct attributes
 Consider the problem of comparing two trees in some fashion, for example checking them for equality.  Some mechanism is needed to associate the nodes of two decorated trees of (possibly) the same shape.  This can be done by an inherited (destruct) attribute passing a [reference](/silver/concepts/decorated-vs-undecorated/#reference-decorated) to one tree being compared down the other, and a corresponding synthesized ([equality](/silver/concepts/automatic-attributes/#equality-attributes)) attribute that at every production determines whether the current tree is equal to the one that was passed down.
@@ -546,7 +546,7 @@ And use it by calling it in this way.
 
 `propagate inh, syn;` generates `child1.inh = top.inh; child2.inh = child1.syn; top.syn = child2.syn;` on non-forwarding prods
 or ` child1.inh = top.inh; child2.inh = child1.syn; forward.inh = child2.syn;`
-on forwarding prods. [Unique reference](/silver/concepts/unique-refs) children are only included in the chaining if the inherited attribute reference type isn't in the [reference set](/silver/concepts/decorated-vs-undecorated).
+on forwarding prods. 
 
 By default the children of productions are traversed left-to-right, but the direction of threading can also be specified manually:
 ```
@@ -575,3 +575,29 @@ We generally do not wish to propagate on forwarding productions as doing so woul
 
 In some cases some non-forwarding propagate statements may not be exported by the definition of the nonterminal, such as with closed nonterminals or optioned grammars.  In these cases explicit propagate statements are required as well, however the omission of these will be caught by the flow analysis.
 
+# Tree sharing considerations
+For productions with [shared](/silver/concepts/tree-sharing) children, one has a choice of whether inherited attributes should be supplied before or after forwarding.  Thus when propagating inherited, destruct or threaded attributes, one can specify whether the attribute should be propagated for shared children by prefixing the names of the propagated attributes with `@`.  For example
+```
+threaded attribute contextIn, contextOut :: TypingContext occurs on Expr;
+
+production funCall implements Application
+top::Expr ::= f::@Expr args::Exprs
+{
+  propagate contextIn, contextOut;
+}
+```
+would produce the equations
+```
+  args.contextIn = top.contextIn;
+  top.contextOut = args.contextOut;
+```
+while writing
+```
+  propagate @contextIn, @contextOut;
+```
+would produce
+```
+  f.contextIn = top.contextIn;
+  args.contextIn = f.contextOut;
+  top.contextOut = args.contextOut;
+```
