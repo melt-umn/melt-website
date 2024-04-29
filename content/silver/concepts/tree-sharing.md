@@ -11,7 +11,7 @@ Tree sharing permits the same [decorated tree](/silver/concepts/decorated-vs-und
 Consider a for loop extension in a simple imperative language:
 ```
 production forLoop
-top::Stmt ::= iVar::String lower::Expr upper::Expr body::Stmt
+top::Stmt ::= iVar::Name lower::Expr upper::Expr body::Stmt
 {
   top.errors = 
     checkInt(lower.type, "loop lower bound") ++
@@ -20,7 +20,7 @@ top::Stmt ::= iVar::String lower::Expr upper::Expr body::Stmt
   lower.env = top.env;
   upper.env = top.env;
   body.env  = addEnv(iVar, intType(), top.env);
-  local upperVar::String = freshName(top.env);
+  local upperVar::Name = freshName(top.env);
   forwards to block(seq(
     decl(iVar, intType(), new(lower)),
     seq(decl(upperVar, intType(), new(upper)),
@@ -42,13 +42,13 @@ The solution is to share a single decorated tree between each child of the `forL
 This can be achieved by replacing calls to `new` with the _tree sharing operator_ `@`:
 ```
 production forLoop
-top::Stmt ::= iVar::String lower::Expr upper::Expr body::Stmt
+top::Stmt ::= iVar::Name lower::Expr upper::Expr body::Stmt
 {
   top.errors = 
     checkInt(lower.type, "loop lower bound") ++
     checkInt(upper.type, "loop upper bound") ++
     lower.errors ++ upper.errors ++ body.errors;
-  local upperVar::String = freshName(top.env);
+  local upperVar::Name = freshName(top.env);
   forwards to block(seq(
     decl(iVar, intType(), @lower),
     seq(decl(upperVar, intType(), @upper),
@@ -59,6 +59,8 @@ top::Stmt ::= iVar::String lower::Expr upper::Expr body::Stmt
 ```
 
 This operator wraps a tree of type `Decorated nt with {}` to give an undecorated value of type `nt`.  When this result is subsequently decorated in some other position, the original tree is returned.  Any attributes explicitly supplied to the original tree take precedence over the places where the attribute was originally supplied.
+
+A small extension to the usual demand-driven attribute evaluation semantics is needed, as additional attributes are supplied during evaluation.  When a shared tree is initially decorated, it is also supplied with a lazy reference to its sharing site; if a missing inherited equation is encountered, then the sharing site is demanded to force any additional remote equations to be supplied.
 
 ### Modular well-definedness
 
@@ -98,6 +100,19 @@ top::Stmt ::= c::Expr body::Stmt
 
 To avoid duplicate sharing in independent extensions, any sharing site must also be [exported by](/silver/concepts/modular-well-definedness) the decoration site.
 
+There also needs to be some consideration in the semantics of undecorating a tree with shared children.  For example consider if an extension production wrote an aspect production
+```
+aspect production while
+top::Stmt ::= c::Expr b::Stmt
+{
+  local b2::Stmt = new(b);
+  b2.env = [];
+  top.extThing = b2.extThing;
+}
+
+```
+Then in the forward of `forLoop` tree, the `while` loop body would potentially be decorated twice, causing the the shared `body` to be decorated again. To prevent this, undecorating a tree by calling `new` must perform a deep copy, if the tree contains a shared subtree.
+
 #### Hidden transitive dependencies
 There is also a a more subtle issue possible when an inherited equation is defined for a tree that is also shared.  For example, consider the host language while loop production:
 ```
@@ -129,13 +144,13 @@ To prevent this sort of hidden transitive dependency from causing problems, the 
 A common pattern is to use [error productions](/silver/concepts/interference/#rule-2-use-error-productions) to avoid writing interfering synthesized override equations on forwarding productions.  For example with the for loop extension, we might want to write
 ```
 production forLoop
-top::Stmt ::= iVar::String lower::Expr upper::Expr body::Stmt
+top::Stmt ::= iVar::Name lower::Expr upper::Expr body::Stmt
 {
   local errs::[Message] = 
     checkInt(lower.type, "loop lower bound") ++
     checkInt(upper.type, "loop upper bound") ++
     lower.errors ++ upper.errors ++ body.errors;
-  local upperVar::String = freshName(top.env);
+  local upperVar::Name = freshName(top.env);
   forwards to
     if !null(errs) then errorStmt(errs)
     else block(seq(
@@ -149,13 +164,13 @@ top::Stmt ::= iVar::String lower::Expr upper::Expr body::Stmt
 However, there is now a problem as the children `lower`, `upper` and `body` are only conditionally being supplied with `env` through forwarding, meaning these equations are now reported as missing.  What we want is to unconditionally decorate the forward tree with inherited attributes, but then only conditionally actually forward to it.  This can be done using a _forward production attribute_ to decorate the tree with implicit copy equations for all inherited attributes:
 ```
 production forLoop
-top::Stmt ::= iVar::String lower::Expr upper::Expr body::Stmt
+top::Stmt ::= iVar::Name lower::Expr upper::Expr body::Stmt
 {
   local errs::[Message] = 
     checkInt(lower.type, "loop lower bound") ++
     checkInt(upper.type, "loop upper bound") ++
     lower.errors ++ upper.errors ++ body.errors;
-  local upperVar::String = freshName(top.env);
+  local upperVar::Name = freshName(top.env);
   forward fwrd =
     block(seq(
       decl(iVar, intType(), @lower),
@@ -226,7 +241,7 @@ top::TRows ::= e::Expr tf::TruthFlags rest::TRows
   top.errors = e.errors ++ tf.errors ++ rest.errors
     ++ checkBoolean(e.type, "row expression");
 
-  local eVar::String = freshName(top.trans.env);
+  local eVar::Name = freshName(top.trans.env);
   tf.rowExpr = var(eVar);
   rest.conds =
     if null(top.conds) then tf.rowConds
@@ -265,3 +280,235 @@ The hidden transitive dependencies check for override equations on shared transl
 
 ## Dispatch sharing
 
+The direct form of tree sharing using the `@` operator, in which inherited attributes are supplied principally by the forwarded-to production, only works when the productions supplying these inherited attributes are fixed. If determining a portion of the forward tree requires computing some analysis on shared children, which requires inherited attributes to be supplied, this poses a problem as supplying these attributes through the forward tree would create a cycle.  A common scenario of this is an overloaded operator, which forwards to different implementation productions depending on the type of its operand.
+```
+production negOp
+top::Expr ::= e::Expr
+{
+  e.env = top.env;
+  forwards to
+    case e.type of
+    | intType() -> negInt(new(e))
+    | boolType() -> negBool(new(e))
+    | t -> errorExpr("Invalid operand to ~: " ++ t.typepp)
+    end;
+}
+production negInt
+top::Expr ::= e::Expr
+{
+  e.env = top.env;
+  top.type = intType();
+  top.errors = e.errors ++ checkInt(e.type, "~ operand");
+}
+production negBool
+top::Expr ::= e::Expr
+{
+  e.env = top.env;
+  top.type = boolType();
+  top.errors = e.errors ++ checkBool(e.type, "~ operand");
+}
+```
+There are a few issues here:
+1. The operand to `negOp` is decorated twice - once as a child to `negOp`, and once in the forward.  Since demanding `type` on a `negOp` tree will cause `type` to be demanded from both versions of `e`, this will lead to a re-computation blowup that is exponential in the depth of nesting.
+2. The equation for `env` is specified more than once - both in the dispatching `negOp` production, and in the implementation productions.  The equation is trivial in this example, but in practice the equations might be more numerous and complicated.
+3. The implementation productions need to repeat the type error check done by `negOp`.  Nothing prevents an extension production from e.g. forwarding directly to `negInt`, bypassing the check in `negOp`.  Either the check needs to be repeated in `negInt`, or an extra semantic contract with extension developers is needed, that they should only forward directly to `negOp`.
+
+An unsatisfactory solution is to use the `@` operator instead of `new` in `negOp`:
+```
+production negOp
+top::Expr ::= e::Expr
+{
+  e.env = top.env;
+  forwards to
+    case e.type of
+    | intType() -> negInt(@e)
+    | boolType() -> negBool(@e)
+    | t -> errorExpr("Invalid operand to ~: " ++ t.typepp)
+    end;
+}
+```
+This addresses issue 1, but not 2 or 3.  If the `env` override equation in `negOp` doesn't match the equation in the forward tree, this can silently cause unexpected behavior.
+
+### The let binding approach
+In some situations, a solution is to bind the operand in a `let` expression, and only use a reference to the bound variable in the implementation production:
+```
+production negOp
+top::Expr ::= e::Expr
+{
+  local n::Name = freshVar(top.env);
+  forwards to let_(
+    n, @e,
+    case e.type of
+    | intType() -> negInt(var(n))
+    | boolType() -> negBool(var(n))
+    | t -> errorExpr("Invalid operand to ~: " ++ t.typepp)
+    end);
+}
+```
+This avoids issues 1 and 2, as `e` is only decorated once, and `negOp` doesn't need to write any explicit inherited equations. However, `negInt` and `negBool` now no longer have direct access to the operand expression tree, restricting what sorts of analyses extensions can perform.  This pattern also is not more broadly applicable for dispatching outside of expressions with some notion of let-binding.
+
+### Sharing through production signatures
+Another solution to issue 2 is to supply `env` in `negOp` prior to forwarding, by annotating the operands of implementation productions with `@` to indicate that they have been previously decorated:
+```
+production negOp
+top::Expr ::= e::Expr
+{
+  e.env = top.env;
+  forwards to
+    case e.type of
+    | intType() -> negInt(e)
+    | boolType() -> negBool(e)
+    | t -> errorExpr("Invalid operand to ~: " ++ t.typepp)
+    end;
+}
+production negInt
+top::Expr ::= @e::Expr
+{
+  top.type = intType();
+  top.errors = e.errors;
+}
+production negBool
+top::Expr ::= @e::Expr
+{
+  top.type = boolType();
+  top.errors = e.errors;
+}
+```
+The type of `negInt` here is now `(Expr ::= Decorated Expr with {})`.  An application of an implementation production with shared children (like `negInt`) may only appear in the root position of a forward (or forward production attribute) equation.  Applications of these productions also must be exported the definition of the production - i.e. the implementation production must know about all the productions that forward to it.  This means that `negInt` can count on `e` having the correct type, as it will only be constructed through the forward of `negOp` where this check is performed.
+
+With these restrictions, the modular well-definedness analysis can check for the presence of any needed inherited equation in an implementation production - either there must be a direct equation in the production, or all productions forwarding to the implementation production must supply an equation.  The dependencies of inherited equations supplied prior to forwarding are also projected into all implementation productions - for example in `negInt`, `e.errors` depends on `top.env` because of the equation for `e.env` in `negOp`.
+
+As seen with direct sharing, the behavior of `new` also needs to handle productions with signature sharing, to avoid creating an un-decorated tree containing a shared subtree. Since every production with shared children must have been constructed via forwarding, undecorating the tree can simply return the undecoration of the tree that forwarded to it.
+
+### Extensible dispatching
+The above approach only works when forwarding to fixed implementation productions.  If one wishes to make use of a [dispatch attribute](http://localhost:1313/silver/ref/stmt/forwarding/#single-dispatch-via-forwarding) to permit extensions to specify overloads, then the dispatching production must be able to forward to independent implementation productions.  However simply forwarding to a function of type `(Expr ::= Decorated Expr with {})` is insufficient, as we must ensure that implementation productions are only applied as the forward of an appropriate dispatch production.  The solution is to enforce this in the type system, by defining a _dispatch signature_:
+```
+production negOp
+top::Expr ::= e::Expr
+{
+  e.env = top.env;
+  forwards to e.type.negProd(e);
+}
+
+dispatch UnaryOp = Expr ::= @e::Expr;
+
+production negInt implements UnaryOp
+top::Expr ::= @e::Expr
+{
+  top.type = intType();
+  top.errors = e.errors;
+}
+production negBool implements UnaryOp
+top::Expr ::= @e::Expr
+{
+  top.type = boolType();
+  top.errors = e.errors;
+}
+production negError implements UnaryOp
+top::Expr ::= @e::Expr msg::String
+{
+  forwards to errorExpr(msg);
+}
+
+synthesized attribute negProd::UnaryOp occurs on Type;
+aspect production intType
+top::Type ::=
+{
+  top.negProd = negInt;
+}
+aspect production boolType
+top::Type ::=
+{
+  top.negProd = negBool;
+}
+aspect default production
+top::Type ::=
+{
+  top.negProd = negError("Invalid operand to ~: " ++ top.typepp);
+}
+```
+
+The dispatch signature `UnaryOp` defines a new nominal function type.  The `negInt` and `negBool` productions implement this signature, and have type `UnaryOp`.  The production `negError` has an extra child, so its type is effectively curried, giving `(UnaryOp ::= String)`.  Note that `UnaryOp` only has one shared child, but there are some cases where we may only want to supply attributes and dispatch on some children before forwarding, and have other children be only decorated after forwarding. For example in the Silver compiler, attribute equations are overloaded based on the left-hand side and sort of attribute:
+```
+dispatch AttributeDef = ProductionStmt ::= @dl::DefLHS @attr::QNameAttrOccur e::Expr;
+```
+Function application is overloaded for dispatch types, to permit calling them like ordinary functions. Every shared child in the dispatch signature must be supplied as the `Decorated` nonterminal type, and every non-shared child as the normal type.
+
+As before, a value of a dispatch signature type can only be applied in the root position of a forward/forward production attribute equation.  All applications of a dispatch signature also must be exported by the declaration of the signature. This means that a production implementing a dispatch can make use of an inherited attribute on a shared child, and the well-definedness analysis can check for all applications of the dispatch, that an inherited attribute is supplied for the child in all these forwarding productions.
+
+It is also possible to use an inherited attribute supplied in all implementation productions in the dispatch production.  For example, if an extension introduces an inherited attribute `env2` on `Expr`, and defines equations on all productions implementing `UnaryOp`, then the extension can rely on `env2` being supplied to the operand of `negOp`:
+```
+production thing
+top::Expr ::= e::Expr
+{
+  top.someAnalysis = checkSomething(e.env2);
+  forwards to negOp(@e);
+}
+```
+Hidden transitive dependencies are (fortunately) not an issue if an inherited equation is supplied for a child in both a dispatch and an implementation production, since the dependencies of the override equation will be reflected in the implementation production.  However if all dispatch productions supply an equation for some attribute, then any equation for the attribute in an implementation production can never have any affect, and is reported as a duplicate equation.
+
+It is also possible for an implementation production to itself forward to itself share children directly, or through additional levels of dispatching. Thus, resolving the presence of an inherited equation on some tree actually amounts to a recursive search process.
+
+The dependencies of all inherited attributes supplied to shared children in dispatching productions are projected in the implementation productions, and vice versa, to ensure that (as before) `e.env` depends on `top.env` in `negInt`, and `e.env2` depends on `top.env2` in `negOp`.  This is actually done by constructing a separate flow graph for the dispatch signature, containing the projected inherited dependencies of all dispatch productions forwarding to it, as well as all implementing productions.
+
+### Implementation production extension points
+All extension implementation productions (ones implementing a dispatch signature, but that are not exported by that signature) are required to forward to host-language implementation productions.  This ensures that extension inherited attributes supplied for all host implementation productions (e.g. `env2` in the above example) are still supplied by independent extension implementation productions.  Additionally, any explicit inherited equations supplied by extension implementation productions cannot exceed the dependencies of corresponding host-language inherited equations.
+
+The first requirement is actually a fairly strong restriction: an extension writer defining an overload for negation for their type would quite frequently wish to forward to something other than another unary operator:
+```
+production negFoo implements UnaryOp
+top::Expr ::= @e::Expr
+{
+  forwards to call(name("neg_foo"), consExpr(@e, nilExpr()));
+}
+```
+Here the `call`/`consExpr` productions could supply a different `env` than `negOp`, which is also potentially problematic.
+
+Another extension might wish to simply reuse the syntax of negation to perform some transformation, where the operand doesn't even directly appear in the forward tree:
+```
+production negBar implements UnaryOp
+top::Expr ::= @e::Expr
+{
+  e.subs = [("a", intLit(42))];
+  forwards to e.inline;
+}
+```
+
+To support these patterns, the host language developer can choose to introduce additional implementation productions that can be used as the target of forwarding.  For example, a production could be added to allow extensions to use the let binding approach:
+```
+production unaryBind implements UnaryOp
+top::Expr ::= @e::Expr impl::(Expr ::= Name)
+{
+  local var::Name = freshName();
+  forwards to let_(var, @e, impl(var));
+}
+```
+This could be used to re-write `negFoo` as
+```
+production negFoo implements UnaryOp
+top::Expr ::= @e::Expr
+{
+  forwards to unaryBind(e, \ n -> call(name("neg_foo"), consExpr(var(n), nilExpr())));
+}
+```
+Note that any inherited equations supplied by `let_` to the bound expression must be are projected through both levels of sharing, and any host-language equations supplied in `negOp` should match those supplied by `let_`.  However, there is no need for an extension inherited attribute to be supplied in both places.
+
+A host production could also be added to allow arbitrary transformations:
+```
+production unaryTransform implements UnaryOp
+top::Expr ::= @e::Expr trans::Expr
+{
+  forwards to @trans;
+}
+```
+This could be used to re-write `negBar`:
+```
+production negBar implements UnaryOp
+top::Expr ::= @e::Expr
+{
+  e.subs = [("a", intLit(42))];
+  forwards to unaryTransform(e, e.inline);
+}
+```
+
+Note that including these host-language implementation productions does limit the analyses that can be performed directly on the `negOp` production, so there is a trade-off to be made by the host language designer.
