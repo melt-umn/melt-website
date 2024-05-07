@@ -48,6 +48,21 @@ the production.
 }
 ```
 
+## Non-decorated local definitions
+
+Sometimes, one wishes to define a local or production attribute with a nonterminal type, that should not be a higher-order attribute. For instance, a local may portion of a larger tree being constructed, that is not directly supplied with inherited attributes.  These locals can be marked as `nondecorated`:
+
+```
+{
+  nondecorated local foo :: Expr = addOp(intLit(42), varExpr("x"));
+  nondecorated production bar :: Expr = mulOp(foo, varExpr("x"));
+}
+```
+
+The syntax `nondecorated foo :: Expr = ...;` is also available as shorthand for `nondecorated local foo :: Expr = ...;`.
+
+Uses of a `nondecorated` local will have the [undecorated](/silver/concepts/decorated-vs-undecorated) nonterminal type, rather than the `Decorated` type for locals and children.  Inherited equations and [tree sharing](/silver/concepts/tree-sharing) are forbidden for `nondecorated` locals.
+
 ## Collection attributes
 
 Currently, production attributes can be [collections](/silver/concepts/collections/), but the legacy syntax must be used.
