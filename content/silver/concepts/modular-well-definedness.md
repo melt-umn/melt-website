@@ -78,6 +78,8 @@ This is slightly trickier.  Silver will not require that all inherited attribute
 
 Generally, the solution to these warnings is to add an equation for the inherited attribute.  However, in some cases, the real solution may be to determine why Silver believes it needs an inherited attribute that you are certain it does not. This can be somewhat tricky, as the culprit could be anywhere.  There does exist a `--dump-flow-graph` flag that produces a dot file, however this is typically too large to actually visualize.  It might be useful to grep, however.
 
+The analysis also tracks inherited attributes that are supplied in remote productions when using [tree sharing](/silver/concepts/tree-sharing) - see this page for more details.
+
 ### Errors involving references
 
 Accessing an inherited attribute on a reference that doesn't have that attribute is an error - _e.g._ accessing `env` on a `Decorated Expr with {}`.  The reference type should include the attribute (`Decorated Expr with {env}`).  Similarly accessing a synthesized attribute that depends on such an inherited attribute is also an error.
