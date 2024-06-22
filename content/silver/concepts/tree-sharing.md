@@ -512,3 +512,15 @@ top::Expr ::= @e::Expr
 ```
 
 Note that including these host-language implementation productions does limit the analyses that can be performed directly on the `negOp` production, so there is a trade-off to be made by the host language designer.
+
+### Referencing the forward parent
+Occasionally it is useful in an implementation production to reference the tree that forwarded to it, termed the _forward parent_.  For example, a synthesized attribute can sometimes be defined with an override equation on a dispatch production without forwarding.  Implementation productions must still provide an equation for the synthesized attribute, but they should simply be able to reference the value computed on the dispatch production without re-defining the equation:
+```
+production negBaz implements UnaryOp
+top::Expr ::= @e::Expr
+{
+  top.someAttr = forwardParent.someAttr;
+}
+```
+
+One can only reference the forward parent in productions with shared children in the signature, because only those productions are guaranteed to only appear as the forward of another production.
