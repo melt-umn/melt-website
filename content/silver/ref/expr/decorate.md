@@ -39,18 +39,19 @@ decorate folder with { input = ["Hello", "world"]; }.output
 > will decorate a value called _`folder`_ with the inherited attribute _`input`_, then demand the synthesized attribute _`output`_ from the resulting decorated node.
 
 
-## `new`
+## Undecoration operator
 
-`new` is the inverse operation of `decorate`.
-It will take an explicitly decorated valued (e.g. of type `Decorated Expr with {env}`) and produce the undecorate valued (e.g. of type `Expr`).
+The operator `^` is the inverse operation of `decorate`.
+It will take an explicitly decorated valued (e.g. of type `Decorated Expr with {env}`) and produce the undecorated valued (e.g. of type `Expr`).
 
 The following syntax will undecorate a decorated tree:
 
 <pre>
-new(<i>expression</i>)
+^<i>expression</i>
 </pre>
 
-`new` is actually just a foreign function, of type `(a ::= Decorated a with i)`, where `i` is a type variable of [kind `InhSet`](/silver/concepts/decorated-vs-undecorated/#inhset-types).
+`^` is actually just syntactic sugar for [the function `new` in the standard library](/silver/gen/silver/core/#new).
+It has type `(a ::= Decorated a with i)`, where `i` is a type variable of [kind `InhSet`](/silver/concepts/decorated-vs-undecorated/#inhset-types).
 
 ## Implicit coercion?
 
