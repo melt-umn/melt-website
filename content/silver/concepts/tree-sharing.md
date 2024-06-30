@@ -22,10 +22,10 @@ top::Stmt ::= iVar::Name lower::Expr upper::Expr body::Stmt
   body.env  = addEnv(iVar, intType(), top.env);
   local upperVar::Name = freshName(top.env);
   forwards to block(seq(
-    decl(iVar, intType(), new(lower)),
-    seq(decl(upperVar, intType(), new(upper)),
+    decl(iVar, intType(), ^lower),
+    seq(decl(upperVar, intType(), ^upper),
       while(intLt(var(iVar), var(upperVar)),
-        seq(new(body), assign(iVar,
+        seq(^body, assign(iVar,
           intAdd(var(iVar), intConst(1))))))));
 }
 ```
@@ -105,7 +105,7 @@ There also needs to be some consideration in the semantics of undecorating a tre
 aspect production while
 top::Stmt ::= c::Expr b::Stmt
 {
-  local b2::Stmt = new(b);
+  local b2::Stmt = ^b;
   b2.env = [];
   top.extThing = b2.extThing;
 }
@@ -288,8 +288,8 @@ top::Expr ::= e::Expr
   e.env = top.env;
   forwards to
     case e.type of
-    | intType() -> negInt(new(e))
-    | boolType() -> negBool(new(e))
+    | intType() -> negInt(^e)
+    | boolType() -> negBool(^e)
     | t -> errorExpr("Invalid operand to ~: " ++ t.typepp)
     end;
 }
