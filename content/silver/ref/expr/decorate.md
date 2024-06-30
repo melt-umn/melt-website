@@ -12,6 +12,7 @@ decorate expr with { env = emptyEnv(); }
 decorate expr with {}
 decorate expr with { inh = value; env = top.env; }
 just(new(expr))
+just(^expr)
 ```
 
 See [Decorated vs Undecorated](/silver/concepts/decorated-vs-undecorated/) for an explanation of what `Decorated` means.
