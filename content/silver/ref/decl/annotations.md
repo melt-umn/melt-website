@@ -23,6 +23,8 @@ Annotations are very different from attributes.
 They are values that are supplied to create undecorated nodes --- similar to a production's children.
 Unlike children, however, they are not something you would supply inherited attributes to, and an annotation appears uniformly on **all** productions for a nonterminal.
 
+Annotations are often useful in representing data structures, such as [`Pair`](/silver/ref/lib/pair).
+
 ## Declaration syntax
 
 Annotation declaration looks very similar to [attribute declarations](/silver/ref/decl/attributes/):

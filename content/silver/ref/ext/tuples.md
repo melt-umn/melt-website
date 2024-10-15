@@ -61,7 +61,7 @@ Tuples are implemented inductively using the construction of ordered pairs, e.g.
 And these both represent the following construction of nested pairs
 
 ```
-pair("I", pair("am", pair("a", pair(5, "tuple"))))
+pair(fst="I", snd=pair(fst="am", snd=pair(fst="a", snd=pair(fst=5, snd="tuple"))))
 ```
 
 In contrast, the 3-tuple
@@ -73,12 +73,12 @@ In contrast, the 3-tuple
 represents
 
 ```
-pair(pair("I'm", "not"), pair(pair("a", 5), "tuple"))
+pair(fst=pair(fst="I'm", snd="not"), snd=pair(fst=pair(fst="a", snd=5), snd="tuple"))
 ```
 
 ### Consequences for element access
 
-Because tuples forward to nested pairs, elements may also be accessed using the `fst` and `snd` attributes that occur on `Pair`, although this syntax may be less immediately intuitive. For example, the `priorityError` tuple defined above would have the following element accesses via `fst` and `snd` attributes:
+Because tuples forward to nested pairs, elements may also be accessed using the `fst` and `snd` annotations that occur on `Pair`, although this syntax may be less immediately intuitive. For example, the `priorityError` tuple defined above would have the following element accesses via `fst` and `snd` annotations:
 
 ```
 priorityError.fst = 3
