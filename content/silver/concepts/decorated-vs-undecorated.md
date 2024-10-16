@@ -53,7 +53,7 @@ top::Stmt ::= l::Name '=' r::Expr
 
 > _`assignmentStmt`_ must be invoked with an undecorated name and expression. Attempting to pass it an already decorated name will result in a type error. Similarly, _`lcopy`_ must be initialized with a value of undecorated type, though in the example above, _`l`_ is automatically undecorated.
 
-This "automatic undecoration" behavior _only_ applies to names, not expressions.  If you call a function that returns a value of type _`Decorated Foo`_, and you try to assign this to a local of type _`Foo`_, you will receive a type error.  You will need to use the _`new`_ operator to manually un-decorate the type. See the [new operator](/silver/ref/expr/new/).
+This "automatic undecoration" behavior _only_ applies to names, not expressions.  If you call a function that returns a value of type _`Decorated Foo`_, and you try to assign this to a local of type _`Foo`_, you will receive a type error.  You will need to use the _`^`_ operator to manually un-decorate the type. See the [undecoration operator](/silver/ref/expr/decorate/#undecoration-operator).
 
 ### Inferring decoratedness
 Whether a name is being referenced as decorated or undecorated is determined via type inference.  However, if a name is passed into a polymorphic function, the "possibly decorated" type will be left unspecialized and will default to the decorated type.  The undecorated type can be forced in these cases by calling _`new`_ on the argument.
@@ -109,7 +109,7 @@ instance ShowTestValue a {
   showTestValue = \ x::a -> show(80, reflect(x).pp);
 }
 instance ShowTestValue a => ShowTestValue Decorated a with i {
-  showTestValue = \ x::Decorated a with i -> showTestValue(new(x));
+  showTestValue = \ x::Decorated a with i -> showTestValue(^x);
 }
 ```
 We want to show ordinary nonterminal and primitive values using [reflection](/silver/concepts/reflection/#reflection), however this cannot handle references.  Thus we have a more specific instance to undecorate any type of reference before it is printed.  `i` in `Decorated a with i` is a type variable used in place of a set of inherited attributes - in fact, inherited attribute sets are themselves types!  They are not the types of values, rather inherited attribute set types have a new [kind](/silver/concepts/types/#kinds), written `InhSet`.  
