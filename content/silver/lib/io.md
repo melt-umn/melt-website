@@ -7,13 +7,13 @@ weight: 500
 
 > _**Note:**_ Silver now has support for [Monads, so you may wish to use those instead](/silver/concepts/monads/).
 
-There are no real values of type _`IO`_, instead, this is a "token" value
+There are no real values of type _`IOToken`_, instead, this is a "token" value
 that is passed around in order to preserve the order of execution of
-imperative IO actions.  You can think of _`IO`_ values as being the entire
-universe, and the _`IO`_ input to a function is the state before the action
-and the _`IO`_ output of a function is the state after the action.
+imperative IO actions.  You can think of _`IOToken`_ values as being the entire
+universe, and the _`IOToken`_ input to a function is the state before the action
+and the _`IOToken`_ output of a function is the state after the action.
 
-Since many IO functions will want to return more than the resulting _`IO`_
+Since many IO functions will want to return more than the resulting _`IOToken`_
 token, there is a standard type called _`IOVal<a>`_ that IO functions use
 to return values of other types in addition.
 
@@ -21,7 +21,7 @@ _`IOVal`_ has only one constructor, _`ioval`_.
 
 ```
 abstract production ioval
-top::IOVal<a> ::= i::IO v::a
+top::IOVal<a> ::= i::IOToken v::a
 ```
 
 The first parameter is the IO token, and the second is the value to wrap up.
@@ -32,7 +32,7 @@ The first parameter is the IO token, and the second is the value to wrap up.
 
 ```
 function main 
-IOVal<Integer> ::= args::[String] ioin::IO
+IOVal<Integer> ::= args::[String] ioin::IOToken
 {
   return ioval(printT("Hi\n", ioin), 0);
 }
@@ -41,7 +41,7 @@ IOVal<Integer> ::= args::[String] ioin::IO
 or
 
 ```
-fun main IOVal<Integer> ::= args::[String] ioin::IO =
+fun main IOVal<Integer> ::= args::[String] ioin::IOToken =
   ioval(printT("Hi\n", ioin), 0);
 ```
 
@@ -52,7 +52,7 @@ fun main IOVal<Integer> ::= args::[String] ioin::IO =
 ### print
 ```
 function print
-IO ::= s::String i::IO
+IO ::= s::String i::IOToken
 ```
 
 Displays a string on standard out. Newlines are NOT automatically added.
@@ -66,7 +66,7 @@ print("world!\n", print("Hello, ", ioin))
 ### readFile
 ```
 function readFile
-IOVal<String> ::= s::String i::IO
+IOVal<String> ::= s::String i::IOToken
 ```
 
 Read the entire contents of a file.  All instances of "\r\n" are replaced by "\n"
@@ -83,7 +83,7 @@ contents = readFile(head(args), ioin);
 ### writeFile
 ```
 function writeFile
-IO ::= file::String contents::String i::IO
+IO ::= file::String contents::String i::IOToken
 ```
 Write a string to a file, replacing whatever is there already. If the write fails, an uncatchable error is thrown.
 
@@ -96,7 +96,7 @@ writeFile("output.txt", tree.pp, ioin)
 ### readLineStdin
 ```
 function readFile
-IOVal<String> ::= i::IO
+IOVal<String> ::= i::IOToken
 ```
 
 Reads a line from standard input.  If the read fails, an uncatchable error is thrown.
@@ -113,7 +113,7 @@ contents = readLineStdIn(ioin);
 ### exit
 ```
 function exit
-IO ::= val::Integer i::IO
+IO ::= val::Integer i::IOToken
 ```
 
 Terminates immediately with the specified error code.
@@ -127,7 +127,7 @@ print("Hi", exit(-1, ioin))
 ### mkdir
 ```
 function mkdir
-IOVal<Boolean> ::= s::String i::IO
+IOVal<Boolean> ::= s::String i::IOToken
 ```
 
 Creates a directory, including any parents that need to be created along the way.
@@ -144,7 +144,7 @@ mkdir("a/sub/directory", ioin)
 ### system
 ```
 function system
-IOVal<Integer> ::= s::String i::IO
+IOVal<Integer> ::= s::String i::IOToken
 ```
 
 Executes a shell command.  Specifically executes _`bash -c`_. (And thus, may not
@@ -163,7 +163,7 @@ system("silver some:grammar && ant > stdout.txt 2> stderr.txt", ioin)
 ### appendFile
 ```
 function appendFile
-IO ::= file::String contents::String i::IO
+IO ::= file::String contents::String i::IOToken
 ```
 
 Unlike `writeFile`, appends
@@ -178,7 +178,7 @@ appendFile("log.txt", "Oh, my.\n", ioin)
 ### fileTime
 ```
 function fileTime
-IOVal<Integer> ::= s::String i::IO
+IOVal<Integer> ::= s::String i::IOToken
 ```
 
 The time, in seconds since 1970, when this file (or directory) was last modified.
@@ -193,7 +193,7 @@ fileTime("log.txt", ioin)
 ### isFile
 ```
 function isFile
-IOVal<Boolean> ::= s::String i::IO
+IOVal<Boolean> ::= s::String i::IOToken
 ```
 
 Checks if a file is an ordinary file.  (non-directory, non-special)
@@ -207,7 +207,7 @@ isFile("/etc/passwd", ioin)
 ### isDirectory
 ```
 function isDirectory
-IOVal<Boolean> ::= s::String i::IO
+IOVal<Boolean> ::= s::String i::IOToken
 ```
 
 Checks if a path is a directory.
@@ -221,7 +221,7 @@ isDirectory("/etc/passwd", ioin)
 ### cwd
 ```
 function cwd
-IOVal<String> ::= i::IO
+IOVal<String> ::= i::IOToken
 ```
 
 Return the current working directory. (There is no way to change it.)
@@ -235,7 +235,7 @@ cwd(ioin)
 ### envVar
 ```
 function envVar
-IOVal<String> ::= s::String i::IO
+IOVal<String> ::= s::String i::IOToken
 ```
 
 Obtains the value of an environment variable. (There is no way to set them.)
@@ -249,7 +249,7 @@ envVar("GRAMMAR_PATH", ioin)
 ### listContents
 ```
 function listContents
-IOVal<[String]> ::= s::String i::IO
+IOVal<[String]> ::= s::String i::IOToken
 ```
 
 List the contents of a directory. Returns the empty list if not a directory or
@@ -264,7 +264,7 @@ listContents(".", ioin)
 ### deleteFile
 ```
 function deleteFile
-IOVal<Boolean> ::= s::String i::IO
+IOVal<Boolean> ::= s::String i::IOToken
 ```
 
 Delete a file, or an empty directory. Returns false if an error occurs, or the
@@ -289,7 +289,7 @@ a ::= msg::String
 
 Die with the stated error message and a stack trace when evaluated. Note that Silver stacks may be hard to read (it's a lazy language.)
 
-Note that _`IO`_ is not involved at all.
+Note that _`IOToken`_ is not involved at all.
 
 > _**Example:**_
 ```
@@ -319,7 +319,7 @@ top::Expr ::=
 ### unsafeTrace / unsafeIO
 ```
 function unsafeTrace
-a ::= val::a act::IO
+a ::= val::a act::IOToken
 
 function unsafeIO
 IO ::= 
