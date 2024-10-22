@@ -3,15 +3,21 @@ title: Token-based IO
 weight: 500
 ---
 
-> _**Note:**_ Silver now has support for Monads, so this threaded-token approach to IO is mostly[^1] obsolete.  See [here](/silver/concepts/monads) for more details.
+> _**Note:**_ Silver now has support for Monads, so this threaded-token approach to IO is mostly[^1] obsolete.  
+> You can now just define `main` as
+```
+fun main IO<Integer> ::= args::[String] =
+  ...;
+```
+> See [here](/silver/concepts/monads) for more details.
 
 [^1]: There still might be some cases where token-based IO is more appropriate - e.g. an analysis that requires performing IO might be cleaner using an IO token
-passed through the tree with seperate threaded attributes than "infecting" everything with an IO monad (although [implicit monads](/silver/concepts/implicit-monads)
+passed through the tree with separate threaded attributes than "infecting" everything with an IO monad (although [implicit monads](/silver/concepts/implicit-monads)
 should also be considered as a solution.) The `IO` monad itself is implemented using token IO, so this won't be going away any time soon, at least.
 
 Silver's IO support ~~is~~**was** terrible. Let's get that out of the way right from the beginning. Silver programs are largely intended to (1) read a file in its entirety and (2) write a file in its entirety, while (3) maybe printing some messages to the console. If you try to be fancier, you'll be all _smdh_.
 
-## How it works
+## How it (used to) work
 
 Start with `main`:
 
@@ -21,6 +27,13 @@ IOVal<Integer> ::= args::[String] ioin::IOToken
 {
   return ...;
 }
+```
+
+or
+
+```
+fun main IOVal<Integer> ::= args::[String] ioin::IOToken =
+  ...;
 ```
 
 You get an _input IO token_ `ioin`. You are then responsible for threading this through every IO function you call, in the correct order, and then out through the standard "IO and also some other value" type called `IOVal`.
@@ -45,7 +58,7 @@ So, first off, if you're getting used to Silver conventions, you'll notice that 
 
 Next, you can see how every function follows the same pattern: you pass in the token, then you either get a token back, or an `IOVal` back.
 
-This is partly because we don't have a `unit` type yet, so print can't return `IOVal<Unit>` or whatever. You know, to be consistent. Oh well. When we fix IO all this will be thrown out anyway.
+This is partly because we didn't have a `unit` type yet, so print couldn't return `IOVal<Unit>` or whatever. You know, to be consistent. Oh well.
 
 Here's a helpful google images search:
 
