@@ -5,7 +5,7 @@
 - The key idea of contextualization is to represent the location of the currently navigated-to node within an abstract syntax tree (AST) textually. This is mainly done through concrete syntax representations of nodes, concrete syntax highlighting, and a set of labels that describe the applications of Silver forwarding or higher-order attributes that generate AST subtrees. (Note that the "is-new" label cannot be implemented in Silver due to the current limitations of origin tracking).
 
 ## What is contextualization for debugging?
-The thesis abstract:
+- The thesis abstract:
 
 `In this thesis, we explore an aspect of debugging attribute grammar (AG) specifications. AG frameworks in themselves are high-level languages that allow a
 programmer to specify the syntax rules and semantics of a new programming language. The debugging of AG specifications is often done by interactively traversing abstract syntax trees (ASTs) that represent a parsed program in a meta-program. The goal of such debugging is to find AG specifications with semantic rules that observe correct inputs but incorrect outputs—the possible bugs of AG specifications.`
@@ -18,7 +18,7 @@ programmer to specify the syntax rules and semantics of a new programming langua
 - Information extracted from an instance of a `DecoratedNode` is captured in a `NodeContextMessage` object. They are records of contextualization for a node that is part of the path from the unique (we ignore reference attributes) root to the current navigated-to node. This is because we naturally do a DFS tree traversal while debugging, and hold visited nodes in a stack. 
 - During tree navigation, we maintain a stack of `NodeContextMessage` objects implicitly representing the path from AST root to the current node.
 - This stack is an instance of `ContextStack` (this is the "full" context stack from the thesis).
-- `DecoratedNode` objects are pushed while following edges into the tree and popped when traversing back up into a `ContextStack`. It is the `ContextStack` itself that makes/generates new `NodeContextMessage` objects when new nodes are pushed.
+- `NodeContextMessage` objects, each represting a single `DecoratedNode`, are pushed when traversing an abstract syntax tree into a `ContextStack`. It is the `ContextStack` itself that makes/generates new `NodeContextMessage` objects when new `DecoratedNode`s are pushed into it.
 - A `ContextStack` can generate its own verbose contextualization. This is useful for debugging the contextualization classes themselves. 
 - To yield a final or "simplified" contextualization, a `SimplifiedContextStack` is employed. It is a heavy-weight wrapper around a (full) `ContextStack` instance. The `SimplifiedContextStack` compresses the stack of `NodeContextMessage` objects within its `ContextStack` into a smaller stack of `SimplifiedContextBox` objects. 
 - It is this stack of `SimplifiedContextBox` objects within a `SimplifiedContextStack` instance that is then rendered to give our contextualization.
@@ -27,7 +27,7 @@ programmer to specify the syntax rules and semantics of a new programming langua
 # Actually Calling the Contextualization
 - Interactive debugging is all handled by the `Debug` class. 
 ## Initialization
-- Before the main debugging loop is entered, a `ContextStack cStack` is created/made. (There are different decorating classes around a `ContextStack` if different *intermediate* contextualization representations are required, such as `FileContextVisualization`. These decorators need to return back the `ContextStack` object they are wrapping). 
+- Before the main debugging loop is entered in the `Debug` class, a `ContextStack cStack` is created/made. (There are different decorating classes around a `ContextStack` if different *intermediate* contextualization representations are required to represent a `ContextStack` itself, such as `FileContextVisualization`. These decorators need to return back the `ContextStack` object they are wrapping). 
 - A `SimplifiedContextStack sStack` is also initialized with `cStack` as its parameter. 
 - Currently, there are two methods to generate final simplified contextualization from `sStack`: `show()` and `generateHTMLFile()`. They, respectively, generate a text or HTML file to a path that can be specified in the constructor of `SimplifiedContextStack`.  
 ## In debugging loop
@@ -39,19 +39,27 @@ programmer to specify the syntax rules and semantics of a new programming langua
 - All files are currently located in the Silver Java runtime in the `core` packet. 
 - *TODO: create new debugging package (not just contextualization issue).*
 
-## ` DecoratedNode.java`
-### Added Functionality
 
-### To extract concrete syntax for a `DecoratedNode`
+
+## `NodeContextMessage.java`
+- ***Overall***: Extract contextualization information for a single `DecoratedNode` object a `NodeContextMessage` is constructed with.
+- Wrap extracted information from `DecoratedNode` about an individual node that is part of a path from the current node to the abstract syntax tree root--a record of a node for contextualization purposes.
+- `NodeContextMessage` objects are the elements of the "full"/intermediate stack maintained in a `ContextStack`. This info is then compressed in `SimplifiedContextStack`.
+
+### Extracting Context Information Functionality
+- Contextualization infromation is extracted from a `DecoratedNode` and stored directly in the `NodeContextMessage` instance.
+#### To extract concrete syntax for a `DecoratedNode`
 - Concrete syntax representations will either be the parsed source syntax associated with a `DecoratedNode` or its pretty print representation.
 - The former is to be used only if no *horizontal* edges were crossed to get to this node. *horizontal* edges refer to either forwarding edges (entering rewrite-rules) or "into" higher-order attribute edges because these constructs may introduce nodes that are not associated with parsed syntax. 
 - `getPrettyPrint()`. Returns ``pp`` attribute or `Util.genericShow()` if it is not present.
 - `getFilename()`. Returns via origin tracking the file name parsed that generated this node.
 - `getStartCoordiantes()` and `getEndCoordiantes()`. Return `FileCoordinate` objects. These objects just store a row and column position.
 - The combination of a filename, start coordinate, and an end coordiante denote the parsed concrete syntax that generated this node.
+- ***Must compile a silver application with ```./silver-compile --clean --force-origins`` to make contextualization work.***
 
-### Labels
+#### Labels
 - These labels are used to represent applications of rewrite rules (forwardings) or higher-order attributes, the two constructs we consider that can generate *horizontal* edges.
+- There are fields in `NodeContextMessage` for each respective label to be associated with a `DecoratedNode`. 
 - A `redex` is a forwarding node; a `contractum` is a forwarded-to node.
 - `getIsRedex()` and `getIsContractum()` represent if a node is involved with a forwarding based on the `forwardParent` field.
 - `getRedex()` and `getContractum()` return the first ancestor of a node that has either respective property or null if none.
@@ -60,34 +68,29 @@ programmer to specify the syntax rules and semantics of a new programming langua
 - To represent the nesting of higher-order attributes for this node, `getIsAttribute()` returns the number of higher-order attribute entry edges encountered from root to this node (0 if none). 
 - These implement the "labels" and "headers" further described in Matthew Feraru's thesis ***[TODO: insert link to thesis in UMN conservatory once uploaded within a couple of months].*** for the `NodeContextMessage` record. 
 
-### TODOs
-- While these additions are implemented efficiently in `DecoratedNode`, we want to move all of these functionalities to a contextualization utility class to keep `DecoratedNode` as minimal as possible (OK to recompute redexes and contractums on parents each time, etc.).
+#### TODOs
 - Find a way to track reference attributes.
-- Higher-order attributes have not been navigated-into yet, so higher-order attribute-related functionality has only been tested to work in the absence of them.
+- Higher-order attributes have not been navigated-into yet in our testing, so higher-order attribute-related functionality has only been tested to work in the absence of them.
+
+
+### Visualization Contextualization Information Functionality
+- A `NodeContextMessage` has getters for each necessary field to make a `SimplifiedContextBox`.
+- To extract information for a `SimplifiedContextStack`'s `SimplifiedContextBox`es, use the simple getter functions for all the fields/properties needed, e.g. `isRedex()` or `getProdName()`. 
+- Additionally, a `NodeContextMessage` can create its own text representation of the above information maintained. 
+- 4 sections of information are maintained about a `DecoratedNode` (given as parameter in `NodeConextMessage` constructor; the constructor calls all necessary functions to fill in all information.)
+1. Section 1. (HEADERS). Headers are either TRANSLATION-X (for rewrite rules) or HIGHER-ORDER (for higher-order attributes). They represent the cumulative nesting of these constructs a current node has relative to the program root. Headers are dependent on a node's labels and its ancestors' labels.
+2. Section 2. (CONCRETE SYNTAX). Concrete syntax representation of the current node. Should hold parsed concrete syntax from the source file if headers are empty (no rewrite rules or higher-order attributes traversed yet), or the node's pretty print attribute otherwise.
+3. Section 3. (PRODUCTION). Store the production name (we currently keep file lines as well. But they are not needed for the current version of the SimplifiedContextStack). 
+4. SECTION 4. (labels). Labels represent whether the current node is involved with horizontal edges. Current possible labels are is-contractum and is-redex (for forwarding relationship) and is-attribute-root (for higher-order attribute subtree roots). Labels are currently extracted from DecoratedNode itself. 
+- The `GetSection_()` (where _ is 1, 2, etc.) functions are to intermediately generate a file representation of such a node within a full `ContextStack`. 
+#### TODOs
+- Add contextualization labels/any info needed to support **reference attributes**.
+- Once remove `ContextStack` and store an intermediate stack of `NodeContextMessage` objects directly in `SimplifiedContextStack`, remove all `GetSection_()` methods. 
 
 ## `FileCoordinate.java`
 - Very straightforward container of a row and column index into a file.
 ### TODO
 - Create another wrapping class to represent <FileName, StartFileCoord, EndFileCoord>, a complete concrete syntax file location.
-
-
-## `NodeContextMessage.java`
-### Functionality
-- Wrap extracted information from `DecoratedNode` about an individual node part of a path from the current node to the abstract syntax tree root--a record of a node for contextualization purposes.
-- They are the elements of the "full"/intermediate stack maintained in a `ContextStack`. This info is then compressed in `SimplifiedContextStack`.
-- 4 sections of information are maintained about a node (given as parameter in `NodeConextMessage` constructor.)
-1. Section 1. (HEADERS). Headers are either TRANSLATION-X (for rewrite rules) or HIGHER-ORDER (for higher-order attributes). They represent the cumulative nesting of these constructs a current node has relative to the program root. Headers are dependent on a node's labels and its ancestors' labels.
-2. Section 2. (CONCRETE SYNTAX). Concrete syntax representation of the current node. Should hold parsed concrete syntax from the source file if headers are empty (no rewrite rules or higher-order attributes traversed yet), or the node's pretty print attribute otherwise.
-
-3. Section 3. (PRODUCTION). Store the production name (we currently keep file lines as well. But they are not needed for the current version of the SimplifiedContextStack). 
-
-4. SECTION 4. (labels). Labels represent whether the current node is involved with horizontal edges. Current possible labels are is-contractum and is-redex (for forwarding relationship) and is-attribute-root (for higher-order attribute subtree roots). Labels are currently extracted from DecoratedNode itself. 
-
-- The `GetSection_()` functions are to intermediately generate a file representation of such a node within a full `ContextStack`. 
-- To extract information for a `SimplifiedContextStack`'s `SimplifiedContextBox`es, use the simple getter functions for respective properties, e.g. `isRedex()` or `getProdName()`. 
-### TODOs
-- Add contextualization labels/any info needed to support **reference attributes**.
-- Once remove `ContextStack` and store an intermediate stack of `NodeContextMessage` objects directly in `SimplifiedContextStack`, remove all `GetSection_()` methods. 
 
 
 ## `ContextStack.java`
