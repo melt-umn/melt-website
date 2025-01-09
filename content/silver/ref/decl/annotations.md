@@ -24,6 +24,7 @@ They are values that are supplied to create undecorated nodes --- similar to a p
 Unlike children, however, they are not something you would supply inherited attributes to, and an annotation appears uniformly on **all** productions for a nonterminal.
 
 Annotations are often useful in representing data structures, such as [`Pair`](/silver/ref/lib/pair).
+In such cases a nonterminal with annotations can be a useful stand-in for a record type.
 
 ## Declaration syntax
 
@@ -80,6 +81,20 @@ global myAnd::(Expr ::= Expr Expr; location::Location) = and;
 
 Currently, productions with annotations are the only way of creating a function with named parameters.
 In the future we may generalize this to support arbitrary functions with named parameters.
+
+## Updating annotation values
+
+The values of annotation(s) on an undecorated tree can be updated using function call syntax.
+This is useful when annotations are used to implement record-like data types:
+```
+global thing::Pair<String Integer> = pair(fst="hello", snd=42);
+global thing2::Pair<String Integer> = thing(snd=24);
+```
+
+An updated annotation can also be supplied as `_` instead of a value, as when partially applying a function:
+```
+global setThing::(Pair<String Integer> ::= String) = thing(fst=_);
+```
 
 ## Implicit location
 
