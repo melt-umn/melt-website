@@ -9,3 +9,4 @@ To work on it locally:
  - Run `./setup-build-env` to fetch hugo and the theme. You should maybe do this semiregularly in case we update the version of hugo we use.
  - OPTIONAL: Run `./make-docs` in your silver install, then run `./fetch-docs` with the env var `DOCPATH` set to the generated folder of docs. E.g. `DOCPATH=../silver/generated/doc/ ./fetch-docs`.
  - Run `serve-site` to run a local webserver serving the site
+
