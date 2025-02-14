@@ -19,6 +19,7 @@ These include extensions for:
 * Matrix features from MATLAB and a `matlab` function construct that generates the boilerplate FFI types and code for calling such functions from MATLAB
 * Term rewriting, inspired by the TOM system and Kiama
 * Closures / lambda-expressions
+* Prolog-inspired logic programming
 * A partial demo of HALIDE-like extensions, a DSL for high performance matrix processing
 
 These all pass the modular determinism analysis in Copper and the modular well-definedness analysis in Silver.
