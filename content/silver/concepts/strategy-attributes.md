@@ -92,7 +92,7 @@ A number of interesting uses of strategy attributes exist, including
 * [An implementation of the lambda calculus](https://github.com/melt-umn/lambda-calculus/blob/develop/grammars/edu.umn.cs.melt.lambdacalc/strategy_attributes/Eval.sv) based on examples from Stratego and Kiama
 * [An implementation of regex matching via Brzozowski derivatives](https://github.com/melt-umn/rewriting-regex-matching)
 * [Normalizing `for`-loops in the ableC-Halide extension](https://github.com/melt-umn/ableC-halide/blob/develop/grammars/edu.umn.cs.melt.exts.ableC.halide/abstractsyntax/IterStmt.sv)
-* [In the implementation of strategy attributes](https://github.com/melt-umn/silver/blob/develop/grammars/silver/extension/strategyattr/StrategyExpr.sv) to perform pre-translation optimizations on strategy expressions
+* [In the implementation of strategy attributes](https://github.com/melt-umn/silver/blob/develop/grammars/silver/compiler/extension/strategyattr/StrategyExpr.sv) to perform pre-translation optimizations on strategy expressions
 
 ## Further reading
 More information on strategy attributes and their applications can be found in our SLE paper [Strategic Tree Rewriting in Attribute Grammars](https://www-users.cs.umn.edu/~evw/pubs/kramer20sle).
