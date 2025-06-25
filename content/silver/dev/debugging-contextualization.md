@@ -1,3 +1,12 @@
+---
+title: AGnosis debugger
+weight: 600
+---
+
+This page contains information about the internals of the AGnosis Silver debugger.
+This tool is unfinished and has not been merged into the main branch of Silver;
+it can be found at https://github.com/melt-umn/silver/tree/feature/agnosis.
+
 # Contextualization Overview
 
 ## Theoretical View
