@@ -11,7 +11,7 @@ Installation instructions and demos can be found on [GitHub](https://github.com/
 ## Setting up CodeProber with a Silver project
 Silver has been adapted to work with CodeProber. All that is required is to define an entry point function
 `codeProberParse`, which can be in the same grammar as `main`.
-This function should take a `[String]` argument, and returning an `IO` action of any `Decorated` type.
+This function should take a `[String]` argument and return an `IO` action of any `Decorated` type.
 The file to parse will be provided as the last item in the list, preceded by any extra arguments specified in the interface.
 For example:
 ```
