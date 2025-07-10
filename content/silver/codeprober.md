@@ -26,11 +26,6 @@ fun codeProberParse IO<Decorated Root> ::= args::[String] = do {
 ```
 Then the CodeProber server can be launched as
 ```
-java -Dcpr.type_identification_style=NODE_LABEL -jar /path/to/codeprober.jar mylang.jar
+java -jar /path/to/codeprober.jar mylang.jar
 ```
 This will print a local URL from which to explore the tree in the browser.
-
-
-## Tips
-When creating a probe, the Silver source file paths in which attribute equations are defined
-can be displayed by checking "Group properties by aspect" in the settings menu.
