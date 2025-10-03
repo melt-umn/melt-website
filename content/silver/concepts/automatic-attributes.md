@@ -126,6 +126,25 @@ This includes [shared](/silver/concepts/tree-sharing) children, since we typical
 
 Monoid attributes commonly have list, string, integer or Boolean types.  If the type of the attribute is in the `Monoid` type class (as is the case with strings and lists), then the empty value and operator (the `with [], ++`) can be omitted.
 
+## Function-valued monoid attributes
+A common pattern is for attributes to be function-valued, wherein the value of the attribute is a function that takes parameters.
+This can be useful when defining an analysis to be computed on a reference, where additional contextual information cannot be supplied as inherited attributes.
+The `Monoid` type class has instances for functions of up to 5 parameters that themselves return a `Monoid` type,
+thus a function-valued monoid attributes can be defined:
+```
+monoid attribute includeErrors::([Message] ::= Transforms) occurs on Decl;
+propagate includeErrors on Decl;
+aspect production funDecl
+top::Decl ::= n::Name params::Params ret::Type body::Stmt
+{
+  top.includeErrors <- \ tr::Transforms ->
+    if tr.isRenamed(n.name) then []
+    else [errFromOrigin(n, "Non-static function must be renamed when included")];
+}
+
+```
+
+
 # Functor attributes
 Functor attributes allow for a mapping-style transformation over a tree, where we only wish to modify the tree in a few
 places.
@@ -217,6 +236,23 @@ top::ExtStmt ::= ...
 ```
 
 Note that propagating a functor attribute on a production with a [shared](/silver/concepts/tree-sharing) child will result in an error, as the generated equation will attempt to apply the production with shared children, which is not permitted outside of forwards-to equations. In most cases, a dispatching production that forwards to this production should instead be used in an explicit equation.
+
+## Function-valued functor attributes
+Like function-valued monoid attributes, a function-valued functor attribute may also be desired
+when defining a context-depended transformation to be computed on a reference.
+To support this, a functor attribute may also be declared with parameters:
+```
+functor attribute includeTrans ::= Transforms occurs on Decl, Stmt;
+propagate includeTrans on Decl excluding funDecl;
+aspect production funDecl
+top::Decl ::= n::Name params::Params ret::Type body::Stmt
+{
+  top.includeTrans = \ tr::Transforms ->
+    if tr.isRenamed(n.name)
+    then funDecl(tr.lookupName(n), ^params, ^ret, body.includeTrans(tr))
+    else funDecl(^n, ^params, ^ret, body.includeTrans(tr));
+}
+```
 
 # Destruct attributes
 Consider the problem of comparing two trees in some fashion, for example checking them for equality.  Some mechanism is needed to associate the nodes of two decorated trees of (possibly) the same shape.  This can be done by an inherited (destruct) attribute passing a [reference](/silver/concepts/decorated-vs-undecorated/#reference-decorated) to one tree being compared down the other, and a corresponding synthesized ([equality](/silver/concepts/automatic-attributes/#equality-attributes)) attribute that at every production determines whether the current tree is equal to the one that was passed down.
