@@ -126,3 +126,6 @@ import silver:langutil:pp as pp;
 ```
 
 This will result in all the the _short names_ imported to be prefixed with `pp:`. For example, the `implode` symbol will now be `pp:implode`. Of course, full names are unaffected, as always.
+
+## Including a grammar
+For the `include` module statement, see [nanopass](/silver/concepts/nanopass).
